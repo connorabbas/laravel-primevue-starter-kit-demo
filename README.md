@@ -27,7 +27,7 @@ For this reason, Tailwind has been added into the project and is utilized with t
 ---
 
 ## Usage with Docker
-This starter kit is configured to use Docker Compose for local development with a few extra configuration steps. With this setup, you do not need PHP, Composer, MySQL or Node.js installed on your machine to get up and running with this project.
+This starter kit is configured to use Docker Compose for local development with a few extra configuration steps. With this setup, you do not need PHP, Composer, PostgreSQL or Node.js installed on your machine to get up and running with this project.
 
 ### Setup
 1. In a new directory (outside of your Laravel project) create a `docker-compose.yml` file to create a reverse proxy container using [Traefik](https://doc.traefik.io/traefik/getting-started/quick-start/). You can reference this [example implementation](https://github.com/connorabbas/traefik-docker-compose/blob/master/docker-compose.yml).
@@ -42,9 +42,9 @@ This starter kit is configured to use Docker Compose for local development with 
     # Match with value used in docker-compose.local.yml
     APP_URL=http://primevue-inertia.localhost
 
-    DB_CONNECTION=mysql
-    DB_HOST=mysql
-    DB_PORT=3306
+    DB_CONNECTION=pgsql
+    DB_HOST=pgsql # name of service
+    DB_PORT=5432
     DB_DATABASE=laravel
     DB_USERNAME=sail
     DB_PASSWORD=password
@@ -52,10 +52,10 @@ This starter kit is configured to use Docker Compose for local development with 
     # Update as needed for running multiple projects
     APP_PORT=8000
     VITE_PORT=5173
-    FORWARD_DB_PORT=3306
+    FORWARD_DB_PORT=5432
     ```
 3. Build the Laravel app container:
    - Either build manually with docker compose (like above), use [Laravel Sail](https://laravel.com/docs/master/sail), or build as a [VS Code Dev Container](https://code.visualstudio.com/docs/devcontainers/tutorial) using the `Dev Containers: Reopen in Container` command.
 
 ### Additional configuration
-If you wish to add additional services, or swap out MySQL with an alternative database, you can reference the [Laravel Sail stubs](https://github.com/laravel/sail/tree/1.x/stubs) and update the `docker-compose.local.yml` file as needed.
+If you wish to add additional services, or swap out PostgreSQL with an alternative database, you can reference the [Laravel Sail stubs](https://github.com/laravel/sail/tree/1.x/stubs) and update the `docker-compose.local.yml` file as needed.
