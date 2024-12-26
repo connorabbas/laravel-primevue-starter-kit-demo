@@ -2,6 +2,10 @@
 ## About
 A basic authentication starter kit using [Laravel](https://laravel.com/docs/master), [Intertia.js](https://inertiajs.com/), and [PrimeVue](https://primevue.org/). An equivalent to using [Laravel Breeze](https://laravel.com/docs/master/starter-kits#laravel-breeze), but with the added benefit of all the PrimeVue components at your disposal.
 
+```
+git clone -b feature/admin-panel https://github.com/connorabbas/laravel-inertia-primevue.git
+```
+
 ## Admin Panel
 
 This branch provides a separate `admin` auth guard for admins to login to the "backend" of the application.
