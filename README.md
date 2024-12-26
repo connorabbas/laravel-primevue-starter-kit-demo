@@ -2,6 +2,8 @@
 ## About
 A basic authentication starter kit using [Laravel](https://laravel.com/docs/master), [Intertia.js](https://inertiajs.com/), and [PrimeVue](https://primevue.org/). An equivalent to using [Laravel Breeze](https://laravel.com/docs/master/starter-kits#laravel-breeze), but with the added benefit of all the PrimeVue components at your disposal.
 
+Do you need a separate Vue SPA front-end instead of using Inertia.js? Consider using the [Vue SPA w/ PrimeVue & Laravel Breeze API Starter Kit](https://github.com/connorabbas/primevue-spa-laravel-api) instead.
+
 ## Features
 - Same auth structure and features as Laravel Breeze with User Profile page
 - Need an admin panel? [There's a branch for that.](https://github.com/connorabbas/laravel-inertia-primevue/tree/feature/admin-panel)
@@ -20,17 +22,17 @@ The starting point for customizing your theme will be the `resources/js/theme-pr
 Please reference the [PrimeVue Styled Mode Docs](https://primevue.org/theming/styled/) to fully understand how this system works, and how to further customize your theme to make it your own.
 
 ## PrimeVue v4 w/ Tailwind CSS
-If you have used a previous version of this project using **PrimeVue V3**, you'll know that PrimeFlex was used instead of Tailwind. With v4 however, the PrimeTek team has officially suggested [Moving from PrimeFlex to Tailwind CSS](https://primevue.org/guides/primeflex/).
+If you have used a previous version of this project using **PrimeVue V3**, you'll know that [PrimeFlex](https://primeflex.org/) was used instead of [Tailwind CSS](https://tailwindcss.com/) for utility class styling. With V4 however, the PrimeTek team has officially suggested [Moving from PrimeFlex to Tailwind CSS](https://primevue.org/guides/primeflex/).
 
-For this reason, Tailwind has been added into the project and is utilized with the [tailwindcss-primeui](https://primevue.org/tailwind/#plugin) plugin. CSS layers have also been implemented so the Tailwind utilities can [override](https://primevue.org/tailwind/#override) the PrimeVue component styling when needed.
+For this reason PrimeFlex has been removed, and Tailwind has been added into the project, along with the [tailwindcss-primeui](https://primevue.org/tailwind/#plugin) plugin. CSS layers have also been implemented so the Tailwind utilities can [override](https://primevue.org/tailwind/#override) the PrimeVue component styling when needed.
 
 ---
 
 ## Usage with Docker
-This starter kit is configured to use Docker Compose for local development with a few extra configuration steps. With this setup, you do not need PHP, Composer, PostgreSQL or Node.js installed on your machine to get up and running with this project.
+This starter kit is configured to use Docker Compose for local development with just a few extra steps, powered by images & configuration from [Laravel Sail](https://laravel.com/docs/master/sail). With this setup, you do not need PHP, Composer, PostgreSQL or Node.js installed on your machine to get up and running with this project.
 
 ### Setup
-1. In a new directory (outside of your Laravel project) create a `docker-compose.yml` file to create a reverse proxy container using [Traefik](https://doc.traefik.io/traefik/getting-started/quick-start/). You can reference this [example implementation](https://github.com/connorabbas/traefik-docker-compose/blob/master/docker-compose.yml).
+1. In a new directory (outside of your Laravel project) create a `docker-compose.yml` file to create a reverse proxy container using [Traefik](https://doc.traefik.io/traefik/getting-started/quick-start/). You can clone/reference this [example implementation](https://github.com/connorabbas/traefik-docker-compose/blob/master/docker-compose.yml).
 
 2. Step into the directory containing the new compose file, and spin up the Traefik container:
     ```
@@ -49,13 +51,15 @@ This starter kit is configured to use Docker Compose for local development with 
     DB_USERNAME=sail
     DB_PASSWORD=password
 
-    # Update as needed for running multiple projects
+    # Update port values as needed when running multiple projects
     APP_PORT=8000
     VITE_PORT=5173
     FORWARD_DB_PORT=5432
     ```
-3. Build the Laravel app container:
-   - Either build manually with docker compose (like above), use [Laravel Sail](https://laravel.com/docs/master/sail), or build as a [VS Code Dev Container](https://code.visualstudio.com/docs/devcontainers/tutorial) using the `Dev Containers: Reopen in Container` command.
+3. Build the Laravel app container using one of the following techniques:
+   - Build manually using docker compose CLI (like above)
+   - Use [Laravel Sail](https://laravel.com/docs/master/sail)
+   - Build as a [VS Code Dev Container](https://code.visualstudio.com/docs/devcontainers/tutorial) using the `Dev Containers: Reopen in Container` command
 
 ### Additional configuration
 If you wish to add additional services, or swap out PostgreSQL with an alternative database, you can reference the [Laravel Sail stubs](https://github.com/laravel/sail/tree/1.x/stubs) and update the `docker-compose.local.yml` file as needed.
