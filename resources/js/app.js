@@ -25,6 +25,7 @@ createInertiaApp({
         ),
     setup({ el, App, props, plugin }) {
         return createApp({ render: () => h(App, props) })
+            .provide('darkMode', darkMode)
             .use(plugin)
             .use(ZiggyVue, Ziggy)
             .use(PrimeVue, {
