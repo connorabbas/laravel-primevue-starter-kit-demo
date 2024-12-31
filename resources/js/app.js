@@ -11,8 +11,10 @@ import PrimeVue from 'primevue/config';
 import ToastService from 'primevue/toastservice';
 
 import customThemePreset from '@/theme-preset.js';
+import { useDark } from '@vueuse/core';
 
 const appName = import.meta.env.VITE_APP_NAME || 'Laravel';
+const darkMode = useDark(); // set Light/Dark Mode
 
 createInertiaApp({
     title: (title) => `${title} - ${appName}`,
@@ -23,6 +25,7 @@ createInertiaApp({
         ),
     setup({ el, App, props, plugin }) {
         return createApp({ render: () => h(App, props) })
+            .provide('darkMode', darkMode)
             .use(plugin)
             .use(ZiggyVue, Ziggy)
             .use(PrimeVue, {
