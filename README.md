@@ -13,7 +13,7 @@ Do you need a separate Vue SPA front-end instead of using Inertia.js? Consider u
 - Need SSR support? [There's a branch for that.](https://github.com/connorabbas/laravel-inertia-primevue/tree/feature/ssr)
 - Pre-configured [Auto Import](https://primevue.org/autoimport/) PrimeVue components
 - Wrapper components for PrimeVue's `Menu`, `MenuBar`, & `PanelMenu` utilizing Inertia's `Link` component
-- Light/Dark mode toggle with custom component & composable
+- Light/Dark mode toggle
 - `useLazyDataTable()` composable for use with PrimeVue's `DataTable` component for easy filtering/sorting (example usage in `feature/admin-panel` branch)
 - Easily customizable theming
 
