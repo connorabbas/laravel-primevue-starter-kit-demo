@@ -24,6 +24,7 @@
         "vue": "^3.5.0"
     },
     "dependencies": {
+        "@vueuse/core": "^12.2.0",
         "lodash": "^4.17.21"
     }
 }
