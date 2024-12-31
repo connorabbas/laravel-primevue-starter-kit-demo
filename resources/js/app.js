@@ -11,7 +11,6 @@ import PrimeVue from 'primevue/config';
 import ToastService from 'primevue/toastservice';
 import Tooltip from 'primevue/tooltip';
 
-import { useTheme } from '@/Composables/useTheme.js';
 import customThemePreset from '@/theme-preset.js';
 
 import Container from './Components/Container.vue';
@@ -26,11 +25,6 @@ createInertiaApp({
             import.meta.glob('./Pages/**/*.vue')
         ),
     setup({ el, App, props, plugin }) {
-        // set site theme (light/dark mode)
-        const { initSiteTheme } = useTheme();
-        initSiteTheme();
-
-        // start the app
         return createApp({ render: () => h(App, props) })
             .use(plugin)
             .use(ZiggyVue, Ziggy)
