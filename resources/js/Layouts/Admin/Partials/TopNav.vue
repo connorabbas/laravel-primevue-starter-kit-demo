@@ -2,7 +2,7 @@
 import { useTemplateRef } from 'vue';
 import { useForm, usePage } from '@inertiajs/vue3';
 import ApplicationLogo from '@/Components/ApplicationLogo.vue';
-import ToggleThemeButton from '@/Components/ToggleThemeButton.vue';
+import ToggleDarkModeButton from '@/Components/ToggleDarkModeButton.vue';
 import LinksMenu from '@/Components/PrimeVue/LinksMenu.vue';
 import LinksMenuBar from '@/Components/PrimeVue/LinksMenuBar.vue';
 
@@ -70,7 +70,7 @@ const toggleUserMenu = (event) => {
                 <template #end>
                     <div class="flex items-center space-x-3">
                         <div>
-                            <ToggleThemeButton
+                            <ToggleDarkModeButton
                                 text
                                 severity="secondary"
                                 rounded

@@ -1,6 +1,6 @@
 <script setup>
 import { computed } from 'vue';
-import ToggleThemeButton from '@/Components/ToggleThemeButton.vue';
+import ToggleDarkModeButton from '@/Components/ToggleDarkModeButton.vue';
 
 const props = defineProps({
     canLogin: {
@@ -99,7 +99,7 @@ const dashboardRoute = computed(() => {
                                 />
                             </Link>
                         </template>
-                        <ToggleThemeButton outlined />
+                        <ToggleDarkModeButton outlined />
                         <div class="mt-6">
                             <p class="m-0 text-sm text-muted-color">
                                 Laravel v{{ laravelVersion }} (PHP v{{
