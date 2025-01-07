@@ -116,7 +116,10 @@ export function useLazyDataTable(
      * WIP, parse url params into useable filters
      */
     function parseUrlParams(urlParams) {
-        filters.value = urlParams?.filters || dataTableDefaults.filters;
+        filters.value = {
+            ...dataTableDefaults.filters,
+            ...urlParams?.filters,
+        };
         Object.keys(filters.value).forEach((key) => {
             const filter = filters.value[key];
             if (!filter?.value || !filter?.matchMode) {
