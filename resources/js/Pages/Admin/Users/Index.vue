@@ -38,24 +38,24 @@ function toggleUserContextMenu(event, userData) {
 
 // DataTable
 const {
+    processing,
     filters,
-    sortField,
-    sortOrder,
-    rowsPerPage,
+    sorting,
     firstDatasetIndex,
-    hasFilteringApplied,
+    filteredOrSorted,
     debounceInputFilter,
-    onFilter,
-    onSort,
-    onPage,
     fetchData,
-    resetTable,
+    paginate,
+    filter,
+    sort,
+    reset,
 } = useLazyDataTable(
     {
         name: { value: null, matchMode: FilterMatchMode.CONTAINS },
         email: { value: null, matchMode: FilterMatchMode.CONTAINS },
     },
-    ['users']
+    ['users'],
+    props.users.per_page
 );
 </script>
 
@@ -68,25 +68,19 @@ const {
     >
         <template #titleEnd>
             <Button
-                v-if="hasFilteringApplied"
+                v-if="filteredOrSorted"
                 severity="secondary"
                 type="button"
                 icon="pi pi-filter-slash"
                 label="Clear Filters"
                 outlined
-                @click="resetTable"
+                @click="reset"
             />
         </template>
 
         <Container :fluid="true">
             <div>
-                <Card
-                    :pt="{
-                        body: {
-                            class: 'p-3',
-                        },
-                    }"
-                >
+                <Card pt:body:class="p-3">
                     <template #content>
                         <Menu
                             ref="user-context-menu"
@@ -101,20 +95,21 @@ const {
                             removableSort
                             resizableColumns
                             columnResizeMode="fit"
+                            :loading="processing"
                             :value="users.data"
                             :totalRecords="users.total"
                             v-model:filters="filters"
                             filterDisplay="row"
-                            :sortField="sortField"
-                            :sortOrder="sortOrder"
-                            :rows="rowsPerPage"
+                            :sortField="sorting.field"
+                            :sortOrder="sorting.order"
+                            :rows="users.per_page"
                             :rowsPerPageOptions="[10, 20, 50, 100]"
                             :first="firstDatasetIndex"
                             paginatorTemplate="FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink CurrentPageReport RowsPerPageDropdown"
                             currentPageReportTemplate="Showing {first} to {last} of {totalRecords} records"
-                            @filter="onFilter"
-                            @sort="onSort"
-                            @page="onPage"
+                            @filter="filter"
+                            @sort="sort"
+                            @page="paginate"
                         >
                             <Column
                                 field="name"
