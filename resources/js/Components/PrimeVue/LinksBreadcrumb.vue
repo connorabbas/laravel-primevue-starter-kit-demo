@@ -1,13 +1,15 @@
+<script setup>
+import { usePage } from '@inertiajs/vue3';
+
+const page = usePage();
+</script>
+
 <template>
     <Breadcrumb
-        :pt="{
-            root: {
-                class: 'p-0 bg-transparent',
-            },
-        }"
+        pt:root:class="p-0 bg-transparent"
         :home="{
             icon: 'pi pi-home',
-            route: route('welcome'),
+            url: page.props.app.baseUrl,
         }"
     >
         <template #item="{ item, props }">

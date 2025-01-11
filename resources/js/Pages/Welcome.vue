@@ -41,9 +41,20 @@ const dashboardRoute = computed(() => {
             >
                 <template #content>
                     <div class="text-center md:text-left">
-                        <span class="block text-6xl font-bold text-red-500 dark:text-red-400 mb-1 ">Laravel,</span>
-                        <div class="text-6xl font-bold text-indigo-500 dark:text-indigo-400 mb-1">Inertia.js,</div>
-                        <div class="text-6xl text-green-500 dark:text-green-400 text-emerald font-bold mb-4">& PrimeVue</div>
+                        <span
+                            class="block text-6xl font-bold text-red-500 dark:text-red-400 mb-1"
+                            >Laravel,</span
+                        >
+                        <div
+                            class="text-6xl font-bold text-indigo-500 dark:text-indigo-400 mb-1"
+                        >
+                            Inertia.js,
+                        </div>
+                        <div
+                            class="text-6xl text-green-500 dark:text-green-400 text-emerald font-bold mb-4"
+                        >
+                            & PrimeVue
+                        </div>
                         <p class="mt-0 mb-4 text-muted-color leading-normal">
                             A starter kit using
                             <a
@@ -55,8 +66,7 @@ const dashboardRoute = computed(() => {
                                 href="https://inertiajs.com/"
                                 class="underline text-primary hover:text-color"
                                 >Inertia.js</a
-                            >,
-                            and
+                            >, and
                             <a
                                 href="https://primevue.org/"
                                 class="underline text-primary hover:text-color"
@@ -66,10 +76,10 @@ const dashboardRoute = computed(() => {
                         <template v-if="$page.props.auth.user">
                             <Link :href="dashboardRoute">
                                 <Button
-                                    raised
                                     label="Dashboard"
                                     icon="pi pi-th-large"
                                     class="mr-4"
+                                    raised
                                 />
                             </Link>
                             <Link v-if="!isAdmin" :href="route('profile.edit')">
@@ -84,10 +94,10 @@ const dashboardRoute = computed(() => {
                         <template v-else>
                             <Link :href="route('login')">
                                 <Button
-                                    raised
                                     label="Login"
                                     icon="pi pi-sign-in"
                                     class="mr-4"
+                                    raised
                                 />
                             </Link>
                             <Link :href="route('register')">

@@ -1,6 +1,6 @@
 <script setup>
 import { useTemplateRef } from 'vue';
-import { useForm, usePage } from '@inertiajs/vue3';
+import { useForm } from '@inertiajs/vue3';
 import ApplicationLogo from '@/Components/ApplicationLogo.vue';
 import ToggleDarkModeButton from '@/Components/ToggleDarkModeButton.vue';
 import LinksMenu from '@/Components/PrimeVue/LinksMenu.vue';
@@ -51,12 +51,12 @@ const toggleUserMenu = (event) => {
                                 outlined
                                 severity="secondary"
                                 icon="pi pi-bars"
-                                @click="emit('open-nav')"
                                 :pt="{
                                     icon: {
                                         class: 'text-xl',
                                     },
                                 }"
+                                @click="emit('open-nav')"
                             />
                             <Link :href="route('welcome')" class="mr-5">
                                 <ApplicationLogo
@@ -98,10 +98,10 @@ const toggleUserMenu = (event) => {
                             />
                             <div id="user-menu-append" class="relative"></div>
                             <LinksMenu
+                                ref="user-menu"
                                 appendTo="#user-menu-append"
                                 :model="userMenuItems"
                                 popup
-                                ref="user-menu"
                                 :pt="{
                                     root: {
                                         class: '!left-auto !top-0 right-0',

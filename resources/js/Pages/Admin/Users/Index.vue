@@ -1,7 +1,7 @@
 <script setup>
 import { ref, useTemplateRef } from 'vue';
 import { Head } from '@inertiajs/vue3';
-import { useLazyDataTable } from '@/Composables/useLazyDataTable.js';
+import { useLazyDataTable } from '@/Composables/useLazyDataTable';
 import { FilterMatchMode } from '@primevue/core/api';
 import AuthenticatedAdminLayout from '@/Layouts/Admin/AuthenticatedLayout.vue';
 import Container from '@/Components/Container.vue';
@@ -38,24 +38,23 @@ function toggleUserContextMenu(event, userData) {
 
 // DataTable
 const {
+    processing,
     filters,
-    sortField,
-    sortOrder,
-    rowsPerPage,
+    sorting,
     firstDatasetIndex,
-    hasFilteringApplied,
+    filteredOrSorted,
     debounceInputFilter,
-    onFilter,
-    onSort,
-    onPage,
-    fetchData,
-    resetTable,
+    paginate,
+    filter,
+    sort,
+    reset,
 } = useLazyDataTable(
     {
         name: { value: null, matchMode: FilterMatchMode.CONTAINS },
         email: { value: null, matchMode: FilterMatchMode.CONTAINS },
     },
-    ['users']
+    ['users'],
+    props.users.per_page
 );
 </script>
 
@@ -68,25 +67,19 @@ const {
     >
         <template #titleEnd>
             <Button
-                v-if="hasFilteringApplied"
+                v-if="filteredOrSorted"
                 severity="secondary"
                 type="button"
                 icon="pi pi-filter-slash"
                 label="Clear Filters"
                 outlined
-                @click="resetTable"
+                @click="reset"
             />
         </template>
 
         <Container :fluid="true">
             <div>
-                <Card
-                    :pt="{
-                        body: {
-                            class: 'p-3',
-                        },
-                    }"
-                >
+                <Card pt:body:class="p-3">
                     <template #content>
                         <Menu
                             ref="user-context-menu"
@@ -101,21 +94,33 @@ const {
                             removableSort
                             resizableColumns
                             columnResizeMode="fit"
+                            v-model:filters="filters"
+                            :loading="processing"
                             :value="users.data"
                             :totalRecords="users.total"
-                            v-model:filters="filters"
                             filterDisplay="row"
-                            :sortField="sortField"
-                            :sortOrder="sortOrder"
-                            :rows="rowsPerPage"
+                            :sortField="sorting.field"
+                            :sortOrder="sorting.order"
+                            :rows="users.per_page"
                             :rowsPerPageOptions="[10, 20, 50, 100]"
                             :first="firstDatasetIndex"
                             paginatorTemplate="FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink CurrentPageReport RowsPerPageDropdown"
                             currentPageReportTemplate="Showing {first} to {last} of {totalRecords} records"
-                            @filter="onFilter"
-                            @sort="onSort"
-                            @page="onPage"
+                            @filter="filter"
+                            @sort="sort"
+                            @page="paginate"
                         >
+                            <template #empty>
+                                <div class="flex justify-center">
+                                    <Message
+                                        severity="warn"
+                                        icon="pi pi-exclamation-circle"
+                                        class="grow text-center flex justify-center"
+                                    >
+                                        No Users found.
+                                    </Message>
+                                </div>
+                            </template>
                             <Column
                                 field="name"
                                 header="Name"
@@ -128,11 +133,11 @@ const {
                                     <InputText
                                         v-model="filterModel.value"
                                         type="text"
+                                        placeholder="Search by name"
                                         fluid
                                         @input="
                                             debounceInputFilter(filterCallback)
                                         "
-                                        placeholder="Search by name"
                                     />
                                 </template>
                                 <template #body="slotProps">
@@ -151,11 +156,11 @@ const {
                                     <InputText
                                         v-model="filterModel.value"
                                         type="text"
+                                        placeholder="Search by Email"
                                         fluid
                                         @input="
                                             debounceInputFilter(filterCallback)
                                         "
-                                        placeholder="Search by Email"
                                     />
                                 </template>
                                 <template #body="slotProps">
@@ -165,6 +170,7 @@ const {
                             <Column header="Action">
                                 <template #body="{ data }">
                                     <Button
+                                        v-tooltip.top="'Show User Actions'"
                                         type="button"
                                         severity="secondary"
                                         text
@@ -173,7 +179,6 @@ const {
                                         @click="
                                             toggleUserContextMenu($event, data)
                                         "
-                                        v-tooltip.top="'Show User Actions'"
                                     />
                                 </template>
                             </Column>

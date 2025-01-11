@@ -1,13 +1,12 @@
 <script setup>
 import { ref, useTemplateRef, onMounted } from 'vue';
-import { usePage } from '@inertiajs/vue3';
 import LinksBreadcrumb from '@/Components/PrimeVue/LinksBreadcrumb.vue';
 import MobileSidebarNavDrawer from './Partials/MobileSidebarNavDrawer.vue';
 import TopNav from './Partials/TopNav.vue';
 import Footer from './Partials/Footer.vue';
 import SideMenuItems from './Partials/SideMenuItems.vue';
 
-const props = defineProps({
+defineProps({
     pageTitle: {
         type: String,
         required: false,
@@ -18,8 +17,6 @@ const props = defineProps({
         default: () => [],
     },
 });
-
-const page = usePage();
 
 // Drawer menus
 const navDrawerOpen = ref(false);
@@ -98,7 +95,7 @@ onMounted(() => {
 
                 <!-- Page Title -->
                 <section v-if="pageTitle">
-                    <Container :fluid="true" class="my-4 md:mt-8 md:mb-6">
+                    <Container :fluid="true" class="my-4 md:my-8">
                         <div class="flex items-end justify-between flex-wrap">
                             <div>
                                 <h1
@@ -121,7 +118,7 @@ onMounted(() => {
                     <slot />
                 </section>
 
-                <footer class="">
+                <footer>
                     <Footer />
                 </footer>
             </div>
