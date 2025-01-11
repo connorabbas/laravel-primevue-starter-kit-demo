@@ -9,7 +9,7 @@ import globals from 'globals';
 import typescriptEslint from 'typescript-eslint';
 
 export default typescriptEslint.config(
-    { ignores: ['*.d.ts', '**/coverage', '**/dist', 'vendor/**'] },
+    { ignores: ['*.d.ts', '**/coverage', '**/dist', 'vendor/**', 'public/build/**'] },
     {
         files: ['**/*.js'],
         ...eslint.configs.recommended,
