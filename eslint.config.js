@@ -1,3 +1,4 @@
+// https://eslint.org/docs/latest/use/configure/
 // https://eslint.vuejs.org/user-guide/
 // https://typescript-eslint.io/rules/?=recommended
 
@@ -28,6 +29,7 @@ export default typescriptEslint.config(
             },
         },
         rules: {
+            'vue/attribute-hyphenation': 'off',
             'vue/multi-word-component-names': 'off',
             'vue/block-lang': 'off',
             '@typescript-eslint/no-explicit-any': 'off',
