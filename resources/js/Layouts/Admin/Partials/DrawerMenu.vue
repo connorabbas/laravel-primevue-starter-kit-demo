@@ -1,8 +1,8 @@
-<script setup>
+<script setup lang="ts">
 import { ref } from 'vue';
 import LinksPanelMenu from '@/Components/PrimeVue/LinksPanelMenu.vue';
 
-const model = defineModel(false);
+const model = defineModel<boolean>(false);
 
 // Menu Items
 const currentRoute = route().current();

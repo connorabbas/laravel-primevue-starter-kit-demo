@@ -1,6 +1,5 @@
 <script setup>
 import { ref, useTemplateRef, onMounted } from 'vue';
-import { usePage } from '@inertiajs/vue3';
 import LinksBreadcrumb from '@/Components/PrimeVue/LinksBreadcrumb.vue';
 import MobileSidebarNavDrawer from './Partials/MobileSidebarNavDrawer.vue';
 import TopNav from './Partials/TopNav.vue';
@@ -119,7 +118,7 @@ onMounted(() => {
                     <slot />
                 </section>
 
-                <footer class="">
+                <footer>
                     <Footer />
                 </footer>
             </div>

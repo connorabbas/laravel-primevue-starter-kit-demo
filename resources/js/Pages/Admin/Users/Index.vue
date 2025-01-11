@@ -44,7 +44,6 @@ const {
     firstDatasetIndex,
     filteredOrSorted,
     debounceInputFilter,
-    fetchData,
     paginate,
     filter,
     sort,
@@ -95,10 +94,10 @@ const {
                             removableSort
                             resizableColumns
                             columnResizeMode="fit"
+                            v-model:filters="filters"
                             :loading="processing"
                             :value="users.data"
                             :totalRecords="users.total"
-                            v-model:filters="filters"
                             filterDisplay="row"
                             :sortField="sorting.field"
                             :sortOrder="sorting.order"
@@ -134,11 +133,11 @@ const {
                                     <InputText
                                         v-model="filterModel.value"
                                         type="text"
+                                        placeholder="Search by name"
                                         fluid
                                         @input="
                                             debounceInputFilter(filterCallback)
                                         "
-                                        placeholder="Search by name"
                                     />
                                 </template>
                                 <template #body="slotProps">
@@ -157,11 +156,11 @@ const {
                                     <InputText
                                         v-model="filterModel.value"
                                         type="text"
+                                        placeholder="Search by Email"
                                         fluid
                                         @input="
                                             debounceInputFilter(filterCallback)
                                         "
-                                        placeholder="Search by Email"
                                     />
                                 </template>
                                 <template #body="slotProps">
@@ -171,12 +170,12 @@ const {
                             <Column header="Action">
                                 <template #body="{ data }">
                                     <Button
+                                        v-tooltip.top="'Show User Actions'"
                                         type="button"
                                         severity="secondary"
                                         text
                                         rounded
                                         icon="pi pi-ellipsis-v"
-                                        v-tooltip.top="'Show User Actions'"
                                         @click="
                                             toggleUserContextMenu($event, data)
                                         "
