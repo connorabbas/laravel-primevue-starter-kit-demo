@@ -34,7 +34,9 @@ jobs:
         echo "DB_DATABASE=database/database.sqlite" >> .env
         
     - name: Install PHP Dependencies
-      run: composer install --prefer-dist --no-progress --no-interaction
+      run: |
+        composer require brianium/paratest --dev
+        composer install --prefer-dist --no-progress --no-interaction
       
     - name: Install Node.js Dependencies
       run: npm ci
@@ -64,4 +66,4 @@ jobs:
         APP_ENV: testing
         DB_CONNECTION: sqlite
         DB_DATABASE: database/database.sqlite
-      run: php artisan test --parallel
+      run: php artisan test
