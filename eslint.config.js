@@ -16,6 +16,14 @@ export default typescriptEslint.config(
         languageOptions: {
             ecmaVersion: 'latest',
             sourceType: 'module',
+            globals: {
+                ...globals.browser,
+                process: 'readonly',
+                module: 'readonly',
+                require: 'readonly',
+                Ziggy: 'readonly',
+                window: 'readonly',
+            },
         },
     },
     {

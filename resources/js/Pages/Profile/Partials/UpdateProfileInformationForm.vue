@@ -48,8 +48,8 @@ onMounted(() => {
         <div class="space-y-2">
             <label for="name">Name</label>
             <InputText
-                ref="name-input"
                 id="name"
+                ref="name-input"
                 v-model="form.name"
                 type="text"
                 required
