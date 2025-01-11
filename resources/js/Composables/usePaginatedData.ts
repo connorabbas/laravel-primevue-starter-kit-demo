@@ -9,20 +9,20 @@ interface PageStateEvent {
     rows: number;
     page: number;
     pageCount: number;
-};
+}
 interface PaginationState {
     page: number;
     rows: number;
-};
+}
 interface SortState {
     field: undefined | string;
     order: undefined | null | 0 | 1 | -1;
-};
+}
 
 export function usePaginatedData(
     defaultFilters: PrimeVue.PaginatedDataFilters = {},
     only: string[] = ['request'],
-    initialsRows: number = 20,
+    initialsRows: number = 20
 ) {
     const page = usePage<{
         request: {
@@ -98,14 +98,14 @@ export function usePaginatedData(
         fetchData().then(() => {
             scrollToTop();
         });
-    };
+    }
 
     function filter() {
         pagination.value.page = 1;
         fetchData().then(() => {
             scrollToTop();
         });
-    };
+    }
 
     function reset() {
         window.history.replaceState(null, '', window.location.pathname);
@@ -143,7 +143,10 @@ export function usePaginatedData(
                     const unique = [...new Set(filter.value)];
                     filter.value = unique;
                     filter.value.forEach((value: any, index: number) => {
-                        if (typeof value === 'string' && !isNaN(Number(value))) {
+                        if (
+                            typeof value === 'string' &&
+                            !isNaN(Number(value))
+                        ) {
                             filter.value[index] = Number(value);
                         }
                     });
@@ -162,7 +165,7 @@ export function usePaginatedData(
             sorting.value.field = urlParams?.sortField;
         }
         if (urlParams?.sortOrder) {
-            sorting.value.order = parseInt(urlParams?.sortOrder) ? 1 : 0
+            sorting.value.order = parseInt(urlParams?.sortOrder) ? 1 : 0;
         }
     }
 

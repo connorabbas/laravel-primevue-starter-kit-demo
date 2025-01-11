@@ -4,7 +4,7 @@ import * as PrimeVue from '@/types/primevue';
 export function useLazyDataTable(
     defaultFilters: PrimeVue.PaginatedDataFilters = {},
     only: string[] = ['request'],
-    initialsRows: number = 20,
+    initialsRows: number = 20
 ) {
     const {
         processing,
@@ -18,11 +18,7 @@ export function useLazyDataTable(
         fetchData,
         paginate,
         reset,
-    } = usePaginatedData(
-        defaultFilters,
-        only,
-        initialsRows
-    );
+    } = usePaginatedData(defaultFilters, only, initialsRows);
 
     function parseEventFilterValues() {
         Object.keys(filters.value).forEach((key) => {
@@ -34,16 +30,14 @@ export function useLazyDataTable(
         });
     }
 
-    function filter(event: {
-        filters: PrimeVue.PaginatedDataFilters
-    }) {
+    function filter(event: { filters: PrimeVue.PaginatedDataFilters }) {
         pagination.value.page = 1;
         filters.value = { ...event.filters };
         parseEventFilterValues();
         fetchData().then(() => {
             scrollToTop();
         });
-    };
+    }
 
     function sort(event: PrimeVue.SortEvent) {
         pagination.value.page = 1;
@@ -52,7 +46,7 @@ export function useLazyDataTable(
         fetchData().then(() => {
             scrollToTop();
         });
-    };
+    }
 
     return {
         processing,
