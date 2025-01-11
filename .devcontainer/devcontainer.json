@@ -22,8 +22,7 @@
                 "esbenp.prettier-vscode",
                 "mikestead.dotenv",
                 "streetsidesoftware.code-spell-checker",
-                "shd101wyy.markdown-preview-enhanced",
-                "pmneo.tsimporter"
+                "shd101wyy.markdown-preview-enhanced"
             ],
             "settings": {}
         }
