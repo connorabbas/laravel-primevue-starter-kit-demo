@@ -1,4 +1,4 @@
-name: Laravel
+name: Laravel CI
 
 on:
   push:
@@ -9,37 +9,59 @@ on:
 jobs:
   laravel-tests:
     runs-on: ubuntu-latest
+    
     steps:
     - uses: actions/checkout@v4
+    
     - uses: shivammathur/setup-php@15c43e89cdef867065b0213be354c2841860869e
       with:
         php-version: '8.3'
+        extensions: mbstring, xml, ctype, iconv, intl, pdo_sqlite, dom, filter, json, libxml, zip
+    
     - name: Setup Node.js
       uses: actions/setup-node@v3
       with:
         node-version: '20'
+        cache: 'npm'
+    
     - name: Copy .env
       run: php -r "file_exists('.env') || copy('.env.example', '.env');"
+    
     - name: Set Environment Variables
       run: |
         echo "APP_ENV=testing" >> .env
         echo "DB_CONNECTION=sqlite" >> .env
         echo "DB_DATABASE=database/database.sqlite" >> .env
+        
     - name: Install PHP Dependencies
       run: composer install --prefer-dist --no-progress --no-interaction
+      
     - name: Install Node.js Dependencies
       run: npm ci
+      
     - name: Generate Application Key
       run: php artisan key:generate
+      
     - name: Set Directory Permissions
       run: chmod -R ug+rwx storage bootstrap/cache
+      
     - name: Prepare Database
       run: |
         mkdir -p database
         touch database/database.sqlite
-        php artisan migrate --force
-    - name: Run Backend Tests
+        
+    - name: Clear Config
+      run: php artisan config:clear
+        
+    - name: Migrate Database
       env:
         DB_CONNECTION: sqlite
         DB_DATABASE: database/database.sqlite
-      run: php artisan test
+      run: php artisan migrate:fresh --seed --force
+        
+    - name: Run Tests
+      env:
+        APP_ENV: testing
+        DB_CONNECTION: sqlite
+        DB_DATABASE: database/database.sqlite
+      run: php artisan test --parallel
