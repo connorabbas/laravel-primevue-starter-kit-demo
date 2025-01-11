@@ -1,7 +1,7 @@
 <script setup>
 import { ref, useTemplateRef } from 'vue';
 import { Head } from '@inertiajs/vue3';
-import { useLazyDataTable } from '@/Composables/useLazyDataTable.js';
+import { useLazyDataTable } from '@/Composables/useLazyDataTable';
 import { FilterMatchMode } from '@primevue/core/api';
 import AuthenticatedAdminLayout from '@/Layouts/Admin/AuthenticatedLayout.vue';
 import Container from '@/Components/Container.vue';
