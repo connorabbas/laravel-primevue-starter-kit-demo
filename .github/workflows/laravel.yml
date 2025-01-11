@@ -24,7 +24,7 @@ jobs:
       - name: Run ESLint
         run: npm run lint
 
-  laravel-tests:
+  laravel:
     runs-on: ubuntu-latest
     
     steps:
@@ -40,6 +40,9 @@ jobs:
 
     - name: Install PHP Dependencies
       run: composer install --prefer-dist --no-progress --no-interaction
+
+    - name: Run Pint
+      run: vendor/bin/pint
     
     - name: Setup Node.js
       uses: actions/setup-node@v3
@@ -79,6 +82,3 @@ jobs:
         DB_CONNECTION: sqlite
         DB_DATABASE: database/database.sqlite
       run: php artisan test
-
-    - name: Run Pint
-      run: vendor/bin/pint
