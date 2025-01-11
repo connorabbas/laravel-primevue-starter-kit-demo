@@ -1,20 +1,30 @@
 // https://eslint.vuejs.org/user-guide/
-// https://www.npmjs.com/package/@vue/eslint-config-typescript
 // https://typescript-eslint.io/rules/?=recommended
 
-import js from '@eslint/js';
-import pluginVue from 'eslint-plugin-vue';
-import vueTsEslintConfig from '@vue/eslint-config-typescript';
+import eslint from '@eslint/js';
+import eslintConfigPrettier from 'eslint-config-prettier';
+import eslintPluginVue from 'eslint-plugin-vue';
+import globals from 'globals';
+import typescriptEslint from 'typescript-eslint';
 
-export default [
-    js.configs.recommended,
-    ...pluginVue.configs['flat/essential'],
-    ...vueTsEslintConfig(),
+export default typescriptEslint.config(
+    { ignores: ['*.d.ts', '**/coverage', '**/dist', 'vendor/**'] },
     {
+        extends: [
+            eslint.configs.recommended,
+            ...typescriptEslint.configs.recommended,
+            ...eslintPluginVue.configs['flat/recommended'],
+        ],
+        files: ['**/*.{ts,js,vue}'],
         languageOptions: {
             ecmaVersion: 'latest',
             globals: {
+                ...globals.browser,
                 Ziggy: 'readonly',
+            },
+            sourceType: 'module',
+            parserOptions: {
+                parser: typescriptEslint.parser,
             },
         },
         rules: {
@@ -23,4 +33,5 @@ export default [
             '@typescript-eslint/no-explicit-any': 'off',
         },
     },
-];
+    eslintConfigPrettier
+);

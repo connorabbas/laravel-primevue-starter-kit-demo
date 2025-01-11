@@ -3,17 +3,25 @@
     "type": "module",
     "scripts": {
         "dev": "vite",
-        "build": "vite build"
+        "build": "vite build",
+        "lint": "eslint ."
     },
     "devDependencies": {
+        "@eslint/js": "^9.18.0",
         "@inertiajs/vue3": "^2.0.0",
         "@primevue/auto-import-resolver": "^4.2.2",
         "@primevue/themes": "^4.2.2",
         "@types/lodash-es": "^4.17.12",
+        "@typescript-eslint/eslint-plugin": "^8.19.1",
+        "@typescript-eslint/parser": "^8.19.1",
         "@vitejs/plugin-vue": "^5.0.0",
         "@vueuse/core": "^12.4.0",
         "autoprefixer": "^10.4.19",
         "axios": "^1.6.4",
+        "eslint": "^9.18.0",
+        "eslint-config-prettier": "^9.1.0",
+        "eslint-plugin-vue": "^9.32.0",
+        "globals": "^15.14.0",
         "laravel-vite-plugin": "^1.0",
         "lodash": "^4.17.21",
         "lodash-es": "^4.17.21",
@@ -24,6 +32,7 @@
         "tailwindcss": "^3.4.4",
         "tailwindcss-primeui": "^0.3.2",
         "typescript": "^5.7.3",
+        "typescript-eslint": "^8.19.1",
         "unplugin-vue-components": "^0.27.4",
         "vite": "^5.0",
         "vue": "^3.5.0"
