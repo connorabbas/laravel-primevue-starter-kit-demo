@@ -45,9 +45,9 @@ onMounted(() => {
             <div class="space-y-2">
                 <label for="email">Email</label>
                 <InputText
+                    id="email"
                     ref="email-input"
                     v-model="form.email"
-                    id="email"
                     type="email"
                     required
                     fluid
@@ -67,8 +67,8 @@ onMounted(() => {
             <div class="space-y-2">
                 <label for="password">Password</label>
                 <InputText
-                    v-model="form.password"
                     id="password"
+                    v-model="form.password"
                     type="password"
                     required
                     fluid
@@ -89,10 +89,10 @@ onMounted(() => {
                 <div class="flex items-center justify-between">
                     <div class="flex items-center">
                         <Checkbox
-                            v-model="form.remember"
-                            :binary="true"
                             id="remember"
                             class="mr-2"
+                            v-model="form.remember"
+                            :binary="true"
                         ></Checkbox>
                         <label for="remember">Remember me</label>
                     </div>
@@ -109,10 +109,10 @@ onMounted(() => {
                 </Link>
                 <Button
                     :loading="form.processing"
-                    raised
                     type="submit"
                     label="Log In"
                     severity="contrast"
+                    raised
                 />
             </div>
         </form>

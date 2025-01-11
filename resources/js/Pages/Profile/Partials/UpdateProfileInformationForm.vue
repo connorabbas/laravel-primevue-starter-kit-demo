@@ -111,11 +111,11 @@ onMounted(() => {
 
         <div class="flex items-center gap-4">
             <Button
-                raised
-                type="submit"
                 :loading="form.processing"
+                type="submit"
                 label="Save"
                 severity="contrast"
+                raised
             />
 
             <Transition

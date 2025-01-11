@@ -45,8 +45,8 @@ onMounted(() => {
                 <label for="email">Email</label>
                 <InputText
                     ref="email-input"
-                    v-model="form.email"
                     id="email"
+                    v-model="form.email"
                     type="email"
                     required
                     fluid
@@ -66,10 +66,10 @@ onMounted(() => {
             <div class="flex justify-end items-center">
                 <Button
                     :loading="form.processing"
-                    raised
                     type="submit"
                     label="Email Password Reset Link"
                     severity="contrast"
+                    raised
                 />
             </div>
         </form>
