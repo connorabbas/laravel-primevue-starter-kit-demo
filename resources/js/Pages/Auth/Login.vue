@@ -35,21 +35,21 @@ onMounted(() => {
     <GuestLayout>
         <Head title="Log in" />
 
-        <template #message v-if="status">
+        <template v-if="status" #message>
             <Message severity="success" :closable="false" class="shadow">
                 {{ status }}
             </Message>
         </template>
 
-        <form @submit.prevent="submit" class="space-y-6">
+        <form class="space-y-6" @submit.prevent="submit">
             <div class="space-y-2">
                 <label for="email">Email</label>
                 <InputText
-                    required
                     ref="email-input"
+                    v-model="form.email"
                     id="email"
                     type="email"
-                    v-model="form.email"
+                    required
                     fluid
                     :invalid="Boolean(form.errors.email)"
                     autocomplete="username"
@@ -67,10 +67,10 @@ onMounted(() => {
             <div class="space-y-2">
                 <label for="password">Password</label>
                 <InputText
-                    required
+                    v-model="form.password"
                     id="password"
                     type="password"
-                    v-model="form.password"
+                    required
                     fluid
                     :invalid="Boolean(form.errors.password)"
                     autocomplete="current-password"
@@ -89,9 +89,9 @@ onMounted(() => {
                 <div class="flex items-center justify-between">
                     <div class="flex items-center">
                         <Checkbox
-                            id="remember"
-                            :binary="true"
                             v-model="form.remember"
+                            :binary="true"
+                            id="remember"
                             class="mr-2"
                         ></Checkbox>
                         <label for="remember">Remember me</label>
@@ -108,9 +108,9 @@ onMounted(() => {
                     Forgot your password?
                 </Link>
                 <Button
+                    :loading="form.processing"
                     raised
                     type="submit"
-                    :loading="form.processing"
                     label="Log In"
                     severity="contrast"
                 />

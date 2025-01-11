@@ -29,6 +29,7 @@ export default typescriptEslint.config(
             },
         },
         rules: {
+            'vue/require-default-prop': 'off',
             'vue/attribute-hyphenation': 'off',
             'vue/multi-word-component-names': 'off',
             'vue/block-lang': 'off',

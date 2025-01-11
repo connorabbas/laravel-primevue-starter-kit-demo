@@ -28,7 +28,7 @@ onMounted(() => {
     <GuestLayout>
         <Head title="Forgot Password" />
 
-        <template #message v-if="status">
+        <template v-if="status" #message>
             <Message severity="success" :closable="false" class="shadow">
                 {{ status }}
             </Message>
@@ -40,15 +40,15 @@ onMounted(() => {
             you to choose a new one.
         </div>
 
-        <form @submit.prevent="submit" class="space-y-6">
+        <form class="space-y-6" @submit.prevent="submit">
             <div class="space-y-2">
                 <label for="email">Email</label>
                 <InputText
-                    required
                     ref="email-input"
+                    v-model="form.email"
                     id="email"
                     type="email"
-                    v-model="form.email"
+                    required
                     fluid
                     :invalid="Boolean(form.errors.email)"
                     autocomplete="username"
@@ -65,9 +65,9 @@ onMounted(() => {
 
             <div class="flex justify-end items-center">
                 <Button
+                    :loading="form.processing"
                     raised
                     type="submit"
-                    :loading="form.processing"
                     label="Email Password Reset Link"
                     severity="contrast"
                 />
