@@ -17,6 +17,12 @@ jobs:
       with:
         php-version: '8.3'
         extensions: mbstring, xml, ctype, iconv, intl, pdo_sqlite, dom, filter, json, libxml, zip
+
+    - name: Copy .env
+      run: php -r "file_exists('.env') || copy('.env.example', '.env');"
+
+    - name: Install PHP Dependencies
+      run: composer install --prefer-dist --no-progress --no-interaction
     
     - name: Setup Node.js
       uses: actions/setup-node@v3
@@ -29,20 +35,12 @@ jobs:
 
     - name: Build Frontend Assets
       run: npm run build
-
-    - name: Copy .env
-      run: php -r "file_exists('.env') || copy('.env.example', '.env');"
     
     - name: Set Environment Variables
       run: |
         echo "APP_ENV=testing" >> .env
         echo "DB_CONNECTION=sqlite" >> .env
         echo "DB_DATABASE=database/database.sqlite" >> .env
-        
-    - name: Install PHP Dependencies
-      run: |
-        composer require brianium/paratest --dev
-        composer install --prefer-dist --no-progress --no-interaction
 
     - name: Generate Application Key
       run: php artisan key:generate
