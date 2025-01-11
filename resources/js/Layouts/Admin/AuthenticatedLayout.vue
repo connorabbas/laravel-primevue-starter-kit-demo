@@ -95,7 +95,7 @@ onMounted(() => {
 
                 <!-- Page Title -->
                 <section v-if="pageTitle">
-                    <Container :fluid="true" class="my-4 md:mt-8 md:mb-6">
+                    <Container :fluid="true" class="my-4 md:my-8">
                         <div class="flex items-end justify-between flex-wrap">
                             <div>
                                 <h1
