@@ -7,7 +7,7 @@ import TopNav from './Partials/TopNav.vue';
 import Footer from './Partials/Footer.vue';
 import SideMenuItems from './Partials/SideMenuItems.vue';
 
-const props = defineProps({
+defineProps({
     pageTitle: {
         type: String,
         required: false,
@@ -18,8 +18,6 @@ const props = defineProps({
         default: () => [],
     },
 });
-
-const page = usePage();
 
 // Drawer menus
 const navDrawerOpen = ref(false);

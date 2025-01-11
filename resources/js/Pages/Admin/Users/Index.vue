@@ -176,10 +176,10 @@ const {
                                         text
                                         rounded
                                         icon="pi pi-ellipsis-v"
+                                        v-tooltip.top="'Show User Actions'"
                                         @click="
                                             toggleUserContextMenu($event, data)
                                         "
-                                        v-tooltip.top="'Show User Actions'"
                                     />
                                 </template>
                             </Column>

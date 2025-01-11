@@ -2,7 +2,7 @@
 import { ref } from 'vue';
 import LinksPanelMenu from '@/Components/PrimeVue/LinksPanelMenu.vue';
 
-const model = defineModel();
+const model = defineModel(false);
 
 // Menu Items
 const currentRoute = route().current();

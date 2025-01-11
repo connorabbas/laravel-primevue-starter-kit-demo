@@ -1,7 +1,7 @@
 <script setup>
 import { usePage } from '@inertiajs/vue3';
 
-const model = defineModel();
+const model = defineModel(false);
 const page = usePage();
 </script>
 
