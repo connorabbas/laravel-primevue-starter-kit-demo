@@ -111,6 +111,17 @@ const {
                             @sort="sort"
                             @page="paginate"
                         >
+                            <template #empty>
+                                <div class="flex justify-center">
+                                    <Message
+                                        severity="warn"
+                                        icon="pi pi-exclamation-circle"
+                                        class="grow text-center flex justify-center"
+                                    >
+                                        No Users found.
+                                    </Message>
+                                </div>
+                            </template>
                             <Column
                                 field="name"
                                 header="Name"
