@@ -11,12 +11,20 @@ import typescriptEslint from 'typescript-eslint';
 export default typescriptEslint.config(
     { ignores: ['*.d.ts', '**/coverage', '**/dist', 'vendor/**'] },
     {
+        files: ['**/*.js'],
+        ...eslint.configs.recommended,
+        languageOptions: {
+            ecmaVersion: 'latest',
+            sourceType: 'module',
+        },
+    },
+    {
+        files: ['**/*.{ts,vue}'],
         extends: [
             eslint.configs.recommended,
             ...typescriptEslint.configs.recommended,
             ...eslintPluginVue.configs['flat/recommended'],
         ],
-        files: ['**/*.{ts,js,vue}'],
         languageOptions: {
             ecmaVersion: 'latest',
             globals: {

@@ -33,8 +33,8 @@ onMounted(() => {
                 <InputText
                     id="name"
                     ref="name-input"
-                    type="text"
                     v-model="form.name"
+                    type="text"
                     :invalid="Boolean(form.errors.name)"
                     required
                     fluid

@@ -44,12 +44,12 @@ function focusPasswordInput() {
 
             <div class="space-y-2">
                 <InputText
-                    autofocus
                     id="password"
                     ref="password-input"
                     v-model="form.password"
                     type="password"
                     placeholder="Password"
+                    autofocus
                     required
                     fluid
                     :invalid="Boolean(form.errors.password)"
@@ -85,10 +85,10 @@ function focusPasswordInput() {
         </Dialog>
 
         <Button
-            @click="modalOpen = true"
             label="Delete Account"
             severity="danger"
             raised
+            @click="modalOpen = true"
         />
     </section>
 </template>

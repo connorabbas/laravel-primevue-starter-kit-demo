@@ -90,8 +90,8 @@ onMounted(() => {
                     <div class="flex items-center">
                         <Checkbox
                             id="remember"
-                            class="mr-2"
                             v-model="form.remember"
+                            class="mr-2"
                             :binary="true"
                         ></Checkbox>
                         <label for="remember">Remember me</label>

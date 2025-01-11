@@ -44,8 +44,8 @@ onMounted(() => {
             <div class="space-y-2">
                 <label for="email">Email</label>
                 <InputText
-                    ref="email-input"
                     id="email"
+                    ref="email-input"
                     v-model="form.email"
                     type="email"
                     required
