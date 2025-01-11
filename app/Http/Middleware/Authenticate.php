@@ -10,7 +10,7 @@ class Authenticate extends DefaultAuthenticate
     /**
      * Get the path the user should be redirected to when they are not authenticated.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  Request  $request
      * @return string|null
      */
     protected function redirectTo(Request $request)
