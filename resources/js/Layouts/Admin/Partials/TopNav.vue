@@ -71,8 +71,8 @@ const toggleUserMenu = (event) => {
                     <div class="flex items-center space-x-3">
                         <div>
                             <ToggleDarkModeButton
-                                text
                                 severity="secondary"
+                                text
                                 rounded
                             />
                         </div>
