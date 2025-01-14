@@ -2,7 +2,9 @@
 import { ref } from 'vue';
 import LinksPanelMenu from '@/Components/PrimeVue/LinksPanelMenu.vue';
 
-const model = defineModel<boolean>(false);
+const visible = defineModel<boolean>({
+    default: false,
+});
 
 // Menu Items
 const currentRoute = route().current();
@@ -71,7 +73,7 @@ const exampleNestedMenuItems = ref([
 
 <template>
     <Drawer
-        v-model:visible="model"
+        v-model:visible="visible"
         position="left"
         :autoZIndex="false"
     >
