@@ -87,12 +87,12 @@ const {
                         />
                         <DataTable
                             ref="dataTable"
+                            v-model:filters="filters"
                             lazy
                             paginator
                             removableSort
                             resizableColumns
                             columnResizeMode="fit"
-                            v-model:filters="filters"
                             :loading="processing"
                             :value="users.data"
                             :totalRecords="users.total"
