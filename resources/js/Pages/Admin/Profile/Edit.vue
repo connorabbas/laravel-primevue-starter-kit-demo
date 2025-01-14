@@ -1,6 +1,4 @@
 <script setup>
-import AdminAuthenticatedLayout from '@/Layouts/Admin/AuthenticatedLayout.vue';
-import Container from '@/Components/Container.vue';
 import DeleteUserForm from './Partials/DeleteUserForm.vue';
 import UpdatePasswordForm from './Partials/UpdatePasswordForm.vue';
 import UpdateProfileInformationForm from './Partials/UpdateProfileInformationForm.vue';

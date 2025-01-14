@@ -11,10 +11,12 @@ import PrimeVue from 'primevue/config';
 import ToastService from 'primevue/toastservice';
 import Tooltip from 'primevue/tooltip';
 
+import AuthenticatedAdminLayout from '@/Layouts/Admin/AuthenticatedLayout.vue';
+import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
+import Container from '@/Components/Container.vue';
+
 import customThemePreset from '@/theme-preset.js';
 import { useDark } from '@vueuse/core';
-
-import Container from './Components/Container.vue';
 
 const appName = import.meta.env.VITE_APP_NAME || 'Laravel';
 const darkMode = useDark(); // set Light/Dark Mode
@@ -37,8 +39,10 @@ createInertiaApp({
             .use(ToastService)
             .component('Head', Head)
             .component('Link', Link)
-            .component('Container', Container)
             .directive('tooltip', Tooltip)
+            .component('AuthenticatedAdminLayout', AuthenticatedAdminLayout)
+            .component('AuthenticatedLayout', AuthenticatedLayout)
+            .component('Container', Container)
             .mount(el);
     },
     progress: {

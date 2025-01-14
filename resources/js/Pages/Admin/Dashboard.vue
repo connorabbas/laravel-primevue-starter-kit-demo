@@ -1,12 +1,5 @@
-<script setup>
-import AuthenticatedAdminLayout from '@/Layouts/Admin/AuthenticatedLayout.vue';
-import Container from '@/Components/Container.vue';
-
-const pageTitle = 'Dashboard';
-</script>
-
 <template>
-    <Head :title="pageTitle" />
+    <Head title="Dashboard" />
     <AuthenticatedAdminLayout>
         <Container :fluid="true" class="py-4 md:py-8">
             <div>
