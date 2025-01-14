@@ -111,8 +111,8 @@ watchEffect(() => {
                             >
                                 <div>
                                     <ToggleDarkModeButton
-                                        text
                                         severity="secondary"
+                                        text
                                         rounded
                                     />
                                 </div>
@@ -169,8 +169,8 @@ watchEffect(() => {
                 <Drawer v-model:visible="mobileMenuOpen" position="right">
                     <template #header>
                         <ToggleDarkModeButton
-                            text
                             severity="secondary"
+                            text
                             rounded
                         />
                     </template>
