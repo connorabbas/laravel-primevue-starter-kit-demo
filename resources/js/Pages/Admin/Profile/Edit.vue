@@ -24,7 +24,7 @@ const breadcrumbs = [
 <template>
     <Head :title="pageTitle" />
 
-    <AdminAuthenticatedLayout
+    <AuthenticatedAdminLayout
         :page-title="pageTitle"
         :breadcrumbs="breadcrumbs"
     >
@@ -96,5 +96,5 @@ const breadcrumbs = [
                 </Card>
             </div>
         </Container>
-    </AdminAuthenticatedLayout>
+    </AuthenticatedAdminLayout>
 </template>
