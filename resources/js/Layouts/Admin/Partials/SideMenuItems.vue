@@ -67,21 +67,19 @@ const exampleNestedMenuItems = [
 </script>
 
 <template>
-    <div class="h-full">
-        <div class="mb-5">
-            <p class="text-muted-color font-bold uppercase text-sm mb-2">
-                Home
-            </p>
+    <div class="h-full space-y-5">
+        <div class="space-y-2">
+            <p class="text-muted-color font-bold uppercase text-sm">Home</p>
             <LinksPanelMenu :model="homeMenuItems" class="w-full" />
         </div>
-        <div class="mb-5">
-            <p class="text-muted-color font-bold uppercase text-sm mb-2">
+        <div class="space-y-2">
+            <p class="text-muted-color font-bold uppercase text-sm">
                 Analytics
             </p>
             <LinksPanelMenu :model="analyticsMenuItems" class="w-full" />
         </div>
-        <div class="mb-5">
-            <p class="text-muted-color font-bold uppercase text-sm mb-2">
+        <div class="space-y-2">
+            <p class="text-muted-color font-bold uppercase text-sm">
                 Example Nested
             </p>
             <LinksPanelMenu :model="exampleNestedMenuItems" class="w-full" />

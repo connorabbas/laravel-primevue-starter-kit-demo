@@ -168,13 +168,17 @@ watchEffect(() => {
                 <!-- Mobile drawer menu -->
                 <Drawer v-model:visible="mobileMenuOpen" position="right">
                     <template #header>
-                        <ToggleDarkModeButton text severity="secondary" rounded />
+                        <ToggleDarkModeButton
+                            text
+                            severity="secondary"
+                            rounded
+                        />
                     </template>
                     <div>
-                        <div>
-                            <div class="mb-5">
+                        <div class="space-y-5">
+                            <div class="space-y-2">
                                 <p
-                                    class="text-muted-color font-bold uppercase text-sm mb-2"
+                                    class="text-muted-color font-bold uppercase text-sm"
                                 >
                                     Home
                                 </p>
