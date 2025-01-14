@@ -1,6 +1,10 @@
 import { usePaginatedData } from './usePaginatedData';
 import cloneDeep from 'lodash-es/cloneDeep';
-import { DataTableFilterMetaData, DataTableFilterEvent, DataTableSortEvent } from 'primevue';
+import {
+    DataTableFilterMetaData,
+    DataTableFilterEvent,
+    DataTableSortEvent,
+} from 'primevue';
 import { PrimeVueDataFilters } from '@/types';
 
 export function useLazyDataTable(

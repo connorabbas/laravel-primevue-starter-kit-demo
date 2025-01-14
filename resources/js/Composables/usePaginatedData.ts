@@ -6,11 +6,7 @@ import cloneDeep from 'lodash-es/cloneDeep';
 import { PageState, DataTablePageEvent } from 'primevue';
 import { PrimeVueDataFilters } from '@/types';
 
-// TODO: npm install qs
-// const queryString = window.location.search;
-// const parsed = qs.parse(queryString, { ignoreQueryPrefix: true });
-
-interface PaginatedFilterableSortableQueryParams {
+interface PaginatedFilteredSortedQueryParams {
     filters?: PrimeVueDataFilters;
     page?: string;
     rows?: string;
@@ -33,7 +29,7 @@ export function usePaginatedData(
 ) {
     const page = usePage<{
         request: {
-            urlParams: PaginatedFilterableSortableQueryParams;
+            urlParams: PaginatedFilteredSortedQueryParams;
         };
     }>();
 
@@ -172,7 +168,7 @@ export function usePaginatedData(
         });
     }
 
-    function parseUrlParams(urlParams: PaginatedFilterableSortableQueryParams) {
+    function parseUrlParams(urlParams: PaginatedFilteredSortedQueryParams) {
         filters.value = {
             ...cloneDeep(initialFilters),
             ...urlParams?.filters,
