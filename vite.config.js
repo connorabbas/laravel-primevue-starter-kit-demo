@@ -30,9 +30,11 @@ export default ({ mode }) => {
         ],
         server: {
             port: devPort,
+            host: true,
             hmr: {
                 host: hostDomain,
             },
+            cors: true,
             watch: {
                 usePolling: true,
             },
