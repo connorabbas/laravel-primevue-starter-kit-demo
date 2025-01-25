@@ -29,7 +29,7 @@ onMounted(() => {
         <Head title="Forgot Password" />
 
         <template v-if="status" #message>
-            <Message severity="success" :closable="false" class="shadow">
+            <Message severity="success" :closable="false" class="shadow-sm">
                 {{ status }}
             </Message>
         </template>

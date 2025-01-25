@@ -81,7 +81,7 @@ const {
                     <template #content>
                         <Menu
                             ref="user-context-menu"
-                            class="shadow"
+                            class="shadow-sm"
                             :model="userContextMenuItems"
                             popup
                         />

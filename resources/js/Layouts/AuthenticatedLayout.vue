@@ -80,7 +80,7 @@ watchEffect(() => {
         <div class="min-h-screen">
             <nav
                 class="dynamic-bg border-b"
-                :class="$slots.header ? 'dynamic-border' : 'shadow'"
+                :class="$slots.header ? 'dynamic-border' : 'shadow-sm'"
             >
                 <!-- Primary Navigation Menu -->
                 <Container>
@@ -138,7 +138,7 @@ watchEffect(() => {
                                         popup
                                         :pt="{
                                             root: {
-                                                class: '!left-auto !top-0 right-0',
+                                                class: 'left-auto! top-0! right-0',
                                             },
                                         }"
                                     />
@@ -217,7 +217,7 @@ watchEffect(() => {
             </nav>
 
             <!-- Page Heading -->
-            <header v-if="$slots.header" class="dynamic-bg shadow">
+            <header v-if="$slots.header" class="dynamic-bg shadow-sm">
                 <Container>
                     <div class="py-6">
                         <slot name="header" />

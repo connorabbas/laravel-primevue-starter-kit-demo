@@ -103,7 +103,7 @@ onMounted(() => {
                 v-if="status === 'verification-link-sent'"
                 severity="success"
                 :closable="false"
-                class="shadow mt-4"
+                class="shadow-sm mt-4"
             >
                 A new verification link has been sent to your email address.
             </Message>
