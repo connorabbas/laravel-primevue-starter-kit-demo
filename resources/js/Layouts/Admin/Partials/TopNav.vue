@@ -104,7 +104,7 @@ const toggleUserMenu = (event) => {
                                 popup
                                 :pt="{
                                     root: {
-                                        class: '!left-auto !top-0 right-0',
+                                        class: 'left-auto! top-0! right-0',
                                     },
                                 }"
                             />
