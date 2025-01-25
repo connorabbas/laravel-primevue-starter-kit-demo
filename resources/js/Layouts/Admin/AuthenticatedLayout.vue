@@ -18,6 +18,19 @@ defineProps({
     },
 });
 
+/* eslint-disable @typescript-eslint/no-unused-vars */
+const tailwindArbitraryValues = [
+    'w-[18rem]', // sidebar width
+    'lg:pl-[18rem]',
+    'top-[57px]', // 57px header height for aura & nora theme
+    'lg:pt-[57px]',
+    'top-[61px]', // 61px header height for lara theme
+    'lg:pt-[61px]',
+    'top-[64px]', // 64px header height for material theme
+    'lg:pt-[64px]',
+];
+/* eslint-enable @typescript-eslint/no-unused-vars */
+
 // Drawer menus
 const navDrawerOpen = ref(false);
 
