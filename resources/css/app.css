@@ -1,17 +1,13 @@
-@import './styles.css';
-@import './custom-preflight.css' layer(tailwind-base);
-
-@layer tailwind-base, primevue, tailwind-utilities;
-
-@utility dynamic-bg {
-  @apply bg-surface-0 dark:bg-surface-900;
+html {
+    /* font size will determine the component/utility scaling */
+    font-size: 14px;
 }
 
-@utility dynamic-border {
-  @apply border-surface-200 dark:border-surface-800;
+body {
+    margin: 0 !important;
+    padding: 0 !important;
 }
 
-@layer tailwind-utilities {
-    @import 'tailwindcss/utilities' layer(utilities);
-    @config '../../tailwind.config.js';
+#nprogress .bar {
+    z-index: 9999999 !important;
 }

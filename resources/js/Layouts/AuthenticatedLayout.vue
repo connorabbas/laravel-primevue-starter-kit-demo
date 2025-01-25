@@ -176,7 +176,7 @@ watchEffect(() => {
                     </template>
                     <div>
                         <div class="space-y-5">
-                            <div class="space-y-2">
+                            <div class="flex flex-col gap-2">
                                 <p
                                     class="text-muted-color font-bold uppercase text-sm"
                                 >
