@@ -45,7 +45,7 @@ onMounted(() => {
 
 <template>
     <form class="space-y-6" @submit.prevent="updateProfileInformation">
-        <div class="space-y-2">
+        <div class="flex flex-col gap-2">
             <label for="name">Name</label>
             <InputText
                 id="name"
@@ -66,7 +66,7 @@ onMounted(() => {
                 {{ form.errors?.name }}
             </Message>
         </div>
-        <div class="space-y-2">
+        <div class="flex flex-col gap-2">
             <label for="email">Email</label>
             <InputText
                 id="email"
