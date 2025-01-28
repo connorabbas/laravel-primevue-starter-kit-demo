@@ -39,7 +39,7 @@ export default typescriptEslint.config(
         extends: [
             eslint.configs.recommended,
             ...typescriptEslint.configs.recommended,
-            ...eslintPluginVue.configs['flat/recommended'],
+            ...eslintPluginVue.configs['flat/strongly-recommended'],
         ],
         languageOptions: {
             ecmaVersion: 'latest',
@@ -64,12 +64,15 @@ export default typescriptEslint.config(
                     singleline: {
                         max: 1,
                     },
+                    multiline: {
+                        max: 1,
+                    },
                 },
             ],
             'vue/first-attribute-linebreak': [
                 'error',
                 {
-                    singleline: 'beside',
+                    singleline: 'ignore',
                     multiline: 'ignore',
                 },
             ],
