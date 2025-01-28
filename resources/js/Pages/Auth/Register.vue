@@ -25,8 +25,7 @@ onMounted(() => {
 
 <template>
     <GuestLayout>
-
-        <Head title="Register" />
+        <InertiaHead title="Register" />
 
         <form
             class="space-y-6"

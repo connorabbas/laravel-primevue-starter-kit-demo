@@ -1,6 +1,5 @@
 <template>
-
-    <Head title="Dashboard" />
+    <InertiaHead title="Dashboard" />
     <AuthenticatedLayout>
         <template #header>
             <h1 class="font-bold text-2xl leading-tight">Dashboard</h1>
