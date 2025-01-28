@@ -33,8 +33,7 @@ onMounted(() => {
 
 <template>
     <GuestLayout>
-
-        <Head title="Log in" />
+        <InertiaHead title="Log in" />
 
         <template
             v-if="status"

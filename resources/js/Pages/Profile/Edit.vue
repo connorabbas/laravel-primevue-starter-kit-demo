@@ -14,8 +14,7 @@ defineProps({
 </script>
 
 <template>
-
-    <Head title="Profile" />
+    <InertiaHead title="Profile" />
 
     <AuthenticatedLayout>
         <template #header>

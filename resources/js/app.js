@@ -36,7 +36,7 @@ createInertiaApp({
                 theme: customThemePreset,
             })
             .use(ToastService)
-            .component('Head', Head)
+            .component('InertiaHead', Head)
             .component('InertiaLink', Link)
             .component('AuthenticatedLayout', AuthenticatedLayout)
             .component('Container', Container)
