@@ -38,8 +38,8 @@ createInertiaApp({
                 theme: customThemePreset,
             })
             .use(ToastService)
-            .component('Head', Head)
-            .component('Link', Link)
+            .component('InertiaHead', Head)
+            .component('InertiaLink', Link)
             .directive('tooltip', Tooltip)
             .component('AuthenticatedAdminLayout', AuthenticatedAdminLayout)
             .component('AuthenticatedLayout', AuthenticatedLayout)

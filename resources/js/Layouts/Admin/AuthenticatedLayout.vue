@@ -64,33 +64,27 @@ onMounted(() => {
 
         <main class="flex-1">
             <!-- Desktop Sidebar -->
-            <aside
-                :class="[
-                    'w-[18rem] inset-0 hidden lg:block fixed overflow-y-auto overflow-x-hidden dynamic-bg border-r dynamic-border',
-                    `top-[${headerHeight}]`,
-                ]"
-            >
+            <aside :class="[
+                'w-[18rem] inset-0 hidden lg:block fixed overflow-y-auto overflow-x-hidden dynamic-bg border-r dynamic-border',
+                `top-[${headerHeight}]`,
+            ]">
                 <div class="w-full px-8 py-6">
                     <SideMenuItems />
                 </div>
             </aside>
 
             <!-- Scrollable Content -->
-            <div
-                :class="[
-                    'flex flex-col h-full lg:pl-[18rem]',
-                    `lg:pt-[${headerHeight}]`,
-                ]"
-            >
+            <div :class="[
+                'flex flex-col h-full lg:pl-[18rem]',
+                `lg:pt-[${headerHeight}]`,
+            ]">
                 <!-- Breadcrumbs Nav -->
                 <nav
                     v-if="breadcrumbs.length"
                     class="dynamic-bg border-b dynamic-border"
                 >
                     <Container :fluid="true">
-                        <div
-                            class="flex items-center justify-between flex-wrap"
-                        >
+                        <div class="flex items-center justify-between flex-wrap">
                             <div>
                                 <LinksBreadcrumb
                                     :model="breadcrumbs"
@@ -98,7 +92,10 @@ onMounted(() => {
                                 />
                             </div>
                             <div>
-                                <div v-if="$slots.headerEnd" class="py-3">
+                                <div
+                                    v-if="$slots.headerEnd"
+                                    class="py-3"
+                                >
                                     <slot name="headerEnd" />
                                 </div>
                             </div>
@@ -108,12 +105,13 @@ onMounted(() => {
 
                 <!-- Page Title -->
                 <section v-if="pageTitle">
-                    <Container :fluid="true" class="my-4 md:my-8">
+                    <Container
+                        :fluid="true"
+                        class="my-4 md:my-8"
+                    >
                         <div class="flex items-end justify-between flex-wrap">
                             <div>
-                                <h1
-                                    class="font-bold text-2xl md:text-3xl leading-tight"
-                                >
+                                <h1 class="font-bold text-2xl md:text-3xl leading-tight">
                                     {{ pageTitle }}
                                 </h1>
                             </div>
@@ -127,7 +125,10 @@ onMounted(() => {
                 </section>
 
                 <!-- Page Content -->
-                <section id="page-content" class="grow">
+                <section
+                    id="page-content"
+                    class="grow"
+                >
                     <slot />
                 </section>
 

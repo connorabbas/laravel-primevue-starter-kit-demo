@@ -1,7 +1,10 @@
 <template>
-    <Head title="Dashboard" />
+    <InertiaHead title="Dashboard" />
     <AuthenticatedAdminLayout>
-        <Container :fluid="true" class="py-4 md:py-8">
+        <Container
+            :fluid="true"
+            class="py-4 md:py-8"
+        >
             <div>
                 <Card>
                     <template #content>
