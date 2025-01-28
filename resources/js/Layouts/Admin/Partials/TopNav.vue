@@ -33,16 +33,14 @@ const toggleUserMenu = (event) => {
 <template>
     <nav class="dynamic-bg border-b dynamic-border">
         <Container :fluid="true">
-            <LinksMenuBar
-                :pt="{
-                    root: {
-                        class: 'px-0 py-3 border-0 rounded-none dynamic-bg',
-                    },
-                    button: {
-                        class: 'hidden',
-                    },
-                }"
-            >
+            <LinksMenuBar :pt="{
+                root: {
+                    class: 'px-0 py-3 border-0 rounded-none dynamic-bg',
+                },
+                button: {
+                    class: 'hidden',
+                },
+            }">
                 <template #start>
                     <div class="flex items-center">
                         <div class="shrink-0 flex items-center">
@@ -58,11 +56,14 @@ const toggleUserMenu = (event) => {
                                 }"
                                 @click="emit('open-nav')"
                             />
-                            <Link :href="route('welcome')" class="mr-5">
+                            <InertiaLink
+                                :href="route('welcome')"
+                                class="mr-5"
+                            >
                                 <ApplicationLogo
                                     class="block h-10 w-auto fill-current text-surface-900 dark:text-surface-0"
                                 />
-                            </Link>
+                            </InertiaLink>
                             <Tag value="Primary">ADMIN</Tag>
                         </div>
                     </div>
@@ -96,7 +97,10 @@ const toggleUserMenu = (event) => {
                                 severity="secondary"
                                 @click="toggleUserMenu($event)"
                             />
-                            <div id="user-menu-append" class="relative"></div>
+                            <div
+                                id="user-menu-append"
+                                class="relative"
+                            ></div>
                             <LinksMenu
                                 ref="user-menu"
                                 appendTo="#user-menu-append"

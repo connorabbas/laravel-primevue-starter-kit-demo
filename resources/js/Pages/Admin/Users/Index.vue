@@ -57,7 +57,7 @@ const {
 </script>
 
 <template>
-    <Head :title="pageTitle" />
+    <InertiaHead :title="pageTitle" />
 
     <AuthenticatedAdminLayout
         :page-title="pageTitle"
@@ -125,9 +125,7 @@ const {
                                 sortable
                                 :showFilterMenu="false"
                             >
-                                <template
-                                    #filter="{ filterModel, filterCallback }"
-                                >
+                                <template #filter="{ filterModel, filterCallback }">
                                     <InputText
                                         v-model="filterModel.value"
                                         type="text"
@@ -135,7 +133,7 @@ const {
                                         fluid
                                         @input="
                                             debounceInputFilter(filterCallback)
-                                        "
+                                            "
                                     />
                                 </template>
                                 <template #body="slotProps">
@@ -148,9 +146,7 @@ const {
                                 sortable
                                 :showFilterMenu="false"
                             >
-                                <template
-                                    #filter="{ filterModel, filterCallback }"
-                                >
+                                <template #filter="{ filterModel, filterCallback }">
                                     <InputText
                                         v-model="filterModel.value"
                                         type="text"
@@ -158,7 +154,7 @@ const {
                                         fluid
                                         @input="
                                             debounceInputFilter(filterCallback)
-                                        "
+                                            "
                                     />
                                 </template>
                                 <template #body="slotProps">
@@ -176,7 +172,7 @@ const {
                                         icon="pi pi-ellipsis-v"
                                         @click="
                                             toggleUserContextMenu($event, data)
-                                        "
+                                            "
                                     />
                                 </template>
                             </Column>

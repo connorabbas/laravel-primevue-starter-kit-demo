@@ -28,8 +28,7 @@ const dashboardRoute = computed(() => {
 </script>
 
 <template>
-
-    <Head title="Welcome" />
+    <InertiaHead title="Welcome" />
 
     <div class="min-h-full">
         <div class="h-screen flex items-center justify-center">

@@ -36,8 +36,7 @@ onMounted(() => {
 
 <template>
     <GuestLayout>
-
-        <Head title="Reset Password" />
+        <InertiaHead title="Reset Password" />
 
         <form
             class="space-y-6"

@@ -26,8 +26,7 @@ onMounted(() => {
 
 <template>
     <GuestLayout>
-
-        <Head title="Forgot Password" />
+        <InertiaHead title="Forgot Password" />
 
         <template
             v-if="status"

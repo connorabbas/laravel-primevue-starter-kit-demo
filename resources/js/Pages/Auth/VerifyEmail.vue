@@ -22,8 +22,7 @@ const verificationLinkSent = computed(
 
 <template>
     <GuestLayout>
-
-        <Head title="Email Verification" />
+        <InertiaHead title="Email Verification" />
 
         <template
             v-if="verificationLinkSent"
