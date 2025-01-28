@@ -10,8 +10,14 @@ defineExpose({
 </script>
 
 <template>
-    <Menubar ref="child-ref" breakpoint="1024px">
-        <template v-if="$slots.start" #start>
+    <Menubar
+        ref="child-ref"
+        breakpoint="1024px"
+    >
+        <template
+            v-if="$slots.start"
+            #start
+        >
             <slot name="start"></slot>
         </template>
         <template #item="{ item, props, hasSubmenu, root }">
@@ -27,12 +33,12 @@ defineExpose({
                 }"
                 custom
             >
-                <span
-                    v-show="item.icon"
-                    :class="item.icon"
-                    class="p-menu-item-icon"
-                />
-                <span class="p-menu-item-label">{{ item.label }}</span>
+            <span
+                v-show="item.icon"
+                :class="item.icon"
+                class="p-menu-item-icon"
+            />
+            <span class="p-menu-item-label">{{ item.label }}</span>
             </Link>
             <a
                 v-else
@@ -59,7 +65,10 @@ defineExpose({
                 ></i>
             </a>
         </template>
-        <template v-if="$slots.end" #end>
+        <template
+            v-if="$slots.end"
+            #end
+        >
             <slot name="end"></slot>
         </template>
     </Menubar>

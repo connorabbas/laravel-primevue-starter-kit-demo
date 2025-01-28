@@ -36,9 +36,13 @@ onMounted(() => {
 
 <template>
     <GuestLayout>
+
         <Head title="Reset Password" />
 
-        <form class="space-y-6" @submit.prevent="submit">
+        <form
+            class="space-y-6"
+            @submit.prevent="submit"
+        >
             <div class="flex flex-col gap-2">
                 <label for="email">Email</label>
                 <InputText

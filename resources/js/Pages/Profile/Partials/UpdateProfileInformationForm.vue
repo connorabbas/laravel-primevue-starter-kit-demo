@@ -44,7 +44,10 @@ onMounted(() => {
 </script>
 
 <template>
-    <form class="space-y-6" @submit.prevent="updateProfileInformation">
+    <form
+        class="space-y-6"
+        @submit.prevent="updateProfileInformation"
+    >
         <div class="flex flex-col gap-2">
             <label for="name">Name</label>
             <InputText
@@ -95,7 +98,7 @@ onMounted(() => {
                     method="post"
                     class="underline text-sm text-muted-color hover:text-color"
                 >
-                    Click here to re-send the verification email.
+                Click here to re-send the verification email.
                 </Link>
             </p>
 

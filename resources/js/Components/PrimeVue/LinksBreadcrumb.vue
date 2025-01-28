@@ -19,12 +19,12 @@ const page = usePage();
                 class="p-breadcrumb-item-link"
                 custom
             >
-                <span
-                    v-show="item.icon"
-                    :class="item.icon"
-                    class="p-breadcrumb-item-icon"
-                />
-                <span class="p-breadcrumb-item-label">{{ item.label }}</span>
+            <span
+                v-show="item.icon"
+                :class="item.icon"
+                class="p-breadcrumb-item-icon"
+            />
+            <span class="p-breadcrumb-item-label">{{ item.label }}</span>
             </Link>
             <a
                 v-else

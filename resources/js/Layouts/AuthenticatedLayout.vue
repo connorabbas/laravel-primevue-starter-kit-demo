@@ -99,16 +99,14 @@ watchEffect(() => {
                             <!-- Logo -->
                             <div class="shrink-0 flex items-center mr-5">
                                 <Link :href="route('welcome')">
-                                    <ApplicationLogo
-                                        class="block h-10 w-auto fill-current text-surface-900 dark:text-surface-0"
-                                    />
+                                <ApplicationLogo
+                                    class="block h-10 w-auto fill-current text-surface-900 dark:text-surface-0"
+                                />
                                 </Link>
                             </div>
                         </template>
                         <template #end>
-                            <div
-                                class="hidden lg:flex items-center ms-6 space-x-3"
-                            >
+                            <div class="hidden lg:flex items-center ms-6 space-x-3">
                                 <div>
                                     <ToggleDarkModeButton
                                         severity="secondary"
@@ -166,7 +164,10 @@ watchEffect(() => {
                 </Container>
 
                 <!-- Mobile drawer menu -->
-                <Drawer v-model:visible="mobileMenuOpen" position="right">
+                <Drawer
+                    v-model:visible="mobileMenuOpen"
+                    position="right"
+                >
                     <template #header>
                         <ToggleDarkModeButton
                             severity="secondary"
@@ -177,9 +178,7 @@ watchEffect(() => {
                     <div>
                         <div class="space-y-5">
                             <div class="flex flex-col gap-2">
-                                <p
-                                    class="text-muted-color font-bold uppercase text-sm"
-                                >
+                                <p class="text-muted-color font-bold uppercase text-sm">
                                     Home
                                 </p>
                                 <LinksPanelMenu
@@ -195,13 +194,13 @@ watchEffect(() => {
                                 :href="route('profile.edit')"
                                 class="flex-auto"
                             >
-                                <Button
-                                    label="Profile"
-                                    icon="pi pi-user"
-                                    fluid
-                                    severity="secondary"
-                                    outlined
-                                ></Button>
+                            <Button
+                                label="Profile"
+                                icon="pi pi-user"
+                                fluid
+                                severity="secondary"
+                                outlined
+                            ></Button>
                             </Link>
                             <Button
                                 label="Logout"
@@ -217,7 +216,10 @@ watchEffect(() => {
             </nav>
 
             <!-- Page Heading -->
-            <header v-if="$slots.header" class="dynamic-bg shadow-sm">
+            <header
+                v-if="$slots.header"
+                class="dynamic-bg shadow-sm"
+            >
                 <Container>
                     <div class="py-6">
                         <slot name="header" />

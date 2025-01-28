@@ -22,10 +22,18 @@ const verificationLinkSent = computed(
 
 <template>
     <GuestLayout>
+
         <Head title="Email Verification" />
 
-        <template v-if="verificationLinkSent" #message>
-            <Message severity="success" :closable="false" class="shadow-sm">
+        <template
+            v-if="verificationLinkSent"
+            #message
+        >
+            <Message
+                severity="success"
+                :closable="false"
+                class="shadow-sm"
+            >
                 A new verification link has been sent to the email address you
                 provided during registration.
             </Message>
@@ -50,8 +58,8 @@ const verificationLinkSent = computed(
                     :href="route('logout')"
                     method="post"
                     class="underline text-muted-color hover:text-color"
-                    >Log Out</Link
-                >
+                >Log Out
+                </Link>
             </div>
         </form>
     </GuestLayout>

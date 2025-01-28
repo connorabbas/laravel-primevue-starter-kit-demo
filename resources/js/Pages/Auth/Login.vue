@@ -33,15 +33,26 @@ onMounted(() => {
 
 <template>
     <GuestLayout>
+
         <Head title="Log in" />
 
-        <template v-if="status" #message>
-            <Message severity="success" :closable="false" class="shadow-sm">
+        <template
+            v-if="status"
+            #message
+        >
+            <Message
+                severity="success"
+                :closable="false"
+                class="shadow-sm"
+            >
                 {{ status }}
             </Message>
         </template>
 
-        <form class="space-y-6" @submit.prevent="submit">
+        <form
+            class="space-y-6"
+            @submit.prevent="submit"
+        >
             <div class="flex flex-col gap-2">
                 <label for="email">Email</label>
                 <InputText
@@ -105,7 +116,7 @@ onMounted(() => {
                     :href="route('password.request')"
                     class="mr-4 underline text-muted-color hover:text-color"
                 >
-                    Forgot your password?
+                Forgot your password?
                 </Link>
                 <Button
                     :loading="form.processing"

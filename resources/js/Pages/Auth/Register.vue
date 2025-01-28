@@ -25,9 +25,13 @@ onMounted(() => {
 
 <template>
     <GuestLayout>
+
         <Head title="Register" />
 
-        <form class="space-y-6" @submit.prevent="submit">
+        <form
+            class="space-y-6"
+            @submit.prevent="submit"
+        >
             <div class="flex flex-col gap-2">
                 <label for="name">Name</label>
                 <InputText
@@ -118,7 +122,7 @@ onMounted(() => {
                     :href="route('login')"
                     class="mr-4 underline text-muted-color hover:text-color"
                 >
-                    Already registered?
+                Already registered?
                 </Link>
                 <Button
                     type="submit"
