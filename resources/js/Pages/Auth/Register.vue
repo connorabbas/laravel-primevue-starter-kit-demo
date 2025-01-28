@@ -118,10 +118,7 @@ onMounted(() => {
             </div>
 
             <div class="flex justify-end items-center pt-2">
-                <InertiaLink
-                    :href="route('login')"
-                    class="mr-4 underline text-muted-color hover:text-color"
-                >
+                <InertiaLink :href="route('login')" class="mr-4 underline text-muted-color hover:text-color">
                     Already registered?
                 </InertiaLink>
                 <Button

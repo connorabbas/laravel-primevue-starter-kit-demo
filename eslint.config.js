@@ -58,11 +58,19 @@ export default typescriptEslint.config(
             'vue/v-on-event-hyphenation': 'off',
             'vue/multi-word-component-names': 'off',
             'vue/block-lang': 'off',
+            'vue/max-attributes-per-line': [
+                'error',
+                {
+                    singleline: {
+                        max: 1,
+                    },
+                },
+            ],
             'vue/first-attribute-linebreak': [
                 'error',
                 {
-                    singleline: 'ignore',
-                    multiline: 'beside',
+                    singleline: 'beside',
+                    multiline: 'ignore',
                 },
             ],
             '@typescript-eslint/no-explicit-any': 'off',
