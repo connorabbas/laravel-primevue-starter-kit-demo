@@ -26,10 +26,18 @@ onMounted(() => {
 
 <template>
     <GuestLayout>
+
         <Head title="Forgot Password" />
 
-        <template v-if="status" #message>
-            <Message severity="success" :closable="false" class="shadow-sm">
+        <template
+            v-if="status"
+            #message
+        >
+            <Message
+                severity="success"
+                :closable="false"
+                class="shadow-sm"
+            >
                 {{ status }}
             </Message>
         </template>
@@ -40,7 +48,10 @@ onMounted(() => {
             you to choose a new one.
         </div>
 
-        <form class="space-y-6" @submit.prevent="submit">
+        <form
+            class="space-y-6"
+            @submit.prevent="submit"
+        >
             <div class="flex flex-col gap-2">
                 <label for="email">Email</label>
                 <InputText

@@ -39,7 +39,7 @@ createInertiaApp({
             })
             .use(ToastService)
             .component('Head', Head)
-            .component('Link', Link)
+            .component('InertiaLink', Link)
             .directive('tooltip', Tooltip)
             .component('AuthenticatedAdminLayout', AuthenticatedAdminLayout)
             .component('AuthenticatedLayout', AuthenticatedLayout)
