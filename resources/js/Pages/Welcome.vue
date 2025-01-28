@@ -55,40 +55,40 @@ defineProps({
                             >PrimeVue</a>.
                         </p>
                         <template v-if="$page.props.auth.user">
-                            <Link :href="route('dashboard')">
-                            <Button
-                                label="Dashboard"
-                                icon="pi pi-home"
-                                class="mr-4"
-                                raised
-                            />
-                            </Link>
-                            <Link :href="route('profile.edit')">
-                            <Button
-                                outlined
-                                label="Profile"
-                                icon="pi pi-user"
-                                class="mr-4"
-                            />
-                            </Link>
+                            <InertiaLink :href="route('dashboard')">
+                                <Button
+                                    label="Dashboard"
+                                    icon="pi pi-home"
+                                    class="mr-4"
+                                    raised
+                                />
+                            </InertiaLink>
+                            <InertiaLink :href="route('profile.edit')">
+                                <Button
+                                    outlined
+                                    label="Profile"
+                                    icon="pi pi-user"
+                                    class="mr-4"
+                                />
+                            </InertiaLink>
                         </template>
                         <template v-else>
-                            <Link :href="route('login')">
-                            <Button
-                                label="Login"
-                                icon="pi pi-sign-in"
-                                class="mr-4"
-                                raised
-                            />
-                            </Link>
-                            <Link :href="route('register')">
-                            <Button
-                                outlined
-                                label="Register"
-                                icon="pi pi-user-plus"
-                                class="mr-4"
-                            />
-                            </Link>
+                            <InertiaLink :href="route('login')">
+                                <Button
+                                    label="Login"
+                                    icon="pi pi-sign-in"
+                                    class="mr-4"
+                                    raised
+                                />
+                            </InertiaLink>
+                            <InertiaLink :href="route('register')">
+                                <Button
+                                    outlined
+                                    label="Register"
+                                    icon="pi pi-user-plus"
+                                    class="mr-4"
+                                />
+                            </InertiaLink>
                         </template>
                         <ToggleDarkModeButton outlined />
                         <div class="mt-6">

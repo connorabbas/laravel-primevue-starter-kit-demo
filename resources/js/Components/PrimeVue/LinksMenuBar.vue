@@ -2,7 +2,7 @@
 import { useTemplateRef } from 'vue';
 import Menubar from 'primevue/menubar';
 
-type MenubarType = InstanceType<typeof Menubar>
+type MenubarType = InstanceType<typeof Menubar>;
 const childRef = useTemplateRef<MenubarType>('child-ref');
 defineExpose({
     childRef,
@@ -23,7 +23,7 @@ defineExpose({
         <template #item="{ item, props, hasSubmenu, root }">
             <!-- add if using 'nora' preset theme -->
             <!-- hover:text-primary-100 dark:hover:text-primary-950 -->
-            <Link
+            <InertiaLink
                 v-if="item.route"
                 :href="item.route"
                 class="p-menubar-item-link"
@@ -33,13 +33,13 @@ defineExpose({
                 }"
                 custom
             >
-            <span
-                v-show="item.icon"
-                :class="item.icon"
-                class="p-menu-item-icon"
-            />
-            <span class="p-menu-item-label">{{ item.label }}</span>
-            </Link>
+                <span
+                    v-show="item.icon"
+                    :class="item.icon"
+                    class="p-menu-item-icon"
+                />
+                <span class="p-menu-item-label">{{ item.label }}</span>
+            </InertiaLink>
             <a
                 v-else
                 :href="item.url"

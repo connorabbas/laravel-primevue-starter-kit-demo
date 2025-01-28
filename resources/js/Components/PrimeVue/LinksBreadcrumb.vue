@@ -13,19 +13,19 @@ const page = usePage();
         }"
     >
         <template #item="{ item, props }">
-            <Link
+            <InertiaLink
                 v-if="item.route"
                 :href="item.route"
                 class="p-breadcrumb-item-link"
                 custom
             >
-            <span
-                v-show="item.icon"
-                :class="item.icon"
-                class="p-breadcrumb-item-icon"
-            />
-            <span class="p-breadcrumb-item-label">{{ item.label }}</span>
-            </Link>
+                <span
+                    v-show="item.icon"
+                    :class="item.icon"
+                    class="p-breadcrumb-item-icon"
+                />
+                <span class="p-breadcrumb-item-label">{{ item.label }}</span>
+            </InertiaLink>
             <a
                 v-else
                 :href="item.url"

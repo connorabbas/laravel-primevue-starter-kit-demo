@@ -54,12 +54,13 @@ const verificationLinkSent = computed(
                     severity="contrast"
                     raised
                 />
-                <Link
+                <InertiaLink
                     :href="route('logout')"
                     method="post"
                     class="underline text-muted-color hover:text-color"
-                >Log Out
-                </Link>
+                >
+                    Log Out
+                </InertiaLink>
             </div>
         </form>
     </GuestLayout>

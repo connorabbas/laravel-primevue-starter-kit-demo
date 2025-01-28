@@ -16,19 +16,19 @@ defineExpose({
 <template>
     <Menu ref="child-ref">
         <template #item="{ item, props }">
-            <Link
+            <InertiaLink
                 v-if="item.route"
                 :href="item.route"
                 class="p-menu-item-link"
                 custom
             >
-            <span
-                v-show="item.icon"
-                :class="item.icon"
-                class="p-menu-item-icon"
-            />
-            <span class="p-menu-item-label">{{ item.label }}</span>
-            </Link>
+                <span
+                    v-show="item.icon"
+                    :class="item.icon"
+                    class="p-menu-item-icon"
+                />
+                <span class="p-menu-item-label">{{ item.label }}</span>
+            </InertiaLink>
             <a
                 v-else
                 :href="item.url"

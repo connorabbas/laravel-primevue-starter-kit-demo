@@ -37,7 +37,7 @@ createInertiaApp({
             })
             .use(ToastService)
             .component('Head', Head)
-            .component('Link', Link)
+            .component('InertiaLink', Link)
             .component('AuthenticatedLayout', AuthenticatedLayout)
             .component('Container', Container)
             .mount(el);

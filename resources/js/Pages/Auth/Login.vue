@@ -111,13 +111,13 @@ onMounted(() => {
             </div>
 
             <div class="flex justify-end items-center pt-2">
-                <Link
+                <InertiaLink
                     v-if="canResetPassword"
                     :href="route('password.request')"
                     class="mr-4 underline text-muted-color hover:text-color"
                 >
-                Forgot your password?
-                </Link>
+                    Forgot your password?
+                </InertiaLink>
                 <Button
                     :loading="form.processing"
                     type="submit"

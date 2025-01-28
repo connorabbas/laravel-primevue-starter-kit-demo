@@ -98,11 +98,11 @@ watchEffect(() => {
                         <template #start>
                             <!-- Logo -->
                             <div class="shrink-0 flex items-center mr-5">
-                                <Link :href="route('welcome')">
-                                <ApplicationLogo
-                                    class="block h-10 w-auto fill-current text-surface-900 dark:text-surface-0"
-                                />
-                                </Link>
+                                <InertiaLink :href="route('welcome')">
+                                    <ApplicationLogo
+                                        class="block h-10 w-auto fill-current text-surface-900 dark:text-surface-0"
+                                    />
+                                </InertiaLink>
                             </div>
                         </template>
                         <template #end>
@@ -190,18 +190,18 @@ watchEffect(() => {
                     </div>
                     <template #footer>
                         <div class="flex items-center gap-2">
-                            <Link
+                            <InertiaLink
                                 :href="route('profile.edit')"
                                 class="flex-auto"
                             >
-                            <Button
-                                label="Profile"
-                                icon="pi pi-user"
-                                fluid
-                                severity="secondary"
-                                outlined
-                            ></Button>
-                            </Link>
+                                <Button
+                                    label="Profile"
+                                    icon="pi pi-user"
+                                    fluid
+                                    severity="secondary"
+                                    outlined
+                                ></Button>
+                            </InertiaLink>
                             <Button
                                 label="Logout"
                                 icon="pi pi-sign-out"
