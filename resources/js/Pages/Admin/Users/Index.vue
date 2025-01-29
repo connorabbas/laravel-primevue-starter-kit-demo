@@ -44,7 +44,7 @@ const {
     paginate,
     filter,
     sort,
-    reset,
+    hardReset,
 } = useLazyDataTable(
     {
         name: { value: null, matchMode: FilterMatchMode.CONTAINS },
@@ -70,7 +70,7 @@ const {
                 icon="pi pi-filter-slash"
                 label="Clear Filters"
                 outlined
-                @click="reset"
+                @click="hardReset"
             />
         </template>
 
