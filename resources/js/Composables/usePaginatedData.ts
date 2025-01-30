@@ -1,10 +1,11 @@
 import { ref, computed, onMounted } from 'vue';
-import { router, usePage } from '@inertiajs/vue3';
+import { router } from '@inertiajs/vue3';
 import { FilterMatchMode } from '@primevue/core/api';
 import debounce from 'lodash-es/debounce';
 import cloneDeep from 'lodash-es/cloneDeep';
 import { PageState, DataTablePageEvent } from 'primevue';
 import { PrimeVueDataFilters } from '@/types';
+import qs from 'qs';
 
 interface PaginatedFilteredSortedQueryParams {
     filters?: PrimeVueDataFilters;
@@ -24,15 +25,10 @@ interface SortState {
 
 export function usePaginatedData(
     initialFilters: PrimeVueDataFilters = {},
-    only: string[] = ['request'],
+    only: string[] = [],
     initialsRows: number = 20
 ) {
-    const page = usePage<{
-        request: {
-            urlParams: PaginatedFilteredSortedQueryParams;
-        };
-    }>();
-
+    const urlParams = ref<PaginatedFilteredSortedQueryParams>({});
     const processing = ref<boolean>(false);
     const filters = ref<PrimeVueDataFilters>(cloneDeep(initialFilters));
     const sorting = ref<SortState>({
@@ -48,8 +44,8 @@ export function usePaginatedData(
         return (pagination.value.page - 1) * pagination.value.rows;
     });
     const filteredOrSorted = computed(() => {
-        const filters = page.props?.request?.urlParams?.filters || {};
-        const sortField = page.props?.request?.urlParams?.sortField || null;
+        const filters = urlParams.value?.filters || {};
+        const sortField = urlParams.value?.sortField || null;
         const isFiltering = Object.values(filters).some(
             (filter) => filter.value !== null && filter.value !== ''
         );
@@ -61,6 +57,15 @@ export function usePaginatedData(
     const debounceInputFilter = debounce((filterCallback: () => void) => {
         filterCallback();
     }, 300);
+
+    function setUrlParams() {
+        const queryString = window.location.search;
+        const params = qs.parse(queryString, {
+            ignoreQueryPrefix: true,
+            strictNullHandling: true,
+        }) as PaginatedFilteredSortedQueryParams;
+        urlParams.value = { ...params };
+    }
 
     function scrollToTop() {
         window.scrollTo({
@@ -84,7 +89,7 @@ export function usePaginatedData(
                 preserveUrl: false,
                 showProgress: true,
                 replace: true,
-                only: ['request', ...new Set(only)],
+                only: only,
                 onSuccess: (page) => {
                     resolve(page);
                 },
@@ -92,6 +97,7 @@ export function usePaginatedData(
                     reject(errors);
                 },
                 onFinish: () => {
+                    setUrlParams();
                     processing.value = false;
                 },
             });
@@ -140,7 +146,7 @@ export function usePaginatedData(
             preserveUrl: false,
             showProgress: true,
             replace: true,
-            only: ['request', ...new Set(only)],
+            only: only,
         });
     }
 
@@ -199,7 +205,8 @@ export function usePaginatedData(
     }
 
     onMounted(() => {
-        parseUrlParams(page.props.request.urlParams);
+        setUrlParams();
+        parseUrlParams(urlParams.value);
     });
 
     return {

@@ -5,7 +5,7 @@ import { PrimeVueDataFilters } from '@/types';
 
 export function useLazyDataTable(
     initialFilters: PrimeVueDataFilters = {},
-    only: string[] = ['request'],
+    only: string[] = [],
     initialsRows: number = 20
 ) {
     const {
