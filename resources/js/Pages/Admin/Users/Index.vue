@@ -45,14 +45,10 @@ const {
     filter,
     sort,
     hardReset,
-} = useLazyDataTable(
-    {
-        name: { value: null, matchMode: FilterMatchMode.CONTAINS },
-        email: { value: null, matchMode: FilterMatchMode.CONTAINS },
-    },
-    ['users'],
-    props.users.per_page
-);
+} = useLazyDataTable('users', {
+    name: { value: null, matchMode: FilterMatchMode.CONTAINS },
+    email: { value: null, matchMode: FilterMatchMode.CONTAINS },
+}, props.users.per_page);
 </script>
 
 <template>
