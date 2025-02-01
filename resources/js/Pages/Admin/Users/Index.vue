@@ -45,14 +45,10 @@ const {
     filter,
     sort,
     hardReset,
-} = useLazyDataTable(
-    {
-        name: { value: null, matchMode: FilterMatchMode.CONTAINS },
-        email: { value: null, matchMode: FilterMatchMode.CONTAINS },
-    },
-    ['users'],
-    props.users.per_page
-);
+} = useLazyDataTable('users', {
+    name: { value: null, matchMode: FilterMatchMode.CONTAINS },
+    email: { value: null, matchMode: FilterMatchMode.CONTAINS },
+}, props.users.per_page);
 </script>
 
 <template>
@@ -130,9 +126,7 @@ const {
                                         type="text"
                                         placeholder="Search by name"
                                         fluid
-                                        @input="
-                                            debounceInputFilter(filterCallback)
-                                            "
+                                        @input="debounceInputFilter(filterCallback)"
                                     />
                                 </template>
                                 <template #body="slotProps">
@@ -151,9 +145,7 @@ const {
                                         type="text"
                                         placeholder="Search by Email"
                                         fluid
-                                        @input="
-                                            debounceInputFilter(filterCallback)
-                                            "
+                                        @input="debounceInputFilter(filterCallback)"
                                     />
                                 </template>
                                 <template #body="slotProps">
@@ -169,9 +161,7 @@ const {
                                         text
                                         rounded
                                         icon="pi pi-ellipsis-v"
-                                        @click="
-                                            toggleUserContextMenu($event, data)
-                                            "
+                                        @click="toggleUserContextMenu($event, data)"
                                     />
                                 </template>
                             </Column>
