@@ -24,8 +24,8 @@ interface SortState {
 }
 
 export function usePaginatedData(
+    propDataToFetch: string,
     initialFilters: PrimeVueDataFilters = {},
-    only: string[] = [],
     initialsRows: number = 20
 ) {
     const urlParams = ref<PaginatedFilteredSortedQueryParams>({});
@@ -63,6 +63,11 @@ export function usePaginatedData(
         const params = qs.parse(queryString, {
             ignoreQueryPrefix: true,
             strictNullHandling: true,
+            decoder: function (str, defaultDecoder) {
+                // set empty string values to null
+                const value = defaultDecoder(str);
+                return value === '' ? null : value;
+            },
         }) as PaginatedFilteredSortedQueryParams;
         urlParams.value = { ...params };
     }
@@ -89,7 +94,7 @@ export function usePaginatedData(
                 preserveUrl: false,
                 showProgress: true,
                 replace: true,
-                only: only,
+                only: [propDataToFetch],
                 onSuccess: (page) => {
                     resolve(page);
                 },
@@ -146,7 +151,7 @@ export function usePaginatedData(
             preserveUrl: false,
             showProgress: true,
             replace: true,
-            only: only,
+            only: [propDataToFetch],
         });
     }
 
@@ -160,6 +165,7 @@ export function usePaginatedData(
                 filters.value[key].value = new Date(filter.value);
             } else if (
                 typeof filter.value === 'string' &&
+                filter.value !== '' &&
                 !isNaN(Number(filter.value))
             ) {
                 filters.value[key].value = Number(filter.value);
