@@ -1,4 +1,3 @@
-import './bootstrap';
 import '../css/app.css';
 import '../css/tailwind.css';
 import 'primeicons/primeicons.css';
