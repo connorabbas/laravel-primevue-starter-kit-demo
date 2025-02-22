@@ -57,7 +57,7 @@ const {
     <AuthenticatedAdminLayout
         :breadcrumbs="breadcrumbs"
     >
-        <Container fluid>
+        <Container vertical fluid>
             <PageTitleSection>
                 <template #title>
                     {{ pageTitle }}
