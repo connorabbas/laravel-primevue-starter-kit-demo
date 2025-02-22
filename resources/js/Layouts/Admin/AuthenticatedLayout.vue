@@ -1,10 +1,10 @@
 <script setup>
 import { ref, useTemplateRef, onMounted } from 'vue';
 import LinksBreadcrumb from '@/Components/PrimeVue/LinksBreadcrumb.vue';
-import MobileSidebarNavDrawer from './Partials/MobileSidebarNavDrawer.vue';
-import TopNav from './Partials/TopNav.vue';
-import Footer from './Partials/Footer.vue';
-import SideMenuItems from './Partials/SideMenuItems.vue';
+import MobileSidebarNavDrawer from '@/Components/Layout/Admin/MobileSidebarNavDrawer.vue';
+import TopNav from '@/Components/Layout/Admin/TopNav.vue';
+import Footer from '@/Components/Layout/Admin/Footer.vue';
+import SideMenuItems from '@/Components/Layout/Admin/SideMenuItems.vue';
 
 defineProps({
     pageTitle: {
@@ -45,14 +45,14 @@ onMounted(() => {
 </script>
 
 <template>
-    <Teleport to="body">
-        <Toast position="top-center" />
-        <MobileSidebarNavDrawer v-model="navDrawerOpen">
-            <SideMenuItems />
-        </MobileSidebarNavDrawer>
-    </Teleport>
-
     <div class="h-screen flex flex-col">
+        <Teleport to="body">
+            <Toast position="top-center" />
+            <MobileSidebarNavDrawer v-model="navDrawerOpen">
+                <SideMenuItems />
+            </MobileSidebarNavDrawer>
+        </Teleport>
+
         <header
             id="site-header"
             ref="site-header"
@@ -62,7 +62,7 @@ onMounted(() => {
             <TopNav @open-nav="navDrawerOpen = true" />
         </header>
 
-        <main class="flex-1">
+        <div class="flex-1">
             <!-- Desktop Sidebar -->
             <aside :class="[
                 'w-[18rem] inset-0 hidden lg:block fixed overflow-y-auto overflow-x-hidden dynamic-bg border-r dynamic-border',
@@ -83,59 +83,26 @@ onMounted(() => {
                     v-if="breadcrumbs.length"
                     class="dynamic-bg border-b dynamic-border"
                 >
-                    <Container :fluid="true">
-                        <div class="flex items-center justify-between flex-wrap">
-                            <div>
-                                <LinksBreadcrumb
-                                    :model="breadcrumbs"
-                                    class="py-3 lg:py-5"
-                                />
-                            </div>
-                            <div>
-                                <div
-                                    v-if="$slots.headerEnd"
-                                    class="py-3"
-                                >
-                                    <slot name="headerEnd" />
-                                </div>
-                            </div>
-                        </div>
+                    <Container fluid>
+                        <LinksBreadcrumb
+                            :model="breadcrumbs"
+                            class="py-4"
+                        />
                     </Container>
                 </nav>
 
-                <!-- Page Title -->
-                <section v-if="pageTitle">
-                    <Container
-                        :fluid="true"
-                        class="my-4 md:my-8"
-                    >
-                        <div class="flex items-end justify-between flex-wrap">
-                            <div>
-                                <h1 class="font-bold text-2xl md:text-3xl leading-tight">
-                                    {{ pageTitle }}
-                                </h1>
-                            </div>
-                            <div>
-                                <div v-if="$slots.titleEnd">
-                                    <slot name="titleEnd" />
-                                </div>
-                            </div>
-                        </div>
-                    </Container>
-                </section>
-
                 <!-- Page Content -->
-                <section
+                <main
                     id="page-content"
                     class="grow"
                 >
                     <slot />
-                </section>
+                </main>
 
                 <footer>
                     <Footer />
                 </footer>
             </div>
-        </main>
+        </div>
     </div>
 </template>

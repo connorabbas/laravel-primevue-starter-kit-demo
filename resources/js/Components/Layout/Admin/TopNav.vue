@@ -14,7 +14,7 @@ const userMenu = useTemplateRef('user-menu');
 const userMenuItems = [
     {
         label: 'Profile',
-        url: route('admin.profile.edit'),
+        route: route('admin.profile.edit'),
         icon: 'pi pi-fw pi-user',
     },
     {
@@ -32,15 +32,11 @@ const toggleUserMenu = (event) => {
 
 <template>
     <nav class="dynamic-bg border-b dynamic-border">
-        <Container :fluid="true">
-            <LinksMenuBar :pt="{
-                root: {
-                    class: 'px-0 py-3 border-0 rounded-none dynamic-bg',
-                },
-                button: {
-                    class: 'hidden',
-                },
-            }">
+        <Container fluid>
+            <LinksMenuBar
+                pt:root:class="px-0 py-3 border-0 rounded-none dynamic-bg"
+                pt:button:class="hidden"
+            >
                 <template #start>
                     <div class="flex items-center">
                         <div class="shrink-0 flex items-center">
@@ -49,11 +45,7 @@ const toggleUserMenu = (event) => {
                                 outlined
                                 severity="secondary"
                                 icon="pi pi-bars"
-                                :pt="{
-                                    icon: {
-                                        class: 'text-xl',
-                                    },
-                                }"
+                                pt:icon:class="text-xl"
                                 @click="emit('open-nav')"
                             />
                             <InertiaLink
@@ -73,28 +65,28 @@ const toggleUserMenu = (event) => {
                         <div>
                             <ToggleDarkModeButton
                                 severity="secondary"
-                                text
                                 rounded
+                                text
                             />
                         </div>
                         <!-- User Dropdown Menu -->
                         <div class="flex flex-col">
                             <Button
                                 id="user-menu-btn"
-                                text
                                 severity="secondary"
                                 :label="$page.props.auth.user.name"
                                 class="hidden sm:flex"
                                 icon="pi pi-angle-down"
                                 iconPos="right"
+                                text
                                 @click="toggleUserMenu($event)"
                             />
                             <Button
                                 class="flex sm:hidden"
                                 icon="pi pi-user"
-                                text
                                 rounded
                                 severity="secondary"
+                                text
                                 @click="toggleUserMenu($event)"
                             />
                             <div
@@ -105,12 +97,8 @@ const toggleUserMenu = (event) => {
                                 ref="user-menu"
                                 appendTo="#user-menu-append"
                                 :model="userMenuItems"
+                                pt:root:class="left-auto! top-0! right-0"
                                 popup
-                                :pt="{
-                                    root: {
-                                        class: 'left-auto! top-0! right-0',
-                                    },
-                                }"
                             />
                         </div>
                     </div>

@@ -1,30 +1,40 @@
 <script setup>
+import { computed } from 'vue';
+import { usePage } from '@inertiajs/vue3';
 import LinksPanelMenu from '@/Components/PrimeVue/LinksPanelMenu.vue';
 
+const page = usePage();
+const currentRoute = computed(() => {
+    // Access page.url to trigger re-computation on navigation.
+    /* eslint-disable @typescript-eslint/no-unused-vars */
+    const url = page.url;
+    /* eslint-enable @typescript-eslint/no-unused-vars */
+    return route().current();
+});
+
 // Nav Items
-const currentRoute = route().current();
-const homeMenuItems = [
+const homeMenuItems = computed(() => [
     {
         label: 'Welcome',
         icon: 'pi pi-home',
         route: route('welcome'),
-        active: currentRoute == 'welcome',
+        active: currentRoute.value == 'welcome',
     },
     {
         label: 'Dashboard',
         icon: 'pi pi-th-large',
         route: route('admin.dashboard'),
-        active: currentRoute == 'admin.dashboard',
+        active: currentRoute.value == 'admin.dashboard',
     },
-];
-const analyticsMenuItems = [
+]);
+const analyticsMenuItems = computed(() => [
     {
         label: 'Users',
         icon: 'pi pi-user',
         route: route('admin.users.index'),
-        active: currentRoute == 'admin.users.index',
+        active: currentRoute.value == 'admin.users.index',
     },
-];
+]);
 const exampleNestedMenuItems = [
     {
         label: 'Files',
