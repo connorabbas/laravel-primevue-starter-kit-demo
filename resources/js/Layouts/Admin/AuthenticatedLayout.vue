@@ -1,10 +1,10 @@
 <script setup>
 import { ref, useTemplateRef, onMounted } from 'vue';
 import LinksBreadcrumb from '@/Components/PrimeVue/LinksBreadcrumb.vue';
-import MobileSidebarNavDrawer from './Partials/MobileSidebarNavDrawer.vue';
-import TopNav from './Partials/TopNav.vue';
-import Footer from './Partials/Footer.vue';
-import SideMenuItems from './Partials/SideMenuItems.vue';
+import MobileSidebarNavDrawer from '@/Components/Layout/Admin/MobileSidebarNavDrawer.vue';
+import TopNav from '@/Components/Layout/Admin/TopNav.vue';
+import Footer from '@/Components/Layout/Admin/Footer.vue';
+import SideMenuItems from '@/Components/Layout/Admin/SideMenuItems.vue';
 
 defineProps({
     pageTitle: {
@@ -62,7 +62,7 @@ onMounted(() => {
             <TopNav @open-nav="navDrawerOpen = true" />
         </header>
 
-        <main class="flex-1">
+        <div class="flex-1">
             <!-- Desktop Sidebar -->
             <aside :class="[
                 'w-[18rem] inset-0 hidden lg:block fixed overflow-y-auto overflow-x-hidden dynamic-bg border-r dynamic-border',
@@ -125,17 +125,17 @@ onMounted(() => {
                 </section>
 
                 <!-- Page Content -->
-                <section
+                <main
                     id="page-content"
                     class="grow"
                 >
                     <slot />
-                </section>
+                </main>
 
                 <footer>
                     <Footer />
                 </footer>
             </div>
-        </main>
+        </div>
     </div>
 </template>

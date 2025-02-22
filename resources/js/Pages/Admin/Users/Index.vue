@@ -158,9 +158,9 @@ const {
                                         v-tooltip.top="'Show User Actions'"
                                         type="button"
                                         severity="secondary"
-                                        text
-                                        rounded
                                         icon="pi pi-ellipsis-v"
+                                        rounded
+                                        text
                                         @click="toggleUserContextMenu($event, data)"
                                     />
                                 </template>
