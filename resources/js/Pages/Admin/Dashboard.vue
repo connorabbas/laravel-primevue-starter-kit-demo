@@ -2,7 +2,7 @@
     <InertiaHead title="Dashboard" />
     <AuthenticatedAdminLayout>
         <Container
-            :fluid="true"
+            fluid
             class="py-4 md:py-8"
         >
             <div>

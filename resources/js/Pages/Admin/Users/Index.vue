@@ -55,22 +55,25 @@ const {
     <InertiaHead :title="pageTitle" />
 
     <AuthenticatedAdminLayout
-        :page-title="pageTitle"
         :breadcrumbs="breadcrumbs"
     >
-        <template #titleEnd>
-            <Button
-                v-if="filteredOrSorted"
-                severity="secondary"
-                type="button"
-                icon="pi pi-filter-slash"
-                label="Clear Filters"
-                outlined
-                @click="hardReset"
-            />
-        </template>
-
-        <Container :fluid="true">
+        <Container fluid>
+            <PageTitleSection>
+                <template #title>
+                    {{ pageTitle }}
+                </template>
+                <template #end>
+                    <Button
+                        v-if="filteredOrSorted"
+                        severity="secondary"
+                        type="button"
+                        icon="pi pi-filter-slash"
+                        label="Clear Filters"
+                        outlined
+                        @click="hardReset"
+                    />
+                </template>
+            </PageTitleSection>
             <div>
                 <Card pt:body:class="p-3">
                     <template #content>

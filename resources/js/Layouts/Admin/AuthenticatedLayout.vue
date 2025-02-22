@@ -83,7 +83,7 @@ onMounted(() => {
                     v-if="breadcrumbs.length"
                     class="dynamic-bg border-b dynamic-border"
                 >
-                    <Container :fluid="true">
+                    <Container fluid>
                         <div class="flex items-center justify-between flex-wrap">
                             <div>
                                 <LinksBreadcrumb
@@ -106,7 +106,7 @@ onMounted(() => {
                 <!-- Page Title -->
                 <section v-if="pageTitle">
                     <Container
-                        :fluid="true"
+                        fluid
                         class="my-4 md:my-8"
                     >
                         <div class="flex items-end justify-between flex-wrap">

@@ -32,7 +32,7 @@ const toggleUserMenu = (event) => {
 
 <template>
     <nav class="dynamic-bg border-b dynamic-border">
-        <Container :fluid="true">
+        <Container fluid>
             <LinksMenuBar :pt="{
                 root: {
                     class: 'px-0 py-3 border-0 rounded-none dynamic-bg',
