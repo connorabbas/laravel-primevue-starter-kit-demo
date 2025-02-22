@@ -127,8 +127,6 @@ onMounted(() => {
                     type="submit"
                     :loading="form.processing"
                     label="Register"
-                    severity="contrast"
-                    raised
                 />
             </div>
         </form>
