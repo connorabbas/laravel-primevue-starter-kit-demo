@@ -119,7 +119,7 @@ watchEffect(() => {
                                         id="user-menu-btn"
                                         text
                                         severity="secondary"
-                                        :label="$page.props.auth.user.name"
+                                        :label="page.props.auth.user.name"
                                         icon="pi pi-angle-down"
                                         iconPos="right"
                                         @click="toggleUserMenu($event)"
