@@ -1,5 +1,6 @@
 <script setup>
 import { computed } from 'vue';
+import { usePage } from '@inertiajs/vue3';
 import ToggleDarkModeButton from '@/Components/ToggleDarkModeButton.vue';
 
 const props = defineProps({
@@ -25,6 +26,7 @@ const props = defineProps({
 const dashboardRoute = computed(() => {
     return props.isAdmin ? route('admin.dashboard') : route('dashboard');
 });
+const page = usePage();
 </script>
 
 <template>
@@ -57,7 +59,7 @@ const dashboardRoute = computed(() => {
                                 class="underline text-primary hover:text-color"
                             >PrimeVue</a>.
                         </p>
-                        <template v-if="$page.props.auth.user">
+                        <template v-if="page.props.auth.user">
                             <InertiaLink :href="dashboardRoute">
                                 <Button
                                     label="Dashboard"
