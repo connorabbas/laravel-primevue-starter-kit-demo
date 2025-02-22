@@ -59,7 +59,6 @@ defineProps({
                                     label="Dashboard"
                                     icon="pi pi-home"
                                     class="mr-4"
-                                    raised
                                 />
                             </InertiaLink>
                             <InertiaLink :href="route('profile.edit')">
@@ -77,7 +76,6 @@ defineProps({
                                     label="Login"
                                     icon="pi pi-sign-in"
                                     class="mr-4"
-                                    raised
                                 />
                             </InertiaLink>
                             <InertiaLink :href="route('register')">
