@@ -6,6 +6,7 @@ defineOptions({ layout: AuthenticatedLayout });
 
 <template>
     <InertiaHead title="Dashboard" />
+
     <Container vertical>
         <Card>
             <template #content>

@@ -18,6 +18,7 @@ defineOptions({ layout: AuthenticatedLayout });
 
 <template>
     <InertiaHead title="Profile" />
+
     <Container vertical>
         <PageTitleSection>
             <template #title>
