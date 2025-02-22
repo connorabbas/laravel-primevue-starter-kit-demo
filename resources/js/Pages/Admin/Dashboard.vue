@@ -2,8 +2,8 @@
     <InertiaHead title="Dashboard" />
     <AuthenticatedAdminLayout>
         <Container
+            vertical
             fluid
-            class="py-4 md:py-8"
         >
             <div>
                 <Card>

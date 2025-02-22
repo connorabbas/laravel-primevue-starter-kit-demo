@@ -24,11 +24,16 @@ const breadcrumbs = [
 <template>
     <InertiaHead :title="pageTitle" />
 
-    <AuthenticatedAdminLayout
-        :page-title="pageTitle"
-        :breadcrumbs="breadcrumbs"
-    >
-        <Container fluid>
+    <AuthenticatedAdminLayout :breadcrumbs="breadcrumbs">
+        <Container
+            vertical
+            fluid
+        >
+            <PageTitleSection>
+                <template #title>
+                    {{ pageTitle }}
+                </template>
+            </PageTitleSection>
             <div class="space-y-4 md:space-y-8">
                 <Card :pt="{
                     body: {

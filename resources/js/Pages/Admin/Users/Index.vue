@@ -54,10 +54,11 @@ const {
 <template>
     <InertiaHead :title="pageTitle" />
 
-    <AuthenticatedAdminLayout
-        :breadcrumbs="breadcrumbs"
-    >
-        <Container vertical fluid>
+    <AuthenticatedAdminLayout :breadcrumbs="breadcrumbs">
+        <Container
+            vertical
+            fluid
+        >
             <PageTitleSection>
                 <template #title>
                     {{ pageTitle }}

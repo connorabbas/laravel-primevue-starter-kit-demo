@@ -88,7 +88,7 @@ onMounted(() => {
                             <div>
                                 <LinksBreadcrumb
                                     :model="breadcrumbs"
-                                    class="py-3 lg:py-5"
+                                    class="py-4"
                                 />
                             </div>
                             <div>
@@ -102,27 +102,6 @@ onMounted(() => {
                         </div>
                     </Container>
                 </nav>
-
-                <!-- Page Title -->
-                <section v-if="pageTitle">
-                    <Container
-                        fluid
-                        class="my-4 md:my-8"
-                    >
-                        <div class="flex items-end justify-between flex-wrap">
-                            <div>
-                                <h1 class="font-bold text-2xl md:text-3xl leading-tight">
-                                    {{ pageTitle }}
-                                </h1>
-                            </div>
-                            <div>
-                                <div v-if="$slots.titleEnd">
-                                    <slot name="titleEnd" />
-                                </div>
-                            </div>
-                        </div>
-                    </Container>
-                </section>
 
                 <!-- Page Content -->
                 <main
