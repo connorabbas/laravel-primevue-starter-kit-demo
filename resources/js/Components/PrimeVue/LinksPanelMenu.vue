@@ -1,18 +1,10 @@
 <template>
-    <PanelMenu :pt="{
-        root: {
-            class: 'p-0 m-0 gap-1',
-        },
-        panel: {
-            class: 'p-0 border-0',
-        },
-        header: {
-            class: 'p-0 border-0',
-        },
-        itemContent: {
-            class: 'gap-1',
-        },
-    }">
+    <PanelMenu
+        pt:root:class="p-0 m-0 gap-1"
+        pt:panel:class="p-0 border-0"
+        pt:header:class="p-0 border-0"
+        pt:itemContent:class="gap-1"
+    >
         <template #item="{ item, active }">
             <InertiaLink
                 v-if="item.route"
