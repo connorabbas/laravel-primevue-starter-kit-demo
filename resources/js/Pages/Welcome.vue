@@ -32,11 +32,7 @@ const dashboardRoute = computed(() => {
 
     <div class="min-h-full">
         <div class="h-screen flex items-center justify-center">
-            <Card :pt="{
-                body: {
-                    class: 'p-4 py-6 sm:p-12',
-                },
-            }">
+            <Card pt:body:class="p-4 py-6 sm:p-12">
                 <template #content>
                     <div class="text-center md:text-left">
                         <span class="block text-6xl font-bold text-red-500 dark:text-red-400 mb-1">Laravel,</span>
@@ -67,7 +63,6 @@ const dashboardRoute = computed(() => {
                                     label="Dashboard"
                                     icon="pi pi-th-large"
                                     class="mr-4"
-                                    raised
                                 />
                             </InertiaLink>
                             <InertiaLink
@@ -88,7 +83,6 @@ const dashboardRoute = computed(() => {
                                     label="Login"
                                     icon="pi pi-sign-in"
                                     class="mr-4"
-                                    raised
                                 />
                             </InertiaLink>
                             <InertiaLink :href="route('register')">
