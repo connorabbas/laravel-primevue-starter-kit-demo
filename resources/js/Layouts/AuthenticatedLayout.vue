@@ -78,15 +78,12 @@ watchEffect(() => {
 <template>
     <div>
         <div class="min-h-screen">
-            <nav
-                class="dynamic-bg border-b"
-                :class="$slots.header ? 'dynamic-border' : 'shadow-sm'"
-            >
+            <nav class="dynamic-bg shadow-sm">
                 <!-- Primary Navigation Menu -->
                 <Container>
                     <LinksMenuBar
                         :model="mainMenuItems"
-                        pt:root:class="px-0 py-3 border-0 rounded-none dynamic-bg"
+                        pt:root:class="px-0 py-4 border-0 rounded-none dynamic-bg"
                         pt:button:class="hidden"
                     >
                         <template #start>
@@ -200,18 +197,6 @@ watchEffect(() => {
                     </template>
                 </Drawer>
             </nav>
-
-            <!-- Page Heading -->
-            <header
-                v-if="$slots.header"
-                class="dynamic-bg shadow-sm"
-            >
-                <Container>
-                    <div class="py-6">
-                        <slot name="header" />
-                    </div>
-                </Container>
-            </header>
 
             <!-- Page Content -->
             <Toast position="top-center" />

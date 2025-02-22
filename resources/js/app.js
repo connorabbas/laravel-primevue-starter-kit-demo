@@ -12,6 +12,7 @@ import ToastService from 'primevue/toastservice';
 
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 import Container from '@/Components/Container.vue';
+import PageTitleSection from '@/Components/PageTitleSection.vue';
 
 import customThemePreset from '@/theme/noir-preset';
 import { useDark } from '@vueuse/core';
@@ -48,6 +49,7 @@ createInertiaApp({
             .component('InertiaLink', Link)
             .component('AuthenticatedLayout', AuthenticatedLayout)
             .component('Container', Container)
+            .component('PageTitleSection', PageTitleSection)
             .mount(el);
     },
     progress: {

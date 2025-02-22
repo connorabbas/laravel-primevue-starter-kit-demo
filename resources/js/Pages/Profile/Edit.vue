@@ -17,12 +17,13 @@ defineProps({
     <InertiaHead title="Profile" />
 
     <AuthenticatedLayout>
-        <template #header>
-            <h1 class="font-bold text-2xl leading-tight">Profile</h1>
-        </template>
-
-        <Container>
-            <div class="py-4 md:py-8">
+        <Container vertical>
+            <PageTitleSection>
+                <template #title>
+                    Profile
+                </template>
+            </PageTitleSection>
+            <div>
                 <div class="space-y-4 md:space-y-8">
                     <Card
                         pt:body:class="max-w-2xl space-y-3"
