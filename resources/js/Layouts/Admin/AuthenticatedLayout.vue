@@ -45,14 +45,14 @@ onMounted(() => {
 </script>
 
 <template>
-    <Teleport to="body">
-        <Toast position="top-center" />
-        <MobileSidebarNavDrawer v-model="navDrawerOpen">
-            <SideMenuItems />
-        </MobileSidebarNavDrawer>
-    </Teleport>
-
     <div class="h-screen flex flex-col">
+        <Teleport to="body">
+            <Toast position="top-center" />
+            <MobileSidebarNavDrawer v-model="navDrawerOpen">
+                <SideMenuItems />
+            </MobileSidebarNavDrawer>
+        </Teleport>
+
         <header
             id="site-header"
             ref="site-header"
@@ -84,22 +84,10 @@ onMounted(() => {
                     class="dynamic-bg border-b dynamic-border"
                 >
                     <Container fluid>
-                        <div class="flex items-center justify-between flex-wrap">
-                            <div>
-                                <LinksBreadcrumb
-                                    :model="breadcrumbs"
-                                    class="py-4"
-                                />
-                            </div>
-                            <div>
-                                <div
-                                    v-if="$slots.headerEnd"
-                                    class="py-3"
-                                >
-                                    <slot name="headerEnd" />
-                                </div>
-                            </div>
-                        </div>
+                        <LinksBreadcrumb
+                            :model="breadcrumbs"
+                            class="py-4"
+                        />
                     </Container>
                 </nav>
 

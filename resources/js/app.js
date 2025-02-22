@@ -11,8 +11,6 @@ import PrimeVue from 'primevue/config';
 import ToastService from 'primevue/toastservice';
 import Tooltip from 'primevue/tooltip';
 
-import AuthenticatedAdminLayout from '@/Layouts/Admin/AuthenticatedLayout.vue';
-import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 import Container from '@/Components/Container.vue';
 import PageTitleSection from '@/Components/PageTitleSection.vue';
 
@@ -50,8 +48,6 @@ createInertiaApp({
             .component('InertiaHead', Head)
             .component('InertiaLink', Link)
             .directive('tooltip', Tooltip)
-            .component('AuthenticatedAdminLayout', AuthenticatedAdminLayout)
-            .component('AuthenticatedLayout', AuthenticatedLayout)
             .component('Container', Container)
             .component('PageTitleSection', PageTitleSection)
             .mount(el);

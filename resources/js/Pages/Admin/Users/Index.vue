@@ -1,3 +1,18 @@
+<script>
+import AuthenticatedAdminLayout from '@/Layouts/Admin/AuthenticatedLayout.vue';
+
+const pageTitle = 'Users';
+const breadcrumbs = [
+    { label: 'Dashboard', route: route('admin.dashboard') },
+    { label: pageTitle, route: route('admin.users.index') },
+    { label: 'List' },
+];
+
+export default {
+    layout: (h, page) => h(AuthenticatedAdminLayout, { breadcrumbs }, () => page)
+}
+</script>
+
 <script setup>
 import { ref, useTemplateRef } from 'vue';
 import { useLazyDataTable } from '@/Composables/useLazyDataTable';
@@ -7,13 +22,6 @@ const props = defineProps({
     auth: Object,
     users: Object,
 });
-
-const pageTitle = 'Users';
-const breadcrumbs = [
-    { label: 'Dashboard', route: route('admin.dashboard') },
-    { label: pageTitle, route: route('admin.users.index') },
-    { label: 'List' },
-];
 
 // User context menu
 const userContextMenu = useTemplateRef('user-context-menu');
@@ -54,125 +62,122 @@ const {
 <template>
     <InertiaHead :title="pageTitle" />
 
-    <AuthenticatedAdminLayout :breadcrumbs="breadcrumbs">
-        <Container
-            vertical
-            fluid
-        >
-            <PageTitleSection>
-                <template #title>
-                    {{ pageTitle }}
-                </template>
-                <template #end>
-                    <Button
-                        v-if="filteredOrSorted"
-                        severity="secondary"
-                        type="button"
-                        icon="pi pi-filter-slash"
-                        label="Clear Filters"
-                        outlined
-                        @click="hardReset"
-                    />
-                </template>
-            </PageTitleSection>
-            <div>
-                <Card pt:body:class="p-3">
-                    <template #content>
-                        <Menu
-                            ref="user-context-menu"
-                            class="shadow-sm"
-                            :model="userContextMenuItems"
-                            popup
-                        />
-                        <DataTable
-                            ref="dataTable"
-                            v-model:filters="filters"
-                            lazy
-                            paginator
-                            removableSort
-                            resizableColumns
-                            columnResizeMode="fit"
-                            :loading="processing"
-                            :value="users.data"
-                            :totalRecords="users.total"
-                            filterDisplay="row"
-                            :sortField="sorting.field"
-                            :sortOrder="sorting.order"
-                            :rows="users.per_page"
-                            :rowsPerPageOptions="[10, 20, 50, 100]"
-                            :first="firstDatasetIndex"
-                            paginatorTemplate="FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink CurrentPageReport RowsPerPageDropdown"
-                            currentPageReportTemplate="Showing {first} to {last} of {totalRecords} records"
-                            @filter="filter"
-                            @sort="sort"
-                            @page="paginate"
-                        >
-                            <template #empty>
-                                <div class="flex justify-center">
-                                    <Message
-                                        severity="warn"
-                                        icon="pi pi-exclamation-circle"
-                                        class="grow text-center flex justify-center"
-                                    >
-                                        No Users found.
-                                    </Message>
-                                </div>
-                            </template>
-                            <Column
-                                field="name"
-                                header="Name"
-                                sortable
-                                :showFilterMenu="false"
+    <Container
+        vertical
+        fluid
+    >
+        <PageTitleSection>
+            <template #title>
+                {{ pageTitle }}
+            </template>
+            <template #end>
+                <Button
+                    v-if="filteredOrSorted"
+                    severity="secondary"
+                    type="button"
+                    icon="pi pi-filter-slash"
+                    label="Clear Filters"
+                    outlined
+                    @click="hardReset"
+                />
+            </template>
+        </PageTitleSection>
+
+        <Card pt:body:class="p-3">
+            <template #content>
+                <Menu
+                    ref="user-context-menu"
+                    class="shadow-sm"
+                    :model="userContextMenuItems"
+                    popup
+                />
+                <DataTable
+                    ref="dataTable"
+                    v-model:filters="filters"
+                    lazy
+                    paginator
+                    removableSort
+                    resizableColumns
+                    columnResizeMode="fit"
+                    :loading="processing"
+                    :value="users.data"
+                    :totalRecords="users.total"
+                    filterDisplay="row"
+                    :sortField="sorting.field"
+                    :sortOrder="sorting.order"
+                    :rows="users.per_page"
+                    :rowsPerPageOptions="[10, 20, 50, 100]"
+                    :first="firstDatasetIndex"
+                    paginatorTemplate="FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink CurrentPageReport RowsPerPageDropdown"
+                    currentPageReportTemplate="Showing {first} to {last} of {totalRecords} records"
+                    @filter="filter"
+                    @sort="sort"
+                    @page="paginate"
+                >
+                    <template #empty>
+                        <div class="flex justify-center">
+                            <Message
+                                severity="warn"
+                                icon="pi pi-exclamation-circle"
+                                class="grow text-center flex justify-center"
                             >
-                                <template #filter="{ filterModel, filterCallback }">
-                                    <InputText
-                                        v-model="filterModel.value"
-                                        type="text"
-                                        placeholder="Search by name"
-                                        fluid
-                                        @input="debounceInputFilter(filterCallback)"
-                                    />
-                                </template>
-                                <template #body="slotProps">
-                                    {{ slotProps.data.name }}
-                                </template>
-                            </Column>
-                            <Column
-                                field="email"
-                                header="Email"
-                                sortable
-                                :showFilterMenu="false"
-                            >
-                                <template #filter="{ filterModel, filterCallback }">
-                                    <InputText
-                                        v-model="filterModel.value"
-                                        type="text"
-                                        placeholder="Search by Email"
-                                        fluid
-                                        @input="debounceInputFilter(filterCallback)"
-                                    />
-                                </template>
-                                <template #body="slotProps">
-                                    {{ slotProps.data.email }}
-                                </template>
-                            </Column>
-                            <Column header="Action">
-                                <template #body="{ data }">
-                                    <Button
-                                        v-tooltip.top="'Show User Actions'"
-                                        type="button"
-                                        severity="secondary"
-                                        icon="pi pi-ellipsis-v"
-                                        rounded
-                                        text
-                                        @click="toggleUserContextMenu($event, data)"
-                                    />
-                                </template>
-                            </Column>
-                        </DataTable>
+                                No Users found.
+                            </Message>
+                        </div>
                     </template>
-                </Card>
-            </div>
-        </Container>
-    </AuthenticatedAdminLayout>
+                    <Column
+                        field="name"
+                        header="Name"
+                        sortable
+                        :showFilterMenu="false"
+                    >
+                        <template #filter="{ filterModel, filterCallback }">
+                            <InputText
+                                v-model="filterModel.value"
+                                type="text"
+                                placeholder="Search by name"
+                                fluid
+                                @input="debounceInputFilter(filterCallback)"
+                            />
+                        </template>
+                        <template #body="slotProps">
+                            {{ slotProps.data.name }}
+                        </template>
+                    </Column>
+                    <Column
+                        field="email"
+                        header="Email"
+                        sortable
+                        :showFilterMenu="false"
+                    >
+                        <template #filter="{ filterModel, filterCallback }">
+                            <InputText
+                                v-model="filterModel.value"
+                                type="text"
+                                placeholder="Search by Email"
+                                fluid
+                                @input="debounceInputFilter(filterCallback)"
+                            />
+                        </template>
+                        <template #body="slotProps">
+                            {{ slotProps.data.email }}
+                        </template>
+                    </Column>
+                    <Column header="Action">
+                        <template #body="{ data }">
+                            <Button
+                                v-tooltip.top="'Show User Actions'"
+                                type="button"
+                                severity="secondary"
+                                icon="pi pi-ellipsis-v"
+                                rounded
+                                text
+                                @click="toggleUserContextMenu($event, data)"
+                            />
+                        </template>
+                    </Column>
+                </DataTable>
+            </template>
+        </Card>
+    </Container>
 </template>
