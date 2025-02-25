@@ -1,5 +1,5 @@
 <script setup>
-import AuthenticatedAdminLayout from '@/Layouts/Admin/AuthenticatedLayout.vue';
+import AuthenticatedAdminLayout from '@/layouts/admin/AuthenticatedLayout.vue';
 
 defineOptions({ layout: AuthenticatedAdminLayout });
 </script>

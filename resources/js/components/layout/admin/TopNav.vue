@@ -1,10 +1,10 @@
 <script setup>
 import { useTemplateRef } from 'vue';
 import { useForm } from '@inertiajs/vue3';
-import ApplicationLogo from '@/Components/ApplicationLogo.vue';
-import ToggleDarkModeButton from '@/Components/ToggleDarkModeButton.vue';
-import LinksMenu from '@/Components/PrimeVue/LinksMenu.vue';
-import LinksMenuBar from '@/Components/PrimeVue/LinksMenuBar.vue';
+import ApplicationLogo from '@/components/ApplicationLogo.vue';
+import ToggleDarkModeButton from '@/components/ToggleDarkModeButton.vue';
+import LinksMenu from '@/components/primevue/LinksMenu.vue';
+import LinksMenuBar from '@/components/primevue/LinksMenuBar.vue';
 
 const emit = defineEmits(['open-nav']);
 

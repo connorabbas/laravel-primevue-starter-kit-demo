@@ -1,5 +1,5 @@
 <script>
-import AuthenticatedAdminLayout from '@/Layouts/Admin/AuthenticatedLayout.vue';
+import AuthenticatedAdminLayout from '@/layouts/admin/AuthenticatedLayout.vue';
 
 const pageTitle = 'Profile';
 const breadcrumbs = [
@@ -14,9 +14,9 @@ export default {
 </script>
 
 <script setup>
-import DeleteUserForm from './Partials/DeleteUserForm.vue';
-import UpdatePasswordForm from './Partials/UpdatePasswordForm.vue';
-import UpdateProfileInformationForm from './Partials/UpdateProfileInformationForm.vue';
+import DeleteUserForm from './partials/DeleteUserForm.vue';
+import UpdatePasswordForm from './partials/UpdatePasswordForm.vue';
+import UpdateProfileInformationForm from './partials/UpdateProfileInformationForm.vue';
 
 defineProps({
     auth: Object,

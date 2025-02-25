@@ -1,10 +1,10 @@
 <script setup>
 import { ref, useTemplateRef, onMounted } from 'vue';
-import LinksBreadcrumb from '@/Components/PrimeVue/LinksBreadcrumb.vue';
-import MobileSidebarNavDrawer from '@/Components/Layout/Admin/MobileSidebarNavDrawer.vue';
-import TopNav from '@/Components/Layout/Admin/TopNav.vue';
-import Footer from '@/Components/Layout/Admin/Footer.vue';
-import SideMenuItems from '@/Components/Layout/Admin/SideMenuItems.vue';
+import LinksBreadcrumb from '@/components/primevue/LinksBreadcrumb.vue';
+import MobileSidebarNavDrawer from '@/components/layout/admin/MobileSidebarNavDrawer.vue';
+import TopNav from '@/components/layout/admin/TopNav.vue';
+import Footer from '@/components/layout/admin/Footer.vue';
+import SideMenuItems from '@/components/layout/admin/SideMenuItems.vue';
 
 defineProps({
     pageTitle: {

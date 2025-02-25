@@ -1,5 +1,5 @@
 <script>
-import AuthenticatedAdminLayout from '@/Layouts/Admin/AuthenticatedLayout.vue';
+import AuthenticatedAdminLayout from '@/layouts/admin/AuthenticatedLayout.vue';
 
 const pageTitle = 'Users';
 const breadcrumbs = [
@@ -15,7 +15,7 @@ export default {
 
 <script setup>
 import { ref, useTemplateRef } from 'vue';
-import { useLazyDataTable } from '@/Composables/useLazyDataTable';
+import { useLazyDataTable } from '@/composables/useLazyDataTable';
 import { FilterMatchMode } from '@primevue/core/api';
 
 const props = defineProps({
