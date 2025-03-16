@@ -14,6 +14,7 @@ Do you need a separate Vue SPA front-end instead of using Inertia.js? Consider u
 - [ ] Alternative admin branch using [Filament PHP](https://filamentphp.com/)
 - [ ] Proper SSR support
 - [ ] Match UI/functionality to `connorabbas/primevue-spa-laravel-api` project
+- [ ] Hosted demo project
 
 ## Features
 
