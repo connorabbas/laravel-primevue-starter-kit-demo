@@ -12,7 +12,7 @@ const currentRoute = computed(() => {
     return route().current();
 });
 
-const sidebarNavItems = [
+const sidebarNavItems = computed(() => [
     {
         title: 'Profile',
         href: route('profile.edit'),
@@ -28,7 +28,7 @@ const sidebarNavItems = [
         href: route('appearance'),
         active: currentRoute.value == 'appearance',
     },
-];
+]);
 </script>
 
 <template>

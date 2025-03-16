@@ -1,8 +1,10 @@
 <script setup>
-import { ref, useTemplateRef } from 'vue';
+import { useTemplateRef } from 'vue';
 import { useForm } from '@inertiajs/vue3';
 
-const modalOpen = defineModel(false);
+const modalOpen = defineModel(false, {
+    type: Boolean,
+});
 const passwordInput = useTemplateRef('password-input');
 
 const form = useForm({
