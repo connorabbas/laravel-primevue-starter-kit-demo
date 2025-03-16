@@ -1,9 +1,9 @@
 <script setup>
-import AuthenticatedLayout from '@/layouts/AuthenticatedLayout.vue';
+import AppLayout from '@/layouts/AppLayout.vue';
 import SettingsLayout from '@/layouts/UserSettingsLayout.vue';
 import SelectColorModeButton from '@/components/SelectColorModeButton.vue';
 
-defineOptions({ layout: AuthenticatedLayout });
+defineOptions({ layout: AppLayout });
 </script>
 
 <template>

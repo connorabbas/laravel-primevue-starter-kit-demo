@@ -32,7 +32,7 @@ const sidebarNavItems = [
 </script>
 
 <template>
-    <Container vertical>
+    <div>
         <PageTitleSection>
             <template #title>
                 Settings
@@ -42,7 +42,7 @@ const sidebarNavItems = [
             </template>
         </PageTitleSection>
 
-        <Divider />
+        <Divider class="my-6 md:my-8" />
 
         <div class="flex flex-col space-y-8 md:space-y-0 lg:flex-row lg:space-x-12 lg:space-y-0">
             <aside class="w-full max-w-xl lg:w-48">
@@ -51,8 +51,8 @@ const sidebarNavItems = [
                         v-for="item in sidebarNavItems"
                         :key="item.href"
                         pt:root:class="flex items-center justify-start no-underline"
-                        :severity="item.active ? 'primary' : ''"
-                        :variant="item.active ? '' : 'text'"
+                        :severity="item.active ? 'secondary' : ''"
+                        :variant="item.active ? 'outlined' : 'text'"
                         :href="item.href"
                         as="InertiaLink"
                     >
@@ -65,5 +65,5 @@ const sidebarNavItems = [
                 <slot />
             </section>
         </div>
-    </Container>
+    </div>
 </template>

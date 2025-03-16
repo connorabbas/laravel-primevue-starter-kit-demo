@@ -173,7 +173,7 @@ watchEffect(() => {
                                 severity="secondary"
                                 :label="page.props.auth.user.name"
                                 size="large"
-                                icon="pi pi-angle-up"
+                                icon="pi pi-sort"
                                 iconPos="right"
                                 pt:root:class="flex justify-between"
                                 @click="toggleMobileUserMenu($event)"
@@ -191,7 +191,9 @@ watchEffect(() => {
             <!-- Page Content -->
             <Toast position="top-center" />
             <main>
-                <slot />
+                <Container vertical>
+                    <slot />
+                </Container>
             </main>
         </div>
     </div>

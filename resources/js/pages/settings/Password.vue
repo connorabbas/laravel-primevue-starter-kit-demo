@@ -2,7 +2,7 @@
 import { useTemplateRef, onMounted } from 'vue';
 import { useForm } from '@inertiajs/vue3';
 import { useToast } from 'primevue/usetoast';
-import AuthenticatedLayout from '@/layouts/AuthenticatedLayout.vue';
+import AppLayout from '@/layouts/AppLayout.vue';
 import SettingsLayout from '@/layouts/UserSettingsLayout.vue';
 
 defineProps({
@@ -14,7 +14,7 @@ defineProps({
     },
 });
 
-defineOptions({ layout: AuthenticatedLayout });
+defineOptions({ layout: AppLayout });
 
 const currentPasswordInput = useTemplateRef('current-password-input');
 const newPasswordInput = useTemplateRef('new-password-input');
