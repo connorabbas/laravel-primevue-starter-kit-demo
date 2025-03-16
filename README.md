@@ -18,7 +18,7 @@ Do you need a separate Vue SPA front-end instead of using Inertia.js? Consider u
 
 ## Features
 
--   Need an admin panel? [There's a branch for that.](https://github.com/connorabbas/laravel-inertia-primevue/tree/feature/admin-panel)
+-   Need an admin panel? [There's a branch for that.](https://github.com/connorabbas/laravel-primevue-starter-kit/tree/feature/admin-panel)
 -   Pre-configured [Auto Import](https://primevue.org/autoimport/) PrimeVue components
 -   Wrapper components for PrimeVue's `Breadcrumb`, `Menu`, `MenuBar`, & `PanelMenu` utilizing Inertia's `Link` component
 -   `usePaginatedData()` & `useLazyDataTable()` composables for use with PrimeVue's `Paginator` & `DataTable` components for easy pagination/filtering/sorting (example usage in `feature/admin-panel` branch)
