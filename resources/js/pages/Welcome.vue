@@ -1,7 +1,11 @@
 <script setup>
+import { computed } from 'vue';
 import { usePage } from '@inertiajs/vue3';
 
-defineProps({
+const props = defineProps({
+    isAdmin: {
+        type: Boolean,
+    },
     laravelVersion: {
         type: String,
         required: true,
@@ -12,6 +16,9 @@ defineProps({
     },
 });
 
+const dashboardRoute = computed(() => {
+    return props.isAdmin ? route('admin.dashboard') : route('dashboard');
+});
 const page = usePage();
 </script>
 
@@ -46,14 +53,17 @@ const page = usePage();
                             >PrimeVue</a>.
                         </p>
                         <template v-if="page.props.auth.user">
-                            <InertiaLink :href="route('dashboard')">
+                            <InertiaLink :href="dashboardRoute">
                                 <Button
                                     label="Dashboard"
-                                    icon="pi pi-home"
+                                    icon="pi pi-th-large"
                                     class="mr-4"
                                 />
                             </InertiaLink>
-                            <InertiaLink :href="route('profile.edit')">
+                            <InertiaLink
+                                v-if="!isAdmin"
+                                :href="route('profile.edit')"
+                            >
                                 <Button
                                     outlined
                                     label="Profile Settings"

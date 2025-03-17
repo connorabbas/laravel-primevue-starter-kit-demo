@@ -15,6 +15,11 @@ const props = defineProps({
         default: false,
         required: false,
     },
+    vertical: {
+        type: Boolean,
+        default: false,
+        required: false,
+    },
 });
 </script>
 

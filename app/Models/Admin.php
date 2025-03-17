@@ -2,20 +2,21 @@
 
 namespace App\Models;
 
+use App\Notifications\AdminVerifyEmail;
 use Illuminate\Notifications\Notifiable;
 //use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
-class User extends Authenticatable //implements MustVerifyEmail
+class Admin extends Authenticatable //implements MustVerifyEmail
 {
     use HasFactory;
     use Notifiable;
 
+    protected $table = 'admins';
+
     /**
      * The attributes that are mass assignable.
-     *
-     * @var array<int, string>
      */
     protected $fillable = [
         'name',
@@ -25,8 +26,6 @@ class User extends Authenticatable //implements MustVerifyEmail
 
     /**
      * The attributes that should be hidden for serialization.
-     *
-     * @var array<int, string>
      */
     protected $hidden = [
         'password',
@@ -34,15 +33,20 @@ class User extends Authenticatable //implements MustVerifyEmail
     ];
 
     /**
-     * Get the attributes that should be cast.
-     *
-     * @return array<string, string>
+     * The attributes that should be cast.
      */
-    protected function casts(): array
+    protected $casts = [
+        'email_verified_at' => 'datetime',
+        'password' => 'hashed',
+    ];
+
+    protected function getDefaultGuardName(): string
     {
-        return [
-            'email_verified_at' => 'datetime',
-            'password' => 'hashed',
-        ];
+        return 'admin';
+    }
+
+    public function sendEmailVerificationNotification()
+    {
+        $this->notify(new AdminVerifyEmail());
     }
 }
