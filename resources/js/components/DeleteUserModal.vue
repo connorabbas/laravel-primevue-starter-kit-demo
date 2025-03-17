@@ -49,13 +49,14 @@ function focusPasswordInput() {
                 id="password"
                 ref="password-input"
                 v-model="form.password"
+                :invalid="Boolean(form.errors.password)"
                 type="password"
                 placeholder="Password"
+                autocomplete="current-password"
+                toggleMask
                 autofocus
                 required
                 fluid
-                :invalid="Boolean(form.errors.password)"
-                autocomplete="current-password"
                 @keyup.enter="deleteUser"
             />
             <Message
