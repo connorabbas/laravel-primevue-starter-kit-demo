@@ -9,7 +9,7 @@ services:
     extra_hosts:
       - 'host.docker.internal:host-gateway'
     ports:
-      - '${APP_PORT:-8000}:80'
+      #- '${APP_PORT:-8000}:80'
       - '${VITE_PORT:-5173}:${VITE_PORT:-5173}'
     environment:
       WWWUSER: '${WWWUSER}'
@@ -21,8 +21,8 @@ services:
       - '.:/var/www/html'
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.laravel-primevue.rule=Host(`laravel-primevue.localhost`)"
-      - "traefik.http.services.laravel-primevue.loadbalancer.server.port=80"
+      - "traefik.http.routers.laravel-primevue-demo.rule=Host(`laravel-primevue-demo.localhost`)"
+      - "traefik.http.services.laravel-primevue-demo.loadbalancer.server.port=80"
     networks:
       - sail
       - proxy
@@ -39,7 +39,7 @@ services:
       POSTGRES_USER: '${DB_USERNAME}'
       POSTGRES_PASSWORD: '${DB_PASSWORD:-secret}'
     volumes:
-      - 'laravel-primevue-pgsql:/var/lib/postgresql/data'
+      - 'laravel-primevue-demo-pgsql:/var/lib/postgresql/data'
       - './docker/local/database/pgsql/create-testing-database.sql:/docker-entrypoint-initdb.d/10-create-testing-database.sql'
     networks:
       - sail
@@ -49,7 +49,7 @@ services:
       timeout: 5s
 
 volumes:
-  laravel-primevue-pgsql:
+  laravel-primevue-demo-pgsql:
     driver: local
 
 networks:
