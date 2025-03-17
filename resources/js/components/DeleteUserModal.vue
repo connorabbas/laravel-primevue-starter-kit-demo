@@ -53,7 +53,6 @@ function focusPasswordInput() {
                 type="password"
                 placeholder="Password"
                 autocomplete="current-password"
-                toggleMask
                 autofocus
                 required
                 fluid
