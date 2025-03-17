@@ -1,15 +1,8 @@
 <script setup>
 import { computed } from 'vue';
 import { usePage } from '@inertiajs/vue3';
-import ToggleDarkModeButton from '@/components/ToggleDarkModeButton.vue';
 
 const props = defineProps({
-    canLogin: {
-        type: Boolean,
-    },
-    canRegister: {
-        type: Boolean,
-    },
     isAdmin: {
         type: Boolean,
     },
@@ -73,8 +66,8 @@ const page = usePage();
                             >
                                 <Button
                                     outlined
-                                    label="Profile"
-                                    icon="pi pi-user"
+                                    label="Profile Settings"
+                                    icon="pi pi-cog"
                                     class="mr-4"
                                 />
                             </InertiaLink>
@@ -96,7 +89,6 @@ const page = usePage();
                                 />
                             </InertiaLink>
                         </template>
-                        <ToggleDarkModeButton outlined />
                         <div class="mt-6">
                             <p class="m-0 text-sm text-muted-color">
                                 Laravel v{{ laravelVersion }} (PHP v{{
