@@ -19,8 +19,25 @@ const currentRoute = computed(() => {
 const mainMenuItems = computed(() => [
     {
         label: 'Dashboard',
+        icon: 'pi pi-th-large',
         route: route('dashboard'),
         active: currentRoute.value == 'dashboard',
+    },
+    {
+        label: 'Info',
+        icon: 'pi pi-info-circle',
+        items: [
+            {
+                label: 'PrimeVue Docs',
+                url: 'https://primevue.org/',
+                icon: 'pi pi-prime'
+            },
+            {
+                label: 'Starter Kit Repo',
+                url: 'https://github.com/connorabbas/laravel-primevue-starter-kit',
+                icon: 'pi pi-github'
+            }
+        ],
     },
 ]);
 
