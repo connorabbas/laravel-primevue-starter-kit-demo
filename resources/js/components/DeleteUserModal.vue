@@ -1,8 +1,10 @@
 <script setup>
-import { ref, useTemplateRef } from 'vue';
+import { useTemplateRef } from 'vue';
 import { useForm } from '@inertiajs/vue3';
 
-const modalOpen = defineModel(false);
+const modalOpen = defineModel(false, {
+    type: Boolean,
+});
 const passwordInput = useTemplateRef('password-input');
 
 const form = useForm({
@@ -47,13 +49,13 @@ function focusPasswordInput() {
                 id="password"
                 ref="password-input"
                 v-model="form.password"
+                :invalid="Boolean(form.errors.password)"
                 type="password"
                 placeholder="Password"
+                autocomplete="current-password"
                 autofocus
                 required
                 fluid
-                :invalid="Boolean(form.errors.password)"
-                autocomplete="current-password"
                 @keyup.enter="deleteUser"
             />
             <Message

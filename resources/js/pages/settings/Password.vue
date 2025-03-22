@@ -2,6 +2,7 @@
 import { useTemplateRef, onMounted } from 'vue';
 import { useForm } from '@inertiajs/vue3';
 import { useToast } from 'primevue/usetoast';
+import Password from 'primevue/password';
 import AppLayout from '@/layouts/AppLayout.vue';
 import SettingsLayout from '@/layouts/UserSettingsLayout.vue';
 
@@ -13,8 +14,6 @@ defineProps({
         type: String,
     },
 });
-
-defineOptions({ layout: AppLayout });
 
 const currentPasswordInput = useTemplateRef('current-password-input');
 const newPasswordInput = useTemplateRef('new-password-input');
@@ -60,91 +59,93 @@ onMounted(() => {
 </script>
 
 <template>
-    <InertiaHead title="Password Settings" />
+    <AppLayout>
+        <InertiaHead title="Password Settings" />
 
-    <SettingsLayout>
-        <Card
-            pt:body:class="max-w-2xl space-y-3"
-            pt:caption:class="space-y-1"
-        >
-            <template #title>Update Password</template>
-            <template #subtitle>
-                Ensure your account is using a long, random password to stay secure
-            </template>
-            <template #content>
-                <form
-                    class="space-y-6"
-                    @submit.prevent="updatePassword"
-                >
-                    <div class="flex flex-col gap-2">
-                        <label for="current_password">Current Password</label>
-                        <InputText
-                            id="current_password"
-                            ref="current-password-input"
-                            v-model="form.current_password"
-                            type="password"
-                            required
-                            fluid
-                            :invalid="Boolean(form.errors?.current_password)"
-                            autocomplete="current-password"
+        <SettingsLayout>
+            <Card
+                pt:body:class="max-w-2xl space-y-3"
+                pt:caption:class="space-y-1"
+            >
+                <template #title>Update Password</template>
+                <template #subtitle>
+                    Ensure your account is using a long, random password to stay secure
+                </template>
+                <template #content>
+                    <form
+                        class="space-y-6"
+                        @submit.prevent="updatePassword"
+                    >
+                        <div class="flex flex-col gap-2">
+                            <label for="current_password">Current Password</label>
+                            <InputText
+                                id="current_password"
+                                ref="current-password-input"
+                                v-model="form.current_password"
+                                :invalid="Boolean(form.errors?.current_password)"
+                                type="password"
+                                autocomplete="current-password"
+                                required
+                                fluid
+                            />
+                            <Message
+                                v-if="form.errors?.current_password"
+                                severity="error"
+                                variant="simple"
+                                size="small"
+                            >
+                                {{ form.errors?.current_password }}
+                            </Message>
+                        </div>
+                        <div class="flex flex-col gap-2">
+                            <label for="password">New Password</label>
+                            <Password
+                                id="password"
+                                ref="new-password-input"
+                                v-model="form.password"
+                                :invalid="Boolean(form.errors?.password)"
+                                autocomplete="new-password"
+                                toggleMask
+                                required
+                                fluid
+                            />
+                            <Message
+                                v-if="form.errors?.password"
+                                severity="error"
+                                variant="simple"
+                                size="small"
+                            >
+                                {{ form.errors?.password }}
+                            </Message>
+                        </div>
+                        <div class="flex flex-col gap-2">
+                            <label for="password_confirmation">Confirm Password</label>
+                            <InputText
+                                id="password_confirmation"
+                                v-model="form.password_confirmation"
+                                :invalid="Boolean(form.errors?.password_confirmation)"
+                                type="password"
+                                autocomplete="confirm-password"
+                                required
+                                fluid
+                            />
+                            <Message
+                                v-if="form.errors?.password_confirmation"
+                                severity="error"
+                                variant="simple"
+                                size="small"
+                            >
+                                {{ form.errors?.password_confirmation }}
+                            </Message>
+                        </div>
+                        <Button
+                            :loading="form.processing"
+                            type="submit"
+                            label="Save"
                         />
-                        <Message
-                            v-if="form.errors?.current_password"
-                            severity="error"
-                            variant="simple"
-                            size="small"
-                        >
-                            {{ form.errors?.current_password }}
-                        </Message>
-                    </div>
-                    <div class="flex flex-col gap-2">
-                        <label for="password">New Password</label>
-                        <InputText
-                            id="password"
-                            ref="new-password-input"
-                            v-model="form.password"
-                            type="password"
-                            required
-                            fluid
-                            :invalid="Boolean(form.errors.password)"
-                            autocomplete="new-password"
-                        />
-                        <Message
-                            v-if="form.errors?.password"
-                            severity="error"
-                            variant="simple"
-                            size="small"
-                        >
-                            {{ form.errors?.password }}
-                        </Message>
-                    </div>
-                    <div class="flex flex-col gap-2">
-                        <label for="password_confirmation">Confirm Password</label>
-                        <InputText
-                            id="password_confirmation"
-                            v-model="form.password_confirmation"
-                            type="password"
-                            required
-                            fluid
-                            :invalid="Boolean(form.errors.password_confirmation)"
-                            autocomplete="new-password"
-                        />
-                        <Message
-                            v-if="form.errors?.password_confirmation"
-                            severity="error"
-                            variant="simple"
-                            size="small"
-                        >
-                            {{ form.errors?.password_confirmation }}
-                        </Message>
-                    </div>
-                    <Button
-                        :loading="form.processing"
-                        type="submit"
-                        label="Save"
-                    />
-                </form>
-            </template>
-        </Card>
-    </SettingsLayout>
+                    </form>
+                </template>
+            </Card>
+        </SettingsLayout>
+    </AppLayout>
 </template>

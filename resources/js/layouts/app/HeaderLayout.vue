@@ -15,16 +15,38 @@ const currentRoute = computed(() => {
     return route().current();
 });
 
-// Main menu
-const mainMenuItems = computed(() => [
+const menuItems = computed(() => [
+    {
+        label: 'Home',
+        icon: 'pi pi-home',
+        route: route('welcome'),
+        active: currentRoute.value == 'welcome',
+    },
     {
         label: 'Dashboard',
+        icon: 'pi pi-th-large',
         route: route('dashboard'),
         active: currentRoute.value == 'dashboard',
     },
+    {
+        label: 'Info',
+        icon: 'pi pi-info-circle',
+        items: [
+            {
+                label: 'PrimeVue Docs',
+                url: 'https://primevue.org/',
+                icon: 'pi pi-prime'
+            },
+            {
+                label: 'Starter Kit Repo',
+                url: 'https://github.com/connorabbas/laravel-primevue-starter-kit',
+                icon: 'pi pi-github'
+            }
+        ],
+    },
 ]);
 
-// User menu (desktop)
+// User menu
 const logoutForm = useForm({});
 const logout = () => {
     logoutForm.post(route('logout'));
@@ -50,21 +72,7 @@ const toggleMobileUserMenu = (event) => {
     mobileUserMenu.value.childRef.toggle(event);
 };
 
-// Mobile menu (Drawer)
-const homeMobileMenuItems = computed(() => [
-    {
-        label: 'Welcome',
-        icon: 'pi pi-home',
-        route: route('welcome'),
-        active: currentRoute.value == 'welcome',
-    },
-    {
-        label: 'Dashboard',
-        icon: 'pi pi-th-large',
-        route: route('dashboard'),
-        active: currentRoute.value == 'dashboard',
-    },
-]);
+// Mobile drawer menu
 const mobileMenuOpen = ref(false);
 const windowWidth = ref(window.innerWidth);
 const updateWidth = () => {
@@ -90,7 +98,7 @@ watchEffect(() => {
                 <!-- Primary Navigation Menu -->
                 <Container>
                     <LinksMenuBar
-                        :model="mainMenuItems"
+                        :model="menuItems"
                         :key="currentRoute"
                         pt:root:class="px-0 py-4 border-0 rounded-none dynamic-bg"
                         pt:button:class="hidden"
@@ -154,17 +162,10 @@ watchEffect(() => {
                     position="right"
                 >
                     <div>
-                        <div class="space-y-5">
-                            <div class="flex flex-col gap-2">
-                                <p class="text-muted-color font-bold uppercase text-sm">
-                                    Home
-                                </p>
-                                <LinksPanelMenu
-                                    :model="homeMobileMenuItems"
-                                    class="w-full"
-                                />
-                            </div>
-                        </div>
+                        <LinksPanelMenu
+                            :model="menuItems"
+                            class="w-full"
+                        />
                     </div>
                     <template #footer>
                         <div class="flex flex-col">

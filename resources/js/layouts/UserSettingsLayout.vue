@@ -12,7 +12,7 @@ const currentRoute = computed(() => {
     return route().current();
 });
 
-const sidebarNavItems = [
+const sidebarNavItems = computed(() => [
     {
         title: 'Profile',
         href: route('profile.edit'),
@@ -28,7 +28,7 @@ const sidebarNavItems = [
         href: route('appearance'),
         active: currentRoute.value == 'appearance',
     },
-];
+]);
 </script>
 
 <template>
@@ -44,8 +44,8 @@ const sidebarNavItems = [
 
         <Divider class="my-6 md:my-8" />
 
-        <div class="flex flex-col space-y-8 md:space-y-0 lg:flex-row lg:space-x-12 lg:space-y-0">
-            <aside class="w-full max-w-xl lg:w-48">
+        <div class="flex flex-col gap-6 lg:gap-8 lg:flex-row">
+            <aside class="w-full md:max-w-2xl lg:w-48">
                 <nav class="flex flex-col space-x-0 space-y-1">
                     <Button
                         v-for="item in sidebarNavItems"
