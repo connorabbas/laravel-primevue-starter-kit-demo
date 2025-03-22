@@ -5,6 +5,15 @@ import ApplicationLogo from '@/components/ApplicationLogo.vue';
 import LinksMenu from '@/components/primevue/LinksMenu.vue';
 import LinksMenuBar from '@/components/primevue/LinksMenuBar.vue';
 import LinksPanelMenu from '@/components/primevue/LinksPanelMenu.vue';
+import LinksBreadcrumb from '@/components/primevue/LinksBreadcrumb.vue';
+
+const props = defineProps({
+    breadcrumbs: {
+        type: Array,
+        required: false,
+        default: () => [],
+    },
+});
 
 const page = usePage();
 const currentRoute = computed(() => {
@@ -124,10 +133,11 @@ watchEffect(() => {
                     </div>
                 </template>
             </Drawer>
+            <Toast position="top-center" />
         </Teleport>
         <div class="min-h-screen">
+            <!-- Primary Navigation Menu -->
             <nav class="dynamic-bg shadow-sm">
-                <!-- Primary Navigation Menu -->
                 <Container>
                     <LinksMenuBar
                         :model="menuItems"
@@ -136,7 +146,6 @@ watchEffect(() => {
                         pt:button:class="hidden"
                     >
                         <template #start>
-                            <!-- Logo -->
                             <div class="shrink-0 flex items-center mr-5">
                                 <InertiaLink :href="route('welcome')">
                                     <ApplicationLogo
@@ -146,8 +155,8 @@ watchEffect(() => {
                             </div>
                         </template>
                         <template #end>
+                            <!-- User Dropdown Menu -->
                             <div class="hidden lg:flex items-center ms-6 space-x-3">
-                                <!-- User Dropdown Menu -->
                                 <div class="flex flex-col">
                                     <Button
                                         id="user-menu-btn"
@@ -172,7 +181,7 @@ watchEffect(() => {
                                 </div>
                             </div>
 
-                            <!-- Mobile Hamburger -->
+                            <!-- Mobile Menu Toggle -->
                             <div class="flex items-center lg:hidden">
                                 <div class="relative">
                                     <Button
@@ -189,13 +198,21 @@ watchEffect(() => {
                 </Container>
             </nav>
 
-            <!-- Page Content -->
-            <Toast position="top-center" />
-            <main>
-                <Container vertical>
+            <Container vertical>
+                <!-- Breadcrumbs -->
+                <LinksBreadcrumb
+                    v-if="props.breadcrumbs.length"
+                    :model="props.breadcrumbs"
+                />
+
+                <!-- Page Content -->
+                <main
+                    id="page-content"
+                    class="grow"
+                >
                     <slot />
-                </Container>
-            </main>
+                </main>
+            </Container>
         </div>
     </div>
 </template>

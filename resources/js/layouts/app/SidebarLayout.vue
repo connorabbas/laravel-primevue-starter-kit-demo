@@ -6,11 +6,7 @@ import LinksMenu from '@/components/primevue/LinksMenu.vue';
 import LinksPanelMenu from '@/components/primevue/LinksPanelMenu.vue';
 import LinksBreadcrumb from '@/components/primevue/LinksBreadcrumb.vue';
 
-defineProps({
-    pageTitle: {
-        type: String,
-        required: false,
-    },
+const props = defineProps({
     breadcrumbs: {
         type: Array,
         required: false,
@@ -149,14 +145,11 @@ watchEffect(() => {
                     </div>
                 </template>
             </Drawer>
+            <Toast position="top-center" />
         </Teleport>
 
         <!-- Mobile Header -->
-        <header
-            id="site-header"
-            ref="site-header"
-            class="block lg:fixed top-0 left-0 right-0 z-50"
-        >
+        <header class="block lg:fixed top-0 left-0 right-0 z-50">
             <nav class="dynamic-bg shadow-sm flex justify-between items-center lg:hidden">
                 <Container class="grow">
                     <div class="flex justify-between items-center py-4">
@@ -224,35 +217,24 @@ watchEffect(() => {
 
             <!-- Scrollable Content -->
             <div class="flex flex-col h-full lg:pl-[18rem]">
-                <!-- Breadcrumbs Nav -->
-                <nav
-                    v-if="breadcrumbs.length"
-                    class="dynamic-bg border-b dynamic-border"
+                <Container
+                    vertical
+                    fluid
                 >
-                    <Container fluid>
-                        <LinksBreadcrumb
-                            :model="breadcrumbs"
-                            class="py-4"
-                        />
-                    </Container>
-                </nav>
+                    <!-- Breadcrumbs -->
+                    <LinksBreadcrumb
+                        v-if="props.breadcrumbs.length"
+                        :model="props.breadcrumbs"
+                    />
 
-                <!-- Page Content -->
-                <main
-                    id="page-content"
-                    class="grow"
-                >
-                    <Container
-                        vertical
-                        fluid
+                    <!-- Page Content -->
+                    <main
+                        id="page-content"
+                        class="grow"
                     >
                         <slot />
-                    </Container>
-                </main>
-
-                <footer>
-                    <!-- Add footer content as desired -->
-                </footer>
+                    </main>
+                </Container>
             </div>
         </div>
     </div>

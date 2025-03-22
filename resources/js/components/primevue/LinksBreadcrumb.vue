@@ -5,13 +5,7 @@ const page = usePage();
 </script>
 
 <template>
-    <Breadcrumb
-        pt:root:class="p-0 bg-transparent"
-        :home="{
-            icon: 'pi pi-home',
-            url: page.props.app.baseUrl,
-        }"
-    >
+    <Breadcrumb pt:root:class="p-0 bg-transparent">
         <template #item="{ item, props }">
             <InertiaLink
                 v-if="item.route"
@@ -40,6 +34,5 @@ const page = usePage();
                 <span class="p-breadcrumb-item-label">{{ item.label }}</span>
             </a>
         </template>
-        <template #separator> / </template>
     </Breadcrumb>
 </template>
