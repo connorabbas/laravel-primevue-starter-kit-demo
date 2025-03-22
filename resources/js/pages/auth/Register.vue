@@ -1,7 +1,7 @@
 <script setup>
 import { useTemplateRef, onMounted } from 'vue';
 import { useForm } from '@inertiajs/vue3';
-import GuestLayout from '@/layouts/GuestLayout.vue';
+import GuestAuthLayout from '@/layouts/GuestAuthLayout.vue';
 
 const form = useForm({
     name: '',
@@ -24,7 +24,7 @@ onMounted(() => {
 </script>
 
 <template>
-    <GuestLayout>
+    <GuestAuthLayout>
         <InertiaHead title="Register" />
 
         <form
@@ -37,11 +37,11 @@ onMounted(() => {
                     id="name"
                     ref="name-input"
                     v-model="form.name"
-                    type="text"
                     :invalid="Boolean(form.errors.name)"
+                    type="text"
+                    autocomplete="name"
                     required
                     fluid
-                    autocomplete="name"
                 />
                 <Message
                     v-if="form.errors?.name"
@@ -130,5 +130,5 @@ onMounted(() => {
                 />
             </div>
         </form>
-    </GuestLayout>
+    </GuestAuthLayout>
 </template>
