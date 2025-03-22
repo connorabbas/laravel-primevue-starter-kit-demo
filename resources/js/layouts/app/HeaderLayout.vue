@@ -112,7 +112,6 @@ watchEffect(() => {
                             pt:root:class="flex justify-between"
                             :label="page.props.auth.user.name"
                             severity="secondary"
-                            size="large"
                             icon="pi pi-sort"
                             iconPos="right"
                             @click="toggleMobileUserMenu($event)"
@@ -141,7 +140,7 @@ watchEffect(() => {
                             <div class="shrink-0 flex items-center mr-5">
                                 <InertiaLink :href="route('welcome')">
                                     <ApplicationLogo
-                                        class="block h-10 w-auto fill-current text-surface-900 dark:text-surface-0"
+                                        class="block h-8 lg:h-10 w-auto fill-current text-surface-900 dark:text-surface-0"
                                     />
                                 </InertiaLink>
                             </div>
@@ -152,8 +151,8 @@ watchEffect(() => {
                                 <div class="flex flex-col">
                                     <Button
                                         id="user-menu-btn"
-                                        severity="secondary"
                                         :label="page.props.auth.user.name"
+                                        severity="secondary"
                                         icon="pi pi-angle-down"
                                         iconPos="right"
                                         text

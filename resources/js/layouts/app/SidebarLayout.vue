@@ -134,9 +134,8 @@ watchEffect(() => {
                     <div class="flex flex-col">
                         <Button
                             id="mobile-user-menu-btn"
-                            severity="secondary"
                             :label="page.props.auth.user.name"
-                            size="large"
+                            severity="secondary"
                             icon="pi pi-sort"
                             iconPos="right"
                             pt:root:class="flex justify-between"
@@ -209,7 +208,6 @@ watchEffect(() => {
                             pt:root:class="flex justify-between"
                             :label="page.props.auth.user.name"
                             severity="secondary"
-                            size="large"
                             icon="pi pi-sort"
                             iconPos="right"
                             fluid
