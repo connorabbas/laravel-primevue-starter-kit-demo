@@ -1,5 +1,5 @@
 <script setup>
-import { ref, useTemplateRef, onMounted } from 'vue';
+import { ref} from 'vue';
 import { useForm, usePage } from '@inertiajs/vue3';
 import { useToast } from 'primevue/usetoast';
 import AppLayout from '@/layouts/AppLayout.vue';
@@ -40,11 +40,6 @@ const updateProfileInformation = () => {
         },
     });
 };
-
-const nameInput = useTemplateRef('name-input');
-onMounted(() => {
-    nameInput.value.$el.focus();
-});
 </script>
 
 <template>
@@ -70,13 +65,12 @@ onMounted(() => {
                                 <label for="name">Name</label>
                                 <InputText
                                     id="name"
-                                    ref="name-input"
                                     v-model="form.name"
+                                    :invalid="Boolean(form.errors.name)"
                                     type="text"
+                                    autocomplete="name"
                                     required
                                     fluid
-                                    :invalid="Boolean(form.errors.name)"
-                                    autocomplete="name"
                                 />
                                 <Message
                                     v-if="form.errors?.name"
@@ -92,11 +86,11 @@ onMounted(() => {
                                 <InputText
                                     id="email"
                                     v-model="form.email"
+                                    :invalid="Boolean(form.errors.email)"
                                     type="email"
+                                    autocomplete="username"
                                     required
                                     fluid
-                                    :invalid="Boolean(form.errors.email)"
-                                    autocomplete="username"
                                 />
                                 <Message
                                     v-if="form.errors?.email"

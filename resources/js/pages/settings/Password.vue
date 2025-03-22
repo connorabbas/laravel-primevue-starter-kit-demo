@@ -1,5 +1,5 @@
 <script setup>
-import { useTemplateRef, onMounted } from 'vue';
+import { useTemplateRef } from 'vue';
 import { useForm } from '@inertiajs/vue3';
 import { useToast } from 'primevue/usetoast';
 import Password from 'primevue/password';
@@ -52,10 +52,6 @@ const updatePassword = () => {
         },
     });
 };
-
-onMounted(() => {
-    currentPasswordInput.value.$el.focus();
-});
 </script>
 
 <template>

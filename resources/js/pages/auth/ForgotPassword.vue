@@ -57,11 +57,11 @@ onMounted(() => {
                     id="email"
                     ref="email-input"
                     v-model="form.email"
+                    :invalid="Boolean(form.errors.email)"
                     type="email"
+                    autocomplete="username"
                     required
                     fluid
-                    :invalid="Boolean(form.errors.email)"
-                    autocomplete="username"
                 />
                 <Message
                     v-if="form.errors?.email"

@@ -93,6 +93,39 @@ watchEffect(() => {
 
 <template>
     <div>
+        <Teleport to="body">
+            <!-- Mobile drawer menu -->
+            <Drawer
+                v-model:visible="mobileMenuOpen"
+                position="right"
+            >
+                <div>
+                    <LinksPanelMenu
+                        :model="menuItems"
+                        class="w-full"
+                    />
+                </div>
+                <template #footer>
+                    <div class="flex flex-col">
+                        <Button
+                            id="mobile-user-menu-btn"
+                            pt:root:class="flex justify-between"
+                            :label="page.props.auth.user.name"
+                            severity="secondary"
+                            size="large"
+                            icon="pi pi-sort"
+                            iconPos="right"
+                            @click="toggleMobileUserMenu($event)"
+                        />
+                        <LinksMenu
+                            ref="mobile-user-menu"
+                            :model="userMenuItems"
+                            popup
+                        />
+                    </div>
+                </template>
+            </Drawer>
+        </Teleport>
         <div class="min-h-screen">
             <nav class="dynamic-bg shadow-sm">
                 <!-- Primary Navigation Menu -->
@@ -155,38 +188,6 @@ watchEffect(() => {
                         </template>
                     </LinksMenuBar>
                 </Container>
-
-                <!-- Mobile drawer menu -->
-                <Drawer
-                    v-model:visible="mobileMenuOpen"
-                    position="right"
-                >
-                    <div>
-                        <LinksPanelMenu
-                            :model="menuItems"
-                            class="w-full"
-                        />
-                    </div>
-                    <template #footer>
-                        <div class="flex flex-col">
-                            <Button
-                                id="mobile-user-menu-btn"
-                                severity="secondary"
-                                :label="page.props.auth.user.name"
-                                size="large"
-                                icon="pi pi-sort"
-                                iconPos="right"
-                                pt:root:class="flex justify-between"
-                                @click="toggleMobileUserMenu($event)"
-                            />
-                            <LinksMenu
-                                ref="mobile-user-menu"
-                                :model="userMenuItems"
-                                popup
-                            />
-                        </div>
-                    </template>
-                </Drawer>
             </nav>
 
             <!-- Page Content -->

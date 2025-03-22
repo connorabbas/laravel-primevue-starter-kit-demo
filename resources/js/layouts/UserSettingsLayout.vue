@@ -42,7 +42,7 @@ const sidebarNavItems = computed(() => [
             </template>
         </PageTitleSection>
 
-        <Divider class="my-6 md:my-8" />
+        <Divider class="my-8" />
 
         <div class="flex flex-col gap-6 lg:gap-8 lg:flex-row">
             <aside class="w-full md:max-w-2xl lg:w-48">
