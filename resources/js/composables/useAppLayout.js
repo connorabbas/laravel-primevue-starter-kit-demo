@@ -4,10 +4,8 @@ import { usePage, useForm } from '@inertiajs/vue3';
 export function useAppLayout() {
     const page = usePage();
     const currentRoute = computed(() => {
-        // Access page.url to trigger re-computation on navigation.
-        /* eslint-disable @typescript-eslint/no-unused-vars */
+        // Access page.url to trigger re-computation on navigation (if using persistent layout)
         const url = page.url;
-        /* eslint-enable @typescript-eslint/no-unused-vars */
         return route().current();
     });
 
