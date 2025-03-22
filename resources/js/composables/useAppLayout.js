@@ -1,11 +1,14 @@
 import { ref, computed, onMounted, onUnmounted, watchEffect } from 'vue';
 import { usePage, useForm } from '@inertiajs/vue3';
+import { route } from 'ziggy-js';
 
 export function useAppLayout() {
     const page = usePage();
     const currentRoute = computed(() => {
-        // Access page.url to trigger re-computation on navigation (if using persistent layout)
+        // Access page.url to trigger re-computation on navigation.
+        /* eslint-disable @typescript-eslint/no-unused-vars */
         const url = page.url;
+        /* eslint-enable @typescript-eslint/no-unused-vars */
         return route().current();
     });
 
