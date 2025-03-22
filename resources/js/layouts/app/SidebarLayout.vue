@@ -1,6 +1,7 @@
 <script setup>
-import { ref, computed, useTemplateRef, onMounted, onUnmounted, watchEffect } from 'vue';
-import { usePage, useForm } from '@inertiajs/vue3';
+import { useTemplateRef } from 'vue';
+import { usePage } from '@inertiajs/vue3';
+import { useAppLayout } from '@/composables/useAppLayout';
 import ApplicationLogo from '@/components/ApplicationLogo.vue';
 import LinksMenu from '@/components/primevue/LinksMenu.vue';
 import LinksPanelMenu from '@/components/primevue/LinksPanelMenu.vue';
@@ -14,102 +15,22 @@ const props = defineProps({
     },
 });
 
-/* eslint-disable @typescript-eslint/no-unused-vars */
-const tailwindArbitraryValues = [
-    'w-[18rem]', // sidebar width
-    'lg:pl-[18rem]',
-    'top-[57px]', // 57px header height for aura & nora theme
-    'lg:pt-[57px]',
-    'top-[61px]', // 61px header height for lara theme
-    'lg:pt-[61px]',
-    'top-[64px]', // 64px header height for material theme
-    'lg:pt-[64px]',
-];
-/* eslint-enable @typescript-eslint/no-unused-vars */
-
 const page = usePage();
-const currentRoute = computed(() => {
-    // Access page.url to trigger re-computation on navigation.
-    /* eslint-disable @typescript-eslint/no-unused-vars */
-    const url = page.url;
-    /* eslint-enable @typescript-eslint/no-unused-vars */
-    return route().current();
-});
+const {
+    mobileMenuOpen,
+    menuItems,
+    userMenuItems,
+} = useAppLayout();
 
-const menuItems = computed(() => [
-    {
-        label: 'Home',
-        icon: 'pi pi-home',
-        route: route('welcome'),
-        active: currentRoute.value == 'welcome',
-    },
-    {
-        label: 'Dashboard',
-        icon: 'pi pi-th-large',
-        route: route('dashboard'),
-        active: currentRoute.value == 'dashboard',
-    },
-    {
-        label: 'Info',
-        icon: 'pi pi-info-circle',
-        items: [
-            {
-                label: 'PrimeVue Docs',
-                url: 'https://primevue.org/',
-                icon: 'pi pi-prime'
-            },
-            {
-                label: 'Starter Kit Repo',
-                url: 'https://github.com/connorabbas/laravel-primevue-starter-kit',
-                icon: 'pi pi-github'
-            }
-        ],
-    },
-]);
-
-// User menu
-const logoutForm = useForm({});
-const logout = () => {
-    logoutForm.post(route('logout'));
-};
-const userMenuItems = [
-    {
-        label: 'Settings',
-        route: route('profile.edit'),
-        icon: 'pi pi-fw pi-cog',
-    },
-    {
-        label: 'Log Out',
-        icon: 'pi pi-fw pi-sign-out',
-        command: () => logout(),
-    },
-];
 const userMenu = useTemplateRef('user-menu');
 const toggleUserMenu = (event) => {
     userMenu.value.childRef.toggle(event);
 };
+
 const mobileUserMenu = useTemplateRef('mobile-user-menu');
 const toggleMobileUserMenu = (event) => {
     mobileUserMenu.value.childRef.toggle(event);
 };
-
-// Mobile drawer menu
-const mobileMenuOpen = ref(false);
-const windowWidth = ref(window.innerWidth);
-const updateWidth = () => {
-    windowWidth.value = window.innerWidth;
-};
-onMounted(() => {
-    window.addEventListener('resize', updateWidth);
-});
-onUnmounted(() => {
-    window.removeEventListener('resize', updateWidth);
-});
-watchEffect(() => {
-    if (windowWidth.value > 1024) {
-        mobileMenuOpen.value = false;
-    }
-});
 </script>
 
 <template>
