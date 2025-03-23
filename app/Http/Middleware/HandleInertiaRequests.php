@@ -4,6 +4,7 @@ namespace App\Http\Middleware;
 
 use Illuminate\Http\Request;
 use Inertia\Middleware;
+use Spatie\Permission\Models\Permission;
 
 class HandleInertiaRequests extends Middleware
 {
@@ -39,6 +40,12 @@ class HandleInertiaRequests extends Middleware
             ...parent::share($request),
             'auth' => [
                 'user' => $request->user(),
+                'isAdmin' => $request->user()?->hasRole('Admin'),
+                'roles' => $request->user()?->roles->pluck('name'),
+                'can' => $request->user()?->getPermissionsViaRoles()
+                    ->mapWithKeys(function (Permission $permission) {
+                        return [$permission['name'] => auth()->user()->can($permission['name'])];
+                    })
             ],
         ];
     }

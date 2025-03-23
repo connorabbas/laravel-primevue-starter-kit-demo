@@ -24,6 +24,9 @@ const {
     userMenuItems,
 } = useAppLayout();
 
+console.log(page.props.auth);
+// https://primevue.org/panelmenu/#controlled
+
 const userMenu = useTemplateRef('user-menu');
 const toggleUserMenu = (event) => {
     userMenu.value.childRef.toggle(event);
@@ -81,12 +84,16 @@ const toggleMobileUserMenu = (event) => {
                         pt:button:class="hidden"
                     >
                         <template #start>
-                            <div class="shrink-0 flex items-center mr-5">
+                            <div class="shrink-0 flex gap-4 items-center mr-5">
                                 <InertiaLink :href="route('welcome')">
                                     <ApplicationLogo
                                         class="block h-8 lg:h-10 w-auto fill-current text-surface-900 dark:text-surface-0"
                                     />
                                 </InertiaLink>
+                                <Tag
+                                    v-if="page.props.auth.isAdmin"
+                                    value="ADMIN"
+                                ></Tag>
                             </div>
                         </template>
                         <template #end>

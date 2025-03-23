@@ -13,36 +13,55 @@ export function useAppLayout() {
     });
 
     // Menu items
-    const menuItems = computed(() => [
-        {
-            label: 'Home',
-            icon: 'pi pi-home',
-            route: route('welcome'),
-            active: currentRoute.value == 'welcome',
-        },
-        {
-            label: 'Dashboard',
-            icon: 'pi pi-th-large',
-            route: route('dashboard'),
-            active: currentRoute.value == 'dashboard',
-        },
-        {
-            label: 'Info',
-            icon: 'pi pi-info-circle',
-            items: [
-                {
-                    label: 'PrimeVue Docs',
-                    url: 'https://primevue.org/',
-                    icon: 'pi pi-prime',
-                },
-                {
-                    label: 'Starter Kit Repo',
-                    url: 'https://github.com/connorabbas/laravel-primevue-starter-kit',
-                    icon: 'pi pi-github',
-                },
-            ],
-        },
-    ]);
+    const menuItems = computed(() => {
+        let items = [
+            {
+                label: 'Home',
+                icon: 'pi pi-home',
+                route: route('welcome'),
+                active: currentRoute.value == 'welcome',
+            },
+            {
+                label: 'Dashboard',
+                icon: 'pi pi-th-large',
+                route: route('dashboard'),
+                active: currentRoute.value == 'dashboard',
+            },
+            {
+                label: 'Info',
+                icon: 'pi pi-info-circle',
+                items: [
+                    {
+                        label: 'PrimeVue Docs',
+                        url: 'https://primevue.org/',
+                        icon: 'pi pi-prime',
+                    },
+                    {
+                        label: 'Starter Kit Repo',
+                        url: 'https://github.com/connorabbas/laravel-primevue-starter-kit',
+                        icon: 'pi pi-github',
+                    },
+                ],
+            },
+        ];
+
+        if (page.props.auth.isAdmin) {
+            items.push({
+                label: 'Admin',
+                icon: 'pi pi-lock',
+                items: [
+                    {
+                        label: 'Dashboard',
+                        icon: 'pi pi-th-large',
+                        route: route('admin.dashboard'),
+                        active: currentRoute.value == 'admin.dashboard',
+                    },
+                ],
+            });
+        }
+
+        return items;
+    });
 
     // User menu and logout functionality.
     const logoutForm = useForm({});
