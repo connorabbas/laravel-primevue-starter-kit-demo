@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { useTemplateRef } from 'vue';
 import Menubar from 'primevue/menubar';
-import { ChevronDown } from 'lucide-vue-next';
+import { ChevronDown, ChevronRight } from 'lucide-vue-next';
 
 type MenubarType = InstanceType<typeof Menubar>;
 const childRef = useTemplateRef<MenubarType>('child-ref');
@@ -61,10 +61,16 @@ defineExpose({
                     class="p-menubar-item-icon size-4"
                 />
                 <span class="p-menubar-item-label">{{ item.label }}</span>
-                <ChevronDown
-                    v-if="hasSubmenu"
-                    class="size-4"
-                />
+                <template v-if="hasSubmenu">
+                    <ChevronDown
+                        v-if="root"
+                        class="size-4 p-menubar-submenu-icon"
+                    />
+                    <ChevronRight
+                        v-else
+                        class="size-4 p-menubar-submenu-icon"
+                    />
+                </template>
             </a>
         </template>
         <template
