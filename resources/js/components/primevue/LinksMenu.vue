@@ -1,6 +1,11 @@
 <script setup lang="ts">
 import { useTemplateRef } from 'vue';
 import Menu from 'primevue/menu';
+import type { ExtendedMenuItem } from '@/types';
+
+const props = defineProps<{
+    model: ExtendedMenuItem[]
+}>();
 
 // Alternatively, you can use the default <Menu /> component using a command callback, and a manual router visit:
 // https://primevue.org/menu/#command
@@ -14,7 +19,10 @@ defineExpose({
 </script>
 
 <template>
-    <Menu ref="child-ref">
+    <Menu
+        ref="child-ref"
+        :model="props.model"
+    >
         <template #item="{ item, props }">
             <InertiaLink
                 v-if="item.route"

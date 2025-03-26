@@ -2,6 +2,11 @@
 import { useTemplateRef } from 'vue';
 import Menubar from 'primevue/menubar';
 import { ChevronDown, ChevronRight } from 'lucide-vue-next';
+import type { ExtendedMenuItem } from '@/types';
+
+const props = defineProps<{
+    model: ExtendedMenuItem[]
+}>();
 
 type MenubarType = InstanceType<typeof Menubar>;
 const childRef = useTemplateRef<MenubarType>('child-ref');
@@ -13,6 +18,7 @@ defineExpose({
 <template>
     <Menubar
         ref="child-ref"
+        :model="props.model"
         breakpoint="1024px"
     >
         <template

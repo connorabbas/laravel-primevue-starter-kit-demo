@@ -1,6 +1,11 @@
 <script setup lang="ts">
 import { useTemplateRef } from 'vue';
 import Breadcrumb from 'primevue/breadcrumb';
+import type { ExtendedMenuItem } from '@/types';
+
+const props = defineProps<{
+    model: ExtendedMenuItem[]
+}>();
 
 type BreadcrumbType = InstanceType<typeof Breadcrumb>;
 const childRef = useTemplateRef<BreadcrumbType>('child-ref');
@@ -12,6 +17,7 @@ defineExpose({
 <template>
     <Breadcrumb
         ref="child-ref"
+        :model="props.model"
         pt:root:class="p-0 bg-transparent"
     >
         <template #item="{ item, props }">

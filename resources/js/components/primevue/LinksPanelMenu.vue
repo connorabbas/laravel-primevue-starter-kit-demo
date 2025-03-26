@@ -2,6 +2,11 @@
 import { useTemplateRef } from 'vue';
 import PanelMenu from 'primevue/panelmenu';
 import { ChevronDown, ChevronRight } from 'lucide-vue-next';
+import type { ExtendedMenuItem } from '@/types';
+
+const props = defineProps<{
+    model: ExtendedMenuItem[]
+}>();
 
 type PanelMenuType = InstanceType<typeof PanelMenu>;
 const childRef = useTemplateRef<PanelMenuType>('child-ref');
@@ -13,6 +18,7 @@ defineExpose({
 <template>
     <PanelMenu
         ref="child-ref"
+        :model="props.model"
         pt:root:class="p-0 m-0 gap-1"
         pt:panel:class="p-0 border-0"
         pt:header:class="p-0 border-0"
