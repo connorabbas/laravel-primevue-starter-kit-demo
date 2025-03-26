@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { useTemplateRef } from 'vue';
 import Menubar from 'primevue/menubar';
+import { ChevronDown } from 'lucide-vue-next';
 
 type MenubarType = InstanceType<typeof Menubar>;
 const childRef = useTemplateRef<MenubarType>('child-ref');
@@ -30,10 +31,15 @@ defineExpose({
                 }"
                 custom
             >
-                <span
+                <i
                     v-if="item.icon"
                     :class="item.icon"
                     class="p-menubar-item-icon"
+                />
+                <component
+                    v-else-if="item.lucideIcon"
+                    :is="item.lucideIcon"
+                    class="p-menubar-item-icon size-4"
                 />
                 <span class="p-menubar-item-label">{{ item.label }}</span>
             </InertiaLink>
@@ -44,19 +50,21 @@ defineExpose({
                 v-bind="props.action"
                 class="p-menubar-item-link"
             >
-                <span
+                <i
                     v-if="item.icon"
                     :class="item.icon"
                     class="p-menubar-item-icon"
                 />
+                <component
+                    v-else-if="item.lucideIcon"
+                    :is="item.lucideIcon"
+                    class="p-menubar-item-icon size-4"
+                />
                 <span class="p-menubar-item-label">{{ item.label }}</span>
-                <i
+                <ChevronDown
                     v-if="hasSubmenu"
-                    :class="[
-                        'pi',
-                        root ? 'pi-angle-down' : 'pi-angle-right',
-                    ]"
-                ></i>
+                    class="size-4"
+                />
             </a>
         </template>
         <template

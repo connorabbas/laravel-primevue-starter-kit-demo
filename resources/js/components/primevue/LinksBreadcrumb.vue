@@ -21,10 +21,15 @@ defineExpose({
                 class="p-breadcrumb-item-link"
                 custom
             >
-                <span
+                <i
                     v-if="item.icon"
                     :class="item.icon"
                     class="p-breadcrumb-item-icon"
+                />
+                <component
+                    v-else-if="item.lucideIcon"
+                    :is="item.lucideIcon"
+                    class="p-breadcrumb-item-icon size-4"
                 />
                 <span class="p-breadcrumb-item-label">{{ item.label }}</span>
             </InertiaLink>
@@ -34,10 +39,15 @@ defineExpose({
                 :target="item.target"
                 v-bind="props.action"
             >
-                <span
+                <i
                     v-if="item.icon"
                     :class="item.icon"
                     class="p-breadcrumb-item-icon"
+                />
+                <component
+                    v-else-if="item.lucideIcon"
+                    :is="item.lucideIcon"
+                    class="p-breadcrumb-item-icon size-4"
                 />
                 <span class="p-breadcrumb-item-label">{{ item.label }}</span>
             </a>

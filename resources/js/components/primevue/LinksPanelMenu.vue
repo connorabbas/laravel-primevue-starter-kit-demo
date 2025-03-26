@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { useTemplateRef } from 'vue';
 import PanelMenu from 'primevue/panelmenu';
+import { ChevronDown, ChevronRight } from 'lucide-vue-next';
 
 type PanelMenuType = InstanceType<typeof PanelMenu>;
 const childRef = useTemplateRef<PanelMenuType>('child-ref');
@@ -30,9 +31,14 @@ defineExpose({
                 <i
                     v-if="item.icon"
                     :class="[
-                        'mr-2 p-panelmenu-item-icon',
+                        'p-panelmenu-item-icon',
                         item.icon,
                     ]"
+                />
+                <component
+                    v-else-if="item.lucideIcon"
+                    :is="item.lucideIcon"
+                    class="p-panelmenu-item-icon size-4"
                 />
                 <span>{{ item.label }}</span>
             </InertiaLink>
@@ -48,18 +54,26 @@ defineExpose({
                 <i
                     v-if="item.icon"
                     :class="[
-                        'mr-2 p-panelmenu-item-icon',
+                        'p-panelmenu-item-icon',
                         item.icon,
                     ]"
                 />
-                <span>{{ item.label }}</span>
-                <span
-                    v-if="item.items"
-                    :class="[
-                        'pi p-panelmenu-submenu-icon ml-auto',
-                        active ? 'pi-angle-down' : 'pi-angle-right',
-                    ]"
+                <component
+                    v-else-if="item.lucideIcon"
+                    :is="item.lucideIcon"
+                    class="p-panelmenu-item-icon size-4"
                 />
+                <span>{{ item.label }}</span>
+                <template v-if="item.items">
+                    <ChevronDown
+                        v-if="active"
+                        class="size-4 p-panelmenu-submenu-icon ml-auto"
+                    />
+                    <ChevronRight
+                        v-else
+                        class="size-4 p-panelmenu-submenu-icon ml-auto"
+                    />
+                </template>
             </a>
         </template>
     </PanelMenu>
