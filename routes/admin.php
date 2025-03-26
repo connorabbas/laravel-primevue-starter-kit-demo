@@ -1,7 +1,8 @@
 <?php
 
-use Inertia\Inertia;
+use App\Http\Controllers\Admin\UserController;
 use Illuminate\Support\Facades\Route;
+use Inertia\Inertia;
 
 Route::middleware(['auth', 'role:Admin'])
     ->prefix('admin')
@@ -10,4 +11,5 @@ Route::middleware(['auth', 'role:Admin'])
         Route::get('/dashboard', function () {
             return Inertia::render('admin/Dashboard');
         })->name('dashboard');
+        Route::get('/users', [UserController::class, 'index'])->name('users.index');
     });

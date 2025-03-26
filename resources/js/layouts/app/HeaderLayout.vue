@@ -24,9 +24,6 @@ const {
     userMenuItems,
 } = useAppLayout();
 
-console.log(page.props.auth);
-// https://primevue.org/panelmenu/#controlled
-
 const userMenu = useTemplateRef('user-menu');
 const toggleUserMenu = (event) => {
     userMenu.value.childRef.toggle(event);

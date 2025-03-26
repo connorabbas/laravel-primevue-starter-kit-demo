@@ -41,11 +41,6 @@ class HandleInertiaRequests extends Middleware
             'auth' => [
                 'user' => $request->user(),
                 'isAdmin' => $request->user()?->hasRole('Admin'),
-                'roles' => $request->user()?->roles->pluck('name'),
-                'can' => $request->user()?->getPermissionsViaRoles()
-                    ->mapWithKeys(function (Permission $permission) {
-                        return [$permission['name'] => auth()->user()->can($permission['name'])];
-                    })
             ],
         ];
     }

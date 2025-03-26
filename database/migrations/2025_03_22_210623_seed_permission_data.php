@@ -6,11 +6,11 @@ use Spatie\Permission\Models\Role;
 
 return new class () extends Migration {
     protected array $defaultAdminPermissions = [
-        'View User List',
-        'View Single User',
-        'Create User',
-        'Update User',
-        'Delete User',
+        'view users list',
+        'view single user',
+        'create user',
+        'update user',
+        'delete user',
     ];
 
     /**

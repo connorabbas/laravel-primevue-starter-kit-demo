@@ -56,6 +56,12 @@ export function useAppLayout() {
                         route: route('admin.dashboard'),
                         active: currentRoute.value == 'admin.dashboard',
                     },
+                    {
+                        label: 'Users',
+                        icon: 'pi pi-users',
+                        route: route('admin.users.index'),
+                        active: currentRoute.value == 'admin.users.index',
+                    },
                 ],
             });
         }
