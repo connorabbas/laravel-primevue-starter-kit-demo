@@ -4,10 +4,10 @@ import { usePage } from '@inertiajs/vue3';
 import { useAppLayout } from '@/composables/useAppLayout';
 import { ChevronsUpDown, ChevronDown, Menu as MenuIcon } from 'lucide-vue-next';
 import ApplicationLogo from '@/components/ApplicationLogo.vue';
-import Menu from '@/components/primevue/Menu.vue';
-import MenuBar from '@/components/primevue/MenuBar.vue';
-import PanelMenu from '@/components/primevue/PanelMenu.vue';
-import Breadcrumb from '@/components/primevue/Breadcrumb.vue';
+import Menu from '@/components/primevue/menu/Menu.vue';
+import MenuBar from '@/components/primevue/menu/MenuBar.vue';
+import PanelMenu from '@/components/primevue/menu/PanelMenu.vue';
+import Breadcrumb from '@/components/primevue/menu/Breadcrumb.vue';
 
 const props = defineProps({
     breadcrumbs: {
