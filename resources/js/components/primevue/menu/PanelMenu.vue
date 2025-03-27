@@ -24,7 +24,7 @@ defineExpose({
         pt:header:class="p-0 border-0"
         pt:itemContent:class="gap-1"
     >
-        <template #item="{ item, active }">
+        <template #item="{ item, root, active, hasSubmenu }">
             <InertiaLink
                 v-if="item.route"
                 :href="item.route"
@@ -37,14 +37,16 @@ defineExpose({
                 <i
                     v-if="item.icon"
                     :class="[
-                        'p-panelmenu-item-icon',
+                        root ? 'p-panelmenu-header-icon' : 'p-panelmenu-item-icon',
                         item.icon,
                     ]"
                 />
                 <component
                     v-else-if="item.lucideIcon"
                     :is="item.lucideIcon"
-                    class="p-panelmenu-item-icon size-4"
+                    :class="[
+                        root ? 'p-panelmenu-header-icon' : 'p-panelmenu-item-icon',
+                    ]"
                 />
                 <span>{{ item.label }}</span>
             </InertiaLink>
@@ -54,30 +56,32 @@ defineExpose({
                 :target="item.target"
                 :class="[
                     'flex items-center cursor-pointer no-underline px-4 py-2',
-                    item.items ? 'p-panelmenu-header-link' : 'p-panelmenu-item-link',
+                    hasSubmenu ? 'p-panelmenu-header-link' : 'p-panelmenu-item-link',
                 ]"
             >
                 <i
                     v-if="item.icon"
                     :class="[
-                        'p-panelmenu-item-icon',
+                        root ? 'p-panelmenu-header-icon' : 'p-panelmenu-item-icon',
                         item.icon,
                     ]"
                 />
                 <component
                     v-else-if="item.lucideIcon"
                     :is="item.lucideIcon"
-                    class="p-panelmenu-item-icon size-4"
+                    :class="[
+                        root ? 'p-panelmenu-header-icon' : 'p-panelmenu-item-icon',
+                    ]"
                 />
                 <span>{{ item.label }}</span>
-                <template v-if="item.items">
+                <template v-if="hasSubmenu">
                     <ChevronDown
                         v-if="active"
-                        class="size-4 p-panelmenu-submenu-icon ml-auto"
+                        class="p-panelmenu-submenu-icon ml-auto"
                     />
                     <ChevronRight
                         v-else
-                        class="size-4 p-panelmenu-submenu-icon ml-auto"
+                        class="p-panelmenu-submenu-icon ml-auto"
                     />
                 </template>
             </a>
