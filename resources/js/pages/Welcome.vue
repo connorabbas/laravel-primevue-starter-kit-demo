@@ -1,6 +1,7 @@
 <script setup>
 import { computed } from 'vue';
 import { usePage } from '@inertiajs/vue3';
+import { LayoutGrid, LogIn, Settings, UserPlus } from 'lucide-vue-next';
 
 const props = defineProps({
     isAdmin: {
@@ -56,9 +57,12 @@ const page = usePage();
                             <InertiaLink :href="dashboardRoute">
                                 <Button
                                     label="Dashboard"
-                                    icon="pi pi-th-large"
                                     class="mr-4"
-                                />
+                                >
+                                    <template #icon>
+                                        <LayoutGrid class="size-4" />
+                                    </template>
+                                </Button>
                             </InertiaLink>
                             <InertiaLink
                                 v-if="!isAdmin"
@@ -67,26 +71,35 @@ const page = usePage();
                                 <Button
                                     outlined
                                     label="Profile Settings"
-                                    icon="pi pi-cog"
                                     class="mr-4"
-                                />
+                                >
+                                    <template #icon>
+                                        <Settings class="size-4" />
+                                    </template>
+                                </Button>
                             </InertiaLink>
                         </template>
                         <template v-else>
                             <InertiaLink :href="route('login')">
                                 <Button
                                     label="Login"
-                                    icon="pi pi-sign-in"
                                     class="mr-4"
-                                />
+                                >
+                                    <template #icon>
+                                        <LogIn class="size-4" />
+                                    </template>
+                                </Button>
                             </InertiaLink>
                             <InertiaLink :href="route('register')">
                                 <Button
                                     outlined
                                     label="Register"
-                                    icon="pi pi-user-plus"
                                     class="mr-4"
-                                />
+                                >
+                                    <template #icon>
+                                        <UserPlus class="size-4" />
+                                    </template>
+                                </Button>
                             </InertiaLink>
                         </template>
                         <div class="mt-6">
