@@ -24,7 +24,7 @@ defineExpose({
         pt:header:class="p-0 border-0"
         pt:itemContent:class="gap-1"
     >
-        <template #item="{ item, root, active }">
+        <template #item="{ item, root, active, hasSubmenu }">
             <InertiaLink
                 v-if="item.route"
                 :href="item.route"
@@ -57,7 +57,7 @@ defineExpose({
                 :target="item.target"
                 :class="[
                     'flex items-center cursor-pointer no-underline px-4 py-2',
-                    item.items ? 'p-panelmenu-header-link' : 'p-panelmenu-item-link',
+                    hasSubmenu ? 'p-panelmenu-header-link' : 'p-panelmenu-item-link',
                 ]"
             >
                 <i
@@ -76,7 +76,7 @@ defineExpose({
                     ]"
                 />
                 <span>{{ item.label }}</span>
-                <template v-if="item.items">
+                <template v-if="hasSubmenu">
                     <ChevronDown
                         v-if="active"
                         class="size-4 p-panelmenu-submenu-icon ml-auto"

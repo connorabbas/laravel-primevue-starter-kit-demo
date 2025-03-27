@@ -1,12 +1,13 @@
 <script setup>
 import { useTemplateRef } from 'vue';
 import { usePage } from '@inertiajs/vue3';
+import { ChevronsUpDown, Menu as MenuIcon } from 'lucide-vue-next';
 import { useAppLayout } from '@/composables/useAppLayout';
 import ApplicationLogo from '@/components/ApplicationLogo.vue';
 import Menu from '@/components/primevue/Menu.vue';
 import PanelMenu from '@/components/primevue/PanelMenu.vue';
 import Breadcrumb from '@/components/primevue/Breadcrumb.vue';
-import { ChevronsUpDown, Menu as MenuIcon } from 'lucide-vue-next';
+import TieredMenu from '@/components/primevue/TieredMenu.vue';
 
 const props = defineProps({
     breadcrumbs: {
@@ -160,6 +161,7 @@ const toggleMobileUserMenu = (event) => {
                         id="page-content"
                         class="grow"
                     >
+                        <TieredMenu :model="menuItems" class="w-20" />
                         <slot />
                     </main>
                 </Container>

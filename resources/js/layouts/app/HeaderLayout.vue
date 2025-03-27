@@ -2,12 +2,12 @@
 import { useTemplateRef } from 'vue';
 import { usePage } from '@inertiajs/vue3';
 import { useAppLayout } from '@/composables/useAppLayout';
+import { ChevronsUpDown, ChevronDown, Menu as MenuIcon } from 'lucide-vue-next';
 import ApplicationLogo from '@/components/ApplicationLogo.vue';
 import Menu from '@/components/primevue/Menu.vue';
 import MenuBar from '@/components/primevue/MenuBar.vue';
 import PanelMenu from '@/components/primevue/PanelMenu.vue';
 import Breadcrumb from '@/components/primevue/Breadcrumb.vue';
-import { ChevronsUpDown, ChevronDown, Menu as MenuIcon } from 'lucide-vue-next';
 
 const props = defineProps({
     breadcrumbs: {
