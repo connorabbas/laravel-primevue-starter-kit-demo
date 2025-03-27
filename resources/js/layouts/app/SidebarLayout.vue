@@ -58,7 +58,7 @@ const toggleMobileUserMenu = (event) => {
                             @click="toggleMobileUserMenu($event)"
                         >
                             <template #icon>
-                                <ChevronsUpDown class="size-4" />
+                                <ChevronsUpDown />
                             </template>
                         </Button>
                         <Menu
@@ -91,7 +91,7 @@ const toggleMobileUserMenu = (event) => {
                                 @click="mobileMenuOpen = true"
                             >
                                 <template #icon>
-                                    <MenuIcon class="size-6" />
+                                    <MenuIcon class="size-6!" />
                                 </template>
                             </Button>
                         </div>
@@ -131,7 +131,7 @@ const toggleMobileUserMenu = (event) => {
                             @click="toggleUserMenu($event)"
                         >
                             <template #icon>
-                                <ChevronsUpDown class="size-4" />
+                                <ChevronsUpDown />
                             </template>
                         </Button>
                         <Menu

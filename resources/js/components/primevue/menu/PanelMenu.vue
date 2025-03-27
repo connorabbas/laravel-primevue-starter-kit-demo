@@ -46,7 +46,6 @@ defineExpose({
                     :is="item.lucideIcon"
                     :class="[
                         root ? 'p-panelmenu-header-icon' : 'p-panelmenu-item-icon',
-                        'size-4',
                     ]"
                 />
                 <span>{{ item.label }}</span>
@@ -72,18 +71,17 @@ defineExpose({
                     :is="item.lucideIcon"
                     :class="[
                         root ? 'p-panelmenu-header-icon' : 'p-panelmenu-item-icon',
-                        'size-4',
                     ]"
                 />
                 <span>{{ item.label }}</span>
                 <template v-if="hasSubmenu">
                     <ChevronDown
                         v-if="active"
-                        class="size-4 p-panelmenu-submenu-icon ml-auto"
+                        class="p-panelmenu-submenu-icon ml-auto"
                     />
                     <ChevronRight
                         v-else
-                        class="size-4 p-panelmenu-submenu-icon ml-auto"
+                        class="p-panelmenu-submenu-icon ml-auto"
                     />
                 </template>
             </a>
