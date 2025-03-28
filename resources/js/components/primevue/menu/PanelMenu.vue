@@ -42,8 +42,8 @@ defineExpose({
                     ]"
                 />
                 <component
-                    v-else-if="item.lucideIcon"
                     :is="item.lucideIcon"
+                    v-else-if="item.lucideIcon"
                     :class="[
                         root ? 'p-panelmenu-header-icon' : 'p-panelmenu-item-icon',
                     ]"
@@ -67,8 +67,8 @@ defineExpose({
                     ]"
                 />
                 <component
-                    v-else-if="item.lucideIcon"
                     :is="item.lucideIcon"
+                    v-else-if="item.lucideIcon"
                     :class="[
                         root ? 'p-panelmenu-header-icon' : 'p-panelmenu-item-icon',
                     ]"
