@@ -1,6 +1,6 @@
 <script setup>
 import { ref, useTemplateRef, onMounted } from 'vue';
-import LinksBreadcrumb from '@/components/primevue/LinksBreadcrumb.vue';
+import LinksBreadcrumb from '@/components/primevue/menu/Breadcrumb.vue';
 import MobileSidebarNavDrawer from '@/components/layout/admin/MobileSidebarNavDrawer.vue';
 import TopNav from '@/components/layout/admin/TopNav.vue';
 import Footer from '@/components/layout/admin/Footer.vue';

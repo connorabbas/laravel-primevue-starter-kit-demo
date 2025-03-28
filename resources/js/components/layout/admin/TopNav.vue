@@ -3,8 +3,8 @@ import { useTemplateRef } from 'vue';
 import { useForm } from '@inertiajs/vue3';
 import ApplicationLogo from '@/components/ApplicationLogo.vue';
 import SelectColorModeButton from '@/components/SelectColorModeButton.vue';
-import LinksMenu from '@/components/primevue/LinksMenu.vue';
-import LinksMenuBar from '@/components/primevue/LinksMenuBar.vue';
+import LinksMenu from '@/components/primevue/menu/Menu.vue';
+import LinksMenuBar from '@/components/primevue/menu/MenuBar.vue';
 
 const emit = defineEmits(['open-nav']);
 

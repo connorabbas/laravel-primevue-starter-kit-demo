@@ -1,7 +1,7 @@
 <script setup>
 import { computed } from 'vue';
 import { usePage } from '@inertiajs/vue3';
-import LinksPanelMenu from '@/components/primevue/LinksPanelMenu.vue';
+import LinksPanelMenu from '@/components/primevue/menu/PanelMenu.vue';
 
 const page = usePage();
 const currentRoute = computed(() => {

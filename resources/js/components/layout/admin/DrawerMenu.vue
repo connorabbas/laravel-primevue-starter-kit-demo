@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref } from 'vue';
-import LinksPanelMenu from '@/components/primevue/LinksPanelMenu.vue';
+import LinksPanelMenu from '@/components/primevue/menu/PanelMenu.vue';
 
 const visible = defineModel<boolean>({
     default: false,
