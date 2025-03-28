@@ -33,8 +33,8 @@ defineExpose({
                     class="p-tieredmenu-item-icon"
                 />
                 <component
-                    v-else-if="item.lucideIcon"
                     :is="item.lucideIcon"
+                    v-else-if="item.lucideIcon"
                     class="p-tieredmenu-item-icon"
                 />
                 <span class="p-tieredmenu-item-label">{{ item.label }}</span>
@@ -51,8 +51,8 @@ defineExpose({
                     class="p-tieredmenu-item-icon"
                 />
                 <component
-                    v-else-if="item.lucideIcon"
                     :is="item.lucideIcon"
+                    v-else-if="item.lucideIcon"
                     class="p-tieredmenu-item-icon"
                 />
                 <span class="p-tieredmenu-item-label">{{ item.label }}</span>

@@ -43,8 +43,8 @@ defineExpose({
                     class="p-menubar-item-icon"
                 />
                 <component
-                    v-else-if="item.lucideIcon"
                     :is="item.lucideIcon"
+                    v-else-if="item.lucideIcon"
                     class="p-menubar-item-icon"
                 />
                 <span class="p-menubar-item-label">{{ item.label }}</span>
@@ -62,8 +62,8 @@ defineExpose({
                     class="p-menubar-item-icon"
                 />
                 <component
-                    v-else-if="item.lucideIcon"
                     :is="item.lucideIcon"
+                    v-else-if="item.lucideIcon"
                     class="p-menubar-item-icon"
                 />
                 <span class="p-menubar-item-label">{{ item.label }}</span>
