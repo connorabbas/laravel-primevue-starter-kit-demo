@@ -80,7 +80,7 @@ This starter kit is configured to use Docker Compose for local development with 
 
     ```env
     # Use any desired domain ending with .localhost
-    # Match with domain value used in docker-compose.local.yml laravel service labels section
+    # Match domain value in docker-compose.local.yml laravel service labels section
     APP_URL=http://laravel-primevue.localhost
 
     DB_CONNECTION=pgsql
