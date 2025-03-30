@@ -13,7 +13,7 @@ const props = defineProps({
 
 const pageTitle = 'Users';
 const breadcrumbs = [
-    { label: 'Dashboard', route: route('admin.dashboard') },
+    { label: 'Admin Dashboard', route: route('admin.dashboard') },
     { label: pageTitle, route: route('admin.users.index') },
     { label: 'List' },
 ];
