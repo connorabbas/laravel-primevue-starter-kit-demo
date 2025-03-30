@@ -5,7 +5,6 @@ import { route } from 'ziggy-js';
 import Tabs from 'primevue/tabs';
 import TabList from 'primevue/tablist';
 import Tab from 'primevue/tab';
-import { ChevronDown, ChevronRight } from 'lucide-vue-next';
 import type { ExtendedMenuItem } from '@/types';
 
 const componentProps = defineProps<{
