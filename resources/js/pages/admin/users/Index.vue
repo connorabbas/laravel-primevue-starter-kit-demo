@@ -94,16 +94,16 @@ const {
                     paginator
                     removableSort
                     resizableColumns
-                    columnResizeMode="fit"
                     :loading="processing"
                     :value="users.data"
                     :totalRecords="users.total"
-                    filterDisplay="row"
                     :sortField="sorting.field"
                     :sortOrder="sorting.order"
                     :rows="users.per_page"
                     :rowsPerPageOptions="[10, 20, 50, 100]"
                     :first="firstDatasetIndex"
+                    columnResizeMode="fit"
+                    filterDisplay="row"
                     paginatorTemplate="FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink CurrentPageReport RowsPerPageDropdown"
                     currentPageReportTemplate="Showing {first} to {last} of {totalRecords} records"
                     @filter="filter"
