@@ -23,7 +23,7 @@ defineExpose({
     >
         <template
             v-for="(_, slotName) in $slots"
-            v-slot:[slotName]="slotProps"
+            #[slotName]="slotProps"
         >
             <slot
                 v-if="slotName != 'item'"
