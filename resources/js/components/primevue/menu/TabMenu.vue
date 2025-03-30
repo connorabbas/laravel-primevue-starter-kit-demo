@@ -7,7 +7,7 @@ import TabList from 'primevue/tablist';
 import Tab from 'primevue/tab';
 import type { ExtendedMenuItem } from '@/types';
 
-const componentProps = defineProps<{
+const props = defineProps<{
     items: ExtendedMenuItem[]
 }>();
 
@@ -35,7 +35,7 @@ defineExpose({
     >
         <TabList>
             <InertiaLink
-                v-for="item in items"
+                v-for="item in props.items"
                 :key="item.label"
                 :href="item.route ?? ''"
                 :class="['no-underline', { 'p-tab-active': item.active }]"
