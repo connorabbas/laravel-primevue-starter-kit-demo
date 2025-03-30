@@ -1,0 +1,43 @@
+// https://aka.ms/devcontainer.json
+{
+    "name": "PrimeVue Inertia",
+    "dockerComposeFile": [
+        "../docker-compose.local.yml"
+    ],
+    "service": "laravel",
+    "workspaceFolder": "/var/www/html",
+    "mounts": [
+        "type=bind,source=/home/${localEnv:USER}/.ssh,target=/home/sail/.ssh,readonly"
+    ],
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                "DEVSENSE.phptools-vscode",
+                "MehediDracula.php-namespace-resolver",
+                "laravel.vscode-laravel",
+                "Vue.volar",
+                "hollowtree.vue-snippets",
+                "bradlc.vscode-tailwindcss",
+                "eamodio.gitlens",
+                "esbenp.prettier-vscode",
+                "mikestead.dotenv",
+                "streetsidesoftware.code-spell-checker",
+                "shd101wyy.markdown-preview-enhanced",
+                "formulahendry.auto-rename-tag",
+                "pmneo.tsimporter"
+            ],
+            "settings": {
+                "html.format.wrapAttributes": "force-expand-multiline",
+                "[vue]": {
+                    "editor.defaultFormatter": "Vue.volar",
+                    "editor.tabSize": 4
+                }
+            }
+        }
+    },
+    "remoteUser": "sail",
+    "postCreateCommand": "chown -R 1000:1000 /var/www/html 2>/dev/null || true"
+    // "forwardPorts": [],
+    // "runServices": [],
+    // "shutdownAction": "none",
+}
