@@ -20,7 +20,7 @@ const currentRoute = computed(() => {
     return route().current();
 });
 
-type TabsType = InstanceType<typeof Menubar>;
+type TabsType = InstanceType<typeof Tabs>;
 const childRef = useTemplateRef<TabsType>('child-ref');
 defineExpose({
     childRef,
@@ -30,7 +30,7 @@ defineExpose({
 <template>
     <Tabs
         ref="child-ref"
-        :value="currentRoute"
+        :value="currentRoute ?? '/'"
         scrollable
     >
         <TabList>
