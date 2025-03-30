@@ -72,7 +72,7 @@ class RegisterUserCommand extends Command
         }
         $this->info("User created successfully!");
 
-        // Roles
+        // Assign Role/s
         $availableRoles = Role::all()->pluck('name')->toArray();
         if (empty($availableRoles)) {
             $this->warn('No roles available to assign.');

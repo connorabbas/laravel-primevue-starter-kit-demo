@@ -3,6 +3,8 @@ import { ref, useTemplateRef } from 'vue';
 import { useLazyDataTable } from '@/composables/useLazyDataTable';
 import { FilterMatchMode } from '@primevue/core/api';
 import AppLayout from '@/layouts/AppLayout.vue';
+import Menu from '@/components/primevue/menu/Menu.vue';
+import { AlertCircle, EllipsisVertical, FilterX, Pencil } from 'lucide-vue-next';
 
 const props = defineProps({
     auth: Object,
@@ -24,14 +26,16 @@ function toggleUserContextMenu(event, userData) {
     userContextMenuItems.value = [
         {
             label: 'Manage User',
-            icon: 'pi pi-pencil',
+            lucideIcon: Pencil,
             command: () => {
                 alert('User Data: ' + JSON.stringify(userData));
             },
         },
     ];
     // Show the menu
-    userContextMenu.value.toggle(event);
+    if (userContextMenu.value && userContextMenu.value?.childRef) {
+        userContextMenu.value.childRef.toggle(event);
+    }
 }
 
 // DataTable
@@ -64,11 +68,14 @@ const {
                     v-if="filteredOrSorted"
                     severity="secondary"
                     type="button"
-                    icon="pi pi-filter-slash"
                     label="Clear Filters"
                     outlined
                     @click="hardReset"
-                />
+                >
+                    <template #icon>
+                        <FilterX />
+                    </template>
+                </Button>
             </template>
         </PageTitleSection>
 
@@ -79,7 +86,11 @@ const {
                     class="shadow-sm"
                     :model="userContextMenuItems"
                     popup
-                />
+                >
+                    <template #start>
+                        Options
+                    </template>
+                </Menu>
                 <DataTable
                     ref="dataTable"
                     v-model:filters="filters"
@@ -107,9 +118,11 @@ const {
                         <div class="flex justify-center">
                             <Message
                                 severity="warn"
-                                icon="pi pi-exclamation-circle"
                                 class="grow text-center flex justify-center"
                             >
+                                <template #icon>
+                                    <AlertCircle />
+                                </template>
                                 No Users found.
                             </Message>
                         </div>
@@ -158,11 +171,14 @@ const {
                                 v-tooltip.top="'Show User Actions'"
                                 type="button"
                                 severity="secondary"
-                                icon="pi pi-ellipsis-v"
                                 rounded
                                 text
                                 @click="toggleUserContextMenu($event, data)"
-                            />
+                            >
+                                <template #icon>
+                                    <EllipsisVertical class="size-5!" />
+                                </template>
+                            </Button>
                         </template>
                     </Column>
                 </DataTable>
