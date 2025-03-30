@@ -86,11 +86,7 @@ const {
                     class="shadow-sm"
                     :model="userContextMenuItems"
                     popup
-                >
-                    <template #start>
-                        Options
-                    </template>
-                </Menu>
+                />
                 <DataTable
                     ref="dataTable"
                     v-model:filters="filters"
