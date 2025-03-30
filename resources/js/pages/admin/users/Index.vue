@@ -1,10 +1,10 @@
 <script setup>
 import { ref, useTemplateRef } from 'vue';
-import { useLazyDataTable } from '@/composables/useLazyDataTable';
 import { FilterMatchMode } from '@primevue/core/api';
+import { AlertCircle, EllipsisVertical, FilterX, Pencil } from 'lucide-vue-next';
+import { useLazyDataTable } from '@/composables/useLazyDataTable';
 import AppLayout from '@/layouts/AppLayout.vue';
 import Menu from '@/components/primevue/menu/Menu.vue';
-import { AlertCircle, EllipsisVertical, FilterX, Pencil } from 'lucide-vue-next';
 
 const props = defineProps({
     auth: Object,
