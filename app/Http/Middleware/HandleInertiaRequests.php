@@ -4,7 +4,6 @@ namespace App\Http\Middleware;
 
 use Illuminate\Http\Request;
 use Inertia\Middleware;
-use Spatie\Permission\Models\Permission;
 
 class HandleInertiaRequests extends Middleware
 {
