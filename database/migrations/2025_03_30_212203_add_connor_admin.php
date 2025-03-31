@@ -9,6 +9,9 @@ return new class () extends Migration {
      */
     public function up(): void
     {
-        User::where('email', 'abbasconnor@gmail.com')->first()->assignRole('Admin');
+        $user = User::where('email', 'abbasconnor@gmail.com')->first();
+        if ($user) {
+            $user->assignRole('Admin');
+        }
     }
 };
