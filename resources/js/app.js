@@ -8,7 +8,6 @@ import { ZiggyVue } from '../../vendor/tightenco/ziggy';
 
 import PrimeVue from 'primevue/config';
 import ToastService from 'primevue/toastservice';
-import Tooltip from 'primevue/tooltip';
 
 import Container from '@/components/Container.vue';
 import PageTitleSection from '@/components/PageTitleSection.vue';
@@ -48,7 +47,6 @@ createInertiaApp({
             .use(ToastService)
             .component('InertiaHead', Head)
             .component('InertiaLink', Link)
-            .directive('tooltip', Tooltip)
             .component('Container', Container)
             .component('PageTitleSection', PageTitleSection)
             .mount(el);

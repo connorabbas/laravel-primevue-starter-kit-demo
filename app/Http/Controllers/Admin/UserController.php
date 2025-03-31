@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\DataTransferObjects\UserFiltersDto;
-use Inertia\Inertia;
-use Inertia\Response;
-use Illuminate\Http\Request;
+use App\Data\UserFiltersDto;
 use App\Http\Controllers\Controller;
 use App\Services\UserService;
+use Illuminate\Http\Request;
+use Inertia\Inertia;
+use Inertia\Response;
 
 class UserController extends Controller
 {

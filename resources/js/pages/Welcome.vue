@@ -1,12 +1,8 @@
 <script setup>
-import { computed } from 'vue';
 import { usePage } from '@inertiajs/vue3';
 import { LayoutGrid, LogIn, Settings, UserPlus } from 'lucide-vue-next';
 
-const props = defineProps({
-    isAdmin: {
-        type: Boolean,
-    },
+defineProps({
     laravelVersion: {
         type: String,
         required: true,
@@ -17,9 +13,6 @@ const props = defineProps({
     },
 });
 
-const dashboardRoute = computed(() => {
-    return props.isAdmin ? route('admin.dashboard') : route('dashboard');
-});
 const page = usePage();
 </script>
 
@@ -54,7 +47,7 @@ const page = usePage();
                             >PrimeVue</a>.
                         </p>
                         <template v-if="page.props.auth.user">
-                            <InertiaLink :href="dashboardRoute">
+                            <InertiaLink :href="route('dashboard')">
                                 <Button
                                     label="Dashboard"
                                     class="mr-4"
@@ -64,10 +57,7 @@ const page = usePage();
                                     </template>
                                 </Button>
                             </InertiaLink>
-                            <InertiaLink
-                                v-if="!isAdmin"
-                                :href="route('profile.edit')"
-                            >
+                            <InertiaLink :href="route('profile.edit')">
                                 <Button
                                     outlined
                                     label="Profile Settings"

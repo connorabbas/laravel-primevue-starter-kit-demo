@@ -78,18 +78,22 @@ const toggleMobileUserMenu = (event) => {
             <nav class="dynamic-bg shadow-sm">
                 <Container>
                     <MenuBar
-                        :model="menuItems"
                         :key="currentRoute"
+                        :model="menuItems"
                         pt:root:class="px-0 py-4 border-0 rounded-none dynamic-bg"
                         pt:button:class="hidden"
                     >
                         <template #start>
-                            <div class="shrink-0 flex items-center mr-5">
+                            <div class="shrink-0 flex gap-4 items-center mr-5">
                                 <InertiaLink :href="route('welcome')">
                                     <ApplicationLogo
                                         class="block h-8 lg:h-10 w-auto fill-current text-surface-900 dark:text-surface-0"
                                     />
                                 </InertiaLink>
+                                <Tag
+                                    v-if="page.props.auth.isAdmin"
+                                    value="ADMIN"
+                                ></Tag>
                             </div>
                         </template>
                         <template #end>
@@ -142,21 +146,18 @@ const toggleMobileUserMenu = (event) => {
                 </Container>
             </nav>
 
-            <Container vertical>
-                <!-- Breadcrumbs -->
-                <Breadcrumb
-                    v-if="props.breadcrumbs.length"
-                    :model="props.breadcrumbs"
-                />
+            <main>
+                <Container vertical>
+                    <!-- Breadcrumbs -->
+                    <Breadcrumb
+                        v-if="props.breadcrumbs.length"
+                        :model="props.breadcrumbs"
+                    />
 
-                <!-- Page Content -->
-                <main
-                    id="page-content"
-                    class="grow"
-                >
+                    <!-- Page Content -->
                     <slot />
-                </main>
-            </Container>
+                </Container>
+            </main>
         </div>
     </div>
 </template>

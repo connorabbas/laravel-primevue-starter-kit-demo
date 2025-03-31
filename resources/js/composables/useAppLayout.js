@@ -1,7 +1,7 @@
 import { ref, computed, onMounted, onUnmounted, watchEffect } from 'vue';
 import { usePage, useForm } from '@inertiajs/vue3';
 import { route } from 'ziggy-js';
-import { LayoutGrid, House, Info, Github, Code, Settings, LogOut } from 'lucide-vue-next';
+import { LayoutGrid, House, Info, Github, Code, Settings, LogOut, Users, Lock } from 'lucide-vue-next';
 
 export function useAppLayout() {
     const page = usePage();
@@ -14,36 +14,61 @@ export function useAppLayout() {
     });
 
     // Menu items
-    const menuItems = computed(() => [
-        {
-            label: 'Home',
-            lucideIcon: House,
-            route: route('welcome'),
-            active: currentRoute.value == 'welcome',
-        },
-        {
-            label: 'Dashboard',
-            lucideIcon: LayoutGrid,
-            route: route('dashboard'),
-            active: currentRoute.value == 'dashboard',
-        },
-        {
-            label: 'Info',
-            lucideIcon: Info,
-            items: [
-                {
-                    label: 'PrimeVue Docs',
-                    url: 'https://primevue.org/',
-                    lucideIcon: Code,
-                },
-                {
-                    label: 'Starter Kit Repo',
-                    url: 'https://github.com/connorabbas/laravel-primevue-starter-kit',
-                    lucideIcon: Github,
-                },
-            ],
-        },
-    ]);
+    const menuItems = computed(() => {
+        let items = [
+            {
+                label: 'Home',
+                lucideIcon: House,
+                route: route('welcome'),
+                active: currentRoute.value == 'welcome',
+            },
+            {
+                label: 'Dashboard',
+                lucideIcon: LayoutGrid,
+                route: route('dashboard'),
+                active: currentRoute.value == 'dashboard',
+            },
+            {
+                label: 'Info',
+                lucideIcon: Info,
+                items: [
+                    {
+                        label: 'PrimeVue Docs',
+                        url: 'https://primevue.org/',
+                        lucideIcon: Code,
+                    },
+                    {
+                        label: 'Starter Kit Repo',
+                        url: 'https://github.com/connorabbas/laravel-primevue-starter-kit',
+                        lucideIcon: Github,
+                    },
+                ],
+            },
+        ];
+
+        if (page.props.auth.isAdmin) {
+            items.push({
+                label: 'Admin',
+                lucideIcon: Lock,
+                items: [
+                    {
+                        label: 'Dashboard',
+                        lucideIcon: LayoutGrid,
+                        route: route('admin.dashboard'),
+                        active: currentRoute.value == 'admin.dashboard',
+                    },
+                    {
+                        label: 'Users',
+                        lucideIcon: Users,
+                        route: route('admin.users.index'),
+                        active: currentRoute.value == 'admin.users.index',
+                    },
+                ],
+            });
+        }
+
+        return items;
+    });
 
     // User menu and logout functionality.
     const logoutForm = useForm({});

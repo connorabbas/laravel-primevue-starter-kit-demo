@@ -6,43 +6,107 @@
 
 A basic authentication starter kit using [Laravel](https://laravel.com/docs/master), [Intertia.js](https://inertiajs.com/), [PrimeVue](https://primevue.org/) components, and [Tailwind CSS](https://tailwindcss.com/).
 
-```
-git clone -b feature/admin-panel https://github.com/connorabbas/laravel-inertia-primevue.git
-```
+[Hosted Demo Project](https://laravel-primevue-starter-kit-demo-master-yhjxow.laravel.cloud/)
 
-## Admin Panel
+Do you need a separate Vue SPA front-end instead of using Inertia.js? Consider using the [Vue SPA w/ PrimeVue & Laravel Breeze API Starter Kit](https://github.com/connorabbas/primevue-spa-laravel-api) instead.
 
-This branch provides a separate `admin` auth guard for admins to login to the "backend" of the application.
+## Roadmap
 
-The following features are provided:
+-   [x] Hosted demo project
+-   [x] Updated User profile settings pages (similar to official Laravel starter kits)
+-   [x] Additional layouts (similar to official Laravel starter kits)
+-   [ ] Alternative admin branch using either [Filament PHP](https://filamentphp.com/) or [spatie/laravel-permission](https://spatie.be/docs/laravel-permission/v6/introduction) (In development)
+-   [ ] TypeScript & SSR repo using [PrimeVue Volt](https://volt.primevue.org/) (In development)
+-   [ ] Update `connorabbas/primevue-spa-laravel-api` project to match UI/functionality (WIP)
 
--   Admin registration via artisan command
--   Fully integrated authentication features (same as standard User model)
-    -   Forgot / reset password flow
-    -   Email verification flow with middleware
-    -   Profile page to manage account settings
-    -   Tests to cover all authentication / authorization / profile update processes
--   Separate Admin Layout
--   Example data index page (using registered User model data)
+## Features
 
-### Register new Admin User
+-   Pre-configured [Auto Import](https://primevue.org/autoimport/) PrimeVue components
+-   Extended PrimeVue menu/navigation components utilizing Inertia's `Link` component and [Lucide Icons](https://lucide.dev/)
+-   `usePaginatedData()` & `useLazyDataTable()` composables for use with PrimeVue's `Paginator` & `DataTable` components for easy pagination/filtering/sorting
+-   Light/dark/system color mode toggle
+-   Easily customizable theming
+-   Opt-in TypeScript usage
 
-Since there is no registration page for admins, use the following artisan command:
+## Theme
 
-```
-php artisan admin:create
-```
+This starter kit provides a collection of custom theme presets to choose from, built using the powerful **PrimeVue V4** theming system. It leverages styled mode and custom design token values to create flexible and cohesive UI designs.
 
-Use the `/admin/login` route to login.
+### Prebuilt Theme Presets
 
-### User Data
+The prebuilt theme presets are located in the `/resources/js/theme` directory. Each preset offers a distinct visual style:
 
-An example index data page is provided at the `/admin/users` route. To seed with 100 test Users (locally):
+-   **noir**  
+    A minimal, monochromatic theme that serves as the default style.
 
-```
-php artisan db:seed
-```
+-   **bootstrap**  
+    Emulates the familiar look and feel of [Bootstrap](https://getbootstrap.com/).
 
-### Changes
+-   **breeze**  
+    Captures the aesthetic of [Laravel Breeze](https://github.com/laravel/breeze).
 
-[Compare against the master branch](https://github.com/connorabbas/primevue-breeze-inertia/compare/master...feature/admin-panel)
+-   **enterprise**  
+    Provides a clean, no-nonsense corporate design.
+
+### Customizing Your Own Theme
+
+Creating your own theme preset is simple. You can:
+
+-   Swap the [primary](https://primevue.org/theming/styled/#primary) values with a different set of [colors](https://primevue.org/theming/styled/#colors).
+-   Adjust the `colorScheme` [surface](https://primevue.org/theming/styled/#surface) values (e.g., slate, gray, neutral).
+-   Change the extended [preset theme](https://primevue.org/theming/styled/#presets).
+
+For detailed guidance on customization, please refer to the [PrimeVue Styled Mode Docs](https://primevue.org/theming/styled/).
+
+### PrimeVue v4 w/ Tailwind CSS
+
+To clarify, Tailwind is **not** used for any component styling in this starter kit; instead, we use PrimeVue's styled mode with a custom theme preset implementation for component styling. Tailwind is applied solely for layout purposes **around** PrimeVue components and for minimal styling when needed.
+
+---
+
+## Local Development with Docker
+
+This starter kit is configured to use Docker Compose for local development with just a few extra steps, powered by images & configuration from [Laravel Sail](https://laravel.com/docs/master/sail). With this setup, you do not need PHP, Composer, PostgreSQL or Node.js installed on your machine to get up and running with this project.
+
+### Setup
+
+1. In a new directory (outside of your Laravel project) create a `docker-compose.yml` file to create a reverse proxy container using [Traefik](https://doc.traefik.io/traefik/getting-started/quick-start/). You can clone/reference this [example implementation](https://github.com/connorabbas/traefik-docker-compose/blob/master/docker-compose.yml).
+
+2. Step into the directory containing the new compose file, and spin up the Traefik container:
+    ```
+    docker compose up -d
+    ```
+3. Update Laravel app `.env`
+
+    ```env
+    # Use any desired domain ending with .localhost
+    # Match domain value in docker-compose.local.yml laravel service labels section
+    APP_URL=http://laravel-primevue.localhost
+
+    DB_CONNECTION=pgsql
+    DB_HOST=pgsql # name of service
+    DB_PORT=5432
+    DB_DATABASE=laravel
+    DB_USERNAME=sail
+    DB_PASSWORD=password
+
+    WWWGROUP=1000
+    WWWUSER=1000
+
+    # Update port values as needed when running multiple projects/services
+    #APP_PORT=80 not required when using Traefik reverse proxy
+    VITE_PORT=5173
+    FORWARD_DB_PORT=5432
+    ```
+
+4. Build the Laravel app container using one of the following techniques:
+    - Build manually using docker compose CLI
+        ```bash
+           docker compose -f docker-compose.local.yml up -d
+        ```
+    - Use [Laravel Sail](https://laravel.com/docs/master/sail)
+    - Build as a [VS Code Dev Container](https://code.visualstudio.com/docs/devcontainers/tutorial) using the `Dev Containers: Reopen in Container` command
+
+### Additional configuration
+
+If you wish to add additional services, or swap out PostgreSQL with an alternative database, you can reference the [Laravel Sail stubs](https://github.com/laravel/sail/tree/1.x/stubs) and update the `docker-compose.local.yml` file as needed.

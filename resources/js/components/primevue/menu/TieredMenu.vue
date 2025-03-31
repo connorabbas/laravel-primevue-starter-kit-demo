@@ -4,12 +4,13 @@ import TieredMenu from 'primevue/tieredmenu';
 import { ChevronRight } from 'lucide-vue-next';
 import type { ExtendedMenuItem } from '@/types';
 
-const props = defineProps<{
+const componentProps = defineProps<{
     model: ExtendedMenuItem[]
 }>();
 
-type TieredMenuType = InstanceType<typeof TieredMenu>
+type TieredMenuType = InstanceType<typeof TieredMenu>;
 const childRef = useTemplateRef<TieredMenuType>('child-ref');
+
 defineExpose({
     childRef,
 });
@@ -18,8 +19,18 @@ defineExpose({
 <template>
     <TieredMenu
         ref="child-ref"
-        :model="props.model"
+        :model="componentProps.model"
     >
+        <template
+            v-for="(_, slotName) in $slots"
+            #[slotName]="slotProps"
+        >
+            <slot
+                v-if="slotName != 'item'"
+                :name="slotName"
+                v-bind="slotProps ?? {}"
+            />
+        </template>
         <template #item="{ item, props, hasSubmenu }">
             <InertiaLink
                 v-if="item.route"
@@ -33,8 +44,8 @@ defineExpose({
                     class="p-tieredmenu-item-icon"
                 />
                 <component
-                    v-else-if="item.lucideIcon"
                     :is="item.lucideIcon"
+                    v-else-if="item.lucideIcon"
                     class="p-tieredmenu-item-icon"
                 />
                 <span class="p-tieredmenu-item-label">{{ item.label }}</span>
@@ -51,8 +62,8 @@ defineExpose({
                     class="p-tieredmenu-item-icon"
                 />
                 <component
-                    v-else-if="item.lucideIcon"
                     :is="item.lucideIcon"
+                    v-else-if="item.lucideIcon"
                     class="p-tieredmenu-item-icon"
                 />
                 <span class="p-tieredmenu-item-label">{{ item.label }}</span>

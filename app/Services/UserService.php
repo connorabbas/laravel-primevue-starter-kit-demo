@@ -2,7 +2,7 @@
 
 namespace App\Services;
 
-use App\DataTransferObjects\UserFiltersDto;
+use App\Data\UserFiltersDto;
 use App\Models\User;
 
 class UserService
