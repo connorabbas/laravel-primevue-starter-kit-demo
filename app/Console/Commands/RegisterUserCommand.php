@@ -39,7 +39,7 @@ class RegisterUserCommand extends Command
     {
         $this->info('--- User Registration ---');
         $name = text('Enter the full name of the user');
-        $email = text('Enter the user email address');
+        $email = text('Enter the email address of the user');
         $password = password('Enter the password');
         $passwordConfirmation = password('Confirm the password');
 
@@ -58,7 +58,7 @@ class RegisterUserCommand extends Command
             foreach ($validator->errors()->all() as $error) {
                 $this->error($error);
             }
-            return 0;
+            return 1;
         }
 
         // Create the user.
@@ -70,7 +70,7 @@ class RegisterUserCommand extends Command
         if ($user instanceof MustVerifyEmail) {
             $user->sendEmailVerificationNotification();
         }
-        $this->info("User created successfully!");
+        $this->info("User successfully created!");
 
         // Assign Role/s
         $availableRoles = Role::all()->pluck('name')->toArray();
@@ -87,6 +87,6 @@ class RegisterUserCommand extends Command
             }
         }
 
-        return 1;
+        return 0;
     }
 }
