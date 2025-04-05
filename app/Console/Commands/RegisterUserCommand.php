@@ -3,9 +3,6 @@
 namespace App\Console\Commands;
 
 use App\Models\User;
-use function Laravel\Prompts\multiselect;
-use function Laravel\Prompts\password;
-use function Laravel\Prompts\text;
 use Illuminate\Console\Command;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Support\Facades\Hash;
@@ -13,6 +10,10 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rules\Password;
 use ReflectionClass;
 use Spatie\Permission\Models\Role;
+
+use function Laravel\Prompts\multiselect;
+use function Laravel\Prompts\password;
+use function Laravel\Prompts\text;
 
 /**
  * https://laravel.com/docs/master/prompts
