@@ -4,21 +4,23 @@ import ContextMenu from 'primevue/contextmenu';
 import { ChevronRight } from 'lucide-vue-next';
 import type { ExtendedMenuItem } from '@/types';
 
-const props = defineProps<{
+const componentProps = defineProps<{
     model: ExtendedMenuItem[]
 }>();
 
-type ContextMenuType = InstanceType<typeof ContextMenu>
+type ContextMenuType = InstanceType<typeof ContextMenu>;
 const childRef = useTemplateRef<ContextMenuType>('child-ref');
+
 defineExpose({
     childRef,
+    toggle: (event: Event) => childRef.value?.toggle(event)
 });
 </script>
 
 <template>
     <ContextMenu
         ref="child-ref"
-        :model="props.model"
+        :model="componentProps.model"
     >
         <template #item="{ item, props, hasSubmenu }">
             <InertiaLink
@@ -33,8 +35,8 @@ defineExpose({
                     class="p-contextmenu-item-icon"
                 />
                 <component
-                    v-else-if="item.lucideIcon"
                     :is="item.lucideIcon"
+                    v-else-if="item.lucideIcon"
                     class="p-contextmenu-item-icon"
                 />
                 <span class="p-contextmenu-item-label">{{ item.label }}</span>
@@ -51,8 +53,8 @@ defineExpose({
                     class="p-contextmenu-item-icon"
                 />
                 <component
-                    v-else-if="item.lucideIcon"
                     :is="item.lucideIcon"
+                    v-else-if="item.lucideIcon"
                     class="p-contextmenu-item-icon"
                 />
                 <span class="p-contextmenu-item-label">{{ item.label }}</span>

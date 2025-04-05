@@ -56,6 +56,7 @@ const toggleMobileUserMenu = (event) => {
                             id="mobile-user-menu-btn"
                             :label="page.props.auth.user.name"
                             severity="secondary"
+                            size="large"
                             pt:root:class="flex flex-row-reverse justify-between"
                             @click="toggleMobileUserMenu($event)"
                         >
@@ -78,8 +79,8 @@ const toggleMobileUserMenu = (event) => {
             <nav class="dynamic-bg shadow-sm">
                 <Container>
                     <MenuBar
-                        :model="menuItems"
                         :key="currentRoute"
+                        :model="menuItems"
                         pt:root:class="px-0 py-4 border-0 rounded-none dynamic-bg"
                         pt:button:class="hidden"
                     >
@@ -142,21 +143,18 @@ const toggleMobileUserMenu = (event) => {
                 </Container>
             </nav>
 
-            <Container vertical>
-                <!-- Breadcrumbs -->
-                <Breadcrumb
-                    v-if="props.breadcrumbs.length"
-                    :model="props.breadcrumbs"
-                />
+            <main>
+                <Container vertical>
+                    <!-- Breadcrumbs -->
+                    <Breadcrumb
+                        v-if="props.breadcrumbs.length"
+                        :model="props.breadcrumbs"
+                    />
 
-                <!-- Page Content -->
-                <main
-                    id="page-content"
-                    class="grow"
-                >
+                    <!-- Page Content -->
                     <slot />
-                </main>
-            </Container>
+                </Container>
+            </main>
         </div>
     </div>
 </template>

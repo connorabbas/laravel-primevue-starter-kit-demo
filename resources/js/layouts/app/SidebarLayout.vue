@@ -55,6 +55,7 @@ const toggleMobileUserMenu = (event) => {
                             :label="page.props.auth.user.name"
                             pt:root:class="flex flex-row-reverse justify-between"
                             severity="secondary"
+                            size="large"
                             @click="toggleMobileUserMenu($event)"
                         >
                             <template #icon>
@@ -144,7 +145,7 @@ const toggleMobileUserMenu = (event) => {
             </aside>
 
             <!-- Scrollable Content -->
-            <div class="flex flex-col h-full lg:pl-[18rem]">
+            <main class="flex flex-col h-full lg:pl-[18rem]">
                 <Container
                     vertical
                     fluid
@@ -156,14 +157,9 @@ const toggleMobileUserMenu = (event) => {
                     />
 
                     <!-- Page Content -->
-                    <main
-                        id="page-content"
-                        class="grow"
-                    >
-                        <slot />
-                    </main>
+                    <slot />
                 </Container>
-            </div>
+            </main>
         </div>
     </div>
 </template>
