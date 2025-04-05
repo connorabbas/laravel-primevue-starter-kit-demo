@@ -138,8 +138,8 @@ const {
                                 @input="debounceInputFilter(filterCallback)"
                             />
                         </template>
-                        <template #body="slotProps">
-                            {{ slotProps.data.name }}
+                        <template #body="{ data }">
+                            {{ data.name }}
                         </template>
                     </Column>
                     <Column
@@ -157,10 +157,16 @@ const {
                                 @input="debounceInputFilter(filterCallback)"
                             />
                         </template>
-                        <template #body="slotProps">
-                            {{ slotProps.data.email }}
+                        <template #body="{ data }">
+                            {{ data.email }}
                         </template>
                     </Column>
+                    <!-- Format date as needed, likely use date-fns -->
+                    <Column
+                        field="created_at"
+                        header="Created"
+                        sortable
+                    ></Column>
                     <Column header="Action">
                         <template #body="{ data }">
                             <Button
