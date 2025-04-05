@@ -1,10 +1,11 @@
 <?php
 
-namespace App\DataTransferObjects;
+namespace App\Data;
 
 use Illuminate\Http\Request;
+use Spatie\LaravelData\Data;
 
-class UserFiltersDto
+class UserFiltersDto extends Data
 {
     public function __construct(
         public ?int $perPage = null,

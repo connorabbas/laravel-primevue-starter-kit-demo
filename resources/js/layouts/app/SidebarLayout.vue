@@ -108,12 +108,16 @@ const toggleMobileUserMenu = (event) => {
             >
                 <div class="w-full h-full flex flex-col justify-between p-4">
                     <div class="space-y-6">
-                        <div class="p-2">
+                        <div class="flex gap-4 items-center">
                             <InertiaLink :href="route('welcome')">
                                 <ApplicationLogo
                                     class="block h-10 w-auto fill-current text-surface-900 dark:text-surface-0"
                                 />
                             </InertiaLink>
+                            <Tag
+                                v-if="page.props.auth.isAdmin"
+                                value="ADMIN"
+                            ></Tag>
                         </div>
                         <div>
                             <PanelMenu

@@ -1,27 +1,22 @@
-<script>
-import AuthenticatedAdminLayout from '@/layouts/admin/AuthenticatedLayout.vue';
-
-const pageTitle = 'Users';
-const breadcrumbs = [
-    { label: 'Dashboard', route: route('admin.dashboard') },
-    { label: pageTitle, route: route('admin.users.index') },
-    { label: 'List' },
-];
-
-export default {
-    layout: (h, page) => h(AuthenticatedAdminLayout, { breadcrumbs }, () => page)
-}
-</script>
-
 <script setup>
 import { ref, useTemplateRef } from 'vue';
-import { useLazyDataTable } from '@/composables/useLazyDataTable';
 import { FilterMatchMode } from '@primevue/core/api';
+import { AlertCircle, EllipsisVertical, FilterX, Pencil } from 'lucide-vue-next';
+import { useLazyDataTable } from '@/composables/useLazyDataTable';
+import AppLayout from '@/layouts/AppLayout.vue';
+import Menu from '@/components/primevue/menu/Menu.vue';
 
 const props = defineProps({
     auth: Object,
     users: Object,
 });
+
+const pageTitle = 'Users';
+const breadcrumbs = [
+    { label: 'Admin Dashboard', route: route('admin.dashboard') },
+    { label: pageTitle, route: route('admin.users.index') },
+    { label: 'List' },
+];
 
 // User context menu
 const userContextMenu = useTemplateRef('user-context-menu');
@@ -31,14 +26,16 @@ function toggleUserContextMenu(event, userData) {
     userContextMenuItems.value = [
         {
             label: 'Manage User',
-            icon: 'pi pi-pencil',
+            lucideIcon: Pencil,
             command: () => {
                 alert('User Data: ' + JSON.stringify(userData));
             },
         },
     ];
     // Show the menu
-    userContextMenu.value.toggle(event);
+    if (userContextMenu.value && userContextMenu.value?.childRef) {
+        userContextMenu.value.childRef.toggle(event);
+    }
 }
 
 // DataTable
@@ -60,12 +57,8 @@ const {
 </script>
 
 <template>
-    <InertiaHead :title="pageTitle" />
-
-    <Container
-        vertical
-        fluid
-    >
+    <AppLayout :breadcrumbs="breadcrumbs">
+        <InertiaHead :title="pageTitle" />
         <PageTitleSection>
             <template #title>
                 {{ pageTitle }}
@@ -75,11 +68,14 @@ const {
                     v-if="filteredOrSorted"
                     severity="secondary"
                     type="button"
-                    icon="pi pi-filter-slash"
                     label="Clear Filters"
                     outlined
                     @click="hardReset"
-                />
+                >
+                    <template #icon>
+                        <FilterX />
+                    </template>
+                </Button>
             </template>
         </PageTitleSection>
 
@@ -98,16 +94,16 @@ const {
                     paginator
                     removableSort
                     resizableColumns
-                    columnResizeMode="fit"
                     :loading="processing"
                     :value="users.data"
                     :totalRecords="users.total"
-                    filterDisplay="row"
                     :sortField="sorting.field"
                     :sortOrder="sorting.order"
                     :rows="users.per_page"
                     :rowsPerPageOptions="[10, 20, 50, 100]"
                     :first="firstDatasetIndex"
+                    columnResizeMode="fit"
+                    filterDisplay="row"
                     paginatorTemplate="FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink CurrentPageReport RowsPerPageDropdown"
                     currentPageReportTemplate="Showing {first} to {last} of {totalRecords} records"
                     @filter="filter"
@@ -118,9 +114,11 @@ const {
                         <div class="flex justify-center">
                             <Message
                                 severity="warn"
-                                icon="pi pi-exclamation-circle"
                                 class="grow text-center flex justify-center"
                             >
+                                <template #icon>
+                                    <AlertCircle />
+                                </template>
                                 No Users found.
                             </Message>
                         </div>
@@ -169,15 +167,18 @@ const {
                                 v-tooltip.top="'Show User Actions'"
                                 type="button"
                                 severity="secondary"
-                                icon="pi pi-ellipsis-v"
                                 rounded
                                 text
                                 @click="toggleUserContextMenu($event, data)"
-                            />
+                            >
+                                <template #icon>
+                                    <EllipsisVertical class="size-5!" />
+                                </template>
+                            </Button>
                         </template>
                     </Column>
                 </DataTable>
             </template>
         </Card>
-    </Container>
+    </AppLayout>
 </template>

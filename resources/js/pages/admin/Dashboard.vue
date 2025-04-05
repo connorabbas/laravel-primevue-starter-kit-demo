@@ -1,21 +1,15 @@
 <script setup>
-import AuthenticatedAdminLayout from '@/layouts/admin/AuthenticatedLayout.vue';
-
-defineOptions({ layout: AuthenticatedAdminLayout });
+import AppLayout from '@/layouts/AppLayout.vue';
 </script>
 
 <template>
-    <InertiaHead title="Dashboard" />
-    <Container
-        vertical
-        fluid
-    >
-        <div>
-            <Card>
-                <template #content>
-                    <p class="m-0">You are logged in as an Admin!</p>
-                </template>
-            </Card>
-        </div>
-    </Container>
+    <AppLayout>
+        <InertiaHead title="Admin Dashboard" />
+
+        <Card>
+            <template #content>
+                <p class="m-0">You are logged in as Admin!</p>
+            </template>
+        </Card>
+    </AppLayout>
 </template>

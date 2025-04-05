@@ -11,5 +11,10 @@ Route::get('/', function () {
     ]);
 })->name('welcome');
 
-require __DIR__ . '/user/web.php';
-require __DIR__ . '/admin/web.php';
+Route::get('/dashboard', function () {
+    return Inertia::render('Dashboard');
+})->middleware(['auth', 'verified'])->name('dashboard');
+
+require __DIR__ . '/auth.php';
+require __DIR__ . '/admin.php';
+require __DIR__ . '/settings.php';
