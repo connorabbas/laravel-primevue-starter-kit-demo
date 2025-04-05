@@ -4,9 +4,11 @@ namespace Tests\Feature\Commands;
 
 use App\Models\User;
 use Illuminate\Auth\Notifications\VerifyEmail;
+use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Notification;
+use ReflectionClass;
 use Spatie\Permission\Models\Role;
 use Tests\TestCase;
 
@@ -17,6 +19,7 @@ class RegisterUserCommandTest extends TestCase
     public function setup(): void
     {
         parent::setup();
+        // remove all roles added from migration, to accurately test when no roles are present
         Role::query()->truncate();
     }
 
@@ -35,8 +38,8 @@ class RegisterUserCommandTest extends TestCase
             'email' => 'john@example.com',
         ]);
 
-        $admin = User::where('email', 'john@example.com')->first();
-        $this->assertTrue(Hash::check('password123', $admin->password));
+        $user = User::where('email', 'john@example.com')->first();
+        $this->assertTrue(Hash::check('password123', $user->password));
     }
 
     public function test_command_fails_with_invalid_email()
@@ -85,7 +88,8 @@ class RegisterUserCommandTest extends TestCase
 
     public function test_command_sends_verification_email_if_user_must_verify()
     {
-        if (!(new User() instanceof MustVerifyEmail)) {
+        $userRef = new ReflectionClass(User::class);
+        if (!$userRef->implementsInterface(MustVerifyEmail::class)) {
             $this->markTestSkipped();
         }
         Notification::fake();
@@ -98,7 +102,7 @@ class RegisterUserCommandTest extends TestCase
             ->expectsOutput('User successfully created!')
             ->assertExitCode(0);
 
-        $admin = User::where('email', 'jane@example.com')->first();
-        Notification::assertSentTo($admin, VerifyEmail::class);
+        $user = User::where('email', 'jane@example.com')->first();
+        Notification::assertSentTo($user, VerifyEmail::class);
     }
 }
