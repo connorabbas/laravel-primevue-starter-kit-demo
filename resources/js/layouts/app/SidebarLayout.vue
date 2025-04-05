@@ -78,16 +78,21 @@ const toggleMobileUserMenu = (event) => {
             <nav class="dynamic-bg shadow-sm flex justify-between items-center lg:hidden">
                 <Container class="grow">
                     <div class="flex justify-between items-center py-4">
-                        <div>
+                        <div class="flex gap-4">
                             <InertiaLink :href="route('welcome')">
                                 <ApplicationLogo
                                     class="block h-8 w-auto fill-current text-surface-900 dark:text-surface-0"
                                 />
                             </InertiaLink>
+                            <Tag
+                                v-if="page.props.auth.isAdmin"
+                                value="ADMIN"
+                            ></Tag>
                         </div>
                         <div>
                             <Button
                                 severity="secondary"
+                                class="p-1!"
                                 text
                                 @click="mobileMenuOpen = true"
                             >
