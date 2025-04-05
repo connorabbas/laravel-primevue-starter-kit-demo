@@ -12,7 +12,7 @@ import ToastService from 'primevue/toastservice';
 import Container from '@/components/Container.vue';
 import PageTitleSection from '@/components/PageTitleSection.vue';
 
-import customThemePreset from '@/theme/breeze-preset';
+import customThemePreset from '@/theme/noir-preset';
 import { useColorMode } from '@vueuse/core';
 
 const appName = import.meta.env.VITE_APP_NAME || 'Laravel';
