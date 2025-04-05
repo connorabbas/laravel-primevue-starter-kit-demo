@@ -4,9 +4,11 @@ namespace App\Console\Commands;
 
 use App\Models\User;
 use Illuminate\Console\Command;
+use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rules\Password;
+use ReflectionClass;
 use Spatie\Permission\Models\Role;
 
 use function Laravel\Prompts\multiselect;
@@ -58,7 +60,7 @@ class RegisterUserCommand extends Command
             foreach ($validator->errors()->all() as $error) {
                 $this->error($error);
             }
-            return 1;
+            return Command::FAILURE;
         }
 
         // Create the user.
@@ -67,7 +69,8 @@ class RegisterUserCommand extends Command
             'email' => $email,
             'password' => Hash::make($password),
         ]);
-        if ($user instanceof MustVerifyEmail) {
+        $userRef = new ReflectionClass(User::class);
+        if ($userRef->implementsInterface(MustVerifyEmail::class)) {
             $user->sendEmailVerificationNotification();
         }
         $this->info("User successfully created!");
@@ -87,6 +90,6 @@ class RegisterUserCommand extends Command
             }
         }
 
-        return 0;
+        return Command::SUCCESS;
     }
 }
