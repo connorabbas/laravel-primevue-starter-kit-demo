@@ -1,6 +1,6 @@
 // https://aka.ms/devcontainer.json
 {
-    "name": "PrimeVue Inertia Demo",
+    "name": "PrimeVue Inertia",
     "dockerComposeFile": [
         "../docker-compose.local.yml"
     ],
