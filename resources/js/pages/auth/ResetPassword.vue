@@ -86,13 +86,13 @@ onMounted(() => {
             </div>
 
             <div class="flex flex-col gap-2">
-                <label for="password_confirmation">Password</label>
-                <Password
+                <label for="password_confirmation">Confirm Password</label>
+                <InputText
                     id="password_confirmation"
                     v-model="resetPwForm.password_confirmation"
                     :invalid="Boolean(resetPwForm.errors.password_confirmation)"
+                    type="password"
                     autocomplete="new-password"
-                    toggleMask
                     required
                     fluid
                 />
