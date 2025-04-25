@@ -87,7 +87,7 @@ const toggleMobileUserMenu = (event) => {
                             <Tag
                                 v-if="page.props.auth.isAdmin"
                                 value="ADMIN"
-                            ></Tag>
+                            />
                         </div>
                         <div>
                             <Button
@@ -122,7 +122,7 @@ const toggleMobileUserMenu = (event) => {
                             <Tag
                                 v-if="page.props.auth.isAdmin"
                                 value="ADMIN"
-                            ></Tag>
+                            />
                         </div>
                         <div>
                             <PanelMenu

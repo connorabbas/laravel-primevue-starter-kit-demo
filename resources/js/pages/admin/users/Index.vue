@@ -166,7 +166,7 @@ const {
                         field="created_at"
                         header="Created"
                         sortable
-                    ></Column>
+                    />
                     <Column header="Action">
                         <template #body="{ data }">
                             <Button
