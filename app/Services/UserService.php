@@ -18,7 +18,7 @@ class UserService
             });
 
         if ($filters->sortField && $filters->sortDirection) {
-            $query->orderBy($filters->sortField, $filters->sortDirection);
+            $query->applySort($filters->sortField, $filters->sortDirection);
         } else {
             $query->orderBy('created_at', 'desc');
         }
