@@ -2,22 +2,23 @@
 
 namespace App\Data\DataTransferObjects\Filtering;
 
-use App\Data\DataTransferObjects\Filtering\Traits\HasPaginatedDataFilters;
+use App\Data\DataTransferObjects\Filtering\Traits\HasSortedPaginatedDataFilters;
 use Illuminate\Http\Request;
 use Spatie\LaravelData\Data;
 
 class UserFilters extends Data
 {
-    use HasPaginatedDataFilters;
+    use HasSortedPaginatedDataFilters;
+
     public ?string $name = null;
     public ?string $email = null;
 
     public static function fromDataTableRequest(Request $request): self
     {
         $filters = $request->input('filters');
-        $paginationArgs = (new self())->getPaginationInputFilters($request);
+        $sortedPaginatedArgs = (new self())->getSortedPaginationInputFilters($request);
         $filterArgs = [
-            ...$paginationArgs,
+            ...$sortedPaginatedArgs,
             'name' => isset($filters['name']['value']) ? $filters['name']['value'] : null,
             'email' => isset($filters['email']['value']) ? $filters['email']['value'] : null,
         ];
