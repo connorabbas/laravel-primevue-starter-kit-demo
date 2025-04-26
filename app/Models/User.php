@@ -49,7 +49,7 @@ class User extends Authenticatable //implements MustVerifyEmail
             'password' => 'hashed',
         ];
     }
-    
+
     protected function getFilterableColumns(): array
     {
         return [

@@ -12,10 +12,10 @@ class UserService
     public function getUsers(UserFilters $filters): LengthAwarePaginator|Collection
     {
         $query = User::query()
-            ->when($filters->name && $filters->nameMatchMode, function ($query) use ($filters) {
+            ->when($filters?->name && $filters?->nameMatchMode, function ($query) use ($filters) {
                 $query->applyFilter('name', $filters->nameMatchMode, $filters->name);
             })
-            ->when($filters->email && $filters->emailMatchMode, function ($query) use ($filters) {
+            ->when($filters?->email && $filters?->emailMatchMode, function ($query) use ($filters) {
                 $query->applyFilter('email', $filters->emailMatchMode, $filters->email);
             });
 
