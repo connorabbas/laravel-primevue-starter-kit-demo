@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Data\UserFiltersDto;
+use App\Data\DataTransferObjects\Filtering\UserFilters;
 use App\Http\Controllers\Controller;
 use App\Services\UserService;
 use Illuminate\Http\Request;
@@ -17,9 +17,10 @@ class UserController extends Controller
 
     public function index(Request $request): Response
     {
+        //dd(UserFilters::fromDataTableRequest($request));
         return Inertia::render('admin/users/Index', [
             'users' => $this->userService->getUsers(
-                UserFiltersDto::fromDataTableRequest($request)
+                UserFilters::fromDataTableRequest($request)
             ),
         ]);
     }

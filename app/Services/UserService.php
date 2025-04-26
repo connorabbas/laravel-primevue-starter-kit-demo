@@ -2,12 +2,14 @@
 
 namespace App\Services;
 
-use App\Data\UserFiltersDto;
+use App\Data\DataTransferObjects\Filtering\UserFilters;
 use App\Models\User;
+use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Pagination\LengthAwarePaginator;
 
 class UserService
 {
-    public function getUsers(UserFiltersDto $filters): mixed
+    public function getUsers(UserFilters $filters): LengthAwarePaginator|Collection
     {
         $query = User::query()
             ->when($filters->name, function ($query) use ($filters) {

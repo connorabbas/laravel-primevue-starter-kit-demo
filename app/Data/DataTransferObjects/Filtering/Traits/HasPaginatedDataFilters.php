@@ -14,12 +14,8 @@ trait HasPaginatedDataFilters
     public function getPaginationInputFilters(Request $request): array
     {
         return [
-            'perPage' => $request->has('rows')
-                ? (int) $request->input('rows', 20)
-                : null,
-            'currentPage' => $request->has('page')
-                ? (int) $request->input('page', 0)
-                : null,
+            'perPage' => (int) $request->input('rows', 20),
+            'currentPage' => (int) $request->input('page', 1),
             'sortField' => $request->input('sortField'),
             'sortDirection' => $request->input('sortOrder', 1) == 1 ? 'asc' : 'desc',
         ];
