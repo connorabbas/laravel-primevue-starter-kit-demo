@@ -7,7 +7,6 @@ import AppLayout from '@/layouts/AppLayout.vue';
 import Menu from '@/components/primevue/menu/Menu.vue';
 
 const props = defineProps({
-    auth: Object,
     users: Object,
 });
 
@@ -95,11 +94,11 @@ const {
                     removableSort
                     resizableColumns
                     :loading="processing"
-                    :value="users.data"
-                    :totalRecords="users.total"
+                    :value="props.users.data"
+                    :totalRecords="props.users.total"
                     :sortField="sorting.field"
                     :sortOrder="sorting.order"
-                    :rows="users.per_page"
+                    :rows="props.users.per_page"
                     :rowsPerPageOptions="[10, 20, 50, 100]"
                     :first="firstDatasetIndex"
                     columnResizeMode="fit"
