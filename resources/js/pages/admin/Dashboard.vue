@@ -8,7 +8,9 @@ import AppLayout from '@/layouts/AppLayout.vue';
 
         <Card>
             <template #content>
-                <p class="m-0">You are logged in as Admin!</p>
+                <p class="m-0">
+                    You are logged in as Admin!
+                </p>
             </template>
         </Card>
     </AppLayout>
