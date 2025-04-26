@@ -94,7 +94,7 @@ const toggleMobileUserMenu = (event) => {
                                 <Tag
                                     v-if="page.props.auth.isAdmin"
                                     value="ADMIN"
-                                ></Tag>
+                                />
                             </div>
                         </template>
                         <template #end>
@@ -116,7 +116,7 @@ const toggleMobileUserMenu = (event) => {
                                     <div
                                         id="user-menu-append"
                                         class="relative"
-                                    ></div>
+                                    />
                                     <Menu
                                         ref="user-menu"
                                         appendTo="#user-menu-append"
