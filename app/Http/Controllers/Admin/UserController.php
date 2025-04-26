@@ -17,7 +17,6 @@ class UserController extends Controller
 
     public function index(Request $request): Response
     {
-        //dd(UserFilters::fromDataTableRequest($request));
         return Inertia::render('admin/users/Index', [
             'users' => $this->userService->getUsers(
                 UserFilters::fromDataTableRequest($request)
