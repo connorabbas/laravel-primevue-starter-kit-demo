@@ -1,38 +1,16 @@
-# Laravel & PrimeVue Starter Kit - Admin Role
+# Laravel + PrimeVue Starter Kit
 
 ## Setup
 
-```
-git clone -b feature/admin-role https://github.com/connorabbas/laravel-primevue-starter-kit.git
-```
+![Static Badge](https://img.shields.io/badge/Laravel%20-%20v12%20-%20%23f9322c) ![Static Badge](https://img.shields.io/badge/Inertia.js%20-%20v2%20-%20%236b46c1) ![Static Badge](<https://img.shields.io/badge/Vue.js%20-%20v3.5%20-%20rgb(66%20184%20131)>) ![Static Badge](<https://img.shields.io/badge/PrimeVue%20-%20v4%20-%20rgb(16%20185%20129)>) ![Static Badge](https://img.shields.io/badge/Tailwind%20CSS%20-%20v4%20-%20%230284c7)
 
-## Features
+A basic authentication starter kit using [Laravel](https://laravel.com/docs/master), [Intertia.js](https://inertiajs.com/), [PrimeVue](https://primevue.org/) components, and [Tailwind CSS](https://tailwindcss.com/).
 
--   Roles/Permissions system via [spatie/laravel-permission](https://spatie.be/docs/laravel-permission/v6/introduction)
--   `Admin` role seeded by default
--   Artisan command to register new Users (and optionally assign their roles)
--   Example Users index page utilizing `useLazyDataTable()` composable
+> [!TIP]
+> Do you need a separate Vue SPA front-end instead of using Inertia.js? Consider using the [PrimeVue SPA + Laravel API Starter Kit](https://github.com/connorabbas/laravel-api-primevue-starter-kit) instead.
 
-## Register new Admin User
+## Resources
 
-Since there is no registration page for admins, use the following artisan command:
+[🌐 **Demo Application**](https://laravel-primevue-starter-kit-demo.laravel.cloud/)
 
-```
-php artisan user:register
-```
-
-And assign the Admin role.
-
-## Admin Pages
-
-A separate Admin dashboard page, and a Users index page are provided by default, protected by the `role:Admin` middleware
-
-The Users index page provides an example using the `useLazyDataTable()` composable and PrimeVue's `<DataTable />` component. To seed the users table with test data (locally) you can run:
-
-```bash
-php artisan db:seed
-```
-
-## Changes
-
-[Compare against the master branch](https://github.com/connorabbas/laravel-primevue-starter-kit/compare/master...feature/admin-role)
+[📚 **Documentation**](https://connorabbas.github.io/laravel-primevue-starter-kit-docs/alt/admin-role-branch.html)
