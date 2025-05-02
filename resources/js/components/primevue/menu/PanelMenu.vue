@@ -8,7 +8,6 @@ import { ptViewMerge } from '@/utils';
 interface ExtendedPanelMenuProps extends Omit<PanelMenuProps, 'model'> {
     model: ExtendedMenuItem[];
 }
-
 const componentProps = defineProps<ExtendedPanelMenuProps>();
 
 const defaultPt: PanelMenuPassThroughOptions = {

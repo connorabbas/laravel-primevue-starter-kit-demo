@@ -118,7 +118,7 @@ const toggleMobileUserMenu = (event) => {
                                         ref="user-menu"
                                         appendTo="#user-menu-append"
                                         :model="userMenuItems"
-                                        pt:root:class="left-auto! top-0! right-0"
+                                        pt:root:class="left-auto! top-0! right-0 z-[1200]"
                                         popup
                                     />
                                 </div>
