@@ -30,6 +30,7 @@ const toggleUserMenu = (event) => {
 
 const mobileUserMenu = useTemplateRef('mobile-user-menu');
 const toggleMobileUserMenu = (event) => {
+    console.log('toggleMobileUserMenu', event);
     mobileUserMenu.value.childRef.toggle(event);
 };
 </script>
