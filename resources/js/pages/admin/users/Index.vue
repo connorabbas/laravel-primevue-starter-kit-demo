@@ -32,8 +32,8 @@ function toggleUserContextMenu(event, userData) {
         },
     ];
     // Show the menu
-    if (userContextMenu.value && userContextMenu.value?.childRef) {
-        userContextMenu.value.childRef.toggle(event);
+    if (userContextMenu.value && userContextMenu.value?.el) {
+        userContextMenu.value.el.toggle(event);
     }
 }
 
