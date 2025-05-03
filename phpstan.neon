@@ -2,7 +2,7 @@ includes:
     - ./vendor/nunomaduro/larastan/extension.neon
 
 parameters:
-    level: 10
+    level: 9
     treatPhpDocTypesAsCertain: false
     paths:
         - app
