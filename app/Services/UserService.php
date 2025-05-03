@@ -25,8 +25,8 @@ class UserService
             $query->orderBy('created_at', 'desc');
         }
 
-        $results = ($filters->perPage && $filters->currentPage)
-            ? $query->paginate(perPage: $filters->perPage, page: $filters->currentPage)
+        $results = ($filters->perPage && $filters->page)
+            ? $query->paginate(perPage: $filters->perPage, page: $filters->page)
             : $query->get();
 
         return $results;
