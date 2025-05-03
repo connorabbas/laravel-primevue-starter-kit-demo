@@ -3,21 +3,30 @@
 namespace App\Services;
 
 use App\Data\DataTransferObjects\Filtering\UserFilters;
+use App\Enums\FilterMatchMode;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Pagination\LengthAwarePaginator;
 
 class UserService
 {
+    /**
+     * @return LengthAwarePaginator<int, User> | Collection<int, User>
+     */
     public function getUsers(UserFilters $filters): LengthAwarePaginator|Collection
     {
-        $query = User::query()
-            ->when($filters?->name && $filters?->nameMatchMode, function ($query) use ($filters) {
-                $query->applyFilter('name', $filters->nameMatchMode, $filters->name);
-            })
-            ->when($filters?->email && $filters?->emailMatchMode, function ($query) use ($filters) {
-                $query->applyFilter('email', $filters->emailMatchMode, $filters->email);
-            });
+        $name = $filters->name;
+        $nameMatchMode = $filters->nameMatchMode;
+        $email = $filters->email;
+        $emailMatchMode = $filters->emailMatchMode;
+
+        $query = User::query();
+        if ($name !== null && $nameMatchMode instanceof FilterMatchMode) {
+            $query->applyFilter('name', $nameMatchMode, $name);
+        }
+        if ($email !== null && $emailMatchMode instanceof FilterMatchMode) {
+            $query->applyFilter('email', $emailMatchMode, $email);
+        }
 
         if ($filters->sortField && $filters->sortDirection) {
             $query->applySort($filters->sortField, $filters->sortDirection);
@@ -25,8 +34,8 @@ class UserService
             $query->orderBy('created_at', 'desc');
         }
 
-        $results = ($filters->perPage && $filters->currentPage)
-            ? $query->paginate(perPage: $filters->perPage, page: $filters->currentPage)
+        $results = (is_int($filters->perPage) && is_int($filters->page))
+            ? $query->paginate(perPage: $filters->perPage, page: $filters->page)
             : $query->get();
 
         return $results;

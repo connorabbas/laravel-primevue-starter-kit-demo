@@ -6,6 +6,9 @@ use App\Enums\FilterMatchMode;
 use Illuminate\Database\Eloquent\Builder;
 use InvalidArgumentException;
 
+/**
+ * @template TModel of \Illuminate\Database\Eloquent\Model
+ */
 trait Filterable
 {
     /**
@@ -17,7 +20,7 @@ trait Filterable
      * Validate if the column is filterable/sortable.
      * @throws InvalidArgumentException
      */
-    private function validateColumn(string $column): void
+    protected function validateColumn(string $column): void
     {
         if (!in_array($column, $this->getFilterableColumns(), true)) {
             throw new InvalidArgumentException("Invalid column name: {$column}.");
@@ -26,6 +29,7 @@ trait Filterable
 
     /**
      * Apply a filter to the query based on the column, match mode, and value.
+     * @param Builder<TModel> $query
      */
     public function scopeApplyFilter(
         Builder $query,
@@ -39,6 +43,7 @@ trait Filterable
 
     /**
      * Apply a filter to a related model's column.
+     * @param Builder<TModel> $query
      * @throws InvalidArgumentException
      */
     public function scopeApplyRelationFilter(
@@ -48,21 +53,26 @@ trait Filterable
         FilterMatchMode $matchMode,
         mixed $value
     ): void {
-        $query->whereHas($relation, function (Builder $query) use ($column, $matchMode, $value) {
-            $related = $query->getModel();
+        $query->whereHas($relation, function (Builder $relationQuery) use ($column, $matchMode, $value) {
+            $related = $relationQuery->getModel();
             $relatedClass = get_class($related);
-            $usedTraits = class_uses($relatedClass);
-            $thisTrait = Filterable::class;
+            $usedTraits = class_uses_recursive($relatedClass);
+            $thisTrait = self::class;
+
             if (!in_array($thisTrait, $usedTraits, true)) {
-                throw new InvalidArgumentException("Related model $relatedClass must use the $thisTrait trait.");
+                throw new InvalidArgumentException("Related model {$relatedClass} must use the {$thisTrait} trait.");
             }
+
+            /** @phpstan-ignore-next-line */
             $related->validateColumn($column);
-            $this->applyFilterLogic($query, $column, $matchMode, $value);
+            /** @phpstan-ignore-next-line */
+            $this->applyFilterLogic($relationQuery, $column, $matchMode, $value);
         });
     }
 
     /**
      * Apply dynamic sorting to the query.
+     * @param Builder<TModel> $query
      */
     public function scopeApplySort(
         Builder $query,
@@ -76,6 +86,8 @@ trait Filterable
 
     /**
      * Apply the filter logic to a query based on the match mode.
+     * @param Builder<TModel> $query
+     * @return Builder<TModel>
      */
     private function applyFilterLogic(
         Builder $query,

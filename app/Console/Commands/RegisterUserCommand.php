@@ -37,7 +37,7 @@ class RegisterUserCommand extends Command
     /**
      * Execute the console command.
      */
-    public function handle()
+    public function handle(): int
     {
         $this->info('--- User Registration ---');
         $name = text('Enter the full name of the user');
@@ -76,6 +76,7 @@ class RegisterUserCommand extends Command
         $this->info("User successfully created!");
 
         // Assign Role/s
+        /** @var array<int, string> $availableRoles */
         $availableRoles = Role::all()->pluck('name')->toArray();
         if (empty($availableRoles)) {
             $this->warn('No roles available to assign.');
