@@ -127,6 +127,7 @@ const {
                         header="Name"
                         sortable
                         :showFilterMenu="false"
+                        :showClearButton="true"
                     >
                         <template #filter="{ filterModel, filterCallback }">
                             <InputText
@@ -146,6 +147,7 @@ const {
                         header="Email"
                         sortable
                         :showFilterMenu="false"
+                        :showClearButton="true"
                     >
                         <template #filter="{ filterModel, filterCallback }">
                             <InputText
