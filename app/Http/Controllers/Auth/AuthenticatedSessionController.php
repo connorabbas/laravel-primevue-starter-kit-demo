@@ -31,10 +31,11 @@ class AuthenticatedSessionController extends Controller
     {
         $request->authenticate();
 
+        $user = $request->user();
         $request->session()->regenerate();
 
         $redirectRoute = 'dashboard';
-        if (auth()->user()->hasRole('Admin')) {
+        if ($user?->hasRole('Admin')) {
             $redirectRoute = 'admin.dashboard';
         }
 
