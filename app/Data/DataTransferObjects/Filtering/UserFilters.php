@@ -14,6 +14,7 @@ class UserFilters extends BaseFilters
 
     public static function fromDataTableRequest(Request $request): self
     {
+        /** @var array<string, mixed> $filters */
         $filters = $request->input('filters', []);
 
         return self::from([

@@ -15,20 +15,32 @@ abstract class BaseFilters extends Data
     protected static function getPaginationFilters(Request $request): self
     {
         return self::from([
-            'perPage' => (int) $request->input('rows', 20),
-            'page' => (int) $request->input('page', 1),
-            'sortField' => $request->input('sortField'),
+            'perPage' => $request->integer('rows', 20),
+            'page' => $request->integer('page', 1),
+            'sortField' => $request->string('sortField')->value(),
             'sortDirection' => $request->input('sortOrder', 1) == 1 ? 'asc' : 'desc',
         ]);
     }
 
+    /**
+     * @param array<string, mixed> $filters
+     */
     protected static function getFilterValue(array $filters, string $field): mixed
     {
-        return $filters[$field]['value'] ?? null;
+        return isset($filters[$field]) && is_array($filters[$field])
+            ? ($filters[$field]['value'] ?? null)
+            : null;
     }
 
+    /**
+     * @param array<string, mixed> $filters
+     */
     protected static function getMatchMode(array $filters, string $field): ?string
     {
-        return $filters[$field]['matchMode'] ?? null;
+        $value = isset($filters[$field]) && is_array($filters[$field])
+            ? ($filters[$field]['matchMode'] ?? null)
+            : null;
+
+        return $value !== null ? (string) $value : null;
     }
 }

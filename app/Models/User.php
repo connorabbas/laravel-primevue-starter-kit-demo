@@ -16,6 +16,7 @@ class User extends Authenticatable //implements MustVerifyEmail
     use HasFactory;
     use Notifiable;
     use HasRoles;
+    /** @use Filterable<User> */
     use Filterable;
 
     /**
