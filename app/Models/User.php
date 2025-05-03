@@ -4,6 +4,7 @@ namespace App\Models;
 
 //use Illuminate\Contracts\Auth\MustVerifyEmail;
 use App\Models\Traits\Filterable;
+use Database\Factories\UserFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -11,6 +12,7 @@ use Spatie\Permission\Traits\HasRoles;
 
 class User extends Authenticatable //implements MustVerifyEmail
 {
+    /** @use HasFactory<UserFactory> */
     use HasFactory;
     use Notifiable;
     use HasRoles;
@@ -19,7 +21,7 @@ class User extends Authenticatable //implements MustVerifyEmail
     /**
      * The attributes that are mass assignable.
      *
-     * @var array<int, string>
+     * @var list<string>
      */
     protected $fillable = [
         'name',
@@ -30,7 +32,7 @@ class User extends Authenticatable //implements MustVerifyEmail
     /**
      * The attributes that should be hidden for serialization.
      *
-     * @var array<int, string>
+     * @var list<string>
      */
     protected $hidden = [
         'password',
