@@ -1,5 +1,6 @@
 import { ref, computed, onMounted } from 'vue';
 import { router } from '@inertiajs/vue3';
+import type { Page, PageProps, Errors } from '@inertiajs/core';
 import { FilterMatchMode } from '@primevue/core/api';
 import debounce from 'lodash-es/debounce';
 import { PageState, DataTablePageEvent } from 'primevue';
@@ -62,8 +63,8 @@ export function usePaginatedData(
         const params = qs.parse(queryString, {
             ignoreQueryPrefix: true,
             strictNullHandling: true,
-            // set empty string values to null to match Laravel backend behavior
             decoder: function (str, defaultDecoder) {
+                // set empty string values to null to match Laravel backend behavior
                 const value = defaultDecoder(str);
                 return value === '' ? null : value;
             },
@@ -80,8 +81,8 @@ export function usePaginatedData(
     }
 
     function fetchData(options: {
-        onSuccess?: (page: any) => void;
-        onError?: (errors: any) => void;
+        onSuccess?: (page: Page<PageProps>) => void;
+        onError?: (errors: Errors) => void;
         onFinish?: () => void;
     } = {}) {
         const { onSuccess: successCallback, onError: errorCallback, onFinish: finishCallback } = options;
