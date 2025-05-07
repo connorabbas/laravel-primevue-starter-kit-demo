@@ -62,6 +62,7 @@ export function usePaginatedData(
         const params = qs.parse(queryString, {
             ignoreQueryPrefix: true,
             strictNullHandling: true,
+            // set empty string values to null to match Laravel backend behavior
             decoder: function (str, defaultDecoder) {
                 const value = defaultDecoder(str);
                 return value === '' ? null : value;
