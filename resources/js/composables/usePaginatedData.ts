@@ -81,9 +81,10 @@ export function usePaginatedData(
     }
 
     function fetchData(options: {
-        onSuccess?: (page: Page<PageProps>) => void;
-        onError?: (errors: Errors) => void;
-        onFinish?: () => void;
+        data?: Record<string, any>,
+        onSuccess?: (page: Page<PageProps>) => void,
+        onError?: (errors: Errors) => void,
+        onFinish?: () => void,
     } = {}) {
         const { onSuccess: successCallback, onError: errorCallback, onFinish: finishCallback } = options;
 
@@ -97,6 +98,7 @@ export function usePaginatedData(
                     ...pagination.value,
                     sortField: sorting.value.field,
                     sortOrder: sorting.value.order,
+                    ...options?.data
                 },
                 preserveState: true,
                 preserveUrl: false,
