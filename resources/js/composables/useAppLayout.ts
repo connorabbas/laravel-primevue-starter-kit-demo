@@ -16,7 +16,7 @@ export function useAppLayout() {
 
     // Menu items
     const menuItems = computed<ExtendedMenuItem[]>(() => {
-        let items: ExtendedMenuItem[] = [
+        const items: ExtendedMenuItem[] = [
             {
                 label: 'Home',
                 lucideIcon: House,
