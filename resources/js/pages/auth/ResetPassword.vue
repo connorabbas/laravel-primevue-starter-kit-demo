@@ -86,7 +86,7 @@ onMounted(() => {
             </div>
 
             <div class="flex flex-col gap-2">
-                <label for="password_confirmation">Confirm Password</label>
+                <label for="password_confirmation">Confirm New Password</label>
                 <Password
                     id="password_confirmation"
                     v-model="resetPwForm.password_confirmation"
