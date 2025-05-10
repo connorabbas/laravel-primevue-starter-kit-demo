@@ -9,9 +9,16 @@ export interface User {
     email_verified_at?: string;
 }
 
+export interface AuthProps {
+    isAdmin?: boolean;
+    user?: User;
+}
+
 export type PageProps<
     T extends Record<string, unknown> = Record<string, unknown>
-> = T;
+> = T & {
+    auth: AuthProps;
+};
 
 export type PrimeVueDataFilters = {
     [key: string]: DataTableFilterMetaData;
