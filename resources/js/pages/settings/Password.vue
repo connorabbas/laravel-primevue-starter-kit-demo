@@ -43,11 +43,17 @@ const updatePassword = () => {
         onError: () => {
             if (updatePasswordForm.errors?.password) {
                 updatePasswordForm.reset('password', 'password_confirmation');
-                newPasswordInput.value.$el.focus();
+                const newPasswordInputElement = newPasswordInput.value.$el.querySelector('input');
+                if (newPasswordInputElement) {
+                    newPasswordInputElement.focus();
+                }
             }
             if (updatePasswordForm.errors?.current_password) {
                 updatePasswordForm.reset('current_password');
-                currentPasswordInput.value.$el.focus();
+                const currentPasswordInputElement = currentPasswordInput.value.$el.querySelector('input');
+                if (currentPasswordInputElement) {
+                    currentPasswordInputElement.focus();
+                }
             }
         },
     });

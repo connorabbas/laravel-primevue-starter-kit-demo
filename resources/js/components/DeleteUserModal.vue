@@ -5,6 +5,7 @@ import { useForm } from '@inertiajs/vue3';
 const modalOpen = defineModel(false, {
     type: Boolean,
 });
+
 const passwordInput = useTemplateRef('password-input');
 
 const form = useForm({
@@ -15,7 +16,12 @@ const deleteUser = () => {
     form.delete(route('profile.destroy'), {
         preserveScroll: true,
         onSuccess: () => (modalOpen.value = false),
-        onError: () => passwordInput.value.$el.focus(),
+        onError: () => {
+            const passwordInputElement = passwordInput.value.$el.querySelector('input');
+            if (passwordInputElement) {
+                passwordInputElement.focus();
+            }
+        },
         onFinish: () => form.reset(),
     });
 };
@@ -41,6 +47,7 @@ const deleteUser = () => {
 
         <div class="flex flex-col gap-2">
             <Password
+                ref="password-input"
                 id="password"
                 v-model="form.password"
                 :invalid="Boolean(form.errors?.password)"
