@@ -2,6 +2,7 @@ import { ref, computed, onMounted, onUnmounted, watchEffect } from 'vue';
 import { usePage, useForm } from '@inertiajs/vue3';
 import { route } from 'ziggy-js';
 import { LayoutGrid, House, Info, Github, Code, Settings, LogOut, Users, Lock, BookOpen } from 'lucide-vue-next';
+import { ExtendedMenuItem } from '@/types';
 
 export function useAppLayout() {
     const page = usePage();
@@ -14,8 +15,8 @@ export function useAppLayout() {
     });
 
     // Menu items
-    const menuItems = computed(() => {
-        let items = [
+    const menuItems = computed<ExtendedMenuItem[]>(() => {
+        let items: ExtendedMenuItem[] = [
             {
                 label: 'Home',
                 lucideIcon: House,
@@ -80,7 +81,7 @@ export function useAppLayout() {
     const logout = () => {
         logoutForm.post(route('logout'));
     };
-    const userMenuItems = [
+    const userMenuItems: ExtendedMenuItem[] = [
         {
             label: 'Settings',
             route: route('profile.edit'),
