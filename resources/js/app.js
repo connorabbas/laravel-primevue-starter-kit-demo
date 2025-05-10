@@ -15,15 +15,15 @@ import PageTitleSection from '@/components/PageTitleSection.vue';
 import { useColorMode } from '@vueuse/core';
 import { useThemePreset } from '@/composables/useThemePreset';
 
-/* global Ziggy */
-const appName = import.meta.env.VITE_APP_NAME || 'Laravel';
-
 // Site light/dark mode
 const colorMode = useColorMode({ emitAuto: true });
 
 // Site theme preset
 const { getCurrentPreset } = useThemePreset();
 const themePreset = getCurrentPreset();
+
+/* global Ziggy */
+const appName = import.meta.env.VITE_APP_NAME || 'Laravel';
 
 createInertiaApp({
     title: (title) => `${title} - ${appName}`,
