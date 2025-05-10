@@ -19,10 +19,6 @@ const deleteUser = () => {
         onFinish: () => form.reset(),
     });
 };
-
-function focusPasswordInput() {
-    passwordInput.value.$el.focus();
-}
 </script>
 
 <template>
@@ -34,7 +30,6 @@ function focusPasswordInput() {
         :draggable="false"
         dismissableMask
         modal
-        @show="focusPasswordInput"
     >
         <div class="mb-6">
             <p class="m-0 text-muted-color">
@@ -45,14 +40,13 @@ function focusPasswordInput() {
         </div>
 
         <div class="flex flex-col gap-2">
-            <InputText
+            <Password
                 id="password"
-                ref="password-input"
                 v-model="form.password"
-                :invalid="Boolean(form.errors.password)"
-                type="password"
-                placeholder="Password"
+                :invalid="Boolean(form.errors?.password)"
+                :feedback="false"
                 autocomplete="current-password"
+                toggleMask
                 autofocus
                 required
                 fluid

@@ -81,7 +81,6 @@ export function usePaginatedData(
     }
 
     function fetchData(options: {
-        data?: Record<string, any>,
         onSuccess?: (page: Page<PageProps>) => void,
         onError?: (errors: Errors) => void,
         onFinish?: () => void,
@@ -98,7 +97,6 @@ export function usePaginatedData(
                     ...pagination.value,
                     sortField: sorting.value.field,
                     sortOrder: sorting.value.order,
-                    ...options?.data
                 },
                 preserveState: true,
                 preserveUrl: false,
