@@ -1,5 +1,6 @@
-import { DataTableFilterMetaData } from 'primevue';
-import { MenuItem } from 'primevue/menuitem';
+import type { DataTableFilterMetaData } from 'primevue';
+import type { Page, PageProps, Errors } from '@inertiajs/core';
+import type { MenuItem } from 'primevue/menuitem';
 import type { LucideIcon } from 'lucide-vue-next';
 
 export interface User {
@@ -27,4 +28,10 @@ export type PrimeVueDataFilters = {
 export interface ExtendedMenuItem extends MenuItem {
     route?: string;
     lucideIcon?: LucideIcon;
+}
+
+export interface InertiaRouterFetchCallbacks {
+    onSuccess?: (page: Page<PageProps>) => void;
+    onError?: (errors: Errors) => void;
+    onFinish?: () => void;
 }
