@@ -148,13 +148,7 @@ export function usePaginatedData(
         return fetchData(options);
     }
 
-    function hardReset(
-        options: {
-            onSuccess?: (page: Page<PageProps>) => void;
-            onError?: (errors: Errors) => void;
-            onFinish?: () => void;
-        } = {}
-    ): Promise<Page<PageProps>> {
+    function hardReset(options: InertiaRouterFetchCallbacks = {}): Promise<Page<PageProps>> {
         const { onSuccess, onError, onFinish } = options;
 
         return new Promise((resolve, reject) => {
