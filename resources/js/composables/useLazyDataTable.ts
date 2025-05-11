@@ -1,7 +1,7 @@
 import type { Page, PageProps } from '@inertiajs/core';
-import { usePaginatedData } from './usePaginatedData';
 import { DataTableFilterMetaData, DataTableFilterEvent, DataTableSortEvent } from 'primevue';
 import { PrimeVueDataFilters, InertiaRouterFetchCallbacks } from '@/types';
+import { usePaginatedData } from './usePaginatedData';
 
 export function useLazyDataTable(
     propDataToFetch: string | string[],
