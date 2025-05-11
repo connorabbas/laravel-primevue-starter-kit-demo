@@ -2,10 +2,10 @@ import { ref, computed, onMounted } from 'vue';
 import { router } from '@inertiajs/vue3';
 import type { Page, PageProps, Errors } from '@inertiajs/core';
 import { FilterMatchMode } from '@primevue/core/api';
-import debounce from 'lodash-es/debounce';
 import { PageState, DataTablePageEvent } from 'primevue';
-import type { PrimeVueDataFilters, InertiaRouterFetchCallbacks } from '@/types';
+import debounce from 'lodash-es/debounce';
 import qs from 'qs';
+import type { PrimeVueDataFilters, InertiaRouterFetchCallbacks } from '@/types';
 
 interface PaginatedFilteredSortedQueryParams {
     filters?: PrimeVueDataFilters;
