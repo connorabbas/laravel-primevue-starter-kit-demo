@@ -1,6 +1,6 @@
 import type { DataTableFilterMetaData } from 'primevue';
 import type { Page, PageProps, Errors } from '@inertiajs/core';
-import { MenuItem } from 'primevue/menuitem';
+import type { MenuItem } from 'primevue/menuitem';
 import type { LucideIcon } from 'lucide-vue-next';
 
 export interface User {

@@ -1,6 +1,6 @@
 import { ref, computed, onMounted } from 'vue';
 import { router } from '@inertiajs/vue3';
-import type { Page, PageProps, Errors } from '@inertiajs/core';
+import type { Page, PageProps } from '@inertiajs/core';
 import { FilterMatchMode } from '@primevue/core/api';
 import { PageState, DataTablePageEvent } from 'primevue';
 import debounce from 'lodash-es/debounce';
