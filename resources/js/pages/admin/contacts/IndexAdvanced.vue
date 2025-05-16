@@ -7,33 +7,33 @@ import AppLayout from '@/layouts/AppLayout.vue';
 import Menu from '@/components/primevue/menu/Menu.vue';
 
 const props = defineProps({
-    users: Object,
+    contacts: Object,
 });
 
-const pageTitle = 'Users';
+const pageTitle = 'Contacts';
 const breadcrumbs = [
     { label: 'Admin Dashboard', route: route('admin.dashboard') },
-    { label: pageTitle, route: route('admin.users.index') },
+    { label: pageTitle, route: route('admin.contacts.index') },
     { label: 'List' },
 ];
 
-// User context menu
-const userContextMenu = useTemplateRef('user-context-menu');
-const userContextMenuItems = ref([]);
-function toggleUserContextMenu(event, userData) {
+// Contact context menu
+const contactContextMenu = useTemplateRef('contact-context-menu');
+const contactContextMenuItems = ref([]);
+function toggleContactContextMenu(event, contactData) {
     // Populate menu items based on row data
-    userContextMenuItems.value = [
+    contactContextMenuItems.value = [
         {
-            label: 'Manage User',
+            label: 'Manage Contact',
             lucideIcon: Pencil,
             command: () => {
-                alert('User Data: ' + JSON.stringify(userData));
+                alert('Contact Data: ' + JSON.stringify(contactData));
             },
         },
     ];
     // Show the menu
-    if (userContextMenu.value && userContextMenu.value?.el) {
-        userContextMenu.value.el.toggle(event);
+    if (contactContextMenu.value && contactContextMenu.value?.el) {
+        contactContextMenu.value.el.toggle(event);
     }
 }
 
@@ -49,10 +49,10 @@ const {
     filter,
     sort,
     hardReset,
-} = useLazyDataTable('users', {
+} = useLazyDataTable('contacts', {
     name: { value: null, matchMode: FilterMatchMode.CONTAINS },
     email: { value: null, matchMode: FilterMatchMode.CONTAINS },
-}, props.users.per_page);
+}, props.contacts.per_page);
 </script>
 
 <template>
@@ -81,9 +81,9 @@ const {
         <Card pt:body:class="p-3">
             <template #content>
                 <Menu
-                    ref="user-context-menu"
+                    ref="contact-context-menu"
                     class="shadow-sm"
-                    :model="userContextMenuItems"
+                    :model="contactContextMenuItems"
                     popup
                 />
                 <DataTable
@@ -94,11 +94,11 @@ const {
                     removableSort
                     resizableColumns
                     :loading="processing"
-                    :value="props.users.data"
-                    :totalRecords="props.users.total"
+                    :value="props.contacts.data"
+                    :totalRecords="props.contacts.total"
                     :sortField="sorting.field"
                     :sortOrder="sorting.order"
-                    :rows="props.users.per_page"
+                    :rows="props.contacts.per_page"
                     :rowsPerPageOptions="[10, 20, 50, 100]"
                     :first="firstDatasetIndex"
                     columnResizeMode="fit"
@@ -118,7 +118,7 @@ const {
                                 <template #icon>
                                     <AlertCircle />
                                 </template>
-                                No Users found.
+                                No Contacts found.
                             </Message>
                         </div>
                     </template>
@@ -171,12 +171,12 @@ const {
                     <Column header="Action">
                         <template #body="{ data }">
                             <Button
-                                v-tooltip.top="'Show User Actions'"
+                                v-tooltip.top="'Show Contact Actions'"
                                 type="button"
                                 severity="secondary"
                                 rounded
                                 text
-                                @click="toggleUserContextMenu($event, data)"
+                                @click="toggleContactContextMenu($event, data)"
                             >
                                 <template #icon>
                                     <EllipsisVertical class="size-5!" />

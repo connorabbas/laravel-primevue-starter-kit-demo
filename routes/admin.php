@@ -14,4 +14,5 @@ Route::middleware(['auth', 'role:Admin'])
         })->name('dashboard');
         Route::get('/users', [UserController::class, 'index'])->name('users.index');
         Route::get('/contacts', [ContactController::class, 'index'])->name('contacts.index');
+        Route::get('/contacts-a', [ContactController::class, 'indexA'])->name('contacts.indexA');
     });

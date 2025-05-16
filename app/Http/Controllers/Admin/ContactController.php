@@ -21,4 +21,16 @@ class ContactController extends Controller
             'contacts' => $contacts,
         ]);
     }
+
+    public function indexA(Request $request): Response
+    {
+        $contacts = Contact::paginate(
+            perPage: $request->integer('rows', 20),
+            page: $request->integer('page', 1)
+        );
+
+        return Inertia::render('admin/contacts/IndexAdvanced', [
+            'contacts' => $contacts,
+        ]);
+    }
 }
