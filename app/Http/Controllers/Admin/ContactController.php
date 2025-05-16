@@ -12,9 +12,12 @@ class ContactController extends Controller
 {
     public function index(Request $request): Response
     {
-        $contacts = Contact::paginate(20);
+        $contacts = Contact::paginate(
+            perPage: $request->integer('rows', 20),
+            page: $request->integer('page', 1)
+        );
 
-        return Inertia::render('admin/users/Index', [
+        return Inertia::render('admin/contacts/Index', [
             'contacts' => $contacts,
         ]);
     }

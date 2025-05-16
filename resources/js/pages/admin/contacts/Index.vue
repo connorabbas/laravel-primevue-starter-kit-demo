@@ -123,7 +123,7 @@ const {
                         </div>
                     </template>
                     <Column
-                        field="name"
+                        filterField="name"
                         header="Name"
                         sortable
                         :showFilterMenu="false"
@@ -139,7 +139,7 @@ const {
                             />
                         </template>
                         <template #body="{ data }">
-                            {{ data.name }}
+                            {{ `${data.first_name} ${data.last_name}` }}
                         </template>
                     </Column>
                     <Column
