@@ -3,7 +3,6 @@ import { AlertCircle } from 'lucide-vue-next';
 import { usePaginatedData } from '@/composables/usePaginatedData';
 import AppLayout from '@/layouts/AppLayout.vue';
 
-
 const props = defineProps({
     contacts: Object,
     organizations: Array,
