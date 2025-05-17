@@ -1,7 +1,5 @@
 <script setup>
-import { ref } from 'vue';
-import { FilterMatchMode } from '@primevue/core/api';
-import { AlertCircle, FunnelX, Search } from 'lucide-vue-next';
+import { AlertCircle } from 'lucide-vue-next';
 import { usePaginatedData } from '@/composables/usePaginatedData';
 import AppLayout from '@/layouts/AppLayout.vue';
 
@@ -55,11 +53,15 @@ const {
                                 <Skeleton
                                     width="10rem"
                                     height="7rem"
-                                ></Skeleton>
+                                />
                             </div>
                         </template>
-                        <template #title>{{ contact.name }}</template>
-                        <template #subtitle>{{ contact.organization.name }}</template>
+                        <template #title>
+                            {{ contact.name }}
+                        </template>
+                        <template #subtitle>
+                            {{ contact.organization.name }}
+                        </template>
                         <template #content>
                             <div class="flex flex-wrap gap-2">
                                 <Tag
@@ -96,8 +98,7 @@ const {
                     template="FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink CurrentPageReport RowsPerPageDropdown"
                     currentPageReportTemplate="Showing {first} to {last} of {totalRecords} records"
                     @page="paginate"
-                >
-                </Paginator>
+                />
             </div>
         </div>
     </AppLayout>

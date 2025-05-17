@@ -67,7 +67,7 @@ const appliedFiltersCount = computed(() => {
     return Object.values(filters.value)
         .filter(f => f.value !== null)
         .length;
-})
+});
 </script>
 
 <template>
@@ -127,15 +127,15 @@ const appliedFiltersCount = computed(() => {
                     <InputGroup>
                         <InputText
                             id="name-filter"
-                            class="flex-1"
                             v-model="filters.name.value"
+                            class="flex-1"
                             placeholder="Filter by first or last name"
                             fluid
                         />
                         <Select
                             id="name-match-mode"
-                            class="flex-none w-auto"
                             v-model="filters.name.matchMode"
+                            class="flex-none w-auto"
                             :options="textInputMatchModes"
                             optionLabel="label"
                             optionValue="value"
@@ -149,15 +149,15 @@ const appliedFiltersCount = computed(() => {
                     <InputGroup>
                         <InputText
                             id="email-filter"
-                            class="flex-1"
                             v-model="filters.email.value"
+                            class="flex-1"
                             placeholder="Filter by email"
                             fluid
                         />
                         <Select
                             id="email-match-mode"
-                            class="flex-none w-auto"
                             v-model="filters.email.matchMode"
+                            class="flex-none w-auto"
                             :options="textInputMatchModes"
                             optionLabel="label"
                             optionValue="value"
@@ -199,16 +199,16 @@ const appliedFiltersCount = computed(() => {
                     <InputGroup>
                         <DatePicker
                             id="created-at-filter"
-                            class="flex-1"
                             v-model="filters.created_at.value"
+                            class="flex-1"
                             dateFormat="mm/dd/yy"
                             placeholder="mm/dd/yyyy"
                             showButtonBar
                         />
                         <Select
                             id="created-at-match-mode"
-                            class="flex-none w-auto"
                             v-model="filters.created_at.matchMode"
+                            class="flex-none w-auto"
                             :options="dateInputMatchModes"
                             optionLabel="label"
                             optionValue="value"
@@ -270,11 +270,15 @@ const appliedFiltersCount = computed(() => {
                                 <Skeleton
                                     width="10rem"
                                     height="7rem"
-                                ></Skeleton>
+                                />
                             </div>
                         </template>
-                        <template #title>{{ contact.name }}</template>
-                        <template #subtitle>{{ contact.organization.name }}</template>
+                        <template #title>
+                            {{ contact.name }}
+                        </template>
+                        <template #subtitle>
+                            {{ contact.organization.name }}
+                        </template>
                         <template #content>
                             <div class="flex flex-wrap gap-2">
                                 <Tag
@@ -311,8 +315,7 @@ const appliedFiltersCount = computed(() => {
                     template="FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink CurrentPageReport RowsPerPageDropdown"
                     currentPageReportTemplate="Showing {first} to {last} of {totalRecords} records"
                     @page="paginate"
-                >
-                </Paginator>
+                />
             </div>
         </BlockUI>
     </AppLayout>
