@@ -2,7 +2,7 @@ import { ref, computed, onMounted, onUnmounted, watchEffect } from 'vue';
 import { usePage, useForm } from '@inertiajs/vue3';
 import { route } from 'ziggy-js';
 import {
-    LayoutGrid, House, Info, Github, Code, Settings, LogOut, Users, Lock, BookOpen, Lightbulb, Table2
+    LayoutGrid, House, Info, Settings, LogOut, ExternalLink, FileSearch, FolderGit2, Lock, Users, Lightbulb, Table2, BookOpen
 } from 'lucide-vue-next';
 import { MenuItem } from '@/types';
 
@@ -38,17 +38,17 @@ export function useAppLayout() {
                     {
                         label: 'PrimeVue Docs',
                         url: 'https://primevue.org/',
-                        lucideIcon: Code,
+                        lucideIcon: ExternalLink,
                     },
                     {
                         label: 'Starter Kit Docs',
                         url: 'https://connorabbas.github.io/laravel-primevue-starter-kit-docs/',
-                        lucideIcon: BookOpen,
+                        lucideIcon: FileSearch,
                     },
                     {
                         label: 'Starter Kit Repo',
                         url: 'https://github.com/connorabbas/laravel-primevue-starter-kit',
-                        lucideIcon: Github,
+                        lucideIcon: FolderGit2,
                     },
                 ],
             },
