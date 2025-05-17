@@ -21,7 +21,7 @@ class ContactFilters extends BaseFilters
     public ?DateTime $createdAt = null;
     public ?FilterMatchMode $createdAtMatchMode = null;
 
-    public static function fromDataTableRequest(Request $request): self
+    public static function fromRequest(Request $request): self
     {
         /** @var array<string, mixed> $filters */
         $filters = $request->input('filters', []);

@@ -62,6 +62,12 @@ export function useAppLayout() {
                         route: route('examples.data-table.contacts.index'),
                         active: currentRoute.value == 'examples.data-table.contacts.index',
                     },
+                    {
+                        label: 'Paginator',
+                        lucideIcon: Table2,
+                        route: route('examples.paginator.contacts.index'),
+                        active: currentRoute.value == 'examples.paginator.contacts.index',
+                    },
                 ],
             },
         ];

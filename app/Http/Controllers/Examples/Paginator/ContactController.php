@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Examples\DataTable;
+namespace App\Http\Controllers\Examples\Paginator;
 
 use App\Data\DataTransferObjects\Filtering\ContactFilters;
 use App\Http\Controllers\Controller;
@@ -20,7 +20,7 @@ class ContactController extends Controller
 
     public function index(Request $request): Response
     {
-        return Inertia::render('examples/data-table/contacts/Index', [
+        return Inertia::render('examples/paginator/contacts/Index', [
             'contacts' => $this->contactService->getContacts(ContactFilters::fromRequest($request)),
             'organizations' => fn () => Organization::all(),
             'tags' => fn () => Tag::all(),

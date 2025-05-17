@@ -5,6 +5,7 @@ import { createApp, h } from 'vue';
 import { createInertiaApp, Head, Link } from '@inertiajs/vue3';
 import { resolvePageComponent } from 'laravel-vite-plugin/inertia-helpers';
 import { ZiggyVue } from '../../vendor/tightenco/ziggy';
+import { autoAnimatePlugin } from '@formkit/auto-animate/vue'
 
 import PrimeVue from 'primevue/config';
 import ToastService from 'primevue/toastservice';
@@ -50,6 +51,7 @@ createInertiaApp({
                 },
             })
             .use(ToastService)
+            .use(autoAnimatePlugin)
             .component('InertiaHead', Head)
             .component('InertiaLink', Link)
             .component('Container', Container)

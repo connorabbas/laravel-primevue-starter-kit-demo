@@ -12,7 +12,7 @@ class UserFilters extends BaseFilters
     public ?string $email = null;
     public ?FilterMatchMode $emailMatchMode = null;
 
-    public static function fromDataTableRequest(Request $request): self
+    public static function fromRequest(Request $request): self
     {
         /** @var array<string, mixed> $filters */
         $filters = $request->input('filters', []);
