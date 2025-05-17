@@ -1,7 +1,7 @@
 <script setup>
 import { ref, computed } from 'vue';
 import { FilterMatchMode } from '@primevue/core/api';
-import { AlertCircle, Funnel, FunnelX } from 'lucide-vue-next';
+import { AlertCircle, Funnel, RotateCcw, Search } from 'lucide-vue-next';
 import { usePaginatedData } from '@/composables/usePaginatedData';
 import AppLayout from '@/layouts/AppLayout.vue';
 
@@ -44,8 +44,8 @@ const sortOptions = ref([
     { label: 'Name - Desc', value: { field: 'name', order: 0 } },
     { label: 'Email - Asc', value: { field: 'email', order: 1 } },
     { label: 'Email - Desc', value: { field: 'email', order: 0 } },
-    { label: 'Created - Asc', value: { field: 'created_at', order: 1 } },
-    { label: 'Created - Desc', value: { field: 'created_at', order: 0 } },
+    { label: 'Created - Oldest', value: { field: 'created_at', order: 1 } },
+    { label: 'Created - Latest', value: { field: 'created_at', order: 0 } },
 ]);
 
 const textInputMatchModes = [
@@ -230,7 +230,7 @@ const appliedFiltersCount = computed(() => {
                         @click="() => hardReset({ onFinish: () => showFilters = false })"
                     >
                         <template #icon>
-                            <FunnelX />
+                            <RotateCcw />
                         </template>
                     </Button>
                     <Button
@@ -240,7 +240,7 @@ const appliedFiltersCount = computed(() => {
                         @click="() => filter({ onFinish: () => showFilters = false })"
                     >
                         <template #icon>
-                            <Funnel />
+                            <Search />
                         </template>
                     </Button>
                 </div>
