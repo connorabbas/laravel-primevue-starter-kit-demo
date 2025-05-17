@@ -2,7 +2,7 @@ import { ref, computed, onMounted, onUnmounted, watchEffect } from 'vue';
 import { usePage, useForm } from '@inertiajs/vue3';
 import { route } from 'ziggy-js';
 import {
-    LayoutGrid, House, Info, Settings, LogOut, ExternalLink, FileSearch, FolderGit2, Lock, Users
+    LayoutGrid, House, Info, Settings, LogOut, ExternalLink, FileSearch, FolderGit2, Lock, Users, Lightbulb, Table2, BookOpen
 } from 'lucide-vue-next';
 import { MenuItem } from '@/types';
 
@@ -49,6 +49,24 @@ export function useAppLayout() {
                         label: 'Starter Kit Repo',
                         url: 'https://github.com/connorabbas/laravel-primevue-starter-kit',
                         lucideIcon: FolderGit2,
+                    },
+                ],
+            },
+            {
+                label: 'Examples',
+                lucideIcon: Lightbulb,
+                items: [
+                    {
+                        label: 'DataTable',
+                        lucideIcon: Table2,
+                        route: route('examples.data-table.contacts.index'),
+                        active: currentRoute.value == 'examples.data-table.contacts.index',
+                    },
+                    {
+                        label: 'Paginator',
+                        lucideIcon: BookOpen,
+                        route: route('examples.paginator.contacts.index'),
+                        active: currentRoute.value == 'examples.paginator.contacts.index',
                     },
                 ],
             },

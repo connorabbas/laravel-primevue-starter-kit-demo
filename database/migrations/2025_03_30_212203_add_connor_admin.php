@@ -9,9 +9,11 @@ return new class () extends Migration {
      */
     public function up(): void
     {
-        $user = User::where('email', 'abbasconnor@gmail.com')->first();
-        if ($user) {
-            $user->assignRole('Admin');
+        if (app()->isProduction()) {
+            $user = User::where('email', 'abbasconnor@gmail.com')->first();
+            if ($user) {
+                $user->assignRole('Admin');
+            }
         }
     }
 };
