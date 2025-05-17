@@ -64,7 +64,7 @@ export function useAppLayout() {
                     },
                     {
                         label: 'Paginator',
-                        lucideIcon: Table2,
+                        lucideIcon: BookOpen,
                         route: route('examples.paginator.contacts.index'),
                         active: currentRoute.value == 'examples.paginator.contacts.index',
                     },

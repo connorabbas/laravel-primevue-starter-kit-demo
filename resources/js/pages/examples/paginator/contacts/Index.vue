@@ -1,7 +1,7 @@
 <script setup>
 import { ref } from 'vue';
 import { FilterMatchMode } from '@primevue/core/api';
-import { FilterX, Search } from 'lucide-vue-next';
+import { AlertCircle, FilterX, Search } from 'lucide-vue-next';
 import { usePaginatedData } from '@/composables/usePaginatedData';
 import AppLayout from '@/layouts/AppLayout.vue';
 
@@ -106,15 +106,25 @@ const sortOptions = ref([
                         class="h-full"
                         pt:content:class="flex flex-col gap-5"
                     >
-                        <template #content>
-                            <div class="flex justify-center">
+                        <template #header>
+                            <div class="p-4 pb-0 flex justify-center">
+                                <!-- Fake profile img -->
                                 <Skeleton
                                     width="10rem"
                                     height="7rem"
                                 ></Skeleton>
                             </div>
-                            <div class="flex flex-col gap-2">
-                                <div>{{ contact.name }}</div>
+                        </template>
+                        <template #title>{{ contact.name }}</template>
+                        <template #subtitle>{{ contact.organization.name }}</template>
+                        <template #content>
+                            <div class="flex flex-wrap gap-2">
+                                <Tag
+                                    v-for="tag in contact.tags"
+                                    :key="tag.id"
+                                    :value="tag.name"
+                                    severity="secondary"
+                                />
                             </div>
                         </template>
                     </Card>
