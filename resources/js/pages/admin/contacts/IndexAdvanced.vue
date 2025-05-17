@@ -161,14 +161,14 @@ const {
                         <template #filter="{ filterModel, filterCallback }">
                             <MultiSelect
                                 v-model="filterModel.value"
-                                @change="filterCallback()"
                                 :options="props.tags"
                                 optionLabel="name"
                                 optionValue="id"
                                 display="chip"
                                 placeholder="Any"
-                                pt:labelContainer:class="flex! flex-wrap!"
+                                pt:label:class="flex flex-wrap"
                                 fluid
+                                @change="filterCallback()"
                             />
                         </template>
                         <template #body="{ data }">

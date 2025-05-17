@@ -13,20 +13,31 @@ class ContactFilters extends BaseFilters
     public ?FilterMatchMode $emailMatchMode = null;
     public ?int $organizationId = null;
     public ?FilterMatchMode $organizationIdMatchMode = null;
+    public ?array $tags = null;
 
     public static function fromDataTableRequest(Request $request): self
     {
         /** @var array<string, mixed> $filters */
         $filters = $request->input('filters', []);
 
-        return self::from([
-            ...self::getPaginationFilters($request)->toArray(),
+        $inputFilters = [
             'name' => self::getFilterValue($filters, 'name'),
             'nameMatchMode' => self::getMatchMode($filters, 'name'),
             'email' => self::getFilterValue($filters, 'email'),
             'emailMatchMode' => self::getMatchMode($filters, 'email'),
             'organizationId' => self::getFilterValue($filters, 'organization'),
             'organizationIdMatchMode' => self::getMatchMode($filters, 'organization'),
-        ]);
+        ];
+        $tags = self::getFilterValue($filters, 'tags');
+        if ($tags && is_array($tags) && count($tags) > 0) {
+            $inputFilters['tags'] = $tags;
+        }
+
+        $params = [
+            ...self::getPaginationFilters($request)->toArray(),
+            ...$inputFilters,
+        ];
+
+        return self::from($params);
     }
 }
