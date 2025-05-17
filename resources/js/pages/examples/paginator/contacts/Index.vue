@@ -219,12 +219,12 @@ const appliedFiltersCount = computed(() => {
                 </div>
             </div>
             <template #footer>
-                <div class="flex items-center gap-2">
+                <div class="flex items-center gap-4">
                     <Button
                         :disabled="!filteredOrSorted || processing"
                         severity="secondary"
                         type="button"
-                        label="Clear Filters"
+                        label="Reset"
                         class="flex-auto"
                         outlined
                         @click="() => hardReset({ onFinish: () => showFilters = false })"
