@@ -19,7 +19,7 @@ class Organization extends Model
 
     public function getFilterableColumns(): array
     {
-        return ['id', 'name'];
+        return ['id'];
     }
 
     /**
