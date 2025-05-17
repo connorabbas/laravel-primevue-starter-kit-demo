@@ -20,29 +20,9 @@ const breadcrumbs = [
 ];
 
 const {
-    filters,
-    sorting,
     firstDatasetIndex,
-    filteredOrSorted,
     paginate,
-    filter,
-    hardReset,
-} = usePaginatedData('contacts', {
-    name: { value: null, matchMode: FilterMatchMode.CONTAINS },
-    email: { value: null, matchMode: FilterMatchMode.CONTAINS },
-    organization: { value: null, matchMode: FilterMatchMode.EQUALS },
-    tags: { value: null, matchMode: FilterMatchMode.IN },
-    created_at: { value: null, matchMode: FilterMatchMode.DATE_IS },
-}, props.contacts.per_page);
-
-const sortOptions = ref([
-    { label: 'Name - Asc', value: { field: 'name', order: 1 } },
-    { label: 'Name - Desc', value: { field: 'name', order: 0 } },
-    { label: 'Email - Asc', value: { field: 'email', order: 1 } },
-    { label: 'Email - Desc', value: { field: 'email', order: 0 } },
-    { label: 'Created - Asc', value: { field: 'created_at', order: 1 } },
-    { label: 'Created - Desc', value: { field: 'created_at', order: 0 } },
-]);
+} = usePaginatedData('contacts', {}, props.contacts.per_page);
 </script>
 
 <template>
@@ -53,45 +33,9 @@ const sortOptions = ref([
             <template #title>
                 {{ pageTitle }}
             </template>
-            <template #end>
-                <Button
-                    v-if="filteredOrSorted"
-                    severity="secondary"
-                    type="button"
-                    label="Clear Filters"
-                    outlined
-                    @click="hardReset"
-                >
-                    <template #icon>
-                        <FilterX />
-                    </template>
-                </Button>
-            </template>
         </PageTitleSection>
 
         <div class="space-y-4">
-            <div class="flex gap-3">
-                <InputGroup>
-                    <InputText
-                        v-model="filters.name.value"
-                        placeholder="Search by contact name"
-                        @keyup.enter="filter"
-                    />
-                    <Button @click="filter">
-                        <template #icon>
-                            <Search />
-                        </template>
-                    </Button>
-                </InputGroup>
-                <Select
-                    v-model="sorting"
-                    :options="sortOptions"
-                    optionLabel="label"
-                    optionValue="value"
-                    placeholder="Sort By"
-                    @change="filter"
-                />
-            </div>
             <div
                 v-if="contacts.data.length"
                 class="grid grid-cols-1 sm:grid-cols-12 gap-4"
