@@ -20,10 +20,10 @@ trait Filterable
      * Validate if the column is filterable/sortable.
      * @throws InvalidArgumentException
      */
-    protected function validateColumn(string $column): void
+    public function validateColumn(string $column): void
     {
         if (!in_array($column, $this->getFilterableColumns(), true)) {
-            throw new InvalidArgumentException("Invalid column name: {$column}.");
+            throw new InvalidArgumentException("Invalid filterable/sortable column name: {$column}.");
         }
     }
 
@@ -55,9 +55,10 @@ trait Filterable
     ): void {
         $query->whereHas($relation, function (Builder $relationQuery) use ($column, $matchMode, $value) {
             $related = $relationQuery->getModel();
+            $fullQualifiedColumnName = $related->getTable() . ".$column";
             $relatedClass = get_class($related);
             $usedTraits = class_uses_recursive($relatedClass);
-            $thisTrait = self::class;
+            $thisTrait = Filterable::class;
 
             if (!in_array($thisTrait, $usedTraits, true)) {
                 throw new InvalidArgumentException("Related model {$relatedClass} must use the {$thisTrait} trait.");
@@ -66,7 +67,7 @@ trait Filterable
             /** @phpstan-ignore-next-line */
             $related->validateColumn($column);
             /** @phpstan-ignore-next-line */
-            $this->applyFilterLogic($relationQuery, $column, $matchMode, $value);
+            $this->applyFilterLogic($relationQuery, $fullQualifiedColumnName, $matchMode, $value);
         });
     }
 
