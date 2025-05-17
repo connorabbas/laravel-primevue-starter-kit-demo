@@ -17,12 +17,15 @@ Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::prefix('examples')->name('examples.')->group(function () {
-    Route::get('/data-table/contacts', [DataTableContactController::class, 'index'])
-        ->name('data-table.contacts.index');
-    Route::get('/paginator/contacts', [PaginatorContactController::class, 'index'])
-        ->name('paginator.contacts.index');
-});
+Route::prefix('examples')
+    ->name('examples.')
+    ->middleware(['auth'])
+    ->group(function () {
+        Route::get('/data-table/contacts', [DataTableContactController::class, 'index'])
+            ->name('data-table.contacts.index');
+        Route::get('/paginator/contacts', [PaginatorContactController::class, 'index'])
+            ->name('paginator.contacts.index');
+    });
 
 require __DIR__ . '/auth.php';
 require __DIR__ . '/admin.php';
