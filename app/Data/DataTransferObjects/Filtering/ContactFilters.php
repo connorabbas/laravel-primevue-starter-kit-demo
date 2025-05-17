@@ -15,6 +15,7 @@ class ContactFilters extends BaseFilters
     public ?FilterMatchMode $emailMatchMode = null;
     public ?int $organizationId = null;
     public ?FilterMatchMode $organizationIdMatchMode = FilterMatchMode::EQUALS;
+    /** @var int[] $tags */
     public ?array $tags = null;
     public ?FilterMatchMode $tagsMatchMode = FilterMatchMode::IN;
     public ?DateTime $createdAt = null;

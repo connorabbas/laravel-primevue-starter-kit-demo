@@ -22,8 +22,8 @@ class FilteredContactController extends Controller
     {
         return Inertia::render('admin/contacts/IndexAdvanced', [
             'contacts' => $this->contactService->getContacts(ContactFilters::fromDataTableRequest($request)),
-            'organizations' => fn() => Organization::all(),
-            'tags' => fn() => Tag::all(),
+            'organizations' => fn () => Organization::all(),
+            'tags' => fn () => Tag::all(),
         ]);
     }
 }
