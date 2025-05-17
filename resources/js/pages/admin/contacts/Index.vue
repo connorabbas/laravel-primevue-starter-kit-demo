@@ -1,5 +1,6 @@
 <script setup>
 import { AlertCircle } from 'lucide-vue-next';
+import { format, parseISO } from 'date-fns';
 import { useLazyDataTable } from '@/composables/useLazyDataTable';
 import AppLayout from '@/layouts/AppLayout.vue';
 import Menu from '@/components/primevue/menu/Menu.vue';
@@ -15,15 +16,11 @@ const breadcrumbs = [
     { label: 'List' },
 ];
 
-// DataTable
 const {
     processing,
     sorting,
     firstDatasetIndex,
     paginate,
-    filter,
-    sort,
-    hardReset,
 } = useLazyDataTable('contacts', {}, props.contacts.per_page);
 </script>
 
@@ -58,8 +55,6 @@ const {
                     :first="firstDatasetIndex"
                     paginatorTemplate="FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink CurrentPageReport RowsPerPageDropdown"
                     currentPageReportTemplate="Showing {first} to {last} of {totalRecords} records"
-                    @filter="filter"
-                    @sort="sort"
                     @page="paginate"
                 >
                     <template #empty>
@@ -76,18 +71,43 @@ const {
                         </div>
                     </template>
                     <Column
-                        field="name"
                         header="Name"
+                        field="name"
                     />
                     <Column
                         field="email"
                         header="Email"
                     />
-                    <!-- Format date as needed, likely use date-fns -->
                     <Column
-                        field="created_at"
+                        header="Organization"
+                        field="organization"
+                    >
+                        <template #body="{ data }">
+                            {{ data.organization.name }}
+                        </template>
+                    </Column>
+                    <Column
+                        header="Tags"
+                        field="tags"
+                    >
+                        <template #body="{ data }">
+                            <Tag
+                                v-for="tag in data.tags"
+                                :key="tag.id"
+                                :value="tag.name"
+                                severity="secondary"
+                                class="mr-2"
+                            />
+                        </template>
+                    </Column>
+                    <Column
                         header="Created"
-                    />
+                        field="created_at"
+                    >
+                        <template #body="{ data }">
+                            {{ format(parseISO(data.created_at), 'MM/dd/yyyy') }}
+                        </template>
+                    </Column>
                 </DataTable>
             </template>
         </Card>

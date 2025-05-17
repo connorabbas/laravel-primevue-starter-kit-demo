@@ -18,7 +18,6 @@ const breadcrumbs = [
     { label: 'List' },
 ];
 
-// DataTable
 const {
     processing,
     filters,
