@@ -6,6 +6,7 @@ use App\Data\DataTransferObjects\Filtering\ContactFilters;
 use App\Http\Controllers\Controller;
 use App\Models\Contact;
 use App\Models\Organization;
+use App\Models\Tag;
 use App\Services\ContactService;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
@@ -34,7 +35,8 @@ class ContactController extends Controller
     {
         return Inertia::render('admin/contacts/IndexAdvanced', [
             'contacts' => $this->contactService->getContacts(ContactFilters::fromDataTableRequest($request)),
-            'organizations' => fn () => Organization::all()
+            'organizations' => fn () => Organization::all(),
+            'tags' => fn () => Tag::all(),
         ]);
     }
 }

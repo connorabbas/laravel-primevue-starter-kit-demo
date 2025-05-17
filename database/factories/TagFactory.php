@@ -19,8 +19,21 @@ class TagFactory extends Factory
      */
     public function definition(): array
     {
+        $default = [
+            'Prospect',
+            'Lead',
+            'Hot Lead',
+            'Cold Lead',
+            'Customer',
+            'VIP',
+            'Partner',
+            'Referral',
+            'Churn Risk',
+            'Opportunity',
+        ];
+
         return [
-            'name' => fake()->unique()->word(),
+            'name' => fake()->unique()->randomElement($default),
         ];
     }
 }

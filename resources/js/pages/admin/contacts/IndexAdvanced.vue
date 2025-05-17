@@ -1,14 +1,13 @@
 <script setup>
-import { ref, useTemplateRef } from 'vue';
 import { FilterMatchMode } from '@primevue/core/api';
-import { AlertCircle, EllipsisVertical, FilterX, Pencil } from 'lucide-vue-next';
+import { AlertCircle, FilterX } from 'lucide-vue-next';
 import { useLazyDataTable } from '@/composables/useLazyDataTable';
 import AppLayout from '@/layouts/AppLayout.vue';
-import Menu from '@/components/primevue/menu/Menu.vue';
 
 const props = defineProps({
     contacts: Object,
     organizations: Array,
+    tags: Array,
 });
 
 const pageTitle = 'Contacts';
@@ -17,26 +16,6 @@ const breadcrumbs = [
     { label: pageTitle, route: route('admin.contacts.index') },
     { label: 'List' },
 ];
-
-// Contact context menu
-const contactContextMenu = useTemplateRef('contact-context-menu');
-const contactContextMenuItems = ref([]);
-function toggleContactContextMenu(event, contactData) {
-    // Populate menu items based on row data
-    contactContextMenuItems.value = [
-        {
-            label: 'Manage Contact',
-            lucideIcon: Pencil,
-            command: () => {
-                alert('Contact Data: ' + JSON.stringify(contactData));
-            },
-        },
-    ];
-    // Show the menu
-    if (contactContextMenu.value && contactContextMenu.value?.el) {
-        contactContextMenu.value.el.toggle(event);
-    }
-}
 
 // DataTable
 const {
@@ -83,12 +62,6 @@ const {
 
         <Card pt:body:class="p-3">
             <template #content>
-                <Menu
-                    ref="contact-context-menu"
-                    class="shadow-sm"
-                    :model="contactContextMenuItems"
-                    popup
-                />
                 <DataTable
                     ref="dataTable"
                     v-model:filters="filters"
@@ -126,8 +99,8 @@ const {
                         </div>
                     </template>
                     <Column
-                        field="name"
                         header="Name"
+                        field="name"
                         sortable
                     >
                         <template #filter="{ filterModel, filterCallback }">
@@ -141,8 +114,8 @@ const {
                         </template>
                     </Column>
                     <Column
-                        field="email"
                         header="Email"
+                        field="email"
                         sortable
                     >
                         <template #filter="{ filterModel, filterCallback }">
@@ -159,8 +132,8 @@ const {
                         </template>
                     </Column>
                     <Column
-                        field="organization"
                         header="Organization"
+                        filterField="organization"
                         :showFilterMenu="false"
                         :showClearButton="true"
                     >
@@ -179,28 +152,41 @@ const {
                             {{ data.organization.name }}
                         </template>
                     </Column>
+                    <Column
+                        header="Tags"
+                        filterField="tags"
+                        :showFilterMenu="false"
+                        :showClearButton="true"
+                    >
+                        <template #filter="{ filterModel, filterCallback }">
+                            <MultiSelect
+                                v-model="filterModel.value"
+                                @change="filterCallback()"
+                                :options="props.tags"
+                                optionLabel="name"
+                                optionValue="id"
+                                display="chip"
+                                placeholder="Any"
+                                pt:labelContainer:class="flex! flex-wrap!"
+                                fluid
+                            />
+                        </template>
+                        <template #body="{ data }">
+                            <Tag
+                                v-for="tag in data.tags"
+                                :key="tag.id"
+                                :value="tag.name"
+                                severity="secondary"
+                                class="mr-2"
+                            />
+                        </template>
+                    </Column>
                     <!-- Format date as needed, likely use date-fns -->
                     <Column
                         field="created_at"
                         header="Created"
                         sortable
                     />
-                    <Column header="Action">
-                        <template #body="{ data }">
-                            <Button
-                                v-tooltip.top="'Show Contact Actions'"
-                                type="button"
-                                severity="secondary"
-                                rounded
-                                text
-                                @click="toggleContactContextMenu($event, data)"
-                            >
-                                <template #icon>
-                                    <EllipsisVertical class="size-5!" />
-                                </template>
-                            </Button>
-                        </template>
-                    </Column>
                 </DataTable>
             </template>
         </Card>
