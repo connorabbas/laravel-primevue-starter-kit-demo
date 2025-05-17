@@ -1,7 +1,7 @@
 <script setup>
 import { ref } from 'vue';
 import { FilterMatchMode } from '@primevue/core/api';
-import { AlertCircle, FilterX, Search } from 'lucide-vue-next';
+import { AlertCircle, FunnelX, Search } from 'lucide-vue-next';
 import { usePaginatedData } from '@/composables/usePaginatedData';
 import AppLayout from '@/layouts/AppLayout.vue';
 

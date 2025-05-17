@@ -1,6 +1,6 @@
 <script setup>
 import { FilterMatchMode } from '@primevue/core/api';
-import { AlertCircle, FilterX } from 'lucide-vue-next';
+import { AlertCircle, FunnelX } from 'lucide-vue-next';
 import { format, parseISO } from 'date-fns';
 import { useLazyDataTable } from '@/composables/useLazyDataTable';
 import AppLayout from '@/layouts/AppLayout.vue';
@@ -55,7 +55,7 @@ const {
                     @click="hardReset"
                 >
                     <template #icon>
-                        <FilterX />
+                        <FunnelX />
                     </template>
                 </Button>
             </template>

@@ -1,7 +1,7 @@
 <script setup>
 import { ref } from 'vue';
 import { FilterMatchMode } from '@primevue/core/api';
-import { AlertCircle, FilterX, Search } from 'lucide-vue-next';
+import { AlertCircle, Funnel, FunnelX } from 'lucide-vue-next';
 import { usePaginatedData } from '@/composables/usePaginatedData';
 import AppLayout from '@/layouts/AppLayout.vue';
 
@@ -35,6 +35,8 @@ const {
     created_at: { value: null, matchMode: FilterMatchMode.DATE_IS },
 }, props.contacts.per_page);
 
+const showFilters = ref(false);
+
 const sortOptions = ref([
     { label: 'Name - Asc', value: { field: 'name', order: 1 } },
     { label: 'Name - Desc', value: { field: 'name', order: 0 } },
@@ -43,6 +45,11 @@ const sortOptions = ref([
     { label: 'Created - Asc', value: { field: 'created_at', order: 1 } },
     { label: 'Created - Desc', value: { field: 'created_at', order: 0 } },
 ]);
+
+function applyFilteringAndSorting() {
+    filter();
+    showFilters.value = false;
+}
 </script>
 
 <template>
@@ -55,43 +62,75 @@ const sortOptions = ref([
             </template>
             <template #end>
                 <Button
-                    v-if="filteredOrSorted"
                     severity="secondary"
                     type="button"
-                    label="Clear Filters"
+                    label="Filter & Sort"
                     outlined
-                    @click="hardReset"
+                    @click="showFilters = true"
                 >
                     <template #icon>
-                        <FilterX />
+                        <FunnelX />
                     </template>
                 </Button>
             </template>
         </PageTitleSection>
 
-        <div class="space-y-4">
-            <div class="flex gap-3">
-                <InputGroup>
+        <Drawer
+            v-model:visible="showFilters"
+            header="Filter & Sort"
+            position="right"
+            class="w-full! sm:w-[30rem]!"
+            blockScroll
+        >
+            <div class="flex flex-col gap-5">
+                <div>
+                    <Select
+                        v-model="sorting"
+                        :options="sortOptions"
+                        optionLabel="label"
+                        optionValue="value"
+                        placeholder="Sort By"
+                        fluid
+                    />
+                </div>
+                <div>
                     <InputText
                         v-model="filters.name.value"
                         placeholder="Search by contact name"
-                        @keyup.enter="filter"
+                        fluid
                     />
-                    <Button @click="filter">
+                </div>
+            </div>
+            <template #footer>
+                <div class="flex items-center gap-2">
+
+                    <Button
+                        :disabled="!filteredOrSorted"
+                        severity="secondary"
+                        type="button"
+                        label="Clear Filters"
+                        class="flex-auto"
+                        outlined
+                        @click="hardReset"
+                    >
                         <template #icon>
-                            <Search />
+                            <FunnelX />
                         </template>
                     </Button>
-                </InputGroup>
-                <Select
-                    v-model="sorting"
-                    :options="sortOptions"
-                    optionLabel="label"
-                    optionValue="value"
-                    placeholder="Sort By"
-                    @change="filter"
-                />
-            </div>
+                    <Button
+                        label="Apply"
+                        class="flex-auto"
+                        @click="applyFilteringAndSorting"
+                    >
+                        <template #icon>
+                            <Funnel />
+                        </template>
+                    </Button>
+                </div>
+            </template>
+        </Drawer>
+
+        <div>
             <div
                 v-if="contacts.data.length"
                 class="grid grid-cols-1 sm:grid-cols-12 gap-4"
