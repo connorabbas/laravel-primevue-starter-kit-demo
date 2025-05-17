@@ -48,6 +48,21 @@ const sortOptions = ref([
     { label: 'Created - Desc', value: { field: 'created_at', order: 0 } },
 ]);
 
+const textInputMatchModes = [
+    { label: 'Starts with', value: FilterMatchMode.STARTS_WITH },
+    { label: 'Contains', value: FilterMatchMode.CONTAINS },
+    { label: 'Not contains', value: FilterMatchMode.NOT_CONTAINS },
+    { label: 'Ends with', value: FilterMatchMode.ENDS_WITH },
+    { label: 'Equals', value: FilterMatchMode.EQUALS },
+    { label: 'Not equals', value: FilterMatchMode.NOT_EQUALS },
+];
+const dateInputMatchModes = [
+    { label: 'Date is', value: FilterMatchMode.DATE_IS },
+    { label: 'Date is not', value: FilterMatchMode.DATE_IS_NOT },
+    { label: 'Date is before', value: FilterMatchMode.DATE_BEFORE },
+    { label: 'Date is after', value: FilterMatchMode.DATE_AFTER },
+];
+
 const appliedFiltersCount = computed(() => {
     return Object.values(filters.value)
         .filter(f => f.value !== null)
@@ -91,10 +106,10 @@ const appliedFiltersCount = computed(() => {
             v-model:visible="showFilters"
             header="Filter & Sort"
             position="right"
-            class="w-full! sm:w-[30rem]!"
+            class="w-full! sm:w-[35rem]!"
             blockScroll
         >
-            <div class="flex flex-col gap-6">
+            <div class="flex flex-col gap-6 sm:gap-8">
                 <div class="flex flex-col gap-2">
                     <label for="sort-by">Sort By</label>
                     <Select
@@ -109,12 +124,47 @@ const appliedFiltersCount = computed(() => {
                 </div>
                 <div class="flex flex-col gap-2">
                     <label for="name-filter">Name</label>
-                    <InputText
-                        id="name-filter"
-                        v-model="filters.name.value"
-                        placeholder="First or last name"
-                        fluid
-                    />
+                    <InputGroup>
+                        <InputText
+                            id="name-filter"
+                            class="flex-1"
+                            v-model="filters.name.value"
+                            placeholder="Filter by first or last name"
+                            fluid
+                        />
+                        <Select
+                            id="name-match-mode"
+                            class="flex-none w-auto"
+                            v-model="filters.name.matchMode"
+                            :options="textInputMatchModes"
+                            optionLabel="label"
+                            optionValue="value"
+                            placeholder="Match mode"
+                            fluid
+                        />
+                    </InputGroup>
+                </div>
+                <div class="flex flex-col gap-2">
+                    <label for="email-filter">Email</label>
+                    <InputGroup>
+                        <InputText
+                            id="email-filter"
+                            class="flex-1"
+                            v-model="filters.email.value"
+                            placeholder="Filter by email"
+                            fluid
+                        />
+                        <Select
+                            id="email-match-mode"
+                            class="flex-none w-auto"
+                            v-model="filters.email.matchMode"
+                            :options="textInputMatchModes"
+                            optionLabel="label"
+                            optionValue="value"
+                            placeholder="Match mode"
+                            fluid
+                        />
+                    </InputGroup>
                 </div>
                 <div class="flex flex-col gap-2">
                     <label for="organization-filter">Organization</label>
@@ -146,13 +196,26 @@ const appliedFiltersCount = computed(() => {
                 </div>
                 <div class="flex flex-col gap-2">
                     <label for="created-at-filter">Created</label>
-                    <DatePicker
-                        id="created-at-filter"
-                        v-model="filters.created_at.value"
-                        dateFormat="mm/dd/yy"
-                        placeholder="mm/dd/yyyy"
-                        showButtonBar
-                    />
+                    <InputGroup>
+                        <DatePicker
+                            id="created-at-filter"
+                            class="flex-1"
+                            v-model="filters.created_at.value"
+                            dateFormat="mm/dd/yy"
+                            placeholder="mm/dd/yyyy"
+                            showButtonBar
+                        />
+                        <Select
+                            id="created-at-match-mode"
+                            class="flex-none w-auto"
+                            v-model="filters.created_at.matchMode"
+                            :options="dateInputMatchModes"
+                            optionLabel="label"
+                            optionValue="value"
+                            placeholder="Match mode"
+                            fluid
+                        />
+                    </InputGroup>
                 </div>
             </div>
             <template #footer>
