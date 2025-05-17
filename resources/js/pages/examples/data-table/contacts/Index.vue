@@ -193,6 +193,7 @@ const {
                                 v-model="filterModel.value"
                                 dateFormat="mm/dd/yy"
                                 placeholder="mm/dd/yyyy"
+                                showButtonBar
                                 @update:modelValue="filterCallback"
                             />
                         </template>

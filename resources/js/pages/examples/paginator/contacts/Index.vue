@@ -5,7 +5,6 @@ import { AlertCircle, Funnel, FunnelX } from 'lucide-vue-next';
 import { usePaginatedData } from '@/composables/usePaginatedData';
 import AppLayout from '@/layouts/AppLayout.vue';
 
-
 const props = defineProps({
     contacts: Object,
     organizations: Array,
@@ -34,6 +33,8 @@ const {
     tags: { value: null, matchMode: FilterMatchMode.IN },
     created_at: { value: null, matchMode: FilterMatchMode.DATE_IS },
 }, props.contacts.per_page);
+
+sorting.value = { field: 'created_at', order: 0 };
 
 const showFilters = ref(false);
 
@@ -82,9 +83,11 @@ function applyFilteringAndSorting() {
             class="w-full! sm:w-[30rem]!"
             blockScroll
         >
-            <div class="flex flex-col gap-5">
-                <div>
+            <div class="flex flex-col gap-6">
+                <div class="flex flex-col gap-2">
+                    <label for="sort-by">Sort By</label>
                     <Select
+                        id="sort-by"
                         v-model="sorting"
                         :options="sortOptions"
                         optionLabel="label"
@@ -93,11 +96,51 @@ function applyFilteringAndSorting() {
                         fluid
                     />
                 </div>
-                <div>
+                <div class="flex flex-col gap-2">
+                    <label for="name-filter">Name</label>
                     <InputText
+                        id="name-filter"
                         v-model="filters.name.value"
-                        placeholder="Search by contact name"
+                        placeholder="First or last name"
                         fluid
+                    />
+                </div>
+                <div class="flex flex-col gap-2">
+                    <label for="organization-filter">Organization</label>
+                    <Select
+                        id="organization-filter"
+                        v-model="filters.organization.value"
+                        :options="props.organizations"
+                        optionLabel="name"
+                        optionValue="id"
+                        placeholder="Any"
+                        showClear
+                        fluid
+                    />
+                </div>
+                <div class="flex flex-col gap-2">
+                    <label for="tags-filter">Tags</label>
+                    <MultiSelect
+                        id="tags-filter"
+                        v-model="filters.tags.value"
+                        :options="props.tags"
+                        optionLabel="name"
+                        optionValue="id"
+                        display="chip"
+                        placeholder="Any"
+                        pt:label:class="flex flex-wrap"
+                        showClear
+                        fluid
+                    />
+                </div>
+                <div class="flex flex-col gap-2">
+                    <label for="created-at-filter">Created</label>
+                    <DatePicker
+                        id="created-at-filter"
+                        v-model="filters.created_at.value"
+                        dateFormat="mm/dd/yy"
+                        placeholder="mm/dd/yyyy"
+                        showButtonBar
                     />
                 </div>
             </div>
