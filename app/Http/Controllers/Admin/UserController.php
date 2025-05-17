@@ -19,7 +19,7 @@ class UserController extends Controller
     {
         return Inertia::render('admin/users/Index', [
             'users' => $this->userService->getUsers(
-                UserFilters::fromDataTableRequest($request)
+                UserFilters::fromRequest($request)
             ),
         ]);
     }
