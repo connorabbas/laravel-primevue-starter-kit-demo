@@ -22,11 +22,17 @@ class Organization extends Model
         return ['id', 'name'];
     }
 
+    /**
+     * @return HasMany<Contact, $this>
+     */
     public function contacts(): HasMany
     {
         return $this->hasMany(Contact::class);
     }
 
+    /**
+     * @return MorphToMany<Tag, $this>
+     */
     public function tags(): MorphToMany
     {
         return $this->morphToMany(Tag::class, 'taggable');

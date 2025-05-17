@@ -13,11 +13,17 @@ class Tag extends Model
 
     protected $guarded = [];
 
+    /**
+     * @return MorphToMany<Organization, $this>
+     */
     public function organizations(): MorphToMany
     {
         return $this->morphedByMany(Organization::class, 'taggable');
     }
 
+    /**
+     * @return MorphToMany<Contact, $this>
+     */
     public function contacts(): MorphToMany
     {
         return $this->morphedByMany(Contact::class, 'taggable');
