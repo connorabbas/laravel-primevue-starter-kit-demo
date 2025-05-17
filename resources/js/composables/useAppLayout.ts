@@ -1,7 +1,7 @@
 import { ref, computed, onMounted, onUnmounted, watchEffect } from 'vue';
 import { usePage, useForm } from '@inertiajs/vue3';
 import { route } from 'ziggy-js';
-import { LayoutGrid, House, Info, Github, Code, Settings, LogOut, Users, Lock, BookOpen } from 'lucide-vue-next';
+import { LayoutGrid, House, Info, Github, Code, Settings, LogOut, Users, Lock, BookOpen, Lightbulb, Table2, Funnel } from 'lucide-vue-next';
 import { MenuItem } from '@/types';
 
 export function useAppLayout() {
@@ -47,6 +47,22 @@ export function useAppLayout() {
                         label: 'Starter Kit Repo',
                         url: 'https://github.com/connorabbas/laravel-primevue-starter-kit',
                         lucideIcon: Github,
+                    },
+                ],
+            },
+            {
+                label: 'Examples',
+                lucideIcon: Lightbulb,
+                items: [
+                    {
+                        label: 'DataTable - Basic Pagination',
+                        route: route('examples.data-table.contacts.index'),
+                        lucideIcon: Table2,
+                    },
+                    {
+                        label: 'DataTable - Filtering & Sorting',
+                        route: route('examples.data-table.filtered-contacts.index'),
+                        lucideIcon: Funnel,
                     },
                 ],
             },

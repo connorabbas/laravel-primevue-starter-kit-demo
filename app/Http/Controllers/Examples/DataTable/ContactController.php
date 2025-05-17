@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers\Examples\DataTable;
 
 use App\Http\Controllers\Controller;
 use App\Models\Contact;
@@ -25,7 +25,7 @@ class ContactController extends Controller
                 page: $request->integer('page', 1)
             );
 
-        return Inertia::render('admin/contacts/Index', [
+        return Inertia::render('examples/data-table/contacts/Index', [
             'contacts' => $contacts,
         ]);
     }

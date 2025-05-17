@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers\Examples\DataTable;
 
 use App\Data\DataTransferObjects\Filtering\ContactFilters;
 use App\Http\Controllers\Controller;
@@ -20,7 +20,7 @@ class FilteredContactController extends Controller
 
     public function index(Request $request): Response
     {
-        return Inertia::render('admin/contacts/IndexAdvanced', [
+        return Inertia::render('examples/data-table/filtered-contacts/Index', [
             'contacts' => $this->contactService->getContacts(ContactFilters::fromDataTableRequest($request)),
             'organizations' => fn () => Organization::all(),
             'tags' => fn () => Tag::all(),

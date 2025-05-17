@@ -14,7 +14,7 @@ const props = defineProps({
 const pageTitle = 'Contacts';
 const breadcrumbs = [
     { label: 'Dashboard', route: route('dashboard') },
-    { label: pageTitle, route: route('examples.data-table.filtered.contacts.index') },
+    { label: pageTitle, route: route('examples.data-table.filtered-contacts.index') },
     { label: 'List' },
 ];
 

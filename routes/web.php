@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\Examples\DataTable\ContactController;
+use App\Http\Controllers\Examples\DataTable\FilteredContactController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -14,6 +16,13 @@ Route::get('/', function () {
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
+
+Route::prefix('examples')->name('examples.')->group(function () {
+    Route::get('/data-table/contacts', [ContactController::class, 'index'])
+        ->name('data-table.contacts.index');
+    Route::get('/data-table/filtered-contacts', [FilteredContactController::class, 'index'])
+        ->name('data-table.filtered-contacts.index');
+});
 
 require __DIR__ . '/auth.php';
 require __DIR__ . '/admin.php';
