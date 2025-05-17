@@ -23,6 +23,8 @@ class ContactService
         $organizationIdMatchMode = $filters->organizationIdMatchMode;
         $tags = $filters->tags;
         $tagsMatchMode = $filters->tagsMatchMode;
+        $createdAt = $filters->createdAt;
+        $createdAtMatchMode = $filters->createdAtMatchMode;
 
         $query = Contact::query()->with(['organization', 'tags']);
         if ($name !== null && $nameMatchMode instanceof FilterMatchMode) {
@@ -36,6 +38,9 @@ class ContactService
         }
         if (is_array($tags) && $tagsMatchMode instanceof FilterMatchMode) {
             $query->applyRelationFilter('tags', 'id', $tagsMatchMode, $tags);
+        }
+        if ($createdAt !== null && $createdAtMatchMode instanceof FilterMatchMode) {
+            $query->applyFilter('created_at', $createdAtMatchMode, $createdAt);
         }
 
         if ($filters->sortField && $filters->sortDirection) {

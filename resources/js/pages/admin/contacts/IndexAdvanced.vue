@@ -1,6 +1,7 @@
 <script setup>
 import { FilterMatchMode } from '@primevue/core/api';
 import { AlertCircle, FilterX } from 'lucide-vue-next';
+import { format, parseISO } from 'date-fns';
 import { useLazyDataTable } from '@/composables/useLazyDataTable';
 import AppLayout from '@/layouts/AppLayout.vue';
 
@@ -34,6 +35,7 @@ const {
     email: { value: null, matchMode: FilterMatchMode.CONTAINS },
     organization: { value: null, matchMode: FilterMatchMode.EQUALS },
     tags: { value: null, matchMode: FilterMatchMode.IN },
+    created_at: { value: null, matchMode: FilterMatchMode.EQUALS },
 }, props.contacts.per_page);
 </script>
 
@@ -145,7 +147,7 @@ const {
                                 optionValue="id"
                                 placeholder="Filter by Organization"
                                 fluid
-                                @change="filterCallback"
+                                @update:modelValue="filterCallback"
                             />
                         </template>
                         <template #body="{ data }">
@@ -168,7 +170,7 @@ const {
                                 placeholder="Any"
                                 pt:label:class="flex flex-wrap"
                                 fluid
-                                @change="filterCallback()"
+                                @update:modelValue="filterCallback"
                             />
                         </template>
                         <template #body="{ data }">
@@ -181,12 +183,24 @@ const {
                             />
                         </template>
                     </Column>
-                    <!-- Format date as needed, likely use date-fns -->
                     <Column
                         field="created_at"
                         header="Created"
+                        dataType="date"
                         sortable
-                    />
+                    >
+                        <template #filter="{ filterModel, filterCallback }">
+                            <DatePicker
+                                v-model="filterModel.value"
+                                dateFormat="mm/dd/yy"
+                                placeholder="mm/dd/yyyy"
+                                @update:modelValue="filterCallback"
+                            />
+                        </template>
+                        <template #body="{ data }">
+                            {{ format(parseISO(data.created_at), 'MM/dd/yyyy') }}
+                        </template>
+                    </Column>
                 </DataTable>
             </template>
         </Card>

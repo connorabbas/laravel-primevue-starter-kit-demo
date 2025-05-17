@@ -3,6 +3,8 @@
 namespace App\Data\DataTransferObjects\Filtering;
 
 use App\Enums\FilterMatchMode;
+use Carbon\Carbon;
+use DateTime;
 use Illuminate\Http\Request;
 
 class ContactFilters extends BaseFilters
@@ -15,6 +17,8 @@ class ContactFilters extends BaseFilters
     public ?FilterMatchMode $organizationIdMatchMode = FilterMatchMode::EQUALS;
     public ?array $tags = null;
     public ?FilterMatchMode $tagsMatchMode = FilterMatchMode::IN;
+    public ?DateTime $createdAt = null;
+    public ?FilterMatchMode $createdAtMatchMode = null;
 
     public static function fromDataTableRequest(Request $request): self
     {
@@ -29,10 +33,15 @@ class ContactFilters extends BaseFilters
             'organizationId' => self::getFilterValue($filters, 'organization'),
             //'organizationIdMatchMode' => self::getMatchMode($filters, 'organization'),
             //'tagsMatchMode' => self::getMatchMode($filters, 'tags'),
+            'createdAtMatchMode' => self::getMatchMode($filters, 'created_at'),
         ];
         $tags = self::getFilterValue($filters, 'tags');
         if ($tags && is_array($tags) && count($tags) > 0) {
             $inputFilters['tags'] = $tags;
+        }
+        $createdAt = self::getFilterValue($filters, 'created_at');
+        if ($createdAt) {
+            $inputFilters['createdAt'] = Carbon::parse($createdAt);
         }
 
         $params = [

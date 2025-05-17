@@ -20,11 +20,15 @@ class ContactFactory extends Factory
      */
     public function definition(): array
     {
+        $date = fake()->dateTimeBetween('-1 year', 'now');
+
         return [
             'name' => fake()->name(),
             'email' => fake()->unique()->safeEmail(),
             'phone' => fake()->optional()->phoneNumber(),
             'organization_id' => Organization::factory(),
+            'created_at' => $date,
+            'updated_at' => $date,
         ];
     }
 }
