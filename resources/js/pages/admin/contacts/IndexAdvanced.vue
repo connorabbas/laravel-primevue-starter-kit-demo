@@ -8,6 +8,7 @@ import Menu from '@/components/primevue/menu/Menu.vue';
 
 const props = defineProps({
     contacts: Object,
+    organizations: Array,
 });
 
 const pageTitle = 'Contacts';
@@ -52,6 +53,8 @@ const {
 } = useLazyDataTable('contacts', {
     name: { value: null, matchMode: FilterMatchMode.CONTAINS },
     email: { value: null, matchMode: FilterMatchMode.CONTAINS },
+    organization: { value: null, matchMode: FilterMatchMode.EQUALS },
+    tags: { value: null, matchMode: FilterMatchMode.IN },
 }, props.contacts.per_page);
 </script>
 
@@ -126,8 +129,6 @@ const {
                         field="name"
                         header="Name"
                         sortable
-                        :showFilterMenu="false"
-                        :showClearButton="true"
                     >
                         <template #filter="{ filterModel, filterCallback }">
                             <InputText
@@ -138,16 +139,11 @@ const {
                                 @input="debounceInputFilter(filterCallback)"
                             />
                         </template>
-                        <template #body="{ data }">
-                            {{ `${data.first_name} ${data.last_name}` }}
-                        </template>
                     </Column>
                     <Column
                         field="email"
                         header="Email"
                         sortable
-                        :showFilterMenu="false"
-                        :showClearButton="true"
                     >
                         <template #filter="{ filterModel, filterCallback }">
                             <InputText
@@ -160,6 +156,27 @@ const {
                         </template>
                         <template #body="{ data }">
                             {{ data.email }}
+                        </template>
+                    </Column>
+                    <Column
+                        field="organization"
+                        header="Organization"
+                        :showFilterMenu="false"
+                        :showClearButton="true"
+                    >
+                        <template #filter="{ filterModel, filterCallback }">
+                            <Select
+                                v-model="filterModel.value"
+                                :options="props.organizations"
+                                optionLabel="name"
+                                optionValue="id"
+                                placeholder="Filter by Organization"
+                                fluid
+                                @change="filterCallback"
+                            />
+                        </template>
+                        <template #body="{ data }">
+                            {{ data.organization.name }}
                         </template>
                     </Column>
                     <!-- Format date as needed, likely use date-fns -->

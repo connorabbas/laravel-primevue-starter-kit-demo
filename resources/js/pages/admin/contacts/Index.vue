@@ -78,11 +78,7 @@ const {
                     <Column
                         field="name"
                         header="Name"
-                    >
-                        <template #body="{ data }">
-                            {{ `${data.first_name} ${data.last_name}` }}
-                        </template>
-                    </Column>
+                    />
                     <Column
                         field="email"
                         header="Email"
