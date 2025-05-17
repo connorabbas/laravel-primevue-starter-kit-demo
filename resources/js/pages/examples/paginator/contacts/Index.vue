@@ -1,5 +1,5 @@
 <script setup>
-import { ref } from 'vue';
+import { ref, computed } from 'vue';
 import { FilterMatchMode } from '@primevue/core/api';
 import { AlertCircle, Funnel, FunnelX } from 'lucide-vue-next';
 import { usePaginatedData } from '@/composables/usePaginatedData';
@@ -19,6 +19,7 @@ const breadcrumbs = [
 ];
 
 const {
+    processing,
     filters,
     sorting,
     firstDatasetIndex,
@@ -47,10 +48,11 @@ const sortOptions = ref([
     { label: 'Created - Desc', value: { field: 'created_at', order: 0 } },
 ]);
 
-function applyFilteringAndSorting() {
-    filter();
-    showFilters.value = false;
-}
+const appliedFiltersCount = computed(() => {
+    return Object.values(filters.value)
+        .filter(f => f.value !== null)
+        .length;
+})
 </script>
 
 <template>
@@ -62,17 +64,26 @@ function applyFilteringAndSorting() {
                 {{ pageTitle }}
             </template>
             <template #end>
-                <Button
-                    severity="secondary"
-                    type="button"
-                    label="Filter & Sort"
-                    outlined
-                    @click="showFilters = true"
-                >
-                    <template #icon>
-                        <FunnelX />
-                    </template>
-                </Button>
+                <div class="relative">
+                    <Button
+                        :disabled="processing"
+                        severity="secondary"
+                        type="button"
+                        label="Filter & Sort"
+                        outlined
+                        @click="showFilters = true"
+                    >
+                        <template #icon>
+                            <Funnel />
+                        </template>
+                    </Button>
+                    <Badge
+                        v-if="appliedFiltersCount > 0"
+                        class="absolute top-0 right-0 -mt-2 -mr-2"
+                        :value="appliedFiltersCount"
+                        size="small"
+                    />
+                </div>
             </template>
         </PageTitleSection>
 
@@ -146,15 +157,14 @@ function applyFilteringAndSorting() {
             </div>
             <template #footer>
                 <div class="flex items-center gap-2">
-
                     <Button
-                        :disabled="!filteredOrSorted"
+                        :disabled="!filteredOrSorted || processing"
                         severity="secondary"
                         type="button"
                         label="Clear Filters"
                         class="flex-auto"
                         outlined
-                        @click="hardReset"
+                        @click="() => hardReset({ onFinish: () => showFilters = false })"
                     >
                         <template #icon>
                             <FunnelX />
@@ -163,7 +173,8 @@ function applyFilteringAndSorting() {
                     <Button
                         label="Apply"
                         class="flex-auto"
-                        @click="applyFilteringAndSorting"
+                        :loading="processing"
+                        @click="() => filter({ onFinish: () => showFilters = false })"
                     >
                         <template #icon>
                             <Funnel />
@@ -173,7 +184,10 @@ function applyFilteringAndSorting() {
             </template>
         </Drawer>
 
-        <div>
+        <BlockUI
+            class="space-y-4 z-[999]"
+            :blocked="processing"
+        >
             <div
                 v-if="contacts.data.length"
                 class="grid grid-cols-1 sm:grid-cols-12 gap-4"
@@ -237,6 +251,6 @@ function applyFilteringAndSorting() {
                 >
                 </Paginator>
             </div>
-        </div>
+        </BlockUI>
     </AppLayout>
 </template>
