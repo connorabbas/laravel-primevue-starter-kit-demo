@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers\Examples\DataTable;
 
+use App\Data\DataTransferObjects\Filtering\ContactFilters;
 use App\Http\Controllers\Controller;
-use App\Models\Contact;
+use App\Models\Organization;
+use App\Models\Tag;
 use App\Services\ContactService;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
@@ -18,15 +20,10 @@ class ContactController extends Controller
 
     public function index(Request $request): Response
     {
-        $contacts = Contact::query()
-            ->with('organization', 'tags')
-            ->paginate(
-                perPage: $request->integer('rows', 20),
-                page: $request->integer('page', 1)
-            );
-
         return Inertia::render('examples/data-table/contacts/Index', [
-            'contacts' => $contacts,
+            'contacts' => $this->contactService->getContacts(ContactFilters::fromDataTableRequest($request)),
+            'organizations' => fn () => Organization::all(),
+            'tags' => fn () => Tag::all(),
         ]);
     }
 }

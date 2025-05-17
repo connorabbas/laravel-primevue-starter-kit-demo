@@ -20,8 +20,6 @@ Route::get('/dashboard', function () {
 Route::prefix('examples')->name('examples.')->group(function () {
     Route::get('/data-table/contacts', [ContactController::class, 'index'])
         ->name('data-table.contacts.index');
-    Route::get('/data-table/filtered-contacts', [FilteredContactController::class, 'index'])
-        ->name('data-table.filtered-contacts.index');
 });
 
 require __DIR__ . '/auth.php';

@@ -1,7 +1,9 @@
 import { ref, computed, onMounted, onUnmounted, watchEffect } from 'vue';
 import { usePage, useForm } from '@inertiajs/vue3';
 import { route } from 'ziggy-js';
-import { LayoutGrid, House, Info, Github, Code, Settings, LogOut, Users, Lock, BookOpen, Lightbulb, Table2, Funnel } from 'lucide-vue-next';
+import {
+    LayoutGrid, House, Info, Github, Code, Settings, LogOut, Users, Lock, BookOpen, Lightbulb, Table2
+} from 'lucide-vue-next';
 import { MenuItem } from '@/types';
 
 export function useAppLayout() {
@@ -55,14 +57,10 @@ export function useAppLayout() {
                 lucideIcon: Lightbulb,
                 items: [
                     {
-                        label: 'DataTable - Basic Pagination',
-                        route: route('examples.data-table.contacts.index'),
+                        label: 'DataTable',
                         lucideIcon: Table2,
-                    },
-                    {
-                        label: 'DataTable - Filtering & Sorting',
-                        route: route('examples.data-table.filtered-contacts.index'),
-                        lucideIcon: Funnel,
+                        route: route('examples.data-table.contacts.index'),
+                        active: currentRoute.value == 'examples.data-table.contacts.index',
                     },
                 ],
             },
