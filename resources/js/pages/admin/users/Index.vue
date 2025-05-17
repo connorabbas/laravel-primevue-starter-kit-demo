@@ -1,7 +1,7 @@
 <script setup>
 import { ref, useTemplateRef } from 'vue';
 import { FilterMatchMode } from '@primevue/core/api';
-import { AlertCircle, EllipsisVertical, FilterX, Pencil } from 'lucide-vue-next';
+import { AlertCircle, EllipsisVertical, FunnelX, Pencil } from 'lucide-vue-next';
 import { useLazyDataTable } from '@/composables/useLazyDataTable';
 import AppLayout from '@/layouts/AppLayout.vue';
 import Menu from '@/components/primevue/menu/Menu.vue';
@@ -72,7 +72,7 @@ const {
                     @click="hardReset"
                 >
                     <template #icon>
-                        <FilterX />
+                        <FunnelX />
                     </template>
                 </Button>
             </template>
