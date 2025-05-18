@@ -2,6 +2,7 @@
 import { ref, useTemplateRef } from 'vue';
 import { FilterMatchMode } from '@primevue/core/api';
 import { AlertCircle, EllipsisVertical, FunnelX, Pencil } from 'lucide-vue-next';
+import { format, parseISO } from 'date-fns';
 import { useLazyDataTable } from '@/composables/useLazyDataTable';
 import AppLayout from '@/layouts/AppLayout.vue';
 import Menu from '@/components/primevue/menu/Menu.vue';
@@ -52,6 +53,7 @@ const {
 } = useLazyDataTable('users', {
     name: { value: null, matchMode: FilterMatchMode.CONTAINS },
     email: { value: null, matchMode: FilterMatchMode.CONTAINS },
+    created_at: { value: null, matchMode: FilterMatchMode.DATE_IS },
 }, props.users.per_page);
 </script>
 
@@ -123,11 +125,9 @@ const {
                         </div>
                     </template>
                     <Column
-                        field="name"
                         header="Name"
+                        field="name"
                         sortable
-                        :showFilterMenu="false"
-                        :showClearButton="true"
                     >
                         <template #filter="{ filterModel, filterCallback }">
                             <InputText
@@ -143,11 +143,9 @@ const {
                         </template>
                     </Column>
                     <Column
-                        field="email"
                         header="Email"
+                        field="email"
                         sortable
-                        :showFilterMenu="false"
-                        :showClearButton="true"
                     >
                         <template #filter="{ filterModel, filterCallback }">
                             <InputText
@@ -162,12 +160,26 @@ const {
                             {{ data.email }}
                         </template>
                     </Column>
-                    <!-- Format date as needed, likely use date-fns -->
                     <Column
-                        field="created_at"
                         header="Created"
+                        field="created_at"
+                        dataType="date"
                         sortable
-                    />
+                    >
+                        <template #filter="{ filterModel, filterCallback }">
+                            <DatePicker
+                                v-model="filterModel.value"
+                                dateFormat="mm/dd/yy"
+                                placeholder="mm/dd/yyyy"
+                                showButtonBar
+                                fluid
+                                @update:modelValue="filterCallback"
+                            />
+                        </template>
+                        <template #body="{ data }">
+                            {{ format(parseISO(data.created_at), 'MM/dd/yyyy') }}
+                        </template>
+                    </Column>
                     <Column header="Action">
                         <template #body="{ data }">
                             <Button
