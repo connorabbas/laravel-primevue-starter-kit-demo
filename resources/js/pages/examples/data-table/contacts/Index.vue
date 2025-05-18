@@ -136,7 +136,7 @@ const {
                         header="Organization"
                         filterField="organization"
                         :showFilterMenu="false"
-                        :showClearButton="true"
+                        showClearButton
                     >
                         <template #filter="{ filterModel, filterCallback }">
                             <Select
@@ -157,7 +157,7 @@ const {
                         header="Tags"
                         filterField="tags"
                         :showFilterMenu="false"
-                        :showClearButton="true"
+                        showClearButton
                     >
                         <template #filter="{ filterModel, filterCallback }">
                             <MultiSelect
@@ -183,8 +183,8 @@ const {
                         </template>
                     </Column>
                     <Column
-                        field="created_at"
                         header="Created"
+                        field="created_at"
                         dataType="date"
                         sortable
                     >
@@ -194,6 +194,7 @@ const {
                                 dateFormat="mm/dd/yy"
                                 placeholder="mm/dd/yyyy"
                                 showButtonBar
+                                fluid
                                 @update:modelValue="filterCallback"
                             />
                         </template>
