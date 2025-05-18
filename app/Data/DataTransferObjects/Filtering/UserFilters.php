@@ -18,7 +18,7 @@ class UserFilters extends BaseFilters
 
     public static function fromRequest(Request $request): self
     {
-        /** @var array<string, mixed> $filters */
+        /** @var array<string, mixed> $inputFilters */
         $inputFilters = $request->input('filters', []);
 
         $filters = [
