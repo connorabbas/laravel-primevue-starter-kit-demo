@@ -1,7 +1,7 @@
 import '../css/app.css';
 import '../css/tailwind.css';
 
-import { createApp, h } from 'vue';
+import { createSSRApp, h } from 'vue';
 import { createInertiaApp, Head, Link } from '@inertiajs/vue3';
 import { resolvePageComponent } from 'laravel-vite-plugin/inertia-helpers';
 import { ZiggyVue } from '../../vendor/tightenco/ziggy';
@@ -33,7 +33,7 @@ createInertiaApp({
             import.meta.glob('./pages/**/*.vue')
         ),
     setup({ el, App, props, plugin }) {
-        return createApp({ render: () => h(App, props) })
+        return createSSRApp({ render: () => h(App, props) })
             .provide('colorMode', colorMode)
             .use(plugin)
             .use(ZiggyVue, Ziggy)
