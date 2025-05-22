@@ -21,11 +21,10 @@ createServer((page) =>
         page,
         render: renderToString,
         title: (title) => `${title} - ${appName}`,
-        resolve: (name) =>
-            resolvePageComponent(
-                `./pages/${name}.vue`,
-                import.meta.glob('./pages/**/*.vue')
-            ),
+        resolve: (name) => resolvePageComponent(
+            `./pages/${name}.vue`,
+            import.meta.glob('./pages/**/*.vue')
+        ),
         setup({ App, props, plugin }) {
             const app = createSSRApp({ render: () => h(App, props) });
 
@@ -34,15 +33,8 @@ createServer((page) =>
                 ...page.props.ziggy,
                 location: new URL(page.props.ziggy.location),
             };
-
-            // Create route function...
-            const route = (name, params, absolute) =>
-                ziggyRoute(name, params, absolute, ziggyConfig);
-
-            // Make route function available globally...
+            const route = (name, params, absolute) => ziggyRoute(name, params, absolute, ziggyConfig);
             app.config.globalProperties.route = route;
-
-            // Make route function available globally for SSR...
             if (typeof window === 'undefined') {
                 global.route = route;
             }
@@ -50,7 +42,7 @@ createServer((page) =>
             app.use(plugin)
                 .use(PrimeVue, {
                     theme: 'none',
-                    /* theme: {
+                    theme: {
                         preset: themePreset,
                         options: {
                             darkModeSelector: '.dark',
@@ -59,7 +51,7 @@ createServer((page) =>
                                 order: 'tailwind-theme, tailwind-base, primevue, tailwind-utilities',
                             },
                         },
-                    }, */
+                    },
                 })
                 .use(ToastService)
                 .component('InertiaHead', Head)
