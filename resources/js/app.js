@@ -13,10 +13,14 @@ import Container from '@/components/Container.vue';
 import PageTitleSection from '@/components/PageTitleSection.vue';
 
 import { useColorMode } from '@vueuse/core';
-import themePreset from '@/theme/noir-preset';
+import { useThemePreset } from '@/composables/useThemePreset';
 
 // Site light/dark mode
 const colorMode = useColorMode({ emitAuto: true });
+
+// Site theme preset
+const { getCurrentPreset } = useThemePreset();
+const themePreset = getCurrentPreset();
 
 /* global Ziggy */
 const appName = import.meta.env.VITE_APP_NAME || 'Laravel';
