@@ -7,7 +7,6 @@ import { createSSRApp, h } from 'vue';
 
 import { route as ziggyRoute } from 'ziggy-js';
 
-import themePreset from '@/theme/noir-preset';
 import PrimeVue from 'primevue/config';
 import ToastService from 'primevue/toastservice';
 
@@ -15,6 +14,8 @@ import Container from '@/components/Container.vue';
 import PageTitleSection from '@/components/PageTitleSection.vue';
 
 const appName = import.meta.env.VITE_APP_NAME || 'Laravel';
+
+// TODO: provide color mode
 
 createServer((page) =>
     createInertiaApp({
@@ -40,19 +41,7 @@ createServer((page) =>
             }
 
             app.use(plugin)
-                .use(PrimeVue, {
-                    theme: 'none',
-                    theme: {
-                        preset: themePreset,
-                        options: {
-                            darkModeSelector: '.dark',
-                            cssLayer: {
-                                name: 'primevue',
-                                order: 'tailwind-theme, tailwind-base, primevue, tailwind-utilities',
-                            },
-                        },
-                    },
-                })
+                .use(PrimeVue, { theme: 'none' })
                 .use(ToastService)
                 .component('InertiaHead', Head)
                 .component('InertiaLink', Link)

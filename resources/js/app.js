@@ -29,7 +29,7 @@ createInertiaApp({
             import.meta.glob('./pages/**/*.vue')
         ),
     setup({ el, App, props, plugin }) {
-        return createSSRApp({ render: () => h(App, props) })
+        const app = createSSRApp({ render: () => h(App, props) })
             .provide('colorMode', colorMode)
             .use(plugin)
             .use(ZiggyVue, Ziggy)
@@ -51,6 +51,12 @@ createInertiaApp({
             .component('Container', Container)
             .component('PageTitleSection', PageTitleSection)
             .mount(el);
+
+        // #app content set to hidden by default
+        // reduces jumpy initial render from SSR content (unstyled PrimeVue components)
+        el.style.visibility = 'visible';
+
+        return app;
     },
     progress: {
         color: 'var(--p-primary-500)',
