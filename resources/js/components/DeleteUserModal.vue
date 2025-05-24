@@ -47,7 +47,7 @@ const deleteUser = () => {
 
         <div class="flex flex-col gap-2">
             <Password
-                id="password"
+                inputId="password"
                 ref="password-input"
                 v-model="form.password"
                 :invalid="Boolean(form.errors?.password)"
