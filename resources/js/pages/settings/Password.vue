@@ -83,12 +83,12 @@ const updatePassword = () => {
                         <div class="flex flex-col gap-2">
                             <label for="current-password">Current Password</label>
                             <Password
-                                inputId="current-password"
                                 ref="current-password-input"
                                 v-model="updatePasswordForm.current_password"
                                 :invalid="Boolean(updatePasswordForm.errors?.current_password)"
-                                autocomplete="current-password"
                                 :feedback="false"
+                                autocomplete="current-password"
+                                inputId="current-password"
                                 toggleMask
                                 required
                                 fluid
@@ -105,11 +105,11 @@ const updatePassword = () => {
                         <div class="flex flex-col gap-2">
                             <label for="password">New Password</label>
                             <Password
-                                inputId="password"
                                 ref="new-password-input"
                                 v-model="updatePasswordForm.password"
                                 :invalid="Boolean(updatePasswordForm.errors?.password)"
                                 autocomplete="new-password"
+                                inputId="password"
                                 toggleMask
                                 required
                                 fluid
@@ -126,11 +126,11 @@ const updatePassword = () => {
                         <div class="flex flex-col gap-2">
                             <label for="password-confirmation">Confirm Password</label>
                             <Password
-                                inputId="password-confirmation"
                                 v-model="updatePasswordForm.password_confirmation"
                                 :invalid="Boolean(updatePasswordForm.errors?.password_confirmation)"
-                                autocomplete="confirm-password"
                                 :feedback="false"
+                                autocomplete="confirm-password"
+                                inputId="password-confirmation"
                                 toggleMask
                                 required
                                 fluid
