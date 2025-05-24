@@ -2,6 +2,8 @@
 import { ref, computed } from 'vue';
 import { FilterMatchMode } from '@primevue/core/api';
 import { AlertCircle, Funnel, RotateCcw, Search } from 'lucide-vue-next';
+import { formatInTimeZone } from 'date-fns-tz';
+import { parseISO } from 'date-fns';
 import { usePaginatedData } from '@/composables/usePaginatedData';
 import AppLayout from '@/layouts/AppLayout.vue';
 
@@ -84,7 +86,7 @@ const appliedFiltersCount = computed(() => {
                         :disabled="processing"
                         severity="secondary"
                         type="button"
-                        label="Filter & Sort"
+                        label="Sort & Filter"
                         outlined
                         @click="showFilters = true"
                     >
@@ -104,7 +106,7 @@ const appliedFiltersCount = computed(() => {
 
         <Drawer
             v-model:visible="showFilters"
-            header="Filter & Sort"
+            header="Sort & Filter"
             position="right"
             class="w-full! sm:w-[35rem]!"
             blockScroll
@@ -280,13 +282,19 @@ const appliedFiltersCount = computed(() => {
                             {{ contact.organization.name }}
                         </template>
                         <template #content>
-                            <div class="flex flex-wrap gap-2">
-                                <Tag
-                                    v-for="tag in contact.tags"
-                                    :key="tag.id"
-                                    :value="tag.name"
-                                    severity="secondary"
-                                />
+                            <div class="flex flex-col gap-3">
+                                <div class="text-muted-color">{{ contact.email }}</div>
+                                <div class="text-muted-color text-xs">
+                                    Created: {{ formatInTimeZone(parseISO(contact.created_at), 'UTC', 'MM/dd/yyyy') }}
+                                </div>
+                                <div class="flex flex-wrap gap-2">
+                                    <Tag
+                                        v-for="tag in contact.tags"
+                                        :key="tag.id"
+                                        :value="tag.name"
+                                        severity="secondary"
+                                    />
+                                </div>
                             </div>
                         </template>
                     </Card>
