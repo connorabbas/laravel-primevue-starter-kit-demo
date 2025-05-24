@@ -12,10 +12,9 @@ import ToastService from 'primevue/toastservice';
 
 import Container from '@/components/Container.vue';
 import PageTitleSection from '@/components/PageTitleSection.vue';
+import { useSiteColorMode } from '@/composables/useSiteColorMode';
 
 const appName = import.meta.env.VITE_APP_NAME || 'Laravel';
-
-// TODO: provide color mode
 
 createServer((page) =>
     createInertiaApp({
@@ -27,9 +26,17 @@ createServer((page) =>
             import.meta.glob('./pages/**/*.vue')
         ),
         setup({ App, props, plugin }) {
+            // Color mode set from cookie on the server
+            const initialColorMode = props.initialPage.props.colorScheme;
+            const colorMode = useSiteColorMode({
+                initialOnServer: initialColorMode,
+                emitAuto: false,
+            });
+
+            // Create app
             const app = createSSRApp({ render: () => h(App, props) });
 
-            // Configure Ziggy for SSR...
+            // Configure Ziggy for SSR
             const ziggyConfig = {
                 ...page.props.ziggy,
                 location: new URL(page.props.ziggy.location),
@@ -41,12 +48,13 @@ createServer((page) =>
             }
 
             app.use(plugin)
-                .use(PrimeVue, { theme: 'none' })
+                .use(PrimeVue, { theme: 'none' }) // PrimeVue won't render it's styles server side
                 .use(ToastService)
                 .component('InertiaHead', Head)
                 .component('InertiaLink', Link)
                 .component('Container', Container)
-                .component('PageTitleSection', PageTitleSection);
+                .component('PageTitleSection', PageTitleSection)
+                .provide('colorMode', colorMode);
 
             return app;
         },

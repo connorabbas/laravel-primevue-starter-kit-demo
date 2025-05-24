@@ -38,6 +38,7 @@ class HandleInertiaRequests extends Middleware
     {
         return [
             ...parent::share($request),
+            'colorScheme' => fn () => $request->cookie('colorScheme', 'auto'),
             'ziggy' => fn () => [
                 ...(new Ziggy())->toArray(),
                 'location' => $request->url(),

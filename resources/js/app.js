@@ -12,11 +12,8 @@ import ToastService from 'primevue/toastservice';
 import Container from '@/components/Container.vue';
 import PageTitleSection from '@/components/PageTitleSection.vue';
 
-import { useColorMode } from '@vueuse/core';
+import { useSiteColorMode } from '@/composables/useSiteColorMode';
 import themePreset from '@/theme/noir-preset';
-
-// Site light/dark mode
-const colorMode = useColorMode({ emitAuto: true });
 
 /* global Ziggy */
 const appName = import.meta.env.VITE_APP_NAME || 'Laravel';
@@ -29,8 +26,10 @@ createInertiaApp({
             import.meta.glob('./pages/**/*.vue')
         ),
     setup({ el, App, props, plugin }) {
+        // Site light/dark mode
+        const colorMode = useSiteColorMode({ emitAuto: true });
+
         const app = createSSRApp({ render: () => h(App, props) })
-            .provide('colorMode', colorMode)
             .use(plugin)
             .use(ZiggyVue, Ziggy)
             .use(PrimeVue, {
@@ -50,6 +49,7 @@ createInertiaApp({
             .component('InertiaLink', Link)
             .component('Container', Container)
             .component('PageTitleSection', PageTitleSection)
+            .provide('colorMode', colorMode)
             .mount(el);
 
         // #app content set to hidden by default

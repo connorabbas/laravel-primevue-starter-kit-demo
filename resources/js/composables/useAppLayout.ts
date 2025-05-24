@@ -73,9 +73,8 @@ export function useAppLayout() {
     ];
 
     // Mobile menu
-    // @ts-expect-error Fix: Vite complaining about env
     const mobileMenuOpen = ref(false);
-    if (import.meta.env.SSR === false) {
+    if (typeof window !== 'undefined') {
         const windowWidth = ref(window.innerWidth);
         const updateWidth = () => {
             windowWidth.value = window.innerWidth;
