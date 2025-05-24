@@ -2,6 +2,8 @@
 import { ref, computed } from 'vue';
 import { FilterMatchMode } from '@primevue/core/api';
 import { AlertCircle, Funnel, RotateCcw, Search } from 'lucide-vue-next';
+import { formatInTimeZone } from 'date-fns-tz';
+import { parseISO } from 'date-fns';
 import { usePaginatedData } from '@/composables/usePaginatedData';
 import AppLayout from '@/layouts/AppLayout.vue';
 
@@ -84,7 +86,7 @@ const appliedFiltersCount = computed(() => {
                         :disabled="processing"
                         severity="secondary"
                         type="button"
-                        label="Filter & Sort"
+                        label="Sort & Filter"
                         outlined
                         @click="showFilters = true"
                     >
@@ -104,7 +106,7 @@ const appliedFiltersCount = computed(() => {
 
         <Drawer
             v-model:visible="showFilters"
-            header="Filter & Sort"
+            header="Sort & Filter"
             position="right"
             class="w-full! sm:w-[35rem]!"
             blockScroll
@@ -113,9 +115,9 @@ const appliedFiltersCount = computed(() => {
                 <div class="flex flex-col gap-2">
                     <label for="sort-by">Sort By</label>
                     <Select
-                        id="sort-by"
                         v-model="sorting"
                         :options="sortOptions"
+                        inputId="sort-by"
                         optionLabel="label"
                         optionValue="value"
                         placeholder="Sort By"
@@ -133,10 +135,10 @@ const appliedFiltersCount = computed(() => {
                             fluid
                         />
                         <Select
-                            id="name-match-mode"
                             v-model="filters.name.matchMode"
                             class="flex-none w-auto"
                             :options="textInputMatchModes"
+                            inputId="name-match-mode"
                             optionLabel="label"
                             optionValue="value"
                             placeholder="Match mode"
@@ -155,10 +157,10 @@ const appliedFiltersCount = computed(() => {
                             fluid
                         />
                         <Select
-                            id="email-match-mode"
                             v-model="filters.email.matchMode"
                             class="flex-none w-auto"
                             :options="textInputMatchModes"
+                            inputId="email-match-mode"
                             optionLabel="label"
                             optionValue="value"
                             placeholder="Match mode"
@@ -169,9 +171,9 @@ const appliedFiltersCount = computed(() => {
                 <div class="flex flex-col gap-2">
                     <label for="organization-filter">Organization</label>
                     <Select
-                        id="organization-filter"
                         v-model="filters.organization.value"
                         :options="props.organizations"
+                        inputId="organization-filter"
                         optionLabel="name"
                         optionValue="id"
                         placeholder="Any"
@@ -182,9 +184,9 @@ const appliedFiltersCount = computed(() => {
                 <div class="flex flex-col gap-2">
                     <label for="tags-filter">Tags</label>
                     <MultiSelect
-                        id="tags-filter"
                         v-model="filters.tags.value"
                         :options="props.tags"
+                        inputId="tags-filter"
                         optionLabel="name"
                         optionValue="id"
                         display="chip"
@@ -198,18 +200,18 @@ const appliedFiltersCount = computed(() => {
                     <label for="created-at-filter">Created</label>
                     <InputGroup>
                         <DatePicker
-                            id="created-at-filter"
                             v-model="filters.created_at.value"
                             class="flex-1"
+                            inputId="created-at-filter"
                             dateFormat="mm/dd/yy"
                             placeholder="mm/dd/yyyy"
                             showButtonBar
                         />
                         <Select
-                            id="created-at-match-mode"
                             v-model="filters.created_at.matchMode"
                             class="flex-none w-auto"
                             :options="dateInputMatchModes"
+                            inputId="created-at-match-mode"
                             optionLabel="label"
                             optionValue="value"
                             placeholder="Match mode"
@@ -280,13 +282,19 @@ const appliedFiltersCount = computed(() => {
                             {{ contact.organization.name }}
                         </template>
                         <template #content>
-                            <div class="flex flex-wrap gap-2">
-                                <Tag
-                                    v-for="tag in contact.tags"
-                                    :key="tag.id"
-                                    :value="tag.name"
-                                    severity="secondary"
-                                />
+                            <div class="flex flex-col gap-3">
+                                <div class="text-muted-color">{{ contact.email }}</div>
+                                <div class="text-muted-color text-xs">
+                                    Created: {{ formatInTimeZone(parseISO(contact.created_at), 'UTC', 'MM/dd/yyyy') }}
+                                </div>
+                                <div class="flex flex-wrap gap-2">
+                                    <Tag
+                                        v-for="tag in contact.tags"
+                                        :key="tag.id"
+                                        :value="tag.name"
+                                        severity="secondary"
+                                    />
+                                </div>
                             </div>
                         </template>
                     </Card>
