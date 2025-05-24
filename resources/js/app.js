@@ -1,7 +1,7 @@
 import '../css/app.css';
 import '../css/tailwind.css';
 
-import { createSSRApp, h } from 'vue';
+import { createApp, h } from 'vue';
 import { createInertiaApp, Head, Link } from '@inertiajs/vue3';
 import { resolvePageComponent } from 'laravel-vite-plugin/inertia-helpers';
 import { ZiggyVue } from '../../vendor/tightenco/ziggy';
@@ -33,7 +33,7 @@ createInertiaApp({
         // Site light/dark mode
         const colorMode = useSiteColorMode({ emitAuto: true });
 
-        const app = createSSRApp({ render: () => h(App, props) })
+        const app = createApp({ render: () => h(App, props) })
             .use(plugin)
             .use(ZiggyVue, Ziggy)
             .use(PrimeVue, {

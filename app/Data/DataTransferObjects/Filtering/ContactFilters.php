@@ -23,31 +23,31 @@ class ContactFilters extends BaseFilters
 
     public static function fromRequest(Request $request): self
     {
-        /** @var array<string, mixed> $filters */
-        $filters = $request->input('filters', []);
+        /** @var array<string, mixed> $inputFilters */
+        $inputFilters = $request->input('filters', []);
 
-        $inputFilters = [
-            'name' => self::getFilterValue($filters, 'name'),
-            'nameMatchMode' => self::getMatchMode($filters, 'name'),
-            'email' => self::getFilterValue($filters, 'email'),
-            'emailMatchMode' => self::getMatchMode($filters, 'email'),
-            'organizationId' => self::getFilterValue($filters, 'organization'),
-            //'organizationIdMatchMode' => self::getMatchMode($filters, 'organization'),
-            //'tagsMatchMode' => self::getMatchMode($filters, 'tags'),
-            'createdAtMatchMode' => self::getMatchMode($filters, 'created_at'),
+        $filters = [
+            'name' => self::getFilterValue($inputFilters, 'name'),
+            'nameMatchMode' => self::getMatchMode($inputFilters, 'name'),
+            'email' => self::getFilterValue($inputFilters, 'email'),
+            'emailMatchMode' => self::getMatchMode($inputFilters, 'email'),
+            'organizationId' => self::getFilterValue($inputFilters, 'organization'),
+            //'organizationIdMatchMode' => self::getMatchMode($inputFilters, 'organization'),
+            //'tagsMatchMode' => self::getMatchMode($inputFilters, 'tags'),
+            'createdAtMatchMode' => self::getMatchMode($inputFilters, 'created_at'),
         ];
-        $tags = self::getFilterValue($filters, 'tags');
+        $tags = self::getFilterValue($inputFilters, 'tags');
         if ($tags && is_array($tags) && count($tags) > 0) {
-            $inputFilters['tags'] = $tags;
+            $filters['tags'] = $tags;
         }
-        $createdAt = self::getFilterValue($filters, 'created_at');
+        $createdAt = self::getFilterValue($inputFilters, 'created_at');
         if ($createdAt) {
-            $inputFilters['createdAt'] = Carbon::parse($createdAt);
+            $filters['createdAt'] = Carbon::parse($createdAt);
         }
 
         $params = [
             ...self::getPaginationFilters($request)->toArray(),
-            ...$inputFilters,
+            ...$filters,
         ];
 
         return self::from($params);
