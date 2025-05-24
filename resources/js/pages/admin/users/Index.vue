@@ -2,7 +2,8 @@
 import { ref, useTemplateRef } from 'vue';
 import { FilterMatchMode } from '@primevue/core/api';
 import { AlertCircle, EllipsisVertical, FunnelX, Pencil } from 'lucide-vue-next';
-import { format, parseISO } from 'date-fns';
+import { formatInTimeZone } from 'date-fns-tz';
+import { parseISO } from 'date-fns';
 import { useLazyDataTable } from '@/composables/useLazyDataTable';
 import AppLayout from '@/layouts/AppLayout.vue';
 import ClientOnly from '@/components/ClientOnly.vue';
@@ -179,7 +180,7 @@ const {
                                 />
                             </template>
                             <template #body="{ data }">
-                                {{ format(parseISO(data.created_at), 'MM/dd/yyyy') }}
+                                {{ formatInTimeZone(parseISO(data.created_at), 'UTC', 'MM/dd/yyyy') }}
                             </template>
                         </Column>
                         <Column header="Action">
