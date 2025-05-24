@@ -2,20 +2,9 @@
     "private": true,
     "type": "module",
     "scripts": {
+        "build": "vite build && vite build --ssr",
         "dev": "vite",
-        "build": "vite build",
         "lint": "eslint . --fix"
-    },
-    "devDependencies": {
-        "@eslint/js": "^9.18.0",
-        "@typescript-eslint/eslint-plugin": "^8.19.1",
-        "@typescript-eslint/parser": "^8.19.1",
-        "@vue/eslint-config-typescript": "^14.5.0",
-        "eslint": "^9.18.0",
-        "eslint-config-prettier": "^9.1.0",
-        "eslint-plugin-vue": "^9.32.0",
-        "typescript-eslint": "^8.19.1",
-        "vue-tsc": "^2.2.8"
     },
     "dependencies": {
         "@inertiajs/vue3": "^2.0.5",
@@ -25,7 +14,9 @@
         "@types/lodash-es": "^4.17.12",
         "@types/qs": "^6.9.18",
         "@vitejs/plugin-vue": "^5.2.3",
+        "@vue/server-renderer": "^3.5.14",
         "@vueuse/core": "^13.0.0",
+        "@vueuse/integrations": "^13.2.0",
         "date-fns": "^4.1.0",
         "globals": "^16.0.0",
         "laravel-vite-plugin": "^1.2.0",
@@ -37,10 +28,22 @@
         "tailwindcss": "^4.0.17",
         "tailwindcss-primeui": "^0.6.1",
         "typescript": "^5.8.2",
+        "universal-cookie": "^7.2.2",
         "unplugin-vue-components": "^28.4.1",
         "vite": "^6.2.3",
         "vue": "^3.5.13",
         "ziggy-js": "^2.5.2"
+    },
+    "devDependencies": {
+        "@eslint/js": "^9.18.0",
+        "@typescript-eslint/eslint-plugin": "^8.19.1",
+        "@typescript-eslint/parser": "^8.19.1",
+        "@vue/eslint-config-typescript": "^14.5.0",
+        "eslint": "^9.18.0",
+        "eslint-config-prettier": "^9.1.0",
+        "eslint-plugin-vue": "^9.32.0",
+        "typescript-eslint": "^8.19.1",
+        "vue-tsc": "^2.2.8"
     },
     "optionalDependencies": {
         "@rollup/rollup-linux-x64-gnu": "4.37.0",
