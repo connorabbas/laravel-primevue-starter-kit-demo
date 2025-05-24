@@ -12,11 +12,8 @@ import ToastService from 'primevue/toastservice';
 import Container from '@/components/Container.vue';
 import PageTitleSection from '@/components/PageTitleSection.vue';
 
-import { useColorMode } from '@vueuse/core';
+import { useSiteColorMode } from '@/composables/useSiteColorMode';
 import { useThemePreset } from '@/composables/useThemePreset';
-
-// Site light/dark mode
-const colorMode = useColorMode({ emitAuto: true });
 
 // Site theme preset
 const { getCurrentPreset } = useThemePreset();
@@ -33,8 +30,10 @@ createInertiaApp({
             import.meta.glob('./pages/**/*.vue')
         ),
     setup({ el, App, props, plugin }) {
-        return createApp({ render: () => h(App, props) })
-            .provide('colorMode', colorMode)
+        // Site light/dark mode
+        const colorMode = useSiteColorMode({ emitAuto: true });
+
+        const app = createApp({ render: () => h(App, props) })
             .use(plugin)
             .use(ZiggyVue, Ziggy)
             .use(PrimeVue, {
@@ -54,7 +53,14 @@ createInertiaApp({
             .component('InertiaLink', Link)
             .component('Container', Container)
             .component('PageTitleSection', PageTitleSection)
+            .provide('colorMode', colorMode)
             .mount(el);
+
+        // #app content set to hidden by default
+        // reduces jumpy initial render from SSR content (unstyled PrimeVue components)
+        el.style.visibility = 'visible';
+
+        return app;
     },
     progress: {
         color: 'var(--p-primary-500)',

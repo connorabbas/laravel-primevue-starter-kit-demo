@@ -2,9 +2,11 @@
 import { ref, useTemplateRef } from 'vue';
 import { FilterMatchMode } from '@primevue/core/api';
 import { AlertCircle, EllipsisVertical, FunnelX, Pencil } from 'lucide-vue-next';
-import { format, parseISO } from 'date-fns';
+import { formatInTimeZone } from 'date-fns-tz';
+import { parseISO } from 'date-fns';
 import { useLazyDataTable } from '@/composables/useLazyDataTable';
 import AppLayout from '@/layouts/AppLayout.vue';
+import ClientOnly from '@/components/ClientOnly.vue';
 import Menu from '@/components/primevue/menu/Menu.vue';
 
 const props = defineProps({
@@ -88,115 +90,117 @@ const {
                     :model="userContextMenuItems"
                     popup
                 />
-                <DataTable
-                    ref="dataTable"
-                    v-model:filters="filters"
-                    lazy
-                    paginator
-                    removableSort
-                    resizableColumns
-                    :loading="processing"
-                    :value="props.users.data"
-                    :totalRecords="props.users.total"
-                    :sortField="sorting.field"
-                    :sortOrder="sorting.order"
-                    :rows="props.users.per_page"
-                    :rowsPerPageOptions="[10, 20, 50, 100]"
-                    :first="firstDatasetIndex"
-                    columnResizeMode="fit"
-                    filterDisplay="row"
-                    paginatorTemplate="FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink CurrentPageReport RowsPerPageDropdown"
-                    currentPageReportTemplate="Showing {first} to {last} of {totalRecords} records"
-                    @filter="filter"
-                    @sort="sort"
-                    @page="paginate"
-                >
-                    <template #empty>
-                        <div class="flex justify-center">
-                            <Message
-                                severity="warn"
-                                class="grow text-center flex justify-center"
-                            >
-                                <template #icon>
-                                    <AlertCircle />
-                                </template>
-                                No Users found.
-                            </Message>
-                        </div>
-                    </template>
-                    <Column
-                        header="Name"
-                        field="name"
-                        sortable
+                <ClientOnly>
+                    <DataTable
+                        ref="dataTable"
+                        v-model:filters="filters"
+                        lazy
+                        paginator
+                        removableSort
+                        resizableColumns
+                        :loading="processing"
+                        :value="props.users.data"
+                        :totalRecords="props.users.total"
+                        :sortField="sorting.field"
+                        :sortOrder="sorting.order"
+                        :rows="props.users.per_page"
+                        :rowsPerPageOptions="[10, 20, 50, 100]"
+                        :first="firstDatasetIndex"
+                        columnResizeMode="fit"
+                        filterDisplay="row"
+                        paginatorTemplate="FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink CurrentPageReport RowsPerPageDropdown"
+                        currentPageReportTemplate="Showing {first} to {last} of {totalRecords} records"
+                        @filter="filter"
+                        @sort="sort"
+                        @page="paginate"
                     >
-                        <template #filter="{ filterModel, filterCallback }">
-                            <InputText
-                                v-model="filterModel.value"
-                                type="text"
-                                placeholder="Search by name"
-                                fluid
-                                @input="debounceInputFilter(filterCallback)"
-                            />
+                        <template #empty>
+                            <div class="flex justify-center">
+                                <Message
+                                    severity="warn"
+                                    class="grow text-center flex justify-center"
+                                >
+                                    <template #icon>
+                                        <AlertCircle />
+                                    </template>
+                                    No Users found.
+                                </Message>
+                            </div>
                         </template>
-                        <template #body="{ data }">
-                            {{ data.name }}
-                        </template>
-                    </Column>
-                    <Column
-                        header="Email"
-                        field="email"
-                        sortable
-                    >
-                        <template #filter="{ filterModel, filterCallback }">
-                            <InputText
-                                v-model="filterModel.value"
-                                type="text"
-                                placeholder="Search by Email"
-                                fluid
-                                @input="debounceInputFilter(filterCallback)"
-                            />
-                        </template>
-                        <template #body="{ data }">
-                            {{ data.email }}
-                        </template>
-                    </Column>
-                    <Column
-                        header="Created"
-                        field="created_at"
-                        dataType="date"
-                        sortable
-                    >
-                        <template #filter="{ filterModel, filterCallback }">
-                            <DatePicker
-                                v-model="filterModel.value"
-                                dateFormat="mm/dd/yy"
-                                placeholder="mm/dd/yyyy"
-                                showButtonBar
-                                fluid
-                                @update:modelValue="filterCallback"
-                            />
-                        </template>
-                        <template #body="{ data }">
-                            {{ format(parseISO(data.created_at), 'MM/dd/yyyy') }}
-                        </template>
-                    </Column>
-                    <Column header="Action">
-                        <template #body="{ data }">
-                            <Button
-                                v-tooltip.top="'Show User Actions'"
-                                type="button"
-                                severity="secondary"
-                                rounded
-                                text
-                                @click="toggleUserContextMenu($event, data)"
-                            >
-                                <template #icon>
-                                    <EllipsisVertical class="size-5!" />
-                                </template>
-                            </Button>
-                        </template>
-                    </Column>
-                </DataTable>
+                        <Column
+                            header="Name"
+                            field="name"
+                            sortable
+                        >
+                            <template #filter="{ filterModel, filterCallback }">
+                                <InputText
+                                    v-model="filterModel.value"
+                                    type="text"
+                                    placeholder="Search by name"
+                                    fluid
+                                    @input="debounceInputFilter(filterCallback)"
+                                />
+                            </template>
+                            <template #body="{ data }">
+                                {{ data.name }}
+                            </template>
+                        </Column>
+                        <Column
+                            header="Email"
+                            field="email"
+                            sortable
+                        >
+                            <template #filter="{ filterModel, filterCallback }">
+                                <InputText
+                                    v-model="filterModel.value"
+                                    type="text"
+                                    placeholder="Search by Email"
+                                    fluid
+                                    @input="debounceInputFilter(filterCallback)"
+                                />
+                            </template>
+                            <template #body="{ data }">
+                                {{ data.email }}
+                            </template>
+                        </Column>
+                        <Column
+                            header="Created"
+                            field="created_at"
+                            dataType="date"
+                            sortable
+                        >
+                            <template #filter="{ filterModel, filterCallback }">
+                                <DatePicker
+                                    v-model="filterModel.value"
+                                    dateFormat="mm/dd/yy"
+                                    placeholder="mm/dd/yyyy"
+                                    showButtonBar
+                                    fluid
+                                    @update:modelValue="filterCallback"
+                                />
+                            </template>
+                            <template #body="{ data }">
+                                {{ formatInTimeZone(parseISO(data.created_at), 'UTC', 'MM/dd/yyyy') }}
+                            </template>
+                        </Column>
+                        <Column header="Action">
+                            <template #body="{ data }">
+                                <Button
+                                    v-tooltip.top="'Show User Actions'"
+                                    type="button"
+                                    severity="secondary"
+                                    rounded
+                                    text
+                                    @click="toggleUserContextMenu($event, data)"
+                                >
+                                    <template #icon>
+                                        <EllipsisVertical class="size-5!" />
+                                    </template>
+                                </Button>
+                            </template>
+                        </Column>
+                    </DataTable>
+                </ClientOnly>
             </template>
         </Card>
     </AppLayout>
