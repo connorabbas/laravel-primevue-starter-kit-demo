@@ -115,9 +115,9 @@ const appliedFiltersCount = computed(() => {
                 <div class="flex flex-col gap-2">
                     <label for="sort-by">Sort By</label>
                     <Select
-                        id="sort-by"
                         v-model="sorting"
                         :options="sortOptions"
+                        inputId="sort-by"
                         optionLabel="label"
                         optionValue="value"
                         placeholder="Sort By"
@@ -135,10 +135,10 @@ const appliedFiltersCount = computed(() => {
                             fluid
                         />
                         <Select
-                            id="name-match-mode"
                             v-model="filters.name.matchMode"
                             class="flex-none w-auto"
                             :options="textInputMatchModes"
+                            inputId="name-match-mode"
                             optionLabel="label"
                             optionValue="value"
                             placeholder="Match mode"
@@ -157,10 +157,10 @@ const appliedFiltersCount = computed(() => {
                             fluid
                         />
                         <Select
-                            id="email-match-mode"
                             v-model="filters.email.matchMode"
                             class="flex-none w-auto"
                             :options="textInputMatchModes"
+                            inputId="email-match-mode"
                             optionLabel="label"
                             optionValue="value"
                             placeholder="Match mode"
@@ -171,9 +171,9 @@ const appliedFiltersCount = computed(() => {
                 <div class="flex flex-col gap-2">
                     <label for="organization-filter">Organization</label>
                     <Select
-                        id="organization-filter"
                         v-model="filters.organization.value"
                         :options="props.organizations"
+                        inputId="organization-filter"
                         optionLabel="name"
                         optionValue="id"
                         placeholder="Any"
@@ -184,9 +184,9 @@ const appliedFiltersCount = computed(() => {
                 <div class="flex flex-col gap-2">
                     <label for="tags-filter">Tags</label>
                     <MultiSelect
-                        id="tags-filter"
                         v-model="filters.tags.value"
                         :options="props.tags"
+                        inputId="tags-filter"
                         optionLabel="name"
                         optionValue="id"
                         display="chip"
@@ -200,18 +200,18 @@ const appliedFiltersCount = computed(() => {
                     <label for="created-at-filter">Created</label>
                     <InputGroup>
                         <DatePicker
-                            id="created-at-filter"
                             v-model="filters.created_at.value"
                             class="flex-1"
+                            inputId="created-at-filter"
                             dateFormat="mm/dd/yy"
                             placeholder="mm/dd/yyyy"
                             showButtonBar
                         />
                         <Select
-                            id="created-at-match-mode"
                             v-model="filters.created_at.matchMode"
                             class="flex-none w-auto"
                             :options="dateInputMatchModes"
+                            inputId="created-at-match-mode"
                             optionLabel="label"
                             optionValue="value"
                             placeholder="Match mode"
