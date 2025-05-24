@@ -27,10 +27,10 @@ createServer((page) =>
         ),
         setup({ App, props, plugin }) {
             // Color mode set from cookie on the server
-            const initialColorMode = props.initialPage.props.colorScheme;
+            const cookieColorMode = props.initialPage.props.colorScheme;
             const colorMode = useSiteColorMode({
-                initialOnServer: initialColorMode,
-                emitAuto: false,
+                cookieColorMode,
+                emitAuto: true,
             });
 
             // Create app
