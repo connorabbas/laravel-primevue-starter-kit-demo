@@ -40,7 +40,7 @@ class ProfileController extends Controller
 
         $user?->save();
 
-        return Redirect::route('profile.edit');
+        return redirect()->route('profile.edit');
     }
 
     /**
