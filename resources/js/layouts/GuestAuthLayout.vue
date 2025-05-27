@@ -3,7 +3,7 @@ import ApplicationLogo from '@/components/ApplicationLogo.vue';
 </script>
 
 <template>
-    <Container class="min-h-screen flex flex-col justify-center items-center sm:pt-0">
+    <Container class="min-h-screen flex flex-col justify-center items-center">
         <div>
             <InertiaLink href="/">
                 <ApplicationLogo class="w-12 h-12 fill-current text-surface-900 dark:text-surface-0" />
