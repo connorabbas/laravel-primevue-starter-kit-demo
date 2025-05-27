@@ -13,7 +13,7 @@ import { Check, Info, TriangleAlert, CircleAlert, Megaphone } from 'lucide-vue-n
             <template #icon>
                 <Check />
             </template>
-            {{ $page.props.flash.success}}
+            {{ $page.props.flash.success }}
         </Message>
         <Message
             v-if="$page.props.flash.info"

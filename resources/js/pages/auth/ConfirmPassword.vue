@@ -20,7 +20,9 @@ const submit = () => {
         <InertiaHead title="Confirm password" />
 
         <template #title>
-            <div class="text-center">Confirm your password</div>
+            <div class="text-center">
+                Confirm your password
+            </div>
         </template>
 
         <template #subtitle>

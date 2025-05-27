@@ -28,11 +28,15 @@ onMounted(() => {
         <InertiaHead title="Register" />
 
         <template #title>
-            <div class="text-center">Create an account</div>
+            <div class="text-center">
+                Create an account
+            </div>
         </template>
 
         <template #subtitle>
-            <div class="text-center">Enter your details below to create your account</div>
+            <div class="text-center">
+                Enter your details below to create your account
+            </div>
         </template>
 
         <form

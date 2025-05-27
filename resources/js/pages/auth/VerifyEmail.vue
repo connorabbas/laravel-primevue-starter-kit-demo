@@ -28,7 +28,9 @@ const verificationLinkSent = computed(
         <InertiaHead title="Email Verification" />
 
         <template #title>
-            <div class="text-center">Verify email</div>
+            <div class="text-center">
+                Verify email
+            </div>
         </template>
 
         <template #subtitle>

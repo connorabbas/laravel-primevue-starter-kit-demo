@@ -39,11 +39,15 @@ onMounted(() => {
         <InertiaHead title="Reset Password" />
 
         <template #title>
-            <div class="text-center">Reset password</div>
+            <div class="text-center">
+                Reset password
+            </div>
         </template>
 
         <template #subtitle>
-            <div class="text-center">Please enter your new password below</div>
+            <div class="text-center">
+                Please enter your new password below
+            </div>
         </template>
 
         <form

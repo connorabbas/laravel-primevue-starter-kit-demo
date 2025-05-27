@@ -42,11 +42,15 @@ onMounted(() => {
         </template>
 
         <template #title>
-            <div class="text-center">Forgot password</div>
+            <div class="text-center">
+                Forgot password
+            </div>
         </template>
 
         <template #subtitle>
-            <div class="text-center">Enter your email to receive a password reset link</div>
+            <div class="text-center">
+                Enter your email to receive a password reset link
+            </div>
         </template>
 
         <form

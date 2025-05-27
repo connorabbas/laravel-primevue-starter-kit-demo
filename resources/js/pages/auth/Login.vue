@@ -49,11 +49,15 @@ onMounted(() => {
         </template>
 
         <template #title>
-            <div class="text-center">Log in to your account</div>
+            <div class="text-center">
+                Log in to your account
+            </div>
         </template>
 
         <template #subtitle>
-            <div class="text-center">Enter your email and password below to log in</div>
+            <div class="text-center">
+                Enter your email and password below to log in
+            </div>
         </template>
 
         <form
