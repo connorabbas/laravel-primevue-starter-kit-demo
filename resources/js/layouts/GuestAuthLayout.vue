@@ -37,9 +37,7 @@ import ApplicationLogo from '@/components/ApplicationLogo.vue';
                         v-if="$slots.subtitle"
                         #subtitle
                     >
-                        <div class="text-base">
-                            <slot name="subtitle" />
-                        </div>
+                        <slot name="subtitle" />
                     </template>
                     <template #content>
                         <slot />

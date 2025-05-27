@@ -163,7 +163,7 @@ const updateProfileInformation = () => {
                                 </div>
                                 <div>
                                     <Button
-                                        label="Delete Account"
+                                        label="Delete account"
                                         severity="danger"
                                         @click="deleteUserModalOpen = true"
                                     />

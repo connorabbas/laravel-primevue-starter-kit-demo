@@ -147,7 +147,7 @@ const updatePassword = () => {
                         <Button
                             :loading="updatePasswordForm.processing"
                             type="submit"
-                            label="Save"
+                            label="Save password"
                         />
                     </form>
                 </template>
