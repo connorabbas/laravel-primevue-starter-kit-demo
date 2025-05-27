@@ -47,6 +47,13 @@ class HandleInertiaRequests extends Middleware
                 'user' => $request->user(),
                 'isAdmin' => $request->user()?->hasRole('Admin'),
             ],
+            'flash' => [
+                'success' => fn () => $request->session()->get('flash_success'),
+                'info' => fn () => $request->session()->get('flash_info'),
+                'warn' => fn () => $request->session()->get('flash_warn'),
+                'error' => fn () => $request->session()->get('flash_error'),
+                'message' => fn () => $request->session()->get('flash_message'),
+            ],
         ];
     }
 }
