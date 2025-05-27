@@ -150,7 +150,7 @@ const toggleMobileUserMenu = (event) => {
 
             <main>
                 <Container vertical>
-                    <!-- Session Flash Messages -->
+                    <!-- Session-based Flash Messages -->
                     <FlashMessages />
 
                     <!-- Breadcrumbs -->

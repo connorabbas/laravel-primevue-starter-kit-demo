@@ -155,7 +155,7 @@ const toggleMobileUserMenu = (event) => {
                     vertical
                     fluid
                 >
-                    <!-- Session Flash Messages -->
+                    <!-- Session-based Flash Messages -->
                     <FlashMessages />
 
                     <!-- Breadcrumbs -->
