@@ -65,7 +65,7 @@ onMounted(() => {
             @submit.prevent="submit"
         >
             <div class="flex flex-col gap-2">
-                <label for="email">Email</label>
+                <label for="email">Email address</label>
                 <InputText
                     id="email"
                     ref="email-input"

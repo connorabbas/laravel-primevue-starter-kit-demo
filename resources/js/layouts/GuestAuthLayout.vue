@@ -4,7 +4,7 @@ import ApplicationLogo from '@/components/ApplicationLogo.vue';
 
 <template>
     <Container>
-        <div class="min-h-screen flex flex-col sm:justify-center items-center pt-6 sm:pt-0">
+        <div class="min-h-screen flex flex-col justify-center items-center pt-6 sm:pt-0">
             <div>
                 <InertiaLink href="/">
                     <ApplicationLogo class="w-12 h-12 fill-current text-surface-900 dark:text-surface-0" />
@@ -37,7 +37,9 @@ import ApplicationLogo from '@/components/ApplicationLogo.vue';
                         v-if="$slots.subtitle"
                         #subtitle
                     >
-                        <slot name="subtitle" />
+                        <div class="text-base">
+                            <slot name="subtitle" />
+                        </div>
                     </template>
                     <template #content>
                         <slot />
