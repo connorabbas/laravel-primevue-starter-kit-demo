@@ -27,8 +27,16 @@ onMounted(() => {
     <GuestAuthLayout>
         <InertiaHead title="Register" />
 
+        <template #title>
+            <div class="text-center">Create an account</div>
+        </template>
+
+        <template #subtitle>
+            <div class="text-center">Enter your details below to create your account</div>
+        </template>
+
         <form
-            class="space-y-6"
+            class="space-y-6 sm:space-y-8"
             @submit.prevent="submit"
         >
             <div class="flex flex-col gap-2">
@@ -117,19 +125,24 @@ onMounted(() => {
                 </Message>
             </div>
 
-            <div class="flex justify-end items-center gap-4 pt-2">
+            <div>
+                <Button
+                    type="submit"
+                    :loading="registerForm.processing"
+                    label="Create account"
+                    fluid
+                />
+            </div>
+
+            <div class="text-center">
+                <span class="text-muted-color mr-1">Already have an account?</span>
                 <InertiaLink :href="route('login')">
                     <Button
                         class="p-0"
                         variant="link"
-                        label="Already registered?"
+                        label="Log in"
                     />
                 </InertiaLink>
-                <Button
-                    type="submit"
-                    :loading="registerForm.processing"
-                    label="Register"
-                />
             </div>
         </form>
     </GuestAuthLayout>
