@@ -2,7 +2,7 @@
 import { AlertCircle } from 'lucide-vue-next';
 import { format, parseISO } from 'date-fns';
 import { useLazyDataTable } from '@/composables/useLazyDataTable';
-import AppLayout from '@/layouts/AppLayout.vue';
+import SidebarLayout from '@/layouts/app/SidebarLayout.vue';
 
 const props = defineProps({
     contacts: Object,

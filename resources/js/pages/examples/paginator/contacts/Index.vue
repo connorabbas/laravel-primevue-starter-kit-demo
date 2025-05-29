@@ -84,7 +84,6 @@ const appliedFiltersCount = computed(() => {
                 <div class="relative">
                     <Button
                         :disabled="processing"
-                        severity="secondary"
                         type="button"
                         label="Sort & Filter"
                         outlined

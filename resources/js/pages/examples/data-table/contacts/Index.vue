@@ -4,7 +4,7 @@ import { AlertCircle, FunnelX } from 'lucide-vue-next';
 import { formatInTimeZone } from 'date-fns-tz';
 import { parseISO } from 'date-fns';
 import { useLazyDataTable } from '@/composables/useLazyDataTable';
-import AppLayout from '@/layouts/AppLayout.vue';
+import SidebarLayout from '@/layouts/app/SidebarLayout.vue';
 
 const props = defineProps({
     contacts: Object,
@@ -40,7 +40,7 @@ const {
 </script>
 
 <template>
-    <AppLayout :breadcrumbs="breadcrumbs">
+    <SidebarLayout :breadcrumbs="breadcrumbs">
         <InertiaHead :title="pageTitle" />
         <PageTitleSection>
             <template #title>
@@ -206,5 +206,5 @@ const {
                 </DataTable>
             </template>
         </Card>
-    </AppLayout>
+    </SidebarLayout>
 </template>
