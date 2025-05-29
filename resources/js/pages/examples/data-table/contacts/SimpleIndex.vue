@@ -24,7 +24,7 @@ const {
 </script>
 
 <template>
-    <AppLayout :breadcrumbs="breadcrumbs">
+    <SidebarLayout :breadcrumbs="breadcrumbs">
         <InertiaHead :title="pageTitle" />
 
         <PageTitleSection>
@@ -104,5 +104,5 @@ const {
                 </DataTable>
             </template>
         </Card>
-    </AppLayout>
+    </SidebarLayout>
 </template>
