@@ -84,7 +84,6 @@ const appliedFiltersCount = computed(() => {
                 <div class="relative">
                     <Button
                         :disabled="processing"
-                        severity="secondary"
                         type="button"
                         label="Sort & Filter"
                         outlined
@@ -283,7 +282,9 @@ const appliedFiltersCount = computed(() => {
                         </template>
                         <template #content>
                             <div class="flex flex-col gap-3">
-                                <div class="text-muted-color">{{ contact.email }}</div>
+                                <div class="text-muted-color">
+                                    {{ contact.email }}
+                                </div>
                                 <div class="text-muted-color text-xs">
                                     Created: {{ formatInTimeZone(parseISO(contact.created_at), 'UTC', 'MM/dd/yyyy') }}
                                 </div>

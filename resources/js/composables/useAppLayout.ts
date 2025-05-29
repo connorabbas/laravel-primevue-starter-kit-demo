@@ -56,13 +56,13 @@ export function useAppLayout() {
                 lucideIcon: Lightbulb,
                 items: [
                     {
-                        label: 'DataTable',
+                        label: 'Sidebar + DataTable',
                         lucideIcon: Table2,
                         route: route('examples.data-table.contacts.index'),
                         active: currentRoute.value == 'examples.data-table.contacts.index',
                     },
                     {
-                        label: 'Paginator',
+                        label: 'Paginator + Sort & Filter',
                         lucideIcon: BookOpen,
                         route: route('examples.paginator.contacts.index'),
                         active: currentRoute.value == 'examples.paginator.contacts.index',
