@@ -282,7 +282,9 @@ const appliedFiltersCount = computed(() => {
                         </template>
                         <template #content>
                             <div class="flex flex-col gap-3">
-                                <div class="text-muted-color">{{ contact.email }}</div>
+                                <div class="text-muted-color">
+                                    {{ contact.email }}
+                                </div>
                                 <div class="text-muted-color text-xs">
                                     Created: {{ formatInTimeZone(parseISO(contact.created_at), 'UTC', 'MM/dd/yyyy') }}
                                 </div>
