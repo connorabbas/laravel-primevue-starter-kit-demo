@@ -5,7 +5,7 @@
  */
 
 if (!function_exists('example')) {
-    function example()
+    function example(): void
     {
         // ...
     }
