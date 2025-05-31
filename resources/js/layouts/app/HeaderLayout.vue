@@ -3,8 +3,8 @@ import { useTemplateRef } from 'vue';
 import { usePage } from '@inertiajs/vue3';
 import { useAppLayout } from '@/composables/useAppLayout';
 import { ChevronsUpDown, ChevronDown, Menu as MenuIcon } from 'lucide-vue-next';
-import ApplicationLogo from '@/components/ApplicationLogo.vue';
 import ClientOnly from '@/components/ClientOnly.vue';
+import NavLogoLink from '@/components/NavLogoLink.vue';
 import FlashMessages from '@/components/FlashMessages.vue';
 import Menu from '@/components/primevue/menu/Menu.vue';
 import Menubar from '@/components/primevue/menu/Menubar.vue';
@@ -57,15 +57,21 @@ const toggleMobileUserMenu = (event) => {
                         <div class="flex flex-col">
                             <Button
                                 id="mobile-user-menu-btn"
-                                :label="page.props.auth.user.name"
                                 severity="secondary"
                                 size="large"
-                                pt:root:class="flex flex-row-reverse justify-between"
+                                pt:root:class="flex justify-between"
                                 @click="toggleMobileUserMenu($event)"
                             >
-                                <template #icon>
+                                <div class="flex items-center gap-3">
+                                    <Tag
+                                        v-if="page.props.auth.isAdmin"
+                                        value="ADMIN"
+                                    />
+                                    {{ page.props.auth.user.name }}
+                                </div>
+                                <div>
                                     <ChevronsUpDown />
-                                </template>
+                                </div>
                             </Button>
                             <Menu
                                 ref="mobile-user-menu"
@@ -90,16 +96,8 @@ const toggleMobileUserMenu = (event) => {
                         pt:button:class="hidden"
                     >
                         <template #start>
-                            <div class="shrink-0 flex gap-4 items-center mr-5">
-                                <InertiaLink :href="route('welcome')">
-                                    <ApplicationLogo
-                                        class="block h-8 lg:h-10 w-auto fill-current text-surface-900 dark:text-surface-0"
-                                    />
-                                </InertiaLink>
-                                <Tag
-                                    v-if="page.props.auth.isAdmin"
-                                    value="ADMIN"
-                                />
+                            <div class="shrink-0 flex items-center mr-5">
+                                <NavLogoLink />
                             </div>
                         </template>
                         <template #end>
@@ -108,15 +106,21 @@ const toggleMobileUserMenu = (event) => {
                                 <div class="flex flex-col">
                                     <Button
                                         id="user-menu-btn"
-                                        :label="page.props.auth.user.name"
-                                        pt:root:class="flex flex-row-reverse justify-between"
                                         severity="secondary"
+                                        pt:root:class="flex justify-between"
                                         text
                                         @click="toggleUserMenu($event)"
                                     >
-                                        <template #icon>
+                                        <div class="flex items-center gap-3">
+                                            <Tag
+                                                v-if="page.props.auth.isAdmin"
+                                                value="ADMIN"
+                                            />
+                                            {{ page.props.auth.user.name }}
+                                        </div>
+                                        <div>
                                             <ChevronDown />
-                                        </template>
+                                        </div>
                                     </Button>
                                     <div
                                         id="user-menu-append"

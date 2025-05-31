@@ -3,9 +3,9 @@ import { useTemplateRef } from 'vue';
 import { usePage } from '@inertiajs/vue3';
 import { ChevronsUpDown, Menu as MenuIcon } from 'lucide-vue-next';
 import { useAppLayout } from '@/composables/useAppLayout';
-import ApplicationLogo from '@/components/ApplicationLogo.vue';
 import ClientOnly from '@/components/ClientOnly.vue';
 import FlashMessages from '@/components/FlashMessages.vue';
+import NavLogoLink from '@/components/NavLogoLink.vue';
 import Menu from '@/components/primevue/menu/Menu.vue';
 import PanelMenu from '@/components/primevue/menu/PanelMenu.vue';
 import Breadcrumb from '@/components/primevue/menu/Breadcrumb.vue';
@@ -43,7 +43,7 @@ const toggleMobileUserMenu = (event) => {
                 <!-- Mobile drawer menu -->
                 <Drawer
                     v-model:visible="mobileMenuOpen"
-                    position="left"
+                    position="right"
                 >
                     <div>
                         <PanelMenu
@@ -55,15 +55,21 @@ const toggleMobileUserMenu = (event) => {
                         <div class="flex flex-col">
                             <Button
                                 id="mobile-user-menu-btn"
-                                :label="page.props.auth.user.name"
-                                pt:root:class="flex flex-row-reverse justify-between"
                                 severity="secondary"
                                 size="large"
+                                pt:root:class="flex justify-between"
                                 @click="toggleMobileUserMenu($event)"
                             >
-                                <template #icon>
+                                <div class="flex items-center gap-3">
+                                    <Tag
+                                        v-if="page.props.auth.isAdmin"
+                                        value="ADMIN"
+                                    />
+                                    {{ page.props.auth.user.name }}
+                                </div>
+                                <div>
                                     <ChevronsUpDown />
-                                </template>
+                                </div>
                             </Button>
                             <Menu
                                 ref="mobile-user-menu"
@@ -82,17 +88,9 @@ const toggleMobileUserMenu = (event) => {
         <header class="block lg:fixed top-0 left-0 right-0 z-50">
             <nav class="dynamic-bg shadow-sm flex justify-between items-center lg:hidden">
                 <Container class="grow">
-                    <div class="flex justify-between items-center py-4">
-                        <div class="flex gap-4">
-                            <InertiaLink :href="route('welcome')">
-                                <ApplicationLogo
-                                    class="block h-8 w-auto fill-current text-surface-900 dark:text-surface-0"
-                                />
-                            </InertiaLink>
-                            <Tag
-                                v-if="page.props.auth.isAdmin"
-                                value="ADMIN"
-                            />
+                    <div class="flex justify-between items-center gap-4 py-4">
+                        <div>
+                            <NavLogoLink />
                         </div>
                         <div>
                             <Button
@@ -118,16 +116,8 @@ const toggleMobileUserMenu = (event) => {
             >
                 <div class="w-full h-full flex flex-col justify-between p-4">
                     <div class="space-y-6">
-                        <div class="flex gap-4 items-center">
-                            <InertiaLink :href="route('welcome')">
-                                <ApplicationLogo
-                                    class="block h-10 w-auto fill-current text-surface-900 dark:text-surface-0"
-                                />
-                            </InertiaLink>
-                            <Tag
-                                v-if="page.props.auth.isAdmin"
-                                value="ADMIN"
-                            />
+                        <div class="p-2">
+                            <NavLogoLink />
                         </div>
                         <div>
                             <PanelMenu
@@ -136,18 +126,23 @@ const toggleMobileUserMenu = (event) => {
                             />
                         </div>
                     </div>
-                    <div>
+                    <div class="flex">
                         <Button
                             id="user-menu-btn"
-                            :label="page.props.auth.user.name"
-                            pt:root:class="flex flex-row-reverse justify-between"
                             severity="secondary"
-                            fluid
+                            pt:root:class="flex grow justify-between"
                             @click="toggleUserMenu($event)"
                         >
-                            <template #icon>
+                            <div class="flex items-center gap-3">
+                                <Tag
+                                    v-if="page.props.auth.isAdmin"
+                                    value="ADMIN"
+                                />
+                                {{ page.props.auth.user.name }}
+                            </div>
+                            <div>
                                 <ChevronsUpDown />
-                            </template>
+                            </div>
                         </Button>
                         <Menu
                             ref="user-menu"
