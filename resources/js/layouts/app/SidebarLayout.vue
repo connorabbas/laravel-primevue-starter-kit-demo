@@ -55,15 +55,21 @@ const toggleMobileUserMenu = (event) => {
                         <div class="flex flex-col">
                             <Button
                                 id="mobile-user-menu-btn"
-                                :label="page.props.auth.user.name"
-                                pt:root:class="flex flex-row-reverse justify-between"
                                 severity="secondary"
                                 size="large"
+                                pt:root:class="flex justify-between"
                                 @click="toggleMobileUserMenu($event)"
                             >
-                                <template #icon>
+                                <div class="flex items-center gap-3">
+                                    <Tag
+                                        v-if="page.props.auth.isAdmin"
+                                        value="ADMIN"
+                                    />
+                                    {{ page.props.auth.user.name }}
+                                </div>
+                                <div>
                                     <ChevronsUpDown />
-                                </template>
+                                </div>
                             </Button>
                             <Menu
                                 ref="mobile-user-menu"
@@ -120,18 +126,23 @@ const toggleMobileUserMenu = (event) => {
                             />
                         </div>
                     </div>
-                    <div>
+                    <div class="flex">
                         <Button
                             id="user-menu-btn"
-                            :label="page.props.auth.user.name"
-                            pt:root:class="flex flex-row-reverse justify-between"
                             severity="secondary"
-                            fluid
+                            pt:root:class="flex grow justify-between"
                             @click="toggleUserMenu($event)"
                         >
-                            <template #icon>
+                            <div class="flex items-center gap-3">
+                                <Tag
+                                    v-if="page.props.auth.isAdmin"
+                                    value="ADMIN"
+                                />
+                                {{ page.props.auth.user.name }}
+                            </div>
+                            <div>
                                 <ChevronsUpDown />
-                            </template>
+                            </div>
                         </Button>
                         <Menu
                             ref="user-menu"
