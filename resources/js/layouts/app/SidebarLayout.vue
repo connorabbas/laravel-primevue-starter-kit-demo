@@ -109,7 +109,7 @@ const toggleMobileUserMenu = (event) => {
             >
                 <div class="w-full h-full flex flex-col justify-between p-4">
                     <div class="space-y-6">
-                        <div>
+                        <div class="p-2">
                             <NavLogoLink />
                         </div>
                         <div>
