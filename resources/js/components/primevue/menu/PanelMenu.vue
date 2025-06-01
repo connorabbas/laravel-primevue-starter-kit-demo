@@ -28,7 +28,10 @@ defineExpose({ el: childRef });
         v-bind="{ ...componentProps, pt: defaultPt, ptOptions: { mergeProps: ptViewMerge } }"
     >
         <template #item="{ item, root, active, props, hasSubmenu }">
-            <Divider v-if="item.separator" pt:root:class="my-0" />
+            <Divider
+                v-if="item.separator"
+                pt:root:class="my-0"
+            />
             <InertiaLink
                 v-else-if="item.visible !== false && item.route"
                 :href="item.route"
