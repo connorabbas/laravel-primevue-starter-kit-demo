@@ -146,7 +146,7 @@ const updateProfileInformation = () => {
                     pt:caption:class="space-y-1"
                 >
                     <template #title>
-                        Delete Account
+                        Delete account
                     </template>
                     <template #subtitle>
                         Delete your account and all of its resources

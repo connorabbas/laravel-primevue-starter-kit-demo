@@ -36,7 +36,7 @@ onMounted(() => {
 
 <template>
     <GuestAuthLayout>
-        <InertiaHead title="Reset Password" />
+        <InertiaHead title="Reset password" />
 
         <template #title>
             <div class="text-center">
