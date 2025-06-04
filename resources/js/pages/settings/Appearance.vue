@@ -28,7 +28,7 @@ const breadcrumbs = [
                 <template #content>
                     <div class="space-y-6">
                         <div class="flex flex-col gap-2">
-                            <label for="color-mode-selector">Color Mode</label>
+                            <label for="color-mode-selector">Color mode</label>
                             <SelectColorModeButton id="color-mode-selector" />
                         </div>
                         <div class="flex flex-col gap-2">
