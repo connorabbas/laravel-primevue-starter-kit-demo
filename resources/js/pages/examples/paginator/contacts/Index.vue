@@ -112,14 +112,14 @@ const appliedFiltersCount = computed(() => {
         >
             <div class="flex flex-col gap-6 sm:gap-8">
                 <div class="flex flex-col gap-2">
-                    <label for="sort-by">Sort By</label>
+                    <label for="sort-by">Sort by</label>
                     <Select
                         v-model="sorting"
                         :options="sortOptions"
                         inputId="sort-by"
                         optionLabel="label"
                         optionValue="value"
-                        placeholder="Sort By"
+                        placeholder="Sort by"
                         fluid
                     />
                 </div>
