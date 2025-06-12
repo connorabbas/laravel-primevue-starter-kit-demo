@@ -67,7 +67,7 @@ const dateInputMatchModes = [
 
 const appliedFiltersCount = computed(() => {
     return Object.values(filters.value)
-        .filter(f => f.value !== null)
+        .filter(f => f.value !== null && f.value !== '')
         .length;
 });
 </script>
@@ -247,7 +247,7 @@ const appliedFiltersCount = computed(() => {
                 </div>
             </template>
         </Drawer>
-
+{{ filters }}
         <BlockUI
             class="space-y-4 z-[999]"
             :blocked="processing"
