@@ -44,7 +44,7 @@ createInertiaApp({
                             summary: responseBody.error_summary,
                             detail: responseBody.error_detail,
                             life: 5000,
-                            styleClass: 'mb-0 mt-4',
+                            styleClass: 'shadow-lg mb-0 mt-4',
                         });
                     }
                 });

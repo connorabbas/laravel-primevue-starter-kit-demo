@@ -1,5 +1,6 @@
 <?php
 
+use App\Exceptions\ErrorToastException;
 use App\Http\Middleware\EncryptCookies;
 use App\Http\Middleware\HandleInertiaRequests;
 use Illuminate\Cookie\Middleware\EncryptCookies as BaseEncryptCookies;
@@ -66,14 +67,20 @@ return Application::configure(basePath: dirname(__DIR__))
                         return $response;
                     }
                     // Return JSON response for PrimeVue toast to display
+                    $errorSummary = "$statusCode - $errorTitles[$statusCode]";
+                    $errorDetail = $errorDetails[$statusCode];
+                    if (get_class($exception) === ErrorToastException::class) {
+                        $errorSummary = "$statusCode - Error";
+                        $errorDetail = $exception->getMessage();
+                    }
                     return response()->json([
-                        'error_summary' => "$statusCode - $errorTitles[$statusCode]",
-                        'error_detail' => $errorDetails[$statusCode],
+                        'error_summary' => $errorSummary,
+                        'error_detail' => $errorDetail,
                     ], $statusCode);
                 }
             } elseif ($statusCode === 419) {
                 return back()->with([
-                    'flash_message' => 'The page expired, please try again.',
+                    'flash_warn' => 'The page expired, please try again.',
                 ]);
             }
 
