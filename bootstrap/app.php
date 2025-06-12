@@ -61,14 +61,14 @@ return Application::configure(basePath: dirname(__DIR__))
                         ->toResponse($request)
                         ->setStatusCode($statusCode);
                 } else {
-                    // Return JSON response for PrimeVue toast to display
-                    $exceptionMessage = '';
-                    if (app()->isLocal()) {
-                        $exceptionMessage = sprintf("\n\n%s: %s", get_class($exception), $exception->getMessage());
+                    // Return standard modal for easier debugging locally
+                    if (app()->isLocal() && $statusCode === 500) {
+                        return $response;
                     }
+                    // Return JSON response for PrimeVue toast to display
                     return response()->json([
                         'error_summary' => "$statusCode - $errorTitles[$statusCode]",
-                        'error_detail' => $errorDetails[$statusCode] . $exceptionMessage,
+                        'error_detail' => $errorDetails[$statusCode],
                     ], $statusCode);
                 }
             } elseif ($statusCode === 419) {
