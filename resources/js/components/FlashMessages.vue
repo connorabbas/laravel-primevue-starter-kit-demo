@@ -10,8 +10,8 @@ onUnmounted(router.on('finish', () => requestsKey.value++));
 
 <template>
     <div
-        class="m-0"
         :key="requestsKey"
+        class="m-0"
     >
         <Message
             v-if="page.props.flash.success"
