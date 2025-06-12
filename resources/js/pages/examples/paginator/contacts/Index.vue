@@ -247,7 +247,6 @@ const appliedFiltersCount = computed(() => {
                 </div>
             </template>
         </Drawer>
-{{ filters }}
         <BlockUI
             class="space-y-4 z-[999]"
             :blocked="processing"
