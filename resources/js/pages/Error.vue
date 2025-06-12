@@ -3,26 +3,17 @@ import { computed } from 'vue';
 import { ArrowLeft } from 'lucide-vue-next';
 
 const props = defineProps({
+    errorTitles: Object,
+    errorDetails: Object,
+    status: Number,
     homepageRoute: String,
-    status: Number
 });
 
 const title = computed(() => {
-    return {
-        503: 'Service Unavailable',
-        500: 'Server Error',
-        404: 'Page Not Found',
-        403: 'Forbidden',
-    }[props.status];
+    return props.errorTitles[props.status];
 });
-
-const description = computed(() => {
-    return {
-        503: 'Sorry, we are doing some maintenance. Please check back soon.',
-        500: 'Whoops, something went wrong on our servers.',
-        404: 'Sorry, the page you are looking for could not be found.',
-        403: 'Sorry, you are forbidden from accessing this page.',
-    }[props.status];
+const details = computed(() => {
+    return props.errorDetails[props.status];
 });
 </script>
 
@@ -41,7 +32,7 @@ const description = computed(() => {
                                 {{ title }}
                             </h2>
                             <p class="text-xl font-semibold md:text-3xl text-muted-color">
-                                {{ description }}
+                                {{ details }}
                             </p>
                             <InertiaLink :href="props.homepageRoute">
                                 <Button
