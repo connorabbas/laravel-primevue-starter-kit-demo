@@ -39,7 +39,7 @@ const showSuccessToast = () => {
         severity: 'success',
         summary: 'Saved',
         detail: 'Profile information has been updated',
-        life: 3000,
+        life: 120000,
     });
 };
 const updateProfileInformation = () => {

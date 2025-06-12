@@ -44,7 +44,7 @@ createInertiaApp({
                             summary: responseBody.error_summary,
                             detail: responseBody.error_detail,
                             life: 5000,
-                            styleClass: 'shadow-lg mb-0 mt-4',
+                            //styleClass: 'shadow-lg mb-0 mt-4 left-4 md:left-auto',
                         });
                     }
                 });
@@ -69,6 +69,16 @@ createInertiaApp({
                         },
                     },
                 },
+                pt: {
+                    toast: {
+                        root: {
+                            class: 'fixed left-4! right-4! bottom-4 md:left-auto! md:top-auto'
+                        },
+                        message: {
+                            class: 'shadow-lg mb-0 mt-4 w-full'
+                        },
+                    },
+                }
             })
             .use(ToastService)
             .component('InertiaHead', Head)
