@@ -13,6 +13,7 @@ export interface User {
 
 export interface AuthProps {
     user: User | null;
+    isAdmin?: boolean;
 }
 
 export interface FlashProps {
