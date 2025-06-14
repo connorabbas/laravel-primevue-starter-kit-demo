@@ -32,9 +32,10 @@ createInertiaApp({
         // Site light/dark mode
         const colorMode = useSiteColorMode({ emitAuto: true });
 
-        // Global Toast component, show errors instead of standard Inertia modal response
+        // Global Toast component
         const Root = {
             setup() {
+                // show error toast instead of standard Inertia modal response
                 const toast = useToast();
                 router.on('invalid', (event) => {
                     const responseBody = event.detail.response?.data;
@@ -48,6 +49,7 @@ createInertiaApp({
                         });
                     }
                 });
+
                 return () => h('div', [
                     h(App, props),
                     h(Toast, { position: 'bottom-right' })
