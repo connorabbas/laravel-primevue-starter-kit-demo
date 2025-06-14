@@ -62,11 +62,11 @@ return Application::configure(basePath: dirname(__DIR__))
                         ->toResponse($request)
                         ->setStatusCode($statusCode);
                 } else {
-                    // Return standard modal for easier debugging locally
+                    // Show standard modal for easier debugging locally
                     if (app()->isLocal() && $statusCode === 500) {
                         return $response;
                     }
-                    // Return JSON response for PrimeVue toast to display
+                    // Return JSON response for PrimeVue toast to display, handled by Inertia router event listener
                     $errorSummary = "$statusCode - $errorTitles[$statusCode]";
                     $errorDetail = $errorDetails[$statusCode];
                     if (get_class($exception) === ErrorToastException::class) {
