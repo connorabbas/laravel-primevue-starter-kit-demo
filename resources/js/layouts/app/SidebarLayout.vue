@@ -80,7 +80,6 @@ const toggleMobileUserMenu = (event) => {
                         </div>
                     </template>
                 </Drawer>
-                <Toast position="top-center" />
             </Teleport>
         </ClientOnly>
 
