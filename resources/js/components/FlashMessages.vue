@@ -1,16 +1,19 @@
 <script setup>
-import { ref, onUnmounted } from 'vue';
-import { usePage, router } from '@inertiajs/vue3';
-import { Check, Info, TriangleAlert, CircleAlert, Megaphone } from 'lucide-vue-next';
+import { ref, watch } from 'vue';
+import { usePage } from '@inertiajs/vue3';
+import { Check, CircleX, Info, TriangleAlert, Megaphone } from 'lucide-vue-next';
 
 const page = usePage();
-const requestsKey = ref(0);
-onUnmounted(router.on('finish', () => requestsKey.value++));
+const flashed = ref(0);
+
+watch(() => page.props.flash, () => {
+    flashed.value++;
+}, { deep: true });
 </script>
 
 <template>
     <div
-        :key="requestsKey"
+        :key="flashed"
         class="m-0"
     >
         <Message
@@ -53,7 +56,7 @@ onUnmounted(router.on('finish', () => requestsKey.value++));
             closable
         >
             <template #icon>
-                <CircleAlert />
+                <CircleX />
             </template>
             {{ page.props.flash.error }}
         </Message>
