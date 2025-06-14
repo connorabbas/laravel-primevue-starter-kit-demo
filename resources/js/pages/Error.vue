@@ -24,14 +24,14 @@ const details = computed(() => {
             <div class="h-screen flex items-center justify-center">
                 <Card class="p-4 py-6 sm:p-12">
                     <template #content>
-                        <div class="flex flex-col gap-8 items-center justify-center text-center">
-                            <h1 class="font-extrabold text-5xl md:text-8xl text-primary">
+                        <div class="flex flex-col gap-6 md:gap-8 items-center justify-center text-center">
+                            <h1 class="font-extrabold text-2xl md:text-4xl text-primary">
                                 {{ props.status }}
                             </h1>
                             <h2 class="font-extrabold text-4xl md:text-6xl">
                                 {{ title }}
                             </h2>
-                            <p class="text-xl font-semibold md:text-3xl text-muted-color">
+                            <p class="text-xl font-semibold text-muted-color">
                                 {{ details }}
                             </p>
                             <InertiaLink :href="props.homepageRoute">
