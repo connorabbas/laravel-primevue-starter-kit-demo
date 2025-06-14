@@ -42,7 +42,7 @@ createServer((page) =>
                         h(Toast, { position: 'bottom-right' })
                     ]);
                 }
-            }
+            };
 
             // Create app
             const app = createSSRApp(Root);

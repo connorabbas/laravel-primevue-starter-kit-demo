@@ -35,7 +35,7 @@ createInertiaApp({
         // Global Toast component, show errors instead of standard Inertia modal response
         const Root = {
             setup() {
-                const toast = useToast()
+                const toast = useToast();
                 router.on('invalid', (event) => {
                     const responseBody = event.detail.response?.data;
                     if (responseBody?.error_summary && responseBody?.error_detail) {
@@ -53,7 +53,7 @@ createInertiaApp({
                     h(Toast, { position: 'bottom-right' })
                 ]);
             }
-        }
+        };
 
         const app = createSSRApp(Root)
             .use(plugin)
