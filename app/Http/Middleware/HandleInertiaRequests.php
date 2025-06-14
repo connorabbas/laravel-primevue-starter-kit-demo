@@ -3,6 +3,7 @@
 namespace App\Http\Middleware;
 
 use Illuminate\Http\Request;
+use Inertia\Inertia;
 use Inertia\Middleware;
 use Tighten\Ziggy\Ziggy;
 
@@ -54,6 +55,7 @@ class HandleInertiaRequests extends Middleware
                 'error' => fn () => $request->session()->get('flash_error'),
                 'message' => fn () => $request->session()->get('flash_message'),
             ],
+            'queryParams' => Inertia::always($request->query()),
         ];
     }
 }
