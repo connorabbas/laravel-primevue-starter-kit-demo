@@ -30,6 +30,7 @@ RUN apk add --no-cache \
     bash \
     gnupg \
     postgresql-dev \
+    openssh-client \
     && apk add --no-cache --virtual .build-deps \
     && rm -rf /var/cache/apk/*
 
@@ -49,6 +50,8 @@ RUN docker-php-serversideup-set-id www-data $USER_ID:$GROUP_ID && \
 
 # Drop privileges back to www-data
 USER www-data
+
+RUN mkdir /home/www-data/.ssh
 
 ############################################
 # CI Image
