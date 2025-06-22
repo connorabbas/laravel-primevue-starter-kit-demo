@@ -1,7 +1,7 @@
 ############################################
 # Base Image
 ############################################
-
+# https://serversideup.net/open-source/docker-php/docs
 # Use Alpine-based PHP 8.4 FPM with NGINX
 FROM serversideup/php:8.4-fpm-nginx-alpine AS base
 
@@ -15,9 +15,9 @@ RUN install-php-extensions bcmath gd pgsql
 ############################################
 FROM base AS development
 
-# Pass USER_ID and GROUP_ID as build arguments
-ARG USER_ID=1000
-ARG GROUP_ID=1000
+# Build arguments
+ARG USER_ID
+ARG GROUP_ID
 ARG NODE_VERSION=22
 
 # Switch to root for package installation and user setup

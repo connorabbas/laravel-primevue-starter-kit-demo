@@ -14,7 +14,7 @@ services:
     labels:
       - 'traefik.enable=true'
       - 'traefik.http.routers.laravel-primevue-demo.rule=Host(`laravel-primevue-demo.localhost`)'
-      - 'traefik.http.services.laravel-primevue-demo.loadbalancer.server.port=8080'
+      - 'traefik.http.services.laravel-primevue-demo.loadbalancer.server.port=8080' # exposed http port from serversideup image
     networks:
       - proxy
     depends_on:
