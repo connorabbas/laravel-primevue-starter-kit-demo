@@ -1,0 +1,50 @@
+services:
+  laravel:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: development
+      args:
+        USER_ID: '${USER_ID:-1000}'
+        GROUP_ID: '${GROUP_ID:-1000}'
+    extra_hosts:
+      - 'host.docker.internal:host-gateway'
+    volumes:
+      - '.:/var/www/html'
+    labels:
+      - 'traefik.enable=true'
+      - 'traefik.http.routers.laravel-primevue-demo.rule=Host(`laravel-primevue-demo.localhost`)'
+      - 'traefik.http.services.laravel-primevue-demo.loadbalancer.server.port=8080' # exposed http port from serversideup image
+    networks:
+      - proxy
+    depends_on:
+      - pgsql
+    tty: true
+
+  pgsql:
+    image: 'postgres:17'
+    ports:
+      - '${FORWARD_DB_PORT:-5432}:5432'
+    environment:
+      PGPASSWORD: '${DB_PASSWORD:-secret}'
+      POSTGRES_DB: '${DB_DATABASE}'
+      POSTGRES_USER: '${DB_USERNAME}'
+      POSTGRES_PASSWORD: '${DB_PASSWORD:-secret}'
+    volumes:
+      - 'postgres-data:/var/lib/postgresql/data'
+      - './database/create-pg-testing-database.sql:/docker-entrypoint-initdb.d/10-create-testing-database.sql'
+    networks:
+      - proxy
+    healthcheck:
+      test: [ "CMD", "pg_isready", "-q", "-d", "${DB_DATABASE}", "-U", "${DB_USERNAME}" ]
+      retries: 3
+      timeout: 5s
+
+volumes:
+  postgres-data:
+    driver: local
+
+networks:
+  proxy:
+    name: traefik_network
+    external: true
