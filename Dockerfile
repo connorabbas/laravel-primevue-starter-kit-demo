@@ -62,6 +62,14 @@ RUN docker-php-serversideup-set-id www-data $USER_ID:$GROUP_ID && \
 USER www-data
 
 ############################################
+# Composer stage (for production)
+############################################
+FROM base AS composer
+WORKDIR /var/www/html
+COPY composer.json composer.lock ./
+RUN composer install --no-dev --optimize-autoloader --no-scripts
+
+############################################
 # Build assets (for production)
 ############################################
 FROM node:${NODE_VERSION}-alpine AS assets
@@ -69,6 +77,7 @@ WORKDIR /var/www/html
 COPY package*.json ./
 RUN npm ci
 COPY . .
+COPY --chown=www-data:www-data --from=composer /var/www/html/vendor ./vendor
 RUN npm run build
 
 ############################################
@@ -88,15 +97,14 @@ FROM base AS release
 
 WORKDIR /var/www/html
 
-# Composer
-COPY composer.json composer.lock ./
-RUN composer install --no-dev --optimize-autoloader --no-scripts
+# Copy Composer files
+COPY --chown=www-data:www-data --from=composer /var/www/html/vendor ./vendor
+
+# Copy built front-end assets
+COPY --chown=www-data:www-data --from=assets /var/www/html/public/build /var/www/html/public/build
 
 # Copy application files
 COPY --chown=www-data:www-data . /var/www/html
-
-# Copy built assets
-COPY --chown=www-data:www-data --from=assets /var/www/html/public/build /var/www/html/public/build
 
 ENV SSL_MODE=mixed
 
