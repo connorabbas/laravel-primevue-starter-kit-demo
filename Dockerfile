@@ -77,7 +77,7 @@ WORKDIR /var/www/html
 COPY package*.json ./
 RUN npm ci
 COPY . .
-COPY --chown=www-data:www-data --from=composer /var/www/html/vendor ./vendor
+COPY --from=composer /var/www/html/vendor ./vendor
 RUN npm run build
 
 ############################################
