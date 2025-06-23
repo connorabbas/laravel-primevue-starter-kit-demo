@@ -72,7 +72,7 @@ RUN composer install --no-dev --optimize-autoloader --no-scripts
 ############################################
 # Build assets (for production)
 ############################################
-FROM node:${NODE_VERSION}-slim AS assets
+FROM node:${NODE_VERSION}-apline AS assets
 WORKDIR /var/www/html
 COPY package*.json ./
 RUN npm config set strict-ssl false
