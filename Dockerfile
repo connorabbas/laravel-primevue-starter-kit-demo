@@ -75,6 +75,7 @@ RUN composer install --no-dev --optimize-autoloader --no-scripts
 FROM node:${NODE_VERSION}-alpine AS assets
 WORKDIR /var/www/html
 COPY package*.json ./
+RUN npm config set strict-ssl false
 RUN npm ci
 COPY . .
 COPY --from=composer /var/www/html/vendor ./vendor
