@@ -11,7 +11,7 @@ services:
       - traefik.http.routers.laravel-primevue-demo.entrypoints=websecure
       - traefik.http.routers.laravel-primevue-demo.tls=true
       - traefik.http.routers.laravel-primevue-demo.tls.certresolver=letsencrypt
-      - traefik.http.services.laravel-primevue-demo.loadbalancer.server.port=8443 # exposed https port from serversideup image
+      - traefik.http.services.laravel-primevue-demo.loadbalancer.server.port=8080 # exposed port from serversideup image
     networks:
       - proxy
     depends_on:
