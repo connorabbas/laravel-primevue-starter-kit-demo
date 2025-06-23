@@ -88,6 +88,10 @@ FROM base AS release
 
 WORKDIR /var/www/html
 
+# Composer
+COPY composer.json composer.lock ./
+RUN composer install --no-dev --optimize-autoloader --no-scripts
+
 # Copy application files
 COPY --chown=www-data:www-data . /var/www/html
 
