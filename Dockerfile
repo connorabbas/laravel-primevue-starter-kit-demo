@@ -72,11 +72,12 @@ RUN composer install --no-dev --optimize-autoloader --no-scripts
 ############################################
 # Build assets (for production)
 ############################################
-FROM node:${NODE_VERSION}-alpine AS assets
+FROM node:${NODE_VERSION}-slim AS assets
 WORKDIR /var/www/html
 COPY package*.json ./
 RUN npm config set strict-ssl false
 RUN npm ci
+COPY vite.config.js ./
 COPY resources ./resources
 COPY --from=composer /var/www/html/vendor ./vendor
 RUN npm run build
