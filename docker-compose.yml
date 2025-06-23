@@ -7,7 +7,7 @@ services:
     restart: always
     labels:
       - traefik.enable=true
-      - traefik.http.routers.laravel-primevue-demo.rule=Host(`laravel-primevue-starter-kit.com`)
+      - traefik.http.routers.laravel-primevue-demo.rule=Host(`demo.laravel-primevue-starter-kit.com`)
       - traefik.http.routers.laravel-primevue-demo.entrypoints=websecure
       - traefik.http.routers.laravel-primevue-demo.tls=true
       - traefik.http.routers.laravel-primevue-demo.tls.certresolver=letsencrypt
