@@ -83,29 +83,15 @@ COPY --from=composer /var/www/html/vendor ./vendor
 RUN npm run build
 
 ############################################
-# CI Image
-############################################
-FROM base AS ci
-
-USER root
-# Configure PHP-FPM to run as www-data
-RUN echo "user = www-data" >> /usr/local/etc/php-fpm.d/docker-php-serversideup-pool.conf && \
-    echo "group = www-data" >> /usr/local/etc/php-fpm.d/docker-php-serversideup-pool.conf
-
-############################################
 # Production Image
 ############################################
 FROM base AS release
 
 WORKDIR /var/www/html
 
-# Copy Composer files
+COPY --chown=www-data:www-data .env .env
 COPY --chown=www-data:www-data --from=composer /var/www/html/vendor ./vendor
-
-# Copy built front-end assets
 COPY --chown=www-data:www-data --from=assets /var/www/html/public/build /var/www/html/public/build
-
-# Copy application files
 COPY --chown=www-data:www-data . /var/www/html
 
 ENV PHP_OPCACHE_ENABLE=1
