@@ -72,7 +72,7 @@ RUN composer install --no-dev --optimize-autoloader --no-scripts
 ############################################
 # Build assets (for production)
 ############################################
-FROM node:${NODE_VERSION}-slim AS assets
+FROM node:${NODE_VERSION}-alpine AS assets
 WORKDIR /var/www/html
 COPY package*.json ./
 RUN npm config set strict-ssl false
@@ -108,6 +108,7 @@ COPY --chown=www-data:www-data --from=assets /var/www/html/public/build /var/www
 # Copy application files
 COPY --chown=www-data:www-data . /var/www/html
 
+ENV PHP_OPCACHE_ENABLE=1
 ENV SSL_MODE=mixed
 
 USER www-data
