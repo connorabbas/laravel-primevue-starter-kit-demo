@@ -4,6 +4,7 @@ services:
       context: .
       dockerfile: Dockerfile
       target: release
+    env_file: '.env'
     restart: always
     labels:
       - traefik.enable=true
