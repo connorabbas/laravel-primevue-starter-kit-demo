@@ -18,10 +18,10 @@ services:
       - 'traefik.http.routers.laravel-primevue-demo.tls.certresolver=letsencrypt'
       - 'traefik.http.services.laravel-primevue-demo.loadbalancer.server.port=8080' # exposed http port from serversideup image
       # Health check
-      - 'traefik.http.services.my-php-app.loadbalancer.healthcheck.path=/healthcheck'
-      - 'traefik.http.services.my-php-app.loadbalancer.healthcheck.interval=30s'
-      - 'traefik.http.services.my-php-app.loadbalancer.healthcheck.timeout=5s'
-      - 'traefik.http.services.my-php-app.loadbalancer.healthcheck.scheme=http'
+      - 'traefik.http.services.laravel-primevue-demo.loadbalancer.healthcheck.path=/healthcheck'
+      - 'traefik.http.services.laravel-primevue-demo.loadbalancer.healthcheck.interval=30s'
+      - 'traefik.http.services.laravel-primevue-demo.loadbalancer.healthcheck.timeout=5s'
+      - 'traefik.http.services.laravel-primevue-demo.loadbalancer.healthcheck.scheme=http'
     networks:
       - proxy
     depends_on:
