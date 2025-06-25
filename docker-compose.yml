@@ -7,12 +7,17 @@ services:
     env_file: '.env'
     restart: always
     labels:
-      - traefik.enable=true
-      - traefik.http.routers.laravel-primevue-demo.rule=Host(`demo.laravel-primevue-starter-kit.com`)
-      - traefik.http.routers.laravel-primevue-demo.entrypoints=websecure
-      - traefik.http.routers.laravel-primevue-demo.tls=true
-      - traefik.http.routers.laravel-primevue-demo.tls.certresolver=letsencrypt
-      - traefik.http.services.laravel-primevue-demo.loadbalancer.server.port=8080 # exposed port from serversideup image
+      - 'traefik.enable=true'
+      - 'traefik.http.routers.laravel-primevue-demo.rule=Host(`demo.laravel-primevue-starter-kit.com`)'
+      - 'traefik.http.routers.laravel-primevue-demo.entrypoints=websecure'
+      - 'traefik.http.routers.laravel-primevue-demo.tls=true'
+      - 'traefik.http.routers.laravel-primevue-demo.tls.certresolver=letsencrypt'
+      - 'traefik.http.services.laravel-primevue-demo.loadbalancer.server.port=8080' # exposed http port from serversideup image
+      # Health check
+      - 'traefik.http.services.my-php-app.loadbalancer.healthcheck.path=/healthcheck'
+      - 'traefik.http.services.my-php-app.loadbalancer.healthcheck.interval=30s'
+      - 'traefik.http.services.my-php-app.loadbalancer.healthcheck.timeout=5s'
+      - 'traefik.http.services.my-php-app.loadbalancer.healthcheck.scheme=http'
     networks:
       - proxy
     depends_on:
@@ -32,7 +37,7 @@ services:
     networks:
       - proxy
     healthcheck:
-      test: ["CMD", "pg_isready", "-q", "-d", "${DB_DATABASE}", "-U", "${DB_USERNAME}"]
+      test: ['CMD', 'pg_isready', '-q', '-d', '${DB_DATABASE}', '-U', '${DB_USERNAME}']
       retries: 3
       timeout: 5s
 
