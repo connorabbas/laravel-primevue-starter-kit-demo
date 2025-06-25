@@ -31,7 +31,6 @@ docker compose exec laravel php artisan migrate --force
 # Optimize & cache
 echo ":: Caching config, routes, and views"
 docker compose exec laravel php artisan optimize
-docker compose exec laravel php artisan view:cache
 
 # Live again
 echo ":: Bringing application back up"
