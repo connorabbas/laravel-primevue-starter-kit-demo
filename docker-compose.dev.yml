@@ -42,7 +42,6 @@ services:
 
 volumes:
   postgres-data:
-    driver: local
 
 networks:
   proxy:

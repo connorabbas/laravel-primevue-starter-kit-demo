@@ -6,6 +6,10 @@ services:
       target: release
     env_file: '.env'
     restart: always
+    volumes:
+      - 'storage_public:/var/www/html/storage/app/public/'
+      - 'storage_sessions:/var/www/html/storage/framework/sessions'
+      - 'storage_logs:/var/www/html/storage/logs'
     labels:
       - 'traefik.enable=true'
       - 'traefik.http.routers.laravel-primevue-demo.rule=Host(`demo.laravel-primevue-starter-kit.com`)'
@@ -43,7 +47,9 @@ services:
 
 volumes:
   postgres-data:
-    driver: local
+  storage_public:
+  storage_sessions:
+  storage_logs:
 
 networks:
   proxy:
