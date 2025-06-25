@@ -15,7 +15,7 @@ ARG USER_ID
 ARG GROUP_ID
 ARG NODE_VERSION
 USER root
-RUN apk add --no-cache curl git bash postgresql-client \
+RUN apk add --no-cache curl git bash gnupg postgresql-client openssh-client \
     && apk add --no-cache --virtual .build-deps build-base autoconf \
     && rm -rf /var/cache/apk/*
 COPY --from=node /usr/lib /usr/lib
