@@ -28,7 +28,7 @@ jobs:
           POSTGRES_PASSWORD: password
         ports:
           - 5432:5432
-        options:
+        options: >-
           --health-cmd "pg_isready -U testuser -d laravel"
           --health-interval 10s
           --health-timeout 5s
@@ -59,7 +59,7 @@ jobs:
       - run: npm run build
       - name: Prepare DB & Migrate
         run: |
-          until pg_isready -h localhost -p 5432 -U ${{ secrets.DB_USERNAME }}; do sleep 1; done
+          until pg_isready -h localhost -p 5432 -U $DB_USERNAME; do sleep 1; done
           php artisan key:generate --ansi
           php artisan migrate --force
       - run: php artisan test --verbose
