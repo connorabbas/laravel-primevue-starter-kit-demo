@@ -1,0 +1,64 @@
+name: CI - Test and Lint
+
+on:
+  push:
+    branches: [ '**' ]
+  pull_request:
+
+jobs:
+  javascript:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npx eslint .
+
+  php:
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:17
+        env:
+          POSTGRES_DB: laravel
+          POSTGRES_USER: laravel
+          POSTGRES_PASSWORD: password
+        ports:
+          - 5432:5432
+        options:
+          --health-cmd "pg_isready -U laravel"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+    env:
+      DB_CONNECTION: pgsql
+      DB_DATABASE: laravel
+      DB_USERNAME: laravel
+      DB_PASSWORD: password
+    steps:
+      - uses: actions/checkout@v4
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: 8.4
+          extensions: mbstring,xml,ctype,iconv,intl,pdo_pgsql,dom,filter,json,zip
+      - run: composer install --prefer-dist --no-interaction
+      - run: vendor/bin/pint --test
+      - run: vendor/bin/phpstan analyse --memory-limit=2G
+      - name: Setup Node.js for assets
+        uses: actions/setup-node@v3
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm run build
+      - name: Prepare DB & Migrate
+        run: |
+          until pg_isready -h localhost -p 5432 -U ${{ secrets.DB_USERNAME }}; do sleep 1; done
+          php artisan key:generate --ansi
+          php artisan migrate --force
+      - run: php artisan test --verbose
