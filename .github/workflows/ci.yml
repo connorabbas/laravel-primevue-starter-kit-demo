@@ -11,70 +11,57 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
           node-version: '22'
           cache: 'npm'
-      
       - name: Install Dependencies
         run: npm ci
-      
       - name: Run ESLint
         run: npx eslint .
 
-  php:
-    runs-on: ubuntu-latest
-    services:
-      postgres:
-        image: postgres:17
-        env:
-          POSTGRES_DB: laravel_test
-          POSTGRES_USER: laravel
-          POSTGRES_PASSWORD: secret
-        ports:
-          - 5432:5432
-        options: >-
-          --health-cmd pg_isready -U laravel -d laravel_test
-          --health-interval 10s
-          --health-timeout 5s
-          --health-retries 5
-
-    steps:
-      - uses: actions/checkout@v4
-    
-      - name: Setup PHP
-        uses: shivammathur/setup-php@v2
-        with:
-          php-version: '8.4'
-          extensions: mbstring, xml, ctype, iconv, intl, pdo_pgsql, dom, filter, json, libxml, zip
-
-      - name: Copy .env
-        run: php -r "file_exists('.env') || copy('.env.example', '.env');"
-
-      - name: Install PHP Dependencies
-        run: composer install --prefer-dist --no-progress --no-interaction
-
-      - name: Run Pint
-        run: vendor/bin/pint --test
-
-      - name: Run PHPStan
-        run: vendor/bin/phpstan analyse --memory-limit=2G
-    
-      - name: Setup Node.js for assets
-        uses: actions/setup-node@v3
-        with:
-          node-version: '22'
-          cache: 'npm'
-    
-      - name: Install Node Dependencies
-        run: npm ci
-
-      - name: Build Frontend Assets
-        run: npm run build
-    
-      - name: Set Environment Variables
+php:
+  runs-on: ubuntu-latest
+  services:
+    postgres:
+      image: postgres:17
+      env:
+        POSTGRES_DB: laravel_test
+        POSTGRES_USER: laravel
+        POSTGRES_PASSWORD: secret
+      ports:
+        - 5432:5432
+      options: >-
+        --health-cmd "pg_isready -U laravel -d laravel_test"
+        --health-interval 10s
+        --health-timeout 5s
+        --health-retries 5
+  steps:
+    - uses: actions/checkout@v4
+    - name: Setup PHP
+      uses: shivammathur/setup-php@v2
+      with:
+        php-version: '8.4'
+        extensions: mbstring, xml, ctype, iconv, intl, pdo_pgsql, dom, filter, json, libxml, zip
+    - name: Copy .env
+      run: php -r "file_exists('.env') || copy('.env.example', '.env');"
+    - name: Install PHP Dependencies
+      run: composer install --prefer-dist --no-progress --no-interaction
+    - name: Run Pint
+      run: vendor/bin/pint --test
+    - name: Run PHPStan
+      run: vendor/bin/phpstan analyse --memory-limit=2G
+    - name: Setup Node.js for assets
+      uses: actions/setup-node@v3
+      with:
+        node-version: '22'
+        cache: 'npm'
+    - name: Install Node Dependencies
+      run: npm ci
+    - name: Build Frontend Assets
+      run: npm run build
+    - name: Set Environment Variables
         run: |
           echo "APP_ENV=testing" >> .env
           echo "DB_CONNECTION=pgsql" >> .env
@@ -83,27 +70,27 @@ jobs:
           echo "DB_DATABASE=laravel_test" >> .env
           echo "DB_USERNAME=laravel" >> .env
           echo "DB_PASSWORD=secret" >> .env
-
-      - name: Generate Application Key
-        run: php artisan key:generate
-
-      - name: Migrate Database
-        env:
-          DB_CONNECTION: pgsql
-          DB_HOST: 127.0.0.1
-          DB_PORT: 5432
-          DB_DATABASE: laravel_test
-          DB_USERNAME: laravel
-          DB_PASSWORD: secret
-        run: php artisan migrate:fresh --force
-
-      - name: Run Tests
-        env:
-          APP_ENV: testing
-          DB_CONNECTION: pgsql
-          DB_HOST: 127.0.0.1
-          DB_PORT: 5432
-          DB_DATABASE: laravel_test
-          DB_USERNAME: laravel
-          DB_PASSWORD: secret
-        run: php artisan test
+    - name: Generate Application Key
+      run: php artisan key:generate
+    - name: Migrate Database
+      env:
+        DB_CONNECTION: pgsql
+        DB_HOST: 127.0.0.1
+        DB_PORT: 5432
+        DB_DATABASE: laravel_test
+        DB_USERNAME: laravel
+        DB_PASSWORD: secret
+      run: |
+        until pg_isready --quiet; do sleep 1; done
+        php artisan key:generate --ansi
+        php artisan migrate:fresh --force
+    - name: Run Tests
+      env:
+        APP_ENV: testing
+        DB_CONNECTION: pgsql
+        DB_HOST: 127.0.0.1
+        DB_PORT: 5432
+        DB_DATABASE: laravel_test
+        DB_USERNAME: laravel
+        DB_PASSWORD: secret
+      run: php artisan test --verbose
