@@ -27,13 +27,13 @@ jobs:
       pgsql:
         image: postgres:17
         env:
-          POSTGRES_DB: laravel_test
+          POSTGRES_DB: testing_db
           POSTGRES_USER: laravel
           POSTGRES_PASSWORD: secret
         ports:
           - 5432:5432
         options: >-
-          --health-cmd "pg_isready -U laravel -d laravel_test"
+          --health-cmd "pg_isready -U laravel -d testing_db"
           --health-interval 10s
           --health-timeout 5s
           --health-retries 5
@@ -65,9 +65,9 @@ jobs:
         run: |
           echo "APP_ENV=testing" >> .env
           echo "DB_CONNECTION=pgsql" >> .env
-          echo "DB_HOST=pgsql" >> .env
+          echo "DB_HOST=127.0.0.1" >> .env
           echo "DB_PORT=5432" >> .env
-          echo "DB_DATABASE=laravel_test" >> .env
+          echo "DB_DATABASE=testing_db" >> .env
           echo "DB_USERNAME=laravel" >> .env
           echo "DB_PASSWORD=secret" >> .env
       - name: Generate Application Key
@@ -76,21 +76,21 @@ jobs:
         env:
           DB_CONNECTION: pgsql
           DB_HOST: pgsql
-          DB_PORT: 5432
-          DB_DATABASE: laravel_test
+          DB_PORT: 127.0.0.1
+          DB_DATABASE: testing_db
           DB_USERNAME: laravel
           DB_PASSWORD: secret
         run: |
-          until pg_isready --quiet; do sleep 1; done
+          timeout 30s bash -c "until pg_isready -U laravel -d testing_db --quiet; do sleep 1; done"
           php artisan key:generate --ansi
           php artisan migrate:fresh --force
       - name: Run Tests
         env:
           APP_ENV: testing
           DB_CONNECTION: pgsql
-          DB_HOST: pgsql
+          DB_HOST: 127.0.0.1
           DB_PORT: 5432
-          DB_DATABASE: laravel_test
+          DB_DATABASE: testing_db
           DB_USERNAME: laravel
           DB_PASSWORD: secret
         run: php artisan test --verbose
