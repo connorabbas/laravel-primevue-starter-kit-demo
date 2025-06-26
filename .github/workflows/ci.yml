@@ -24,7 +24,7 @@ jobs:
   php:
     runs-on: ubuntu-latest
     services:
-      postgres:
+      pgsql:
         image: postgres:17
         env:
           POSTGRES_DB: laravel_test
@@ -65,7 +65,7 @@ jobs:
         run: |
           echo "APP_ENV=testing" >> .env
           echo "DB_CONNECTION=pgsql" >> .env
-          echo "DB_HOST=127.0.0.1" >> .env
+          echo "DB_HOST=pgsql" >> .env
           echo "DB_PORT=5432" >> .env
           echo "DB_DATABASE=laravel_test" >> .env
           echo "DB_USERNAME=laravel" >> .env
@@ -75,7 +75,7 @@ jobs:
       - name: Migrate Database
         env:
           DB_CONNECTION: pgsql
-          DB_HOST: 127.0.0.1
+          DB_HOST: pgsql
           DB_PORT: 5432
           DB_DATABASE: laravel_test
           DB_USERNAME: laravel
@@ -88,7 +88,7 @@ jobs:
         env:
           APP_ENV: testing
           DB_CONNECTION: pgsql
-          DB_HOST: 127.0.0.1
+          DB_HOST: pgsql
           DB_PORT: 5432
           DB_DATABASE: laravel_test
           DB_USERNAME: laravel
