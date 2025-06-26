@@ -17,7 +17,8 @@ ARG NODE_VERSION
 USER root
 RUN apk add --no-cache curl git bash gnupg postgresql-client openssh-client \
     && apk add --no-cache --virtual .build-deps build-base autoconf \
-    && rm -rf /var/cache/apk/*
+    && rm -rf /var/cache/apk/* \
+    && apk del .build-deps
 COPY --from=node /usr/lib /usr/lib
 COPY --from=node /usr/local/lib /usr/local/lib
 COPY --from=node /usr/local/include /usr/local/include
@@ -37,20 +38,20 @@ COPY composer.json composer.lock ./
 RUN composer install --no-dev --optimize-autoloader --no-scripts --no-interaction
 
 # Assets Stage
-FROM node:${NODE_VERSION}-alpine AS assets
+FROM node:${NODE_VERSION}-alpine AS build-assets
 WORKDIR /var/www/html
 COPY package*.json ./
 RUN npm ci
+COPY --from=composer /var/www/html/vendor/tightenco/ziggy ./vendor/tightenco/ziggy
 COPY vite.config.js ./
 COPY resources ./resources
-COPY --from=composer /var/www/html/vendor ./vendor
 RUN npm run build
 
 # Production Image
 FROM base AS release
 WORKDIR /var/www/html
 COPY --chown=www-data:www-data --from=composer /var/www/html/vendor ./vendor
-COPY --chown=www-data:www-data --from=assets /var/www/html/public/build ./public/build
+COPY --chown=www-data:www-data --from=build-assets /var/www/html/public/build ./public/build
 COPY --chown=www-data:www-data . .
 ENV PHP_OPCACHE_ENABLE=1
 ENV SSL_MODE=mixed
