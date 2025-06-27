@@ -101,7 +101,7 @@ export function useAppLayout() {
                     {
                         label: 'Logs',
                         lucideIcon: Logs,
-                        route: '/log-viewer',
+                        url: '/log-viewer',
                     },
                 ],
             });
