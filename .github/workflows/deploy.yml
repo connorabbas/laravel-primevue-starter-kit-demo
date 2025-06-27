@@ -1,0 +1,25 @@
+name: Deploy Laravel App to Production Server
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    needs: [javascript, php]
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+    - name: Run Remote Deploy Script
+      uses: appleboy/ssh-action@v1
+      with:
+        host: ${{ secrets.VPS_HOST }}
+        username: ${{ secrets.VPS_USER }}
+        key: ${{ secrets.SSH_PRIVATE_KEY }}
+        script: |
+          cd /home/${{ secrets.VPS_USER }}/projects/laravel-primevue-starter-kit-demo
+          chmod +x docker-deploy.sh
+          ./docker-deploy.sh
+
