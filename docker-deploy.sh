@@ -41,4 +41,8 @@ docker compose exec laravel php artisan optimize
 echo ":: Bringing application back up"
 docker compose exec laravel php artisan up || true
 
+# Prune dangling image builds
+echo "Docker image cleanup"
+docker image prune -f
+
 echo "✅  Deployment complete!"
