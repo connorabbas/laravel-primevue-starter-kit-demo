@@ -1,7 +1,8 @@
 import { ref, computed, onMounted, onUnmounted, watchEffect } from 'vue';
 import { usePage, useForm } from '@inertiajs/vue3';
 import {
-    LayoutGrid, House, Info, Settings, LogOut, ExternalLink, FileSearch, FolderGit2, Lock, Users, Lightbulb, Table2, BookOpen
+    LayoutGrid, House, Info, Settings, LogOut, ExternalLink, FileSearch, FolderGit2, Lock, Users, Lightbulb, Table2, BookOpen,
+    Logs
 } from 'lucide-vue-next';
 import { MenuItem } from '@/types';
 
@@ -96,6 +97,11 @@ export function useAppLayout() {
                         lucideIcon: Users,
                         route: route('admin.users.index'),
                         active: currentRoute.value == 'admin.users.index',
+                    },
+                    {
+                        label: 'Logs',
+                        lucideIcon: Logs,
+                        route: '/log-viewer',
                     },
                 ],
             });
