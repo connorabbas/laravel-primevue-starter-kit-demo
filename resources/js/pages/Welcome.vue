@@ -20,8 +20,7 @@ const page = usePage();
     <InertiaHead title="Welcome" />
 
     <Container fluid>
-        <!-- This is a test changed comment for the auto-deployment -->
-        <div class="min-h-svh flex items-center justify-center">
+        <div class="min-h-svh flex items-center justify-center test-class-deployed">
             <Card pt:body:class="p-4 py-6 sm:p-12">
                 <template #content>
                     <div class="text-center md:text-left">
