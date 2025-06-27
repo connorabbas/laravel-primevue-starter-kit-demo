@@ -30,7 +30,7 @@ class AppServiceProvider extends ServiceProvider
                 return true;
             }
 
-            return $request?->user()->hasRole('Admin');
+            return $request?->user()?->hasRole('Admin') ?? false;
         });
     }
 }
