@@ -1,4 +1,6 @@
 .git
+public/build
+bootstrap/ssr
 node_modules
 vendor
 tests
