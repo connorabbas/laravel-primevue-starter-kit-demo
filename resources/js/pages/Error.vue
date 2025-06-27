@@ -21,7 +21,7 @@ const details = computed(() => {
     <InertiaHead title="Error" />
     <Container fluid>
         <main>
-            <div class="h-screen flex items-center justify-center test-new">
+            <div class="h-screen flex items-center justify-center">
                 <Card class="p-4 py-6 sm:p-12">
                     <template #content>
                         <div class="flex flex-col gap-6 md:gap-8 items-center justify-center text-center">
