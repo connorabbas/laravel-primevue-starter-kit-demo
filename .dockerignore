@@ -1,9 +1,6 @@
 .git
-node_modules
-vendor
 tests
 .env.example
 Dockerfile
-docker-compose.yml
-docker-compose.dev.yml
+docker-*.yml
 *.md
