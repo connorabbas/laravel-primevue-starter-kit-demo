@@ -25,6 +25,7 @@ class AppServiceProvider extends ServiceProvider
             URL::forceScheme('https');
         }
 
+        // Easier way to view logs
         LogViewer::auth(function ($request) {
             if (app()->isLocal()) {
                 return true;
