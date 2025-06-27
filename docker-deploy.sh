@@ -16,7 +16,7 @@ git pull origin master
 
 # Rebuild & restart container
 echo ":: Rebuilding app image & restarting"
-docker compose up -d --build laravel
+docker compose up -d --build --force-recreate laravel
 
 # Wait for successful health check
 echo ":: Waiting for app to report healthy..."
@@ -24,15 +24,18 @@ until docker compose ps laravel | grep -q "(healthy)"; do
   sleep 3
 done
 
+# Clear out cached data
+echo ":: Clearing cache"
+docker compose exec laravel php artisan optimize:clear
+docker compose exec laravel php artisan cache:clear
+
 # Run database migrations
 echo ":: Running migrations"
 docker compose exec laravel php artisan migrate --force
 
-# Optimize & cache
+# Optimize
 echo ":: Caching config, routes, and views"
-docker compose exec laravel php artisan optimize:clear
 docker compose exec laravel php artisan optimize
-docker compose exec laravel php artisan cache:clear
 
 # Live again
 echo ":: Bringing application back up"

@@ -1,6 +1,6 @@
 .git
 tests
 .env.example
-Dockerfile
+Dockerfile*
 docker-*.yml
 *.md
