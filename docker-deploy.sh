@@ -41,4 +41,16 @@ docker compose exec laravel php artisan optimize
 echo ":: Bringing application back up"
 docker compose exec laravel php artisan up || true
 
-echo "✅  Deployment complete!"
+# Prune dangling image builds
+echo "Prune dangling images"
+docker image prune -a -f \
+  --filter "label=com.docker.compose.project=$(basename $(pwd))" \
+  --filter "label=com.docker.compose.service=laravel"
+
+echo ":: Docker disk space summary"
+docker system df
+
+#echo ":: Prune build cache"
+#docker builder prune -f
+
+echo "✅ Deployment complete!"
