@@ -53,4 +53,4 @@ docker system df
 #echo ":: Prune build cache"
 #docker builder prune -f
 
-echo "✅  Deployment complete!"
+echo "✅ Deployment complete!"
