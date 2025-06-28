@@ -28,6 +28,4 @@ WORKDIR /var/www/html
 COPY --chown=www-data:www-data --from=composer /var/www/html/vendor ./vendor
 COPY --chown=www-data:www-data --from=build-assets /var/www/html/public/build ./public/build
 COPY --chown=www-data:www-data . .
-ENV PHP_OPCACHE_ENABLE=1
-ENV SSL_MODE=mixed
 USER www-data

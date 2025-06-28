@@ -9,11 +9,15 @@ services:
         GROUP_ID: '${GROUP_ID:-1000}'
     extra_hosts:
       - 'host.docker.internal:host-gateway'
+    environment:
+      PHP_OPCACHE_ENABLE: '1'
+      PHP_OPCACHE_REVALIDATE_FREQ: '0'
+      XDEBUG_MODE: '${XDEBUG_MODE:-off}'
     volumes:
       - '.:/var/www/html'
     labels:
       - 'traefik.enable=true'
-      - 'traefik.http.routers.laravel-primevue-demo.rule=Host(`laravel-primevue-demo.localhost`)'
+      - 'traefik.http.routers.laravel-primevue-demo.rule=Host(`demo.laravel-primevue.localhost`)'
       - 'traefik.http.services.laravel-primevue-demo.loadbalancer.server.port=8080' # exposed http port from serversideup image
     networks:
       - proxy
