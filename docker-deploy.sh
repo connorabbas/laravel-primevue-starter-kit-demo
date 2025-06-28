@@ -47,7 +47,7 @@ docker image prune -a -f \
   --filter "label=com.docker.compose.project=$(basename $(pwd))" \
   --filter "label=com.docker.compose.service=laravel"
 
-#echo ":: Docker disk space summary"
+echo ":: Docker disk space summary"
 docker system df
 
 #echo ":: Prune build cache"
