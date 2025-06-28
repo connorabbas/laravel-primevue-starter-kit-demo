@@ -47,7 +47,10 @@ docker image prune -a -f \
   --filter "label=com.docker.compose.project=$(basename $(pwd))" \
   --filter "label=com.docker.compose.service=laravel"
 
+#echo ":: Docker disk space summary"
+docker system df
+
 #echo ":: Prune build cache"
-docker builder prune -f
+#docker builder prune -f
 
 echo "✅  Deployment complete!"
