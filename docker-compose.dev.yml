@@ -23,7 +23,6 @@ services:
       - proxy
     depends_on:
       - pgsql
-    tty: true
 
   pgsql:
     image: 'postgres:17'
