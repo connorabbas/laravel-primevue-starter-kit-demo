@@ -16,16 +16,21 @@ ARG GROUP_ID
 USER root
 RUN apk add --no-cache curl git bash gnupg postgresql-client openssh-client \
     && apk add --no-cache --virtual .build-deps build-base autoconf \
+    && install-php-extensions xdebug \
     && rm -rf /var/cache/apk/* \
     && apk del .build-deps
 COPY --from=node /usr/lib /usr/lib
 COPY --from=node /usr/local/lib /usr/local/lib
 COPY --from=node /usr/local/include /usr/local/include
 COPY --from=node /usr/local/bin /usr/local/bin
+COPY .devcontainer/.bashrc /home/www-data/.bashrc
+COPY .devcontainer/xdebug.ini /usr/local/etc/php/conf.d/xdebug.ini
 RUN usermod -s /bin/bash www-data \
     && git config --global --add safe.directory /var/www/html \
     && mkdir -p /home/www-data/.ssh \
     && chown www-data:www-data /home/www-data/.ssh \
+    && chown www-data:www-data /home/www-data/.bashrc \
+    && chown www-data:www-data /usr/local/etc/php/conf.d/xdebug.ini \
     && docker-php-serversideup-set-id www-data $USER_ID:$GROUP_ID \
     && docker-php-serversideup-set-file-permissions --owner $USER_ID:$GROUP_ID --service nginx
 USER www-data
