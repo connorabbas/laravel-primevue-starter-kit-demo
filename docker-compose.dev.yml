@@ -11,6 +11,8 @@ services:
       - 'host.docker.internal:host-gateway'
     volumes:
       - '.:/var/www/html'
+    environment:
+      XDEBUG_MODE: '${XDEBUG_MODE:-off}'
     labels:
       - 'traefik.enable=true'
       - 'traefik.http.routers.laravel-primevue-demo.rule=Host(`demo.laravel-primevue.localhost`)'
