@@ -2,7 +2,7 @@ services:
   laravel:
     build:
       context: .
-      dockerfile: Dockerfile.dev
+      dockerfile: Dockerfile
       target: development
       args:
         USER_ID: '${USER_ID:-1000}'
