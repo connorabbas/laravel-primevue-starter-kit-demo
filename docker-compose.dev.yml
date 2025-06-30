@@ -21,6 +21,7 @@ services:
       - 'traefik.http.services.laravel-primevue-demo.loadbalancer.server.port=8080' # exposed http port from serversideup image
     networks:
       - proxy
+      - laravel
     depends_on:
       - pgsql
 
@@ -37,7 +38,7 @@ services:
       - 'postgres-data:/var/lib/postgresql/data'
       - './database/create-pg-testing-database.sql:/docker-entrypoint-initdb.d/10-create-testing-database.sql'
     networks:
-      - proxy
+      - laravel
     healthcheck:
       test: [ "CMD", "pg_isready", "-q", "-d", "${DB_DATABASE}", "-U", "${DB_USERNAME}" ]
       retries: 3
@@ -47,6 +48,7 @@ volumes:
   postgres-data:
 
 networks:
+  laravel:
   proxy:
     name: traefik_network
     external: true
