@@ -58,3 +58,20 @@ COPY --chown=www-data:www-data --from=composer /var/www/html/vendor ./vendor
 COPY --chown=www-data:www-data --from=build-assets /var/www/html/public/build ./public/build
 COPY --chown=www-data:www-data . .
 USER www-data
+
+# SSR Node Production Image
+FROM base AS ssr-release
+COPY --from=node /usr/lib /usr/lib
+COPY --from=node /usr/local/lib /usr/local/lib
+COPY --from=node /usr/local/include /usr/local/include
+COPY --from=node /usr/local/bin /usr/local/bin
+COPY --chown=www-data:www-data --chmod=755 .infrastructure/s6-overlay/inertia-ssr /etc/s6-overlay/s6-rc.d/inertia-ssr
+RUN touch /etc/s6-overlay/s6-rc.d/user/contents.d/inertia-ssr \
+    && chown www-data:www-data /etc/s6-overlay/s6-rc.d/user/contents.d/inertia-ssr \
+    && chmod 755 /etc/s6-overlay/s6-rc.d/user/contents.d/inertia-ssr
+WORKDIR /var/www/html
+COPY --chown=www-data:www-data --from=composer /var/www/html/vendor ./vendor
+COPY --chown=www-data:www-data --from=build-assets /var/www/html/public/build ./public/build
+COPY --chown=www-data:www-data --from=build-assets /var/www/html/bootstrap/ssr ./bootstrap/ssr
+COPY --chown=www-data:www-data . .
+USER www-data
