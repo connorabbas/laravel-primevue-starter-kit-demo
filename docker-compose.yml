@@ -3,9 +3,12 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-      target: release
-    env_file: '.env'
+      target: ssr-release
     restart: always
+    env_file: '.env'
+    environment:
+      PHP_OPCACHE_ENABLE: '1'
+      SSL_MODE: 'mixed'
     volumes:
       - 'storage-public:/var/www/html/storage/app/public/'
       - 'storage-sessions:/var/www/html/storage/framework/sessions'
