@@ -1,7 +1,7 @@
 import '../css/app.css';
 import '../css/tailwind.css';
 
-import { createApp, h } from 'vue';
+import { createSSRApp, h } from 'vue';
 import { createInertiaApp, router, Head, Link } from '@inertiajs/vue3';
 import { resolvePageComponent } from 'laravel-vite-plugin/inertia-helpers';
 import { ZiggyVue } from '../../vendor/tightenco/ziggy';
@@ -61,7 +61,7 @@ createInertiaApp({
             }
         };
 
-        const app = createApp(Root)
+        const app = createSSRApp(Root)
             .use(plugin)
             .use(ZiggyVue, Ziggy)
             .use(PrimeVue, {
