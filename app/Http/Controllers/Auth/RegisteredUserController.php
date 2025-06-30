@@ -42,7 +42,10 @@ class RegisteredUserController extends Controller
                 'unique:' . User::class,
                 function ($attribute, $value, $fail) {
                     if (Str::endsWith(strtolower($value), '@mailinator.com')) {
-                        $fail('Emails from mailinator.com are not allowed.');
+                        $fail('Email domains from "mailinator.com" are not allowed.');
+                    }
+                    if (Str::endsWith(strtolower($value), '@admin.com')) {
+                        $fail('Email domains from "admin.com" are not allowed.');
                     }
                 },
             ],
