@@ -79,12 +79,10 @@ export function useAppLayout() {
                     },
                 ],
             },
-        ];
-
-        if (page.props.auth.isAdmin) {
-            items.push({
+            {
                 label: 'Admin',
                 lucideIcon: Lock,
+                visible: page.props.auth.isAdmin,
                 items: [
                     {
                         label: 'Dashboard',
@@ -104,8 +102,8 @@ export function useAppLayout() {
                         url: '/log-viewer',
                     },
                 ],
-            });
-        }
+            },
+        ];
 
         return items;
     });
