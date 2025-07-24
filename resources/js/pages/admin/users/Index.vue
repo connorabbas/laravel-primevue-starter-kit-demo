@@ -4,7 +4,7 @@ import { FilterMatchMode } from '@primevue/core/api';
 import { AlertCircle, EllipsisVertical, FunnelX, Pencil } from 'lucide-vue-next';
 import { formatInTimeZone } from 'date-fns-tz';
 import { parseISO } from 'date-fns';
-import { useLazyDataTable } from '@/composables/useLazyDataTable';
+import { usePaginatedDataTable } from '@/composables/usePaginatedDataTable';
 import AppLayout from '@/layouts/AppLayout.vue';
 import ClientOnly from '@/components/ClientOnly.vue';
 import Menu from '@/components/primevue/menu/Menu.vue';
@@ -52,7 +52,7 @@ const {
     filter,
     sort,
     hardReset,
-} = useLazyDataTable('users', {
+} = usePaginatedDataTable('users', {
     name: { value: null, matchMode: FilterMatchMode.CONTAINS },
     email: { value: null, matchMode: FilterMatchMode.CONTAINS },
     created_at: { value: null, matchMode: FilterMatchMode.DATE_IS },
