@@ -1,7 +1,7 @@
 <script setup>
 import { AlertCircle } from 'lucide-vue-next';
 import { format, parseISO } from 'date-fns';
-import { useLazyDataTable } from '@/composables/useLazyDataTable';
+import { usePaginatedDataTable } from '@/composables/usePaginatedDataTable';
 import SidebarLayout from '@/layouts/app/SidebarLayout.vue';
 
 const props = defineProps({
@@ -20,7 +20,7 @@ const {
     sorting,
     firstDatasetIndex,
     paginate,
-} = useLazyDataTable('contacts', {}, props.contacts.per_page);
+} = usePaginatedDataTable('contacts', {}, props.contacts.per_page);
 </script>
 
 <template>
