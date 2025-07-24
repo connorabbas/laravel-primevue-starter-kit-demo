@@ -3,7 +3,7 @@ import { FilterMatchMode } from '@primevue/core/api';
 import { AlertCircle, FunnelX } from 'lucide-vue-next';
 import { formatInTimeZone } from 'date-fns-tz';
 import { parseISO } from 'date-fns';
-import { useLazyDataTable } from '@/composables/useLazyDataTable';
+import { usePaginatedDataTable } from '@/composables/usePaginatedDataTable';
 import SidebarLayout from '@/layouts/app/SidebarLayout.vue';
 
 const props = defineProps({
@@ -30,7 +30,7 @@ const {
     filter,
     sort,
     hardReset,
-} = useLazyDataTable('contacts', {
+} = usePaginatedDataTable('contacts', {
     name: { value: null, matchMode: FilterMatchMode.CONTAINS },
     email: { value: null, matchMode: FilterMatchMode.CONTAINS },
     organization: { value: null, matchMode: FilterMatchMode.EQUALS },
