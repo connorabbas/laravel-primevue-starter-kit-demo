@@ -60,12 +60,10 @@ export function useAppLayout() {
                     },
                 ],
             },
-        ];
-
-        if (page.props.auth.isAdmin) {
-            items.push({
+            {
                 label: 'Admin',
                 lucideIcon: Lock,
+                visible: page.props.auth.isAdmin,
                 items: [
                     {
                         label: 'Dashboard',
@@ -80,8 +78,8 @@ export function useAppLayout() {
                         active: currentRoute.value == 'admin.users.index',
                     },
                 ],
-            });
-        }
+            },
+        ];
 
         return items;
     });
