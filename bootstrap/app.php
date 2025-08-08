@@ -52,7 +52,6 @@ return Application::configure(basePath: dirname(__DIR__))
                     && app()->hasDebugModeEnabled()
                     && get_class($exception) !== ErrorToastException::class
                 ) {
-                    // Show Inertia response modal for debugging
                     return $response;
                 } elseif (!$request->inertia()) {
                     // Show error page component for standard visits
