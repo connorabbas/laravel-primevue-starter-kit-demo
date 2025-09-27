@@ -1,10 +1,10 @@
 import '../css/app.css';
 import '../css/tailwind.css';
 
-import { createSSRApp, h } from 'vue';
+import { createApp, DefineComponent, h } from 'vue';
 import { createInertiaApp, router, Head, Link } from '@inertiajs/vue3';
 import { resolvePageComponent } from 'laravel-vite-plugin/inertia-helpers';
-import { ZiggyVue } from '../../vendor/tightenco/ziggy';
+import { ZiggyVue } from 'ziggy-js';
 
 import PrimeVue from 'primevue/config';
 import ToastService from 'primevue/toastservice';
@@ -18,7 +18,6 @@ import { useSiteColorMode } from '@/composables/useSiteColorMode';
 import themePreset from '@/theme/noir-preset';
 import globalPt from '@/theme/global-pt';
 
-/* global Ziggy */
 const appName = import.meta.env.VITE_APP_NAME || 'Laravel';
 
 createInertiaApp({
@@ -26,13 +25,13 @@ createInertiaApp({
     resolve: (name) =>
         resolvePageComponent(
             `./pages/${name}.vue`,
-            import.meta.glob('./pages/**/*.vue')
+            import.meta.glob<DefineComponent>('./pages/**/*.vue'),
         ),
     setup({ el, App, props, plugin }) {
         // Site light/dark mode
         const colorMode = useSiteColorMode({ emitAuto: true });
 
-        // Global Toast component
+        // Root component with Global Toast
         const Root = {
             setup() {
                 // show error toast instead of standard Inertia modal response
@@ -57,9 +56,9 @@ createInertiaApp({
             }
         };
 
-        const app = createSSRApp(Root)
+        createApp(Root)
             .use(plugin)
-            .use(ZiggyVue, Ziggy)
+            .use(ZiggyVue)
             .use(PrimeVue, {
                 theme: {
                     preset: themePreset,
@@ -67,7 +66,7 @@ createInertiaApp({
                         darkModeSelector: '.dark',
                         cssLayer: {
                             name: 'primevue',
-                            order: 'tailwind-theme, tailwind-base, primevue, tailwind-utilities',
+                            order: 'theme, base, primevue, utilities',
                         },
                     },
                 },
@@ -83,9 +82,7 @@ createInertiaApp({
 
         // #app content set to hidden by default
         // reduces jumpy initial render from SSR content (unstyled PrimeVue components)
-        el.style.visibility = 'visible';
-
-        return app;
+        (el as HTMLElement).style.visibility = 'visible';
     },
     progress: {
         color: 'var(--p-primary-500)',
