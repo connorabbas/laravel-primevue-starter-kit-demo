@@ -1,19 +1,19 @@
 import '../css/app.css'
 import '../css/tailwind.css'
 
-import { createApp, DefineComponent, h } from 'vue'
 import { createInertiaApp, router } from '@inertiajs/vue3'
 import { resolvePageComponent } from 'laravel-vite-plugin/inertia-helpers'
+import { createApp, DefineComponent, h } from 'vue'
 import { ZiggyVue } from 'ziggy-js'
 
 import PrimeVue from 'primevue/config'
+import Toast from 'primevue/toast'
 import ToastService from 'primevue/toastservice'
 import { useToast } from 'primevue/usetoast'
-import Toast from 'primevue/toast'
 
 import { useSiteColorMode } from '@/composables/useSiteColorMode'
-import themePreset from '@/theme/noir-preset'
 import globalPt from '@/theme/global-pt'
+import themePreset from '@/theme/noir-preset'
 
 const appName = import.meta.env.VITE_APP_NAME || 'Laravel'
 

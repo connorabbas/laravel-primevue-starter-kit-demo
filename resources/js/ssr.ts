@@ -7,8 +7,8 @@ import { createSSRApp, DefineComponent, h } from 'vue'
 import { route as ziggyRoute, ZiggyVue } from 'ziggy-js'
 
 import PrimeVue from 'primevue/config'
-import ToastService from 'primevue/toastservice'
 import Toast from 'primevue/toast'
+import ToastService from 'primevue/toastservice'
 
 import { useSiteColorMode } from '@/composables/useSiteColorMode'
 
