@@ -21,7 +21,7 @@ WORKDIR /var/www/html
 COPY package*.json ./
 RUN npm ci
 COPY --from=composer /var/www/html/vendor/tightenco/ziggy ./vendor/tightenco/ziggy
-COPY vite.config.js ./
+COPY vite.config.ts ./
 COPY resources ./resources
 RUN npm run build:ssr
 
