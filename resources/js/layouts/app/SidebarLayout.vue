@@ -9,13 +9,12 @@ import NavLogoLink from '@/components/NavLogoLink.vue'
 import Menu from '@/components/primevue/menu/Menu.vue'
 import PanelMenu from '@/components/primevue/menu/PanelMenu.vue'
 import Breadcrumb from '@/components/primevue/menu/Breadcrumb.vue'
+import { MenuItem } from '@/types'
 
-const props = defineProps({
-    breadcrumbs: {
-        type: Array,
-        required: false,
-        default: () => [],
-    },
+const props = withDefaults(defineProps<{
+    breadcrumbs?: MenuItem[],
+}>(), {
+    breadcrumbs: () => [],
 })
 
 const page = usePage()

@@ -6,15 +6,6 @@ import Password from 'primevue/password'
 import AppLayout from '@/layouts/AppLayout.vue'
 import SettingsLayout from '@/layouts/UserSettingsLayout.vue'
 
-defineProps({
-    mustVerifyEmail: {
-        type: Boolean,
-    },
-    status: {
-        type: String,
-    },
-})
-
 const breadcrumbs = [
     { label: 'Dashboard', route: route('dashboard') },
     { label: 'Password settings' },

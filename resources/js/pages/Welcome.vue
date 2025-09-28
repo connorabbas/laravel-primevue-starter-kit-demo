@@ -2,16 +2,10 @@
 import { usePage } from '@inertiajs/vue3'
 import { LayoutGrid, LogIn, Settings, UserPlus } from 'lucide-vue-next'
 
-defineProps({
-    laravelVersion: {
-        type: String,
-        required: true,
-    },
-    phpVersion: {
-        type: String,
-        required: true,
-    },
-})
+defineProps<{
+    laravelVersion: string,
+    phpVersion: string,
+}>()
 
 const page = usePage()
 </script>

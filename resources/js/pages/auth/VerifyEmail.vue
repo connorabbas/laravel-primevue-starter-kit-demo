@@ -3,11 +3,9 @@ import { computed } from 'vue'
 import { useForm } from '@inertiajs/vue3'
 import GuestAuthLayout from '@/layouts/GuestAuthLayout.vue'
 
-const props = defineProps({
-    status: {
-        type: String,
-    },
-})
+const props = defineProps<{
+    status: string
+}>()
 
 const sendVerificationForm = useForm({})
 const submit = () => {
@@ -18,9 +16,7 @@ const logout = () => {
     logoutForm.post(route('logout'))
 }
 
-const verificationLinkSent = computed(
-    () => props.status === 'verification-link-sent'
-)
+const verificationLinkSent = computed(() => props.status === 'verification-link-sent')
 </script>
 
 <template>

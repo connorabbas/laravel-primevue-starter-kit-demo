@@ -6,14 +6,10 @@ import AppLayout from '@/layouts/AppLayout.vue'
 import SettingsLayout from '@/layouts/UserSettingsLayout.vue'
 import DeleteUserModal from '@/components/DeleteUserModal.vue'
 
-defineProps({
-    mustVerifyEmail: {
-        type: Boolean,
-    },
-    status: {
-        type: String,
-    },
-})
+defineProps<{
+    mustVerifyEmail: boolean,
+    status: string,
+}>()
 
 const breadcrumbs = [
     { label: 'Dashboard', route: route('dashboard') },

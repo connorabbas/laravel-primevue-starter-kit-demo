@@ -2,12 +2,12 @@
 import { computed } from 'vue'
 import { ArrowLeft } from 'lucide-vue-next'
 
-const props = defineProps({
-    errorTitles: Object,
-    errorDetails: Object,
-    status: Number,
-    homepageRoute: String,
-})
+const props = defineProps<{
+    errorTitles: Record<number, string>
+    errorDetails: Record<number, string>
+    status: number
+    homepageRoute: string
+}>()
 
 const title = computed(() => {
     return props.errorTitles[props.status]

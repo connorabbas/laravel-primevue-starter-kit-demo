@@ -2,9 +2,7 @@
 import { useTemplateRef } from 'vue'
 import { useForm } from '@inertiajs/vue3'
 
-const modalOpen = defineModel(false, {
-    type: Boolean,
-})
+const modalOpen = defineModel<boolean>({ default: false })
 
 const passwordInput = useTemplateRef('password-input')
 

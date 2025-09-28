@@ -3,16 +3,10 @@ import { useTemplateRef, onMounted } from 'vue'
 import { useForm } from '@inertiajs/vue3'
 import GuestAuthLayout from '@/layouts/GuestAuthLayout.vue'
 
-const props = defineProps({
-    email: {
-        type: String,
-        required: true,
-    },
-    token: {
-        type: String,
-        required: true,
-    },
-})
+const props = defineProps<{
+    email: string,
+    token: string,
+}>()
 
 const emailInput = useTemplateRef('email-input')
 
