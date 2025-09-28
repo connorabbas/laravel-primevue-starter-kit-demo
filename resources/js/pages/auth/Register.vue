@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { useTemplateRef, onMounted } from 'vue'
-import { useForm } from '@inertiajs/vue3'
+import { useForm, Head as InertiaHead } from '@inertiajs/vue3'
 import GuestAuthLayout from '@/layouts/GuestAuthLayout.vue'
 import InputText from 'primevue/inputtext'
 
@@ -28,9 +28,9 @@ onMounted(() => {
 </script>
 
 <template>
-    <GuestAuthLayout>
-        <InertiaHead title="Register" />
+    <InertiaHead title="Register" />
 
+    <GuestAuthLayout>
         <template #title>
             <div class="text-center">
                 Create an account

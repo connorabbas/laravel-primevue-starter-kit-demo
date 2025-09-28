@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { useForm } from '@inertiajs/vue3'
+import { useForm, Head as InertiaHead } from '@inertiajs/vue3'
 import GuestAuthLayout from '@/layouts/GuestAuthLayout.vue'
 
 const form = useForm({
@@ -16,9 +16,9 @@ const submit = () => {
 </script>
 
 <template>
-    <GuestAuthLayout>
-        <InertiaHead title="Confirm password" />
+    <InertiaHead title="Confirm password" />
 
+    <GuestAuthLayout>
         <template #title>
             <div class="text-center">
                 Confirm your password

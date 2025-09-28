@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { computed } from 'vue'
-import { useForm } from '@inertiajs/vue3'
+import { useForm, Head as InertiaHead } from '@inertiajs/vue3'
 import GuestAuthLayout from '@/layouts/GuestAuthLayout.vue'
 
 const props = defineProps<{
@@ -20,9 +20,9 @@ const verificationLinkSent = computed(() => props.status === 'verification-link-
 </script>
 
 <template>
-    <GuestAuthLayout>
-        <InertiaHead title="Email verification" />
+    <InertiaHead title="Email verification" />
 
+    <GuestAuthLayout>
         <template #title>
             <div class="text-center">
                 Verify email

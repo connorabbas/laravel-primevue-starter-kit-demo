@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { computed } from 'vue'
+import { Head as InertiaHead } from '@inertiajs/vue3'
 import { ArrowLeft } from 'lucide-vue-next'
 
 const props = defineProps<{
@@ -19,6 +20,7 @@ const details = computed(() => {
 
 <template>
     <InertiaHead title="Error" />
+
     <Container fluid>
         <main>
             <div class="h-screen flex items-center justify-center">
