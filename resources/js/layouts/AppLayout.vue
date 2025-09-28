@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import AppLayout from '@/layouts/app/HeaderLayout.vue'
-import { MenuItem } from '@/types';
+import { MenuItem } from '@/types'
 
 const props = withDefaults(defineProps<{
     breadcrumbs?: MenuItem[],
