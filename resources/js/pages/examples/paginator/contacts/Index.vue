@@ -1,17 +1,21 @@
 <script setup lang="ts">
 import { ref, computed } from 'vue'
+import { Head as InertiaHead } from '@inertiajs/vue3'
 import { FilterMatchMode } from '@primevue/core/api'
 import { AlertCircle, Funnel, RotateCcw, Search } from 'lucide-vue-next'
 import { formatInTimeZone } from 'date-fns-tz'
 import { parseISO } from 'date-fns'
 import { usePaginatedData } from '@/composables/usePaginatedData'
 import AppLayout from '@/layouts/AppLayout.vue'
+import PageTitleSection from '@/components/PageTitleSection.vue'
+import type { LengthAwarePaginator } from '@/types/paginiation'
+import type { ContactWithRelations, Organization, Tag } from '@/types'
 
-const props = defineProps({
-    contacts: Object,
-    organizations: Array,
-    tags: Array,
-})
+const props = defineProps<{
+    contacts: LengthAwarePaginator<ContactWithRelations>,
+    organizations: Organization[],
+    tags: Tag[],
+}>()
 
 const pageTitle = 'Contacts'
 const breadcrumbs = [
@@ -73,9 +77,9 @@ const appliedFiltersCount = computed(() => {
 </script>
 
 <template>
-    <AppLayout :breadcrumbs="breadcrumbs">
-        <InertiaHead :title="pageTitle" />
+    <InertiaHead :title="pageTitle" />
 
+    <AppLayout :breadcrumbs="breadcrumbs">
         <PageTitleSection>
             <template #title>
                 {{ pageTitle }}
@@ -276,7 +280,10 @@ const appliedFiltersCount = computed(() => {
                         <template #title>
                             {{ contact.name }}
                         </template>
-                        <template #subtitle>
+                        <template
+                            v-if="contact.organization"
+                            #subtitle
+                        >
                             {{ contact.organization.name }}
                         </template>
                         <template #content>

@@ -1,12 +1,16 @@
 <script setup lang="ts">
+import { Head as InertiaHead } from '@inertiajs/vue3'
 import { AlertCircle } from 'lucide-vue-next'
 import { format, parseISO } from 'date-fns'
 import { usePaginatedDataTable } from '@/composables/usePaginatedDataTable'
 import SidebarLayout from '@/layouts/app/SidebarLayout.vue'
+import PageTitleSection from '@/components/PageTitleSection.vue'
+import type { LengthAwarePaginator } from '@/types/paginiation'
+import type { ContactWithRelations } from '@/types'
 
-const props = defineProps({
-    contacts: Object,
-})
+const props = defineProps<{
+    contacts: LengthAwarePaginator<ContactWithRelations>,
+}>()
 
 const pageTitle = 'Contacts'
 const breadcrumbs = [
@@ -24,9 +28,9 @@ const {
 </script>
 
 <template>
-    <SidebarLayout :breadcrumbs="breadcrumbs">
-        <InertiaHead :title="pageTitle" />
+    <InertiaHead :title="pageTitle" />
 
+    <SidebarLayout :breadcrumbs="breadcrumbs">
         <PageTitleSection>
             <template #title>
                 {{ pageTitle }}

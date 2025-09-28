@@ -13,6 +13,41 @@ export interface User {
     updated_at: string;
 }
 
+export interface Organization {
+    id: number;
+    name: string;
+    industry: string | null;
+    website: string | null;
+    created_at: string;
+    updated_at: string;
+}
+
+export interface Contact {
+    id: number;
+    name: string;
+    email: string;
+    phone: string | null;
+    organization_id: number | null;
+    created_at: string;
+    updated_at: string;
+}
+export interface Tag {
+    id: number;
+    name: string;
+    created_at: string;
+    updated_at: string;
+}
+
+export interface ContactWithRelations extends Contact {
+    organization?: Organization | null;
+    tags?: Tag[] | null;
+}
+
+export interface OrganizationWithRelations extends Organization {
+    contacts?: Contact[];
+    tags?: Tag[] | null;
+}
+
 export interface AuthProps {
     user: User;
     isAdmin?: boolean;
