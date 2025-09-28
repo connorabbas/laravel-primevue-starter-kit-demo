@@ -10,7 +10,6 @@ import PrimeVue from 'primevue/config'
 import ToastService from 'primevue/toastservice'
 import Toast from 'primevue/toast'
 
-import PageTitleSection from '@/components/PageTitleSection.vue'
 import { useSiteColorMode } from '@/composables/useSiteColorMode'
 
 const appName = import.meta.env.VITE_APP_NAME || 'Laravel'
@@ -63,7 +62,6 @@ createServer((page) =>
                 .use(ZiggyVue, ziggyConfig)
                 .use(PrimeVue, { theme: 'none' }) // TODO: PrimeVue won't render it's styles server side
                 .use(ToastService)
-                .component('PageTitleSection', PageTitleSection)
                 .provide('colorMode', colorMode)
 
             return app

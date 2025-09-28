@@ -11,8 +11,6 @@ import ToastService from 'primevue/toastservice'
 import { useToast } from 'primevue/usetoast'
 import Toast from 'primevue/toast'
 
-import PageTitleSection from '@/components/PageTitleSection.vue'
-
 import { useSiteColorMode } from '@/composables/useSiteColorMode'
 import themePreset from '@/theme/noir-preset'
 import globalPt from '@/theme/global-pt'
@@ -72,7 +70,6 @@ createInertiaApp({
                 pt: globalPt,
             })
             .use(ToastService)
-            .component('PageTitleSection', PageTitleSection)
             .provide('colorMode', colorMode)
             .mount(el);
 

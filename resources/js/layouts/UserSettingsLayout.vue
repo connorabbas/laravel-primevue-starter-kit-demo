@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 import { usePage } from '@inertiajs/vue3'
+import PageTitleSection from '@/components/PageTitleSection.vue'
 
 const page = usePage()
 const currentRoute = computed(() => {
