@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { Link as InertiaLink } from '@inertiajs/vue3'
 import ApplicationLogo from '@/components/ApplicationLogo.vue'
+import Container from '@/components/Container.vue'
 import FlashMessages from '@/components/FlashMessages.vue'
 </script>
 

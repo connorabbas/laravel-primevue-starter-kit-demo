@@ -10,7 +10,6 @@ import PrimeVue from 'primevue/config'
 import ToastService from 'primevue/toastservice'
 import Toast from 'primevue/toast'
 
-import Container from '@/components/Container.vue'
 import PageTitleSection from '@/components/PageTitleSection.vue'
 import { useSiteColorMode } from '@/composables/useSiteColorMode'
 
@@ -64,7 +63,6 @@ createServer((page) =>
                 .use(ZiggyVue, ziggyConfig)
                 .use(PrimeVue, { theme: 'none' }) // TODO: PrimeVue won't render it's styles server side
                 .use(ToastService)
-                .component('Container', Container)
                 .component('PageTitleSection', PageTitleSection)
                 .provide('colorMode', colorMode)
 

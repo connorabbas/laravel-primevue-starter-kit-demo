@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { usePage, Head as InertiaHead, Link as InertiaLink } from '@inertiajs/vue3'
 import { LayoutGrid, LogIn, Settings, UserPlus } from 'lucide-vue-next'
+import Container from '@/components/Container.vue'
 
 defineProps<{
     laravelVersion: string,
