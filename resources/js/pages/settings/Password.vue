@@ -11,8 +11,9 @@ const breadcrumbs = [
     { label: 'Password settings' },
 ]
 
-const currentPasswordInput = useTemplateRef('current-password-input')
-const newPasswordInput = useTemplateRef('new-password-input')
+type PasswordInputType = InstanceType<typeof Password> & { $el: HTMLElement };
+const currentPasswordInput = useTemplateRef<PasswordInputType>('current-password-input')
+const newPasswordInput = useTemplateRef<PasswordInputType>('new-password-input')
 
 const toast = useToast()
 const updatePasswordForm = useForm({
@@ -39,16 +40,16 @@ const updatePassword = () => {
         onError: () => {
             if (updatePasswordForm.errors?.password) {
                 updatePasswordForm.reset('password', 'password_confirmation')
-                const newPasswordInputElement = newPasswordInput.value.$el.querySelector('input')
-                if (newPasswordInputElement) {
-                    newPasswordInputElement.focus()
+                if (newPasswordInput.value && newPasswordInput.value?.$el) {
+                    const newPasswordInputElement = newPasswordInput.value.$el.querySelector('input')
+                    newPasswordInputElement?.focus()
                 }
             }
             if (updatePasswordForm.errors?.current_password) {
                 updatePasswordForm.reset('current_password')
-                const currentPasswordInputElement = currentPasswordInput.value.$el.querySelector('input')
-                if (currentPasswordInputElement) {
-                    currentPasswordInputElement.focus()
+                if (currentPasswordInput.value && currentPasswordInput.value?.$el) {
+                    const currentPasswordInputElement = currentPasswordInput.value.$el.querySelector('input')
+                    currentPasswordInputElement?.focus()
                 }
             }
         },

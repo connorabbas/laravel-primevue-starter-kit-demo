@@ -2,6 +2,7 @@
 import { useTemplateRef, onMounted } from 'vue'
 import { useForm } from '@inertiajs/vue3'
 import GuestAuthLayout from '@/layouts/GuestAuthLayout.vue'
+import InputText from 'primevue/inputtext'
 
 const registerForm = useForm({
     name: '',
@@ -10,7 +11,8 @@ const registerForm = useForm({
     password_confirmation: '',
 })
 
-const nameInput = useTemplateRef('name-input')
+type InputTextType = InstanceType<typeof InputText> & { $el: HTMLElement };
+const nameInput = useTemplateRef<InputTextType>('name-input')
 
 const submit = () => {
     registerForm.post(route('register'), {
@@ -19,7 +21,9 @@ const submit = () => {
 }
 
 onMounted(() => {
-    nameInput.value.$el.focus()
+    if (nameInput.value) {
+        nameInput.value.$el.focus()
+    }
 })
 </script>
 

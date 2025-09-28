@@ -2,12 +2,14 @@
 import { useTemplateRef, onMounted } from 'vue'
 import { useForm } from '@inertiajs/vue3'
 import GuestAuthLayout from '@/layouts/GuestAuthLayout.vue'
+import InputText from 'primevue/inputtext'
 
 const props = defineProps<{
     status: string
 }>()
 
-const emailInput = useTemplateRef('email-input')
+type InputTextType = InstanceType<typeof InputText> & { $el: HTMLElement };
+const emailInput = useTemplateRef<InputTextType>('email-input')
 
 const forgotPasswordForm = useForm({
     email: '',
@@ -18,7 +20,9 @@ const submit = () => {
 }
 
 onMounted(() => {
-    emailInput.value.$el.focus()
+    if (emailInput.value) {
+        emailInput.value.$el.focus()
+    }
 })
 </script>
 

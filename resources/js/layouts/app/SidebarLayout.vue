@@ -4,6 +4,7 @@ import { usePage } from '@inertiajs/vue3'
 import { ChevronsUpDown, Menu as MenuIcon } from 'lucide-vue-next'
 import { useAppLayout } from '@/composables/useAppLayout'
 import ClientOnly from '@/components/ClientOnly.vue'
+import PopupMenuButton from '@/components/PopupMenuButton.vue'
 import FlashMessages from '@/components/FlashMessages.vue'
 import NavLogoLink from '@/components/NavLogoLink.vue'
 import Menu from '@/components/primevue/menu/Menu.vue'
@@ -23,16 +24,6 @@ const {
     menuItems,
     userMenuItems,
 } = useAppLayout()
-
-const userMenu = useTemplateRef('user-menu')
-const toggleUserMenu = (event) => {
-    userMenu.value.$el.toggle(event)
-}
-
-const mobileUserMenu = useTemplateRef('mobile-user-menu')
-const toggleMobileUserMenu = (event) => {
-    mobileUserMenu.value.$el.toggle(event)
-}
 </script>
 
 <template>
@@ -51,26 +42,16 @@ const toggleMobileUserMenu = (event) => {
                         />
                     </div>
                     <template #footer>
-                        <div class="flex flex-col">
-                            <Button
-                                id="mobile-user-menu-btn"
-                                :label="page.props.auth.user.name"
-                                pt:root:class="flex flex-row-reverse justify-between"
-                                severity="secondary"
-                                size="large"
-                                @click="toggleMobileUserMenu($event)"
-                            >
-                                <template #icon>
-                                    <ChevronsUpDown />
-                                </template>
-                            </Button>
-                            <Menu
-                                ref="mobile-user-menu"
-                                :model="userMenuItems"
-                                pt:root:class="z-[1200]"
-                                popup
-                            />
-                        </div>
+                        <PopupMenuButton
+                            v-if="page.props.auth.user"
+                            name="mobile-user-menu-dd"
+                            :menu-items="userMenuItems"
+                            :button-label="page.props.auth.user.name"
+                        >
+                            <template #toggleIcon>
+                                <ChevronsUpDown />
+                            </template>
+                        </PopupMenuButton>
                     </template>
                 </Drawer>
                 <ScrollTop
@@ -121,23 +102,16 @@ const toggleMobileUserMenu = (event) => {
                         </div>
                     </div>
                     <div>
-                        <Button
-                            id="user-menu-btn"
-                            :label="page.props.auth.user.name"
-                            pt:root:class="flex flex-row-reverse justify-between"
-                            severity="secondary"
-                            fluid
-                            @click="toggleUserMenu($event)"
+                        <PopupMenuButton
+                            v-if="page.props.auth.user"
+                            name="desktop-user-menu-dd"
+                            :menu-items="userMenuItems"
+                            :button-label="page.props.auth.user.name"
                         >
-                            <template #icon>
+                            <template #toggleIcon>
                                 <ChevronsUpDown />
                             </template>
-                        </Button>
-                        <Menu
-                            ref="user-menu"
-                            :model="userMenuItems"
-                            popup
-                        />
+                        </PopupMenuButton>
                     </div>
                 </div>
             </aside>

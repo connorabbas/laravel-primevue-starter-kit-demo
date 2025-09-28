@@ -15,6 +15,7 @@
 
 @theme {
     --font-sans: Inter, sans-serif;
+    --header-height: 4rem;
 }
 
 @utility dynamic-bg {
