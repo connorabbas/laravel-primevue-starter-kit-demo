@@ -1,6 +1,6 @@
-<script setup>
-import ApplicationLogo from '@/components/ApplicationLogo.vue';
-import FlashMessages from '@/components/FlashMessages.vue';
+<script setup lang="ts">
+import ApplicationLogo from '@/components/ApplicationLogo.vue'
+import FlashMessages from '@/components/FlashMessages.vue'
 </script>
 
 <template>

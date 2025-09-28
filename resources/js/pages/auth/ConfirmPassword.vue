@@ -1,18 +1,18 @@
-<script setup>
-import { useForm } from '@inertiajs/vue3';
-import GuestAuthLayout from '@/layouts/GuestAuthLayout.vue';
+<script setup lang="ts">
+import { useForm } from '@inertiajs/vue3'
+import GuestAuthLayout from '@/layouts/GuestAuthLayout.vue'
 
 const form = useForm({
     password: '',
-});
+})
 
 const submit = () => {
     form.post(route('password.confirm'), {
         onFinish: () => {
-            form.reset();
+            form.reset()
         },
-    });
-};
+    })
+}
 </script>
 
 <template>

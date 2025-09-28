@@ -1,20 +1,20 @@
-<script setup>
-import { computed } from 'vue';
-import { ArrowLeft } from 'lucide-vue-next';
+<script setup lang="ts">
+import { computed } from 'vue'
+import { ArrowLeft } from 'lucide-vue-next'
 
 const props = defineProps({
     errorTitles: Object,
     errorDetails: Object,
     status: Number,
     homepageRoute: String,
-});
+})
 
 const title = computed(() => {
-    return props.errorTitles[props.status];
-});
+    return props.errorTitles[props.status]
+})
 const details = computed(() => {
-    return props.errorDetails[props.status];
-});
+    return props.errorDetails[props.status]
+})
 </script>
 
 <template>

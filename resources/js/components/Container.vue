@@ -1,4 +1,4 @@
-<script setup>
+<script setup lang="ts">
 const props = defineProps({
     fluid: {
         type: Boolean,
@@ -15,7 +15,7 @@ const props = defineProps({
         default: false,
         required: false,
     },
-});
+})
 </script>
 
 <template>

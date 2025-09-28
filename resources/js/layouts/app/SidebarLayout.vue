@@ -1,14 +1,14 @@
-<script setup>
-import { useTemplateRef } from 'vue';
-import { usePage } from '@inertiajs/vue3';
-import { ChevronsUpDown, Menu as MenuIcon } from 'lucide-vue-next';
-import { useAppLayout } from '@/composables/useAppLayout';
-import ClientOnly from '@/components/ClientOnly.vue';
-import FlashMessages from '@/components/FlashMessages.vue';
-import NavLogoLink from '@/components/NavLogoLink.vue';
-import Menu from '@/components/primevue/menu/Menu.vue';
-import PanelMenu from '@/components/primevue/menu/PanelMenu.vue';
-import Breadcrumb from '@/components/primevue/menu/Breadcrumb.vue';
+<script setup lang="ts">
+import { useTemplateRef } from 'vue'
+import { usePage } from '@inertiajs/vue3'
+import { ChevronsUpDown, Menu as MenuIcon } from 'lucide-vue-next'
+import { useAppLayout } from '@/composables/useAppLayout'
+import ClientOnly from '@/components/ClientOnly.vue'
+import FlashMessages from '@/components/FlashMessages.vue'
+import NavLogoLink from '@/components/NavLogoLink.vue'
+import Menu from '@/components/primevue/menu/Menu.vue'
+import PanelMenu from '@/components/primevue/menu/PanelMenu.vue'
+import Breadcrumb from '@/components/primevue/menu/Breadcrumb.vue'
 
 const props = defineProps({
     breadcrumbs: {
@@ -16,24 +16,24 @@ const props = defineProps({
         required: false,
         default: () => [],
     },
-});
+})
 
-const page = usePage();
+const page = usePage()
 const {
     mobileMenuOpen,
     menuItems,
     userMenuItems,
-} = useAppLayout();
+} = useAppLayout()
 
-const userMenu = useTemplateRef('user-menu');
+const userMenu = useTemplateRef('user-menu')
 const toggleUserMenu = (event) => {
-    userMenu.value.$el.toggle(event);
-};
+    userMenu.value.$el.toggle(event)
+}
 
-const mobileUserMenu = useTemplateRef('mobile-user-menu');
+const mobileUserMenu = useTemplateRef('mobile-user-menu')
 const toggleMobileUserMenu = (event) => {
-    mobileUserMenu.value.$el.toggle(event);
-};
+    mobileUserMenu.value.$el.toggle(event)
+}
 </script>
 
 <template>

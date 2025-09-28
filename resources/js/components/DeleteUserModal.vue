@@ -1,30 +1,30 @@
-<script setup>
-import { useTemplateRef } from 'vue';
-import { useForm } from '@inertiajs/vue3';
+<script setup lang="ts">
+import { useTemplateRef } from 'vue'
+import { useForm } from '@inertiajs/vue3'
 
 const modalOpen = defineModel(false, {
     type: Boolean,
-});
+})
 
-const passwordInput = useTemplateRef('password-input');
+const passwordInput = useTemplateRef('password-input')
 
 const form = useForm({
     password: '',
-});
+})
 
 const deleteUser = () => {
     form.delete(route('profile.destroy'), {
         preserveScroll: true,
         onSuccess: () => (modalOpen.value = false),
         onError: () => {
-            const passwordInputElement = passwordInput.value.$el.querySelector('input');
+            const passwordInputElement = passwordInput.value.$el.querySelector('input')
             if (passwordInputElement) {
-                passwordInputElement.focus();
+                passwordInputElement.focus()
             }
         },
         onFinish: () => form.reset(),
-    });
-};
+    })
+}
 </script>
 
 <template>

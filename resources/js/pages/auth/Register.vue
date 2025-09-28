@@ -1,26 +1,26 @@
-<script setup>
-import { useTemplateRef, onMounted } from 'vue';
-import { useForm } from '@inertiajs/vue3';
-import GuestAuthLayout from '@/layouts/GuestAuthLayout.vue';
+<script setup lang="ts">
+import { useTemplateRef, onMounted } from 'vue'
+import { useForm } from '@inertiajs/vue3'
+import GuestAuthLayout from '@/layouts/GuestAuthLayout.vue'
 
 const registerForm = useForm({
     name: '',
     email: '',
     password: '',
     password_confirmation: '',
-});
+})
 
-const nameInput = useTemplateRef('name-input');
+const nameInput = useTemplateRef('name-input')
 
 const submit = () => {
     registerForm.post(route('register'), {
         onFinish: () => registerForm.reset('password', 'password_confirmation'),
-    });
-};
+    })
+}
 
 onMounted(() => {
-    nameInput.value.$el.focus();
-});
+    nameInput.value.$el.focus()
+})
 </script>
 
 <template>

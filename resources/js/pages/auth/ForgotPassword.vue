@@ -1,27 +1,27 @@
-<script setup>
-import { useTemplateRef, onMounted } from 'vue';
-import { useForm } from '@inertiajs/vue3';
-import GuestAuthLayout from '@/layouts/GuestAuthLayout.vue';
+<script setup lang="ts">
+import { useTemplateRef, onMounted } from 'vue'
+import { useForm } from '@inertiajs/vue3'
+import GuestAuthLayout from '@/layouts/GuestAuthLayout.vue'
 
 defineProps({
     status: {
         type: String,
     },
-});
+})
 
-const emailInput = useTemplateRef('email-input');
+const emailInput = useTemplateRef('email-input')
 
 const forgotPasswordForm = useForm({
     email: '',
-});
+})
 
 const submit = () => {
-    forgotPasswordForm.post(route('password.email'));
-};
+    forgotPasswordForm.post(route('password.email'))
+}
 
 onMounted(() => {
-    emailInput.value.$el.focus();
-});
+    emailInput.value.$el.focus()
+})
 </script>
 
 <template>

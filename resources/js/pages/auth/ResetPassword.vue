@@ -1,7 +1,7 @@
-<script setup>
-import { useTemplateRef, onMounted } from 'vue';
-import { useForm } from '@inertiajs/vue3';
-import GuestAuthLayout from '@/layouts/GuestAuthLayout.vue';
+<script setup lang="ts">
+import { useTemplateRef, onMounted } from 'vue'
+import { useForm } from '@inertiajs/vue3'
+import GuestAuthLayout from '@/layouts/GuestAuthLayout.vue'
 
 const props = defineProps({
     email: {
@@ -12,26 +12,26 @@ const props = defineProps({
         type: String,
         required: true,
     },
-});
+})
 
-const emailInput = useTemplateRef('email-input');
+const emailInput = useTemplateRef('email-input')
 
 const resetPwForm = useForm({
     token: props.token,
     email: props.email,
     password: '',
     password_confirmation: '',
-});
+})
 
 const submit = () => {
     resetPwForm.post(route('password.store'), {
         onFinish: () => resetPwForm.reset('password', 'password_confirmation'),
-    });
-};
+    })
+}
 
 onMounted(() => {
-    emailInput.value.$el.focus();
-});
+    emailInput.value.$el.focus()
+})
 </script>
 
 <template>

@@ -1,10 +1,10 @@
-<script setup>
-import { useTemplateRef } from 'vue';
-import { useForm } from '@inertiajs/vue3';
-import { useToast } from 'primevue/usetoast';
-import Password from 'primevue/password';
-import AppLayout from '@/layouts/AppLayout.vue';
-import SettingsLayout from '@/layouts/UserSettingsLayout.vue';
+<script setup lang="ts">
+import { useTemplateRef } from 'vue'
+import { useForm } from '@inertiajs/vue3'
+import { useToast } from 'primevue/usetoast'
+import Password from 'primevue/password'
+import AppLayout from '@/layouts/AppLayout.vue'
+import SettingsLayout from '@/layouts/UserSettingsLayout.vue'
 
 defineProps({
     mustVerifyEmail: {
@@ -13,22 +13,22 @@ defineProps({
     status: {
         type: String,
     },
-});
+})
 
 const breadcrumbs = [
     { label: 'Dashboard', route: route('dashboard') },
     { label: 'Password settings' },
-];
+]
 
-const currentPasswordInput = useTemplateRef('current-password-input');
-const newPasswordInput = useTemplateRef('new-password-input');
+const currentPasswordInput = useTemplateRef('current-password-input')
+const newPasswordInput = useTemplateRef('new-password-input')
 
-const toast = useToast();
+const toast = useToast()
 const updatePasswordForm = useForm({
     current_password: '',
     password: '',
     password_confirmation: '',
-});
+})
 
 const showSuccessToast = () => {
     toast.add({
@@ -36,33 +36,33 @@ const showSuccessToast = () => {
         summary: 'Saved',
         detail: 'Your password has been updated',
         life: 3000,
-    });
-};
+    })
+}
 const updatePassword = () => {
     updatePasswordForm.put(route('password.update'), {
         preserveScroll: true,
         onSuccess: () => {
-            updatePasswordForm.reset();
-            showSuccessToast();
+            updatePasswordForm.reset()
+            showSuccessToast()
         },
         onError: () => {
             if (updatePasswordForm.errors?.password) {
-                updatePasswordForm.reset('password', 'password_confirmation');
-                const newPasswordInputElement = newPasswordInput.value.$el.querySelector('input');
+                updatePasswordForm.reset('password', 'password_confirmation')
+                const newPasswordInputElement = newPasswordInput.value.$el.querySelector('input')
                 if (newPasswordInputElement) {
-                    newPasswordInputElement.focus();
+                    newPasswordInputElement.focus()
                 }
             }
             if (updatePasswordForm.errors?.current_password) {
-                updatePasswordForm.reset('current_password');
-                const currentPasswordInputElement = currentPasswordInput.value.$el.querySelector('input');
+                updatePasswordForm.reset('current_password')
+                const currentPasswordInputElement = currentPasswordInput.value.$el.querySelector('input')
                 if (currentPasswordInputElement) {
-                    currentPasswordInputElement.focus();
+                    currentPasswordInputElement.focus()
                 }
             }
         },
-    });
-};
+    })
+}
 </script>
 
 <template>

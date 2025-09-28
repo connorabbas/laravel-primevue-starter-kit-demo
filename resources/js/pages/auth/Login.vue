@@ -1,7 +1,7 @@
-<script setup>
-import { useTemplateRef, onMounted } from 'vue';
-import { useForm } from '@inertiajs/vue3';
-import GuestAuthLayout from '@/layouts/GuestAuthLayout.vue';
+<script setup lang="ts">
+import { useTemplateRef, onMounted } from 'vue'
+import { useForm } from '@inertiajs/vue3'
+import GuestAuthLayout from '@/layouts/GuestAuthLayout.vue'
 
 const props = defineProps({
     canResetPassword: {
@@ -10,25 +10,25 @@ const props = defineProps({
     status: {
         type: String,
     },
-});
+})
 
-const emailInput = useTemplateRef('email-input');
+const emailInput = useTemplateRef('email-input')
 
 const loginForm = useForm({
     email: '',
     password: '',
     remember: false,
-});
+})
 
 const submit = () => {
     loginForm.post(route('login'), {
         onFinish: () => loginForm.reset('password'),
-    });
-};
+    })
+}
 
 onMounted(() => {
-    emailInput.value.$el.focus();
-});
+    emailInput.value.$el.focus()
+})
 </script>
 
 <template>
