@@ -8,7 +8,7 @@ import DeleteUserModal from '@/components/DeleteUserModal.vue'
 
 defineProps<{
     mustVerifyEmail: boolean,
-    status: string,
+    status?: string,
 }>()
 
 const breadcrumbs = [

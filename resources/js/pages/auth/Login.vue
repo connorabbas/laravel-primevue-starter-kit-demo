@@ -6,7 +6,7 @@ import InputText from 'primevue/inputtext'
 
 const props = defineProps<{
     canResetPassword: boolean,
-    status: string,
+    status?: string,
 }>()
 
 type InputTextType = InstanceType<typeof InputText> & { $el: HTMLElement };

@@ -4,7 +4,7 @@ import { useForm } from '@inertiajs/vue3'
 import GuestAuthLayout from '@/layouts/GuestAuthLayout.vue'
 
 const props = defineProps<{
-    status: string
+    status?: string
 }>()
 
 const sendVerificationForm = useForm({})

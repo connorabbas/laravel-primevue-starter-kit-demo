@@ -9,10 +9,12 @@ export interface User {
     name: string;
     email: string;
     email_verified_at: string | null;
+    created_at: string;
+    updated_at: string;
 }
 
 export interface AuthProps {
-    user: User | null;
+    user: User;
 }
 
 export interface FlashProps {

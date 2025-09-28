@@ -5,7 +5,7 @@ import GuestAuthLayout from '@/layouts/GuestAuthLayout.vue'
 import InputText from 'primevue/inputtext'
 
 const props = defineProps<{
-    status: string
+    status?: string
 }>()
 
 type InputTextType = InstanceType<typeof InputText> & { $el: HTMLElement };

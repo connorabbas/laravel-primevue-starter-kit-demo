@@ -43,7 +43,6 @@ const {
                     </div>
                     <template #footer>
                         <PopupMenuButton
-                            v-if="page.props.auth.user"
                             name="mobile-user-menu-dd"
                             :menu-items="userMenuItems"
                             :button-label="page.props.auth.user.name"
@@ -76,10 +75,7 @@ const {
                         </template>
                         <template #end>
                             <!-- User Dropdown Menu -->
-                            <div
-                                v-if="page.props.auth.user"
-                                class="hidden lg:flex items-center ms-6"
-                            >
+                            <div class="hidden lg:flex items-center ms-6">
                                 <PopupMenuButton
                                     name="desktop-user-menu-dd"
                                     button-variant="text"
