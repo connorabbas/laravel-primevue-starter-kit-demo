@@ -1,23 +1,23 @@
-<script setup>
-import { FilterMatchMode } from '@primevue/core/api';
-import { AlertCircle, FunnelX } from 'lucide-vue-next';
-import { formatInTimeZone } from 'date-fns-tz';
-import { parseISO } from 'date-fns';
-import { usePaginatedDataTable } from '@/composables/usePaginatedDataTable';
-import SidebarLayout from '@/layouts/app/SidebarLayout.vue';
+<script setup lang="ts">
+import { FilterMatchMode } from '@primevue/core/api'
+import { AlertCircle, FunnelX } from 'lucide-vue-next'
+import { formatInTimeZone } from 'date-fns-tz'
+import { parseISO } from 'date-fns'
+import { usePaginatedDataTable } from '@/composables/usePaginatedDataTable'
+import SidebarLayout from '@/layouts/app/SidebarLayout.vue'
 
 const props = defineProps({
     contacts: Object,
     organizations: Array,
     tags: Array,
-});
+})
 
-const pageTitle = 'Contacts';
+const pageTitle = 'Contacts'
 const breadcrumbs = [
     { label: 'Dashboard', route: route('dashboard') },
     { label: pageTitle, route: route('examples.data-table.contacts.index') },
     { label: 'List' },
-];
+]
 
 const {
     processing,
@@ -36,7 +36,7 @@ const {
     organization: { value: null, matchMode: FilterMatchMode.EQUALS },
     tags: { value: null, matchMode: FilterMatchMode.IN },
     created_at: { value: null, matchMode: FilterMatchMode.DATE_IS },
-}, props.contacts.per_page);
+}, props.contacts.per_page)
 </script>
 
 <template>

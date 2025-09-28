@@ -1,26 +1,26 @@
-<script setup>
-import { AlertCircle } from 'lucide-vue-next';
-import { format, parseISO } from 'date-fns';
-import { usePaginatedDataTable } from '@/composables/usePaginatedDataTable';
-import SidebarLayout from '@/layouts/app/SidebarLayout.vue';
+<script setup lang="ts">
+import { AlertCircle } from 'lucide-vue-next'
+import { format, parseISO } from 'date-fns'
+import { usePaginatedDataTable } from '@/composables/usePaginatedDataTable'
+import SidebarLayout from '@/layouts/app/SidebarLayout.vue'
 
 const props = defineProps({
     contacts: Object,
-});
+})
 
-const pageTitle = 'Contacts';
+const pageTitle = 'Contacts'
 const breadcrumbs = [
     { label: 'Dashboard', route: route('dashboard') },
     { label: pageTitle, route: route('examples.data-table.contacts.index') },
     { label: 'List' },
-];
+]
 
 const {
     processing,
     sorting,
     firstDatasetIndex,
     paginate,
-} = usePaginatedDataTable('contacts', {}, props.contacts.per_page);
+} = usePaginatedDataTable('contacts', {}, props.contacts.per_page)
 </script>
 
 <template>
