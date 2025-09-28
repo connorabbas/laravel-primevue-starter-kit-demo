@@ -1,24 +1,28 @@
-<script setup>
-import { ref, computed } from 'vue';
-import { FilterMatchMode } from '@primevue/core/api';
-import { AlertCircle, Funnel, RotateCcw, Search } from 'lucide-vue-next';
-import { formatInTimeZone } from 'date-fns-tz';
-import { parseISO } from 'date-fns';
-import { usePaginatedData } from '@/composables/usePaginatedData';
-import AppLayout from '@/layouts/AppLayout.vue';
+<script setup lang="ts">
+import { ref, computed } from 'vue'
+import { Head as InertiaHead } from '@inertiajs/vue3'
+import { FilterMatchMode } from '@primevue/core/api'
+import { AlertCircle, Funnel, RotateCcw, Search } from 'lucide-vue-next'
+import { formatInTimeZone } from 'date-fns-tz'
+import { parseISO } from 'date-fns'
+import { usePaginatedData } from '@/composables/usePaginatedData'
+import AppLayout from '@/layouts/AppLayout.vue'
+import PageTitleSection from '@/components/PageTitleSection.vue'
+import type { LengthAwarePaginator } from '@/types/paginiation'
+import type { ContactWithRelations, Organization, Tag } from '@/types'
 
-const props = defineProps({
-    contacts: Object,
-    organizations: Array,
-    tags: Array,
-});
+const props = defineProps<{
+    contacts: LengthAwarePaginator<ContactWithRelations>,
+    organizations: Organization[],
+    tags: Tag[],
+}>()
 
-const pageTitle = 'Contacts';
+const pageTitle = 'Contacts'
 const breadcrumbs = [
     { label: 'Dashboard', route: route('dashboard') },
     { label: pageTitle, route: route('examples.paginator.contacts.index') },
     { label: 'List' },
-];
+]
 
 const {
     processing,
@@ -35,11 +39,11 @@ const {
     organization: { value: null, matchMode: FilterMatchMode.EQUALS },
     tags: { value: null, matchMode: FilterMatchMode.IN },
     created_at: { value: null, matchMode: FilterMatchMode.DATE_IS },
-}, props.contacts.per_page);
+}, props.contacts.per_page)
 
-sorting.value = { field: 'created_at', order: 0 };
+sorting.value = { field: 'created_at', order: 0 }
 
-const showFilters = ref(false);
+const showFilters = ref(false)
 
 const sortOptions = ref([
     { label: 'Name - Asc', value: { field: 'name', order: 1 } },
@@ -48,7 +52,7 @@ const sortOptions = ref([
     { label: 'Email - Desc', value: { field: 'email', order: 0 } },
     { label: 'Created - Oldest', value: { field: 'created_at', order: 1 } },
     { label: 'Created - Latest', value: { field: 'created_at', order: 0 } },
-]);
+])
 
 const textInputMatchModes = [
     { label: 'Starts with', value: FilterMatchMode.STARTS_WITH },
@@ -57,25 +61,25 @@ const textInputMatchModes = [
     { label: 'Ends with', value: FilterMatchMode.ENDS_WITH },
     { label: 'Equals', value: FilterMatchMode.EQUALS },
     { label: 'Not equals', value: FilterMatchMode.NOT_EQUALS },
-];
+]
 const dateInputMatchModes = [
     { label: 'Date is', value: FilterMatchMode.DATE_IS },
     { label: 'Date is not', value: FilterMatchMode.DATE_IS_NOT },
     { label: 'Date is before', value: FilterMatchMode.DATE_BEFORE },
     { label: 'Date is after', value: FilterMatchMode.DATE_AFTER },
-];
+]
 
 const appliedFiltersCount = computed(() => {
     return Object.values(filters.value)
         .filter(f => f.value !== null && f.value !== '')
-        .length;
-});
+        .length
+})
 </script>
 
 <template>
-    <AppLayout :breadcrumbs="breadcrumbs">
-        <InertiaHead :title="pageTitle" />
+    <InertiaHead :title="pageTitle" />
 
+    <AppLayout :breadcrumbs="breadcrumbs">
         <PageTitleSection>
             <template #title>
                 {{ pageTitle }}
@@ -276,7 +280,10 @@ const appliedFiltersCount = computed(() => {
                         <template #title>
                             {{ contact.name }}
                         </template>
-                        <template #subtitle>
+                        <template
+                            v-if="contact.organization"
+                            #subtitle
+                        >
                             {{ contact.organization.name }}
                         </template>
                         <template #content>

@@ -1,23 +1,27 @@
-<script setup>
-import { FilterMatchMode } from '@primevue/core/api';
-import { AlertCircle, FunnelX } from 'lucide-vue-next';
-import { formatInTimeZone } from 'date-fns-tz';
-import { parseISO } from 'date-fns';
-import { usePaginatedDataTable } from '@/composables/usePaginatedDataTable';
-import SidebarLayout from '@/layouts/app/SidebarLayout.vue';
+<script setup lang="ts">
+import { Head as InertiaHead } from '@inertiajs/vue3'
+import { FilterMatchMode } from '@primevue/core/api'
+import { AlertCircle, FunnelX } from 'lucide-vue-next'
+import { formatInTimeZone } from 'date-fns-tz'
+import { parseISO } from 'date-fns'
+import { usePaginatedDataTable } from '@/composables/usePaginatedDataTable'
+import SidebarLayout from '@/layouts/app/SidebarLayout.vue'
+import PageTitleSection from '@/components/PageTitleSection.vue'
+import type { LengthAwarePaginator } from '@/types/paginiation'
+import type { ContactWithRelations, Organization, Tag } from '@/types'
 
-const props = defineProps({
-    contacts: Object,
-    organizations: Array,
-    tags: Array,
-});
+const props = defineProps<{
+    contacts: LengthAwarePaginator<ContactWithRelations>,
+    organizations: Organization[],
+    tags: Tag[],
+}>()
 
-const pageTitle = 'Contacts';
+const pageTitle = 'Contacts'
 const breadcrumbs = [
     { label: 'Dashboard', route: route('dashboard') },
     { label: pageTitle, route: route('examples.data-table.contacts.index') },
     { label: 'List' },
-];
+]
 
 const {
     processing,
@@ -36,12 +40,13 @@ const {
     organization: { value: null, matchMode: FilterMatchMode.EQUALS },
     tags: { value: null, matchMode: FilterMatchMode.IN },
     created_at: { value: null, matchMode: FilterMatchMode.DATE_IS },
-}, props.contacts.per_page);
+}, props.contacts.per_page)
 </script>
 
 <template>
+    <InertiaHead :title="pageTitle" />
+
     <SidebarLayout :breadcrumbs="breadcrumbs">
-        <InertiaHead :title="pageTitle" />
         <PageTitleSection>
             <template #title>
                 {{ pageTitle }}

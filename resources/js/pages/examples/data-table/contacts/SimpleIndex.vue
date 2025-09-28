@@ -1,32 +1,36 @@
-<script setup>
-import { AlertCircle } from 'lucide-vue-next';
-import { format, parseISO } from 'date-fns';
-import { usePaginatedDataTable } from '@/composables/usePaginatedDataTable';
-import SidebarLayout from '@/layouts/app/SidebarLayout.vue';
+<script setup lang="ts">
+import { Head as InertiaHead } from '@inertiajs/vue3'
+import { AlertCircle } from 'lucide-vue-next'
+import { format, parseISO } from 'date-fns'
+import { usePaginatedDataTable } from '@/composables/usePaginatedDataTable'
+import SidebarLayout from '@/layouts/app/SidebarLayout.vue'
+import PageTitleSection from '@/components/PageTitleSection.vue'
+import type { LengthAwarePaginator } from '@/types/paginiation'
+import type { ContactWithRelations } from '@/types'
 
-const props = defineProps({
-    contacts: Object,
-});
+const props = defineProps<{
+    contacts: LengthAwarePaginator<ContactWithRelations>,
+}>()
 
-const pageTitle = 'Contacts';
+const pageTitle = 'Contacts'
 const breadcrumbs = [
     { label: 'Dashboard', route: route('dashboard') },
     { label: pageTitle, route: route('examples.data-table.contacts.index') },
     { label: 'List' },
-];
+]
 
 const {
     processing,
     sorting,
     firstDatasetIndex,
     paginate,
-} = usePaginatedDataTable('contacts', {}, props.contacts.per_page);
+} = usePaginatedDataTable('contacts', {}, props.contacts.per_page)
 </script>
 
 <template>
-    <SidebarLayout :breadcrumbs="breadcrumbs">
-        <InertiaHead :title="pageTitle" />
+    <InertiaHead :title="pageTitle" />
 
+    <SidebarLayout :breadcrumbs="breadcrumbs">
         <PageTitleSection>
             <template #title>
                 {{ pageTitle }}

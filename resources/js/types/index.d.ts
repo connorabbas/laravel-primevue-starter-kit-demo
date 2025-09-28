@@ -1,18 +1,55 @@
-import type { DataTableFilterMetaData } from 'primevue';
-import type { Page, Errors } from '@inertiajs/core';
-import type { MenuItem as PrimeVueMenuItem } from 'primevue/menuitem';
-import type { LucideIcon } from 'lucide-vue-next';
-import type { Config } from 'ziggy-js';
+import type { DataTableFilterMetaData } from 'primevue'
+import type { Page, Errors } from '@inertiajs/core'
+import type { MenuItem as PrimeVueMenuItem } from 'primevue/menuitem'
+import type { LucideIcon } from 'lucide-vue-next'
+import type { Config } from 'ziggy-js'
 
 export interface User {
     id: number;
     name: string;
     email: string;
     email_verified_at: string | null;
+    created_at: string;
+    updated_at: string;
+}
+
+export interface Organization {
+    id: number;
+    name: string;
+    industry: string | null;
+    website: string | null;
+    created_at: string;
+    updated_at: string;
+}
+
+export interface Contact {
+    id: number;
+    name: string;
+    email: string;
+    phone: string | null;
+    organization_id: number | null;
+    created_at: string;
+    updated_at: string;
+}
+export interface Tag {
+    id: number;
+    name: string;
+    created_at: string;
+    updated_at: string;
+}
+
+export interface ContactWithRelations extends Contact {
+    organization?: Organization | null;
+    tags?: Tag[] | null;
+}
+
+export interface OrganizationWithRelations extends Organization {
+    contacts?: Contact[];
+    tags?: Tag[] | null;
 }
 
 export interface AuthProps {
-    user: User | null;
+    user: User;
     isAdmin?: boolean;
 }
 

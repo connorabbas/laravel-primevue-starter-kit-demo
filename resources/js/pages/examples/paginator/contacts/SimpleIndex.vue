@@ -1,31 +1,33 @@
-<script setup>
-import { AlertCircle } from 'lucide-vue-next';
-import { usePaginatedData } from '@/composables/usePaginatedData';
-import AppLayout from '@/layouts/AppLayout.vue';
+<script setup lang="ts">
+import { Head as InertiaHead } from '@inertiajs/vue3'
+import { AlertCircle } from 'lucide-vue-next'
+import { usePaginatedData } from '@/composables/usePaginatedData'
+import AppLayout from '@/layouts/AppLayout.vue'
+import PageTitleSection from '@/components/PageTitleSection.vue'
+import { LengthAwarePaginator } from '@/types/paginiation'
+import type { ContactWithRelations } from '@/types'
 
-const props = defineProps({
-    contacts: Object,
-    organizations: Array,
-    tags: Array,
-});
+const props = defineProps<{
+    contacts: LengthAwarePaginator<ContactWithRelations>,
+}>()
 
-const pageTitle = 'Contacts';
+const pageTitle = 'Contacts'
 const breadcrumbs = [
     { label: 'Dashboard', route: route('dashboard') },
     { label: pageTitle, route: route('examples.paginator.contacts.index') },
     { label: 'List' },
-];
+]
 
 const {
     firstDatasetIndex,
     paginate,
-} = usePaginatedData('contacts', {}, props.contacts.per_page);
+} = usePaginatedData('contacts', {}, props.contacts.per_page)
 </script>
 
 <template>
-    <AppLayout :breadcrumbs="breadcrumbs">
-        <InertiaHead :title="pageTitle" />
+    <InertiaHead :title="pageTitle" />
 
+    <AppLayout :breadcrumbs="breadcrumbs">
         <PageTitleSection>
             <template #title>
                 {{ pageTitle }}
@@ -58,7 +60,10 @@ const {
                         <template #title>
                             {{ contact.name }}
                         </template>
-                        <template #subtitle>
+                        <template
+                            v-if="contact.organization"
+                            #subtitle
+                        >
                             {{ contact.organization.name }}
                         </template>
                         <template #content>
