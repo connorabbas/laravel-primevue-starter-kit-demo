@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { usePage, Head as InertiaHead } from '@inertiajs/vue3'
+import { usePage, Head as InertiaHead, Link as InertiaLink } from '@inertiajs/vue3'
 import { LayoutGrid, LogIn, Settings, UserPlus } from 'lucide-vue-next'
 
 defineProps<{

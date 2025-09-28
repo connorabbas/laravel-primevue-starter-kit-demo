@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { useTemplateRef, computed } from 'vue'
-import { usePage } from '@inertiajs/vue3'
+import { usePage, Link as InertiaLink } from '@inertiajs/vue3'
 import { route } from 'ziggy-js'
 import Tabs from 'primevue/tabs'
 import TabList, { type TabListProps } from 'primevue/tablist'
@@ -37,7 +37,7 @@ defineExpose({ $el: childRef })
         <TabList>
             <InertiaLink
                 v-for="item in componentProps.items"
-                :key="item.label"
+                :key="item.route"
                 :href="item.route ?? ''"
                 :class="['no-underline', { 'p-tab-active': item.active }]"
                 custom

@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { useTemplateRef } from 'vue'
+import { Link as InertiaLink } from '@inertiajs/vue3'
 import PanelMenu, { type PanelMenuPassThroughOptions, type PanelMenuProps } from 'primevue/panelmenu'
 import { ChevronDown, ChevronRight } from 'lucide-vue-next'
 import type { MenuItem } from '@/types'

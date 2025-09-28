@@ -1,4 +1,4 @@
-import { createInertiaApp, Link } from '@inertiajs/vue3'
+import { createInertiaApp } from '@inertiajs/vue3'
 import createServer from '@inertiajs/vue3/server'
 
 import { renderToString } from '@vue/server-renderer'
@@ -64,7 +64,6 @@ createServer((page) =>
                 .use(ZiggyVue, ziggyConfig)
                 .use(PrimeVue, { theme: 'none' }) // TODO: PrimeVue won't render it's styles server side
                 .use(ToastService)
-                .component('InertiaLink', Link)
                 .component('Container', Container)
                 .component('PageTitleSection', PageTitleSection)
                 .provide('colorMode', colorMode)

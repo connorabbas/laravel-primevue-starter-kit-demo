@@ -2,7 +2,7 @@ import '../css/app.css'
 import '../css/tailwind.css'
 
 import { createApp, DefineComponent, h } from 'vue'
-import { createInertiaApp, router, Link } from '@inertiajs/vue3'
+import { createInertiaApp, router } from '@inertiajs/vue3'
 import { resolvePageComponent } from 'laravel-vite-plugin/inertia-helpers'
 import { ZiggyVue } from 'ziggy-js'
 
@@ -73,7 +73,6 @@ createInertiaApp({
                 pt: globalPt,
             })
             .use(ToastService)
-            .component('InertiaLink', Link)
             .component('Container', Container)
             .component('PageTitleSection', PageTitleSection)
             .provide('colorMode', colorMode)

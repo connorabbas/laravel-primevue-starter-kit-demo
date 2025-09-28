@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { useTemplateRef } from 'vue'
+import { Link as InertiaLink } from '@inertiajs/vue3'
 import ContextMenu, { type ContextMenuProps } from 'primevue/contextmenu'
 import { ChevronRight } from 'lucide-vue-next'
 import type { MenuItem } from '@/types'

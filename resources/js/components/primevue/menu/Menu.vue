@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { useTemplateRef } from 'vue'
+import { Link as InertiaLink } from '@inertiajs/vue3'
 import Menu, { type MenuProps } from 'primevue/menu'
 import type { MenuItem } from '@/types'
 import { ptViewMerge } from '@/utils'
