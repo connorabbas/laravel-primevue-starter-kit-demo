@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import { computed } from 'vue';
-import { Head as InertiaHead, Link as InertiaLink } from '@inertiajs/vue3';
-import { ArrowLeft } from 'lucide-vue-next';
+import { computed } from 'vue'
+import { Head as InertiaHead, Link as InertiaLink } from '@inertiajs/vue3'
+import { ArrowLeft } from 'lucide-vue-next'
 import Container from '@/components/Container.vue'
 
 const props = defineProps<{
