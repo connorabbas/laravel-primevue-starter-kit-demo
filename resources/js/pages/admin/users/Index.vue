@@ -1,42 +1,45 @@
-<script setup>
-import { ref, useTemplateRef } from 'vue';
-import { FilterMatchMode } from '@primevue/core/api';
-import { AlertCircle, EllipsisVertical, FunnelX, Pencil } from 'lucide-vue-next';
-import { formatInTimeZone } from 'date-fns-tz';
-import { parseISO } from 'date-fns';
-import { usePaginatedDataTable } from '@/composables/usePaginatedDataTable';
-import AppLayout from '@/layouts/AppLayout.vue';
-import ClientOnly from '@/components/ClientOnly.vue';
-import Menu from '@/components/primevue/menu/Menu.vue';
+<script setup lang="ts">
+import { ref, useTemplateRef } from 'vue'
+import { Head as InertiaHead } from '@inertiajs/vue3'
+import { FilterMatchMode } from '@primevue/core/api'
+import { AlertCircle, EllipsisVertical, FunnelX, Pencil } from 'lucide-vue-next'
+import { formatInTimeZone } from 'date-fns-tz'
+import { parseISO } from 'date-fns'
+import { usePaginatedDataTable } from '@/composables/usePaginatedDataTable'
+import AppLayout from '@/layouts/AppLayout.vue'
+import ClientOnly from '@/components/ClientOnly.vue'
+import Menu from '@/components/primevue/menu/Menu.vue'
+import { LengthAwarePaginator } from '@/types/paginiation'
+import { MenuItem, User } from '@/types'
 
-const props = defineProps({
-    users: Object,
-});
+const props = defineProps<{
+    users: LengthAwarePaginator<User>
+}>()
 
-const pageTitle = 'Users';
+const pageTitle = 'Users'
 const breadcrumbs = [
     { label: 'Admin Dashboard', route: route('admin.dashboard') },
     { label: pageTitle, route: route('admin.users.index') },
     { label: 'List' },
-];
+]
 
 // User context menu
-const userContextMenu = useTemplateRef('user-context-menu');
-const userContextMenuItems = ref([]);
-function toggleUserContextMenu(event, userData) {
+const userContextMenu = useTemplateRef<typeof Menu>('user-context-menu')
+const userContextMenuItems = ref<MenuItem[]>([])
+function toggleUserContextMenu(event: Event, userData: User) {
     // Populate menu items based on row data
     userContextMenuItems.value = [
         {
             label: 'Manage User',
             lucideIcon: Pencil,
             command: () => {
-                alert('User Data: ' + JSON.stringify(userData));
+                alert('User Data: ' + JSON.stringify(userData))
             },
         },
-    ];
+    ]
     // Show the menu
     if (userContextMenu.value && userContextMenu.value?.$el) {
-        userContextMenu.value.$el.toggle(event);
+        userContextMenu.value.$el.toggle(event)
     }
 }
 
@@ -56,12 +59,13 @@ const {
     name: { value: null, matchMode: FilterMatchMode.CONTAINS },
     email: { value: null, matchMode: FilterMatchMode.CONTAINS },
     created_at: { value: null, matchMode: FilterMatchMode.DATE_IS },
-}, props.users.per_page);
+}, props.users.per_page)
 </script>
 
 <template>
+    <InertiaHead :title="pageTitle" />
+
     <AppLayout :breadcrumbs="breadcrumbs">
-        <InertiaHead :title="pageTitle" />
         <PageTitleSection>
             <template #title>
                 {{ pageTitle }}
@@ -73,7 +77,7 @@ const {
                     type="button"
                     label="Clear Filters"
                     outlined
-                    @click="hardReset"
+                    @click="hardReset()"
                 >
                     <template #icon>
                         <FunnelX />

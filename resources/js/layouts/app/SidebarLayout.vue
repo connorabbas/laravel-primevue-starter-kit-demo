@@ -1,39 +1,28 @@
-<script setup>
-import { useTemplateRef } from 'vue';
-import { usePage } from '@inertiajs/vue3';
-import { ChevronsUpDown, Menu as MenuIcon } from 'lucide-vue-next';
-import { useAppLayout } from '@/composables/useAppLayout';
-import ClientOnly from '@/components/ClientOnly.vue';
-import FlashMessages from '@/components/FlashMessages.vue';
-import NavLogoLink from '@/components/NavLogoLink.vue';
-import Menu from '@/components/primevue/menu/Menu.vue';
-import PanelMenu from '@/components/primevue/menu/PanelMenu.vue';
-import Breadcrumb from '@/components/primevue/menu/Breadcrumb.vue';
+<script setup lang="ts">
+import { usePage } from '@inertiajs/vue3'
+import { ChevronsUpDown, Menu as MenuIcon } from 'lucide-vue-next'
+import { useAppLayout } from '@/composables/useAppLayout'
+import ClientOnly from '@/components/ClientOnly.vue'
+import Container from '@/components/Container.vue'
+import PopupMenuButton from '@/components/PopupMenuButton.vue'
+import FlashMessages from '@/components/FlashMessages.vue'
+import NavLogoLink from '@/components/NavLogoLink.vue'
+import PanelMenu from '@/components/primevue/menu/PanelMenu.vue'
+import Breadcrumb from '@/components/primevue/menu/Breadcrumb.vue'
+import { MenuItem } from '@/types'
 
-const props = defineProps({
-    breadcrumbs: {
-        type: Array,
-        required: false,
-        default: () => [],
-    },
-});
+const props = withDefaults(defineProps<{
+    breadcrumbs?: MenuItem[],
+}>(), {
+    breadcrumbs: () => [],
+})
 
-const page = usePage();
+const page = usePage()
 const {
     mobileMenuOpen,
     menuItems,
     userMenuItems,
-} = useAppLayout();
-
-const userMenu = useTemplateRef('user-menu');
-const toggleUserMenu = (event) => {
-    userMenu.value.$el.toggle(event);
-};
-
-const mobileUserMenu = useTemplateRef('mobile-user-menu');
-const toggleMobileUserMenu = (event) => {
-    mobileUserMenu.value.$el.toggle(event);
-};
+} = useAppLayout()
 </script>
 
 <template>
@@ -52,32 +41,26 @@ const toggleMobileUserMenu = (event) => {
                         />
                     </div>
                     <template #footer>
-                        <div class="flex flex-col">
-                            <Button
-                                id="mobile-user-menu-btn"
-                                severity="secondary"
-                                size="large"
-                                pt:root:class="flex justify-between"
-                                @click="toggleMobileUserMenu($event)"
-                            >
-                                <div class="flex items-center gap-3">
-                                    <Tag
-                                        v-if="page.props.auth.isAdmin"
-                                        value="ADMIN"
-                                    />
-                                    {{ page.props.auth.user.name }}
+                        <PopupMenuButton
+                            name="mobile-user-menu-dd"
+                            button-size="large"
+                            :menu-items="userMenuItems"
+                        >
+                            <template #content>
+                                <div class="w-full flex items-center justify-between gap-3">
+                                    <div class="flex items-center gap-3">
+                                        <Tag
+                                            v-if="page.props.auth.isAdmin"
+                                            value="ADMIN"
+                                        />
+                                        {{ page.props.auth.user.name }}
+                                    </div>
+                                    <div>
+                                        <ChevronsUpDown />
+                                    </div>
                                 </div>
-                                <div>
-                                    <ChevronsUpDown />
-                                </div>
-                            </Button>
-                            <Menu
-                                ref="mobile-user-menu"
-                                :model="userMenuItems"
-                                pt:root:class="z-[1200]"
-                                popup
-                            />
-                        </div>
+                            </template>
+                        </PopupMenuButton>
                     </template>
                 </Drawer>
                 <ScrollTop
@@ -128,29 +111,26 @@ const toggleMobileUserMenu = (event) => {
                             />
                         </div>
                     </div>
-                    <div class="flex">
-                        <Button
-                            id="user-menu-btn"
-                            severity="secondary"
-                            pt:root:class="flex grow justify-between"
-                            @click="toggleUserMenu($event)"
+                    <div>
+                        <PopupMenuButton
+                            name="desktop-user-menu-dd"
+                            :menu-items="userMenuItems"
                         >
-                            <div class="flex items-center gap-3">
-                                <Tag
-                                    v-if="page.props.auth.isAdmin"
-                                    value="ADMIN"
-                                />
-                                {{ page.props.auth.user.name }}
-                            </div>
-                            <div>
-                                <ChevronsUpDown />
-                            </div>
-                        </Button>
-                        <Menu
-                            ref="user-menu"
-                            :model="userMenuItems"
-                            popup
-                        />
+                            <template #content>
+                                <div class="w-full flex items-center justify-between gap-3">
+                                    <div class="flex items-center gap-3">
+                                        <Tag
+                                            v-if="page.props.auth.isAdmin"
+                                            value="ADMIN"
+                                        />
+                                        {{ page.props.auth.user.name }}
+                                    </div>
+                                    <div>
+                                        <ChevronsUpDown />
+                                    </div>
+                                </div>
+                            </template>
+                        </PopupMenuButton>
                     </div>
                 </div>
             </aside>
