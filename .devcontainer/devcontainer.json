@@ -1,6 +1,6 @@
 // https://aka.ms/devcontainer.json
 {
-    "name": "PrimeVue Inertia Demo",
+    "name": "Laravel PrimeVue Starter Demo",
     "dockerComposeFile": [
         "../docker-compose.dev.yml"
     ],
