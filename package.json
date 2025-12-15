@@ -9,7 +9,7 @@
     },
     "dependencies": {
         "@inertiajs/vue3": "^2.0.5",
-        "@primeuix/themes": "^1.0.0",
+        "@primeuix/themes": "^2.0.0",
         "@tailwindcss/vite": "^4.0.17",
         "@types/lodash-es": "^4.17.12",
         "@vitejs/plugin-vue": "^5.2.3",
