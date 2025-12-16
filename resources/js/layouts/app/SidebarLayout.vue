@@ -42,24 +42,22 @@ const {
                     </div>
                     <template #footer>
                         <PopupMenuButton
+                            class="w-full flex items-center justify-between gap-3"
                             name="mobile-user-menu-dd"
-                            button-size="large"
+                            severity="secondary"
+                            size="large"
                             :menu-items="userMenuItems"
                         >
-                            <template #content>
-                                <div class="w-full flex items-center justify-between gap-3">
-                                    <div class="flex items-center gap-3">
-                                        <Tag
-                                            v-if="page.props.auth.isAdmin"
-                                            value="ADMIN"
-                                        />
-                                        {{ page.props.auth.user.name }}
-                                    </div>
-                                    <div>
-                                        <ChevronsUpDown />
-                                    </div>
-                                </div>
-                            </template>
+                            <div class="flex items-center gap-3">
+                                <Tag
+                                    v-if="page.props.auth.isAdmin"
+                                    value="ADMIN"
+                                />
+                                {{ page.props.auth.user.name }}
+                            </div>
+                            <div>
+                                <ChevronsUpDown />
+                            </div>
                         </PopupMenuButton>
                     </template>
                 </Drawer>
@@ -113,23 +111,21 @@ const {
                     </div>
                     <div>
                         <PopupMenuButton
+                            class="w-full flex items-center justify-between gap-3"
                             name="desktop-user-menu-dd"
+                            severity="secondary"
                             :menu-items="userMenuItems"
                         >
-                            <template #content>
-                                <div class="w-full flex items-center justify-between gap-3">
-                                    <div class="flex items-center gap-3">
-                                        <Tag
-                                            v-if="page.props.auth.isAdmin"
-                                            value="ADMIN"
-                                        />
-                                        {{ page.props.auth.user.name }}
-                                    </div>
-                                    <div>
-                                        <ChevronsUpDown />
-                                    </div>
-                                </div>
-                            </template>
+                            <div class="flex items-center gap-3">
+                                <Tag
+                                    v-if="page.props.auth.isAdmin"
+                                    value="ADMIN"
+                                />
+                                {{ page.props.auth.user.name }}
+                            </div>
+                            <div>
+                                <ChevronsUpDown />
+                            </div>
                         </PopupMenuButton>
                     </div>
                 </div>
