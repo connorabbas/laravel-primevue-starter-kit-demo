@@ -44,24 +44,22 @@ const {
                     </div>
                     <template #footer>
                         <PopupMenuButton
+                            class="w-full flex items-center justify-between gap-3"
                             name="mobile-user-menu-dd"
-                            button-size="large"
+                            severity="secondary"
+                            size="large"
                             :menu-items="userMenuItems"
                         >
-                            <template #content>
-                                <div class="w-full flex items-center justify-between gap-3">
-                                    <div class="flex items-center gap-3">
-                                        <Tag
-                                            v-if="page.props.auth.isAdmin"
-                                            value="ADMIN"
-                                        />
-                                        {{ page.props.auth.user.name }}
-                                    </div>
-                                    <div>
-                                        <ChevronsUpDown />
-                                    </div>
-                                </div>
-                            </template>
+                            <div class="flex items-center gap-3">
+                                <Tag
+                                    v-if="page.props.auth.isAdmin"
+                                    value="ADMIN"
+                                />
+                                {{ page.props.auth.user.name }}
+                            </div>
+                            <div>
+                                <ChevronsUpDown />
+                            </div>
                         </PopupMenuButton>
                     </template>
                 </Drawer>
@@ -89,25 +87,22 @@ const {
                             <!-- User Dropdown Menu -->
                             <div class="hidden lg:flex">
                                 <PopupMenuButton
+                                    class="w-full flex items-center justify-between gap-3"
                                     name="desktop-user-menu-dd"
-                                    button-variant="text"
-                                    fixed-position="right"
+                                    side="right"
+                                    severity="secondary"
                                     :menu-items="userMenuItems"
                                 >
-                                    <template #content>
-                                        <div class="w-full flex items-center justify-between gap-3">
-                                            <div class="flex items-center gap-3">
-                                                <Tag
-                                                    v-if="page.props.auth.isAdmin"
-                                                    value="ADMIN"
-                                                />
-                                                {{ page.props.auth.user.name }}
-                                            </div>
-                                            <div>
-                                                <ChevronDown />
-                                            </div>
-                                        </div>
-                                    </template>
+                                    <div class="flex items-center gap-3">
+                                        <Tag
+                                            v-if="page.props.auth.isAdmin"
+                                            value="ADMIN"
+                                        />
+                                        {{ page.props.auth.user.name }}
+                                    </div>
+                                    <div>
+                                        <ChevronDown />
+                                    </div>
                                 </PopupMenuButton>
                             </div>
 
