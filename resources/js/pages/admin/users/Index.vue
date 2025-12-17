@@ -9,7 +9,7 @@ import { usePaginatedDataTable } from '@/composables/usePaginatedDataTable'
 import AppLayout from '@/layouts/AppLayout.vue'
 import PageTitleSection from '@/components/PageTitleSection.vue'
 import ClientOnly from '@/components/ClientOnly.vue'
-import Menu from '@/components/primevue/menu/Menu.vue'
+import Menu from '@/components/router-link-menus/Menu.vue'
 import { LengthAwarePaginator } from '@/types/paginiation'
 import { MenuItem, User } from '@/types'
 

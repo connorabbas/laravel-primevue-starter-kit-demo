@@ -7,8 +7,8 @@ import Container from '@/components/Container.vue'
 import PopupMenuButton from '@/components/PopupMenuButton.vue'
 import FlashMessages from '@/components/FlashMessages.vue'
 import NavLogoLink from '@/components/NavLogoLink.vue'
-import PanelMenu from '@/components/primevue/menu/PanelMenu.vue'
-import Breadcrumb from '@/components/primevue/menu/Breadcrumb.vue'
+import PanelMenu from '@/components/router-link-menus/PanelMenu.vue'
+import Breadcrumb from '@/components/router-link-menus/Breadcrumb.vue'
 import { MenuItem } from '@/types'
 
 const props = withDefaults(defineProps<{
@@ -42,13 +42,13 @@ const {
                     </div>
                     <template #footer>
                         <PopupMenuButton
-                            class="w-full flex items-center justify-between gap-3"
+                            class="w-full flex items-center justify-between gap-2"
                             name="mobile-user-menu-dd"
                             severity="secondary"
                             size="large"
                             :menu-items="userMenuItems"
                         >
-                            <div class="flex items-center gap-3">
+                            <div class="flex items-center gap-2">
                                 <Tag
                                     v-if="page.props.auth.isAdmin"
                                     value="ADMIN"
@@ -111,12 +111,12 @@ const {
                     </div>
                     <div>
                         <PopupMenuButton
-                            class="w-full flex items-center justify-between gap-3"
+                            class="w-full flex items-center justify-between gap-2"
                             name="desktop-user-menu-dd"
                             severity="secondary"
                             :menu-items="userMenuItems"
                         >
-                            <div class="flex items-center gap-3">
+                            <div class="flex items-center gap-2">
                                 <Tag
                                     v-if="page.props.auth.isAdmin"
                                     value="ADMIN"
