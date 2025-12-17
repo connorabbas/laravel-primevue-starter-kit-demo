@@ -44,13 +44,13 @@ const {
                     </div>
                     <template #footer>
                         <PopupMenuButton
-                            class="w-full flex items-center justify-between gap-3"
+                            class="w-full flex items-center justify-between gap-2"
                             name="mobile-user-menu-dd"
                             severity="secondary"
                             size="large"
                             :menu-items="userMenuItems"
                         >
-                            <div class="flex items-center gap-3">
+                            <div class="flex items-center gap-2">
                                 <Tag
                                     v-if="page.props.auth.isAdmin"
                                     value="ADMIN"
@@ -87,13 +87,13 @@ const {
                             <!-- User Dropdown Menu -->
                             <div class="hidden lg:flex">
                                 <PopupMenuButton
-                                    class="w-full flex items-center justify-between gap-3"
+                                    class="w-full flex items-center justify-between gap-2"
                                     name="desktop-user-menu-dd"
                                     side="right"
                                     severity="secondary"
                                     :menu-items="userMenuItems"
                                 >
-                                    <div class="flex items-center gap-3">
+                                    <div class="flex items-center gap-2">
                                         <Tag
                                             v-if="page.props.auth.isAdmin"
                                             value="ADMIN"
