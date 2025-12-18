@@ -67,17 +67,20 @@ export function useAppLayout() {
             ],
         },
         {
+            key: 'admin',
             label: 'Admin',
             lucideIcon: Lock,
             visible: page.props.auth.isAdmin,
             items: [
                 {
+                    key: 'admin-dashboard',
                     label: 'Dashboard',
                     lucideIcon: LayoutGrid,
                     route: route('admin.dashboard'),
                     active: currentRoute.value == 'admin.dashboard',
                 },
                 {
+                    key: 'admin-users-index',
                     label: 'Users',
                     lucideIcon: Users,
                     route: route('admin.users.index'),
