@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, computed } from 'vue'
+import { ref, computed, nextTick, watch } from 'vue'
 import { Head as InertiaHead } from '@inertiajs/vue3'
 import { FilterMatchMode } from '@primevue/core/api'
 import { AlertCircle, Funnel, RotateCcw, Search } from 'lucide-vue-next'
@@ -73,6 +73,21 @@ const appliedFiltersCount = computed(() => {
     return Object.values(filters.value)
         .filter(f => f.value !== null && f.value !== '')
         .length
+})
+
+// Add delay to blocked UI, because the response is too fast...
+// https://github.com/primefaces/primevue/issues/7817
+const blockedUi = ref(false)
+watch(processing, (newVal) => {
+    nextTick(() => {
+        if (!newVal) {
+            setTimeout(() => {
+                blockedUi.value = newVal
+            }, 50)
+        } else {
+            blockedUi.value = newVal
+        }
+    })
 })
 </script>
 
@@ -253,7 +268,7 @@ const appliedFiltersCount = computed(() => {
         </Drawer>
         <BlockUI
             class="space-y-4 z-[999]"
-            :blocked="processing"
+            :blocked="blockedUi"
         >
             <div
                 v-if="contacts.data.length"
