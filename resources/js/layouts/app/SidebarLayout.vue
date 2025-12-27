@@ -35,8 +35,6 @@ const sidebarOpen = useSsrStorage('desktop-sidebar-open', true)
 const toggleSidebar = () => {
     sidebarOpen.value = !sidebarOpen.value
 }
-// testing
-console.log(sidebarOpen.value)
 </script>
 
 <template>
