@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, computed, nextTick, watch } from 'vue'
+import { ref, computed } from 'vue'
 import { Head as InertiaHead } from '@inertiajs/vue3'
 import { FilterMatchMode } from '@primevue/core/api'
 import { AlertCircle, Funnel, RotateCcw, Search } from 'lucide-vue-next'
@@ -74,21 +74,6 @@ const appliedFiltersCount = computed(() => {
         .filter(f => f.value !== null && f.value !== '')
         .length
 })
-
-// Add delay to blocked UI, because the response is too fast...
-// https://github.com/primefaces/primevue/issues/7817
-const blockedUi = ref(false)
-watch(processing, (newVal) => {
-    nextTick(() => {
-        if (!newVal) {
-            setTimeout(() => {
-                blockedUi.value = newVal
-            }, 50)
-        } else {
-            blockedUi.value = newVal
-        }
-    })
-})
 </script>
 
 <template>
@@ -127,7 +112,6 @@ watch(processing, (newVal) => {
             header="Sort & Filter"
             position="right"
             class="w-full! sm:w-[35rem]!"
-            blockScroll
         >
             <div class="flex flex-col gap-6 sm:gap-8">
                 <div class="flex flex-col gap-2">
@@ -266,13 +250,11 @@ watch(processing, (newVal) => {
                 </div>
             </template>
         </Drawer>
-        <BlockUI
-            class="space-y-4 z-[999]"
-            :blocked="blockedUi"
-        >
-            <div
+        <div class="space-y-4">
+            <BlockUI
                 v-if="contacts.data.length"
-                class="grid grid-cols-1 sm:grid-cols-12 gap-4"
+                :blocked="processing"
+                class="grid grid-cols-1 sm:grid-cols-12 gap-4 z-[999]"
             >
                 <div
                     v-for="contact in props.contacts.data"
@@ -321,7 +303,7 @@ watch(processing, (newVal) => {
                         </template>
                     </Card>
                 </div>
-            </div>
+            </BlockUI>
             <div
                 v-else
                 class="flex justify - center"
@@ -347,6 +329,6 @@ watch(processing, (newVal) => {
                     @page="paginate"
                 />
             </div>
-        </BlockUI>
+        </div>
     </AppLayout>
 </template>
