@@ -94,6 +94,7 @@ const {
                                     side="right"
                                     severity="secondary"
                                     :menu-items="userMenuItems"
+                                    text
                                 >
                                     <div class="flex items-center gap-2">
                                         <Tag
