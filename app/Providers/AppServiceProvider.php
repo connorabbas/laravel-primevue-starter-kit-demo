@@ -2,8 +2,12 @@
 
 namespace App\Providers;
 
+use Carbon\CarbonImmutable;
+use Illuminate\Support\Facades\Date;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\URL;
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Validation\Rules\Password;
 use Opcodes\LogViewer\Facades\LogViewer;
 
 class AppServiceProvider extends ServiceProvider
@@ -21,10 +25,6 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        if ($this->app->environment('production')) {
-            URL::forceScheme('https');
-        }
-
         // Easier way to view logs
         LogViewer::auth(function ($request) {
             if (app()->isLocal()) {
@@ -33,5 +33,34 @@ class AppServiceProvider extends ServiceProvider
 
             return $request?->user()?->hasRole('Admin') ?? false;
         });
+
+        $this->configureDefaults();
+    }
+
+    /**
+     * Configure default behaviors for production-ready applications.
+     */
+    protected function configureDefaults(): void
+    {
+        if (app()->isProduction()) {
+            URL::forceScheme('https');
+        }
+
+        Date::use(CarbonImmutable::class);
+
+        DB::prohibitDestructiveCommands(
+            app()->isProduction(),
+        );
+
+        Password::defaults(
+            fn (): ?Password => app()->isProduction()
+            ? Password::min(12)
+                ->mixedCase()
+                ->letters()
+                ->numbers()
+                ->symbols()
+                ->uncompromised()
+            : null
+        );
     }
 }
