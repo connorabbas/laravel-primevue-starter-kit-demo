@@ -13,6 +13,7 @@ import { useToast } from 'primevue/usetoast'
 
 import { useSiteColorMode } from '@/composables/useSiteColorMode'
 import { useThemePreset } from '@/composables/useThemePreset'
+import type { ErrorResponsePayload } from '@/types'
 import globalPt from '@/theme/global-pt'
 
 // Site theme preset
@@ -35,19 +36,37 @@ createInertiaApp({
         // Root component with Global Toast
         const Root = {
             setup() {
-                // show error toast instead of standard Inertia modal response
                 const toast = useToast()
+
                 router.on('invalid', (event) => {
-                    const responseBody = event.detail.response?.data
-                    if (responseBody?.error_summary && responseBody?.error_detail) {
+                    const responseBody = event.detail.response?.data as Partial<ErrorResponsePayload> | undefined
+
+                    if (
+                        responseBody?.status
+                        && responseBody?.error_title
+                        && responseBody?.error_summary
+                        && responseBody?.error_detail
+                    ) {
                         event.preventDefault()
+
                         toast.add({
-                            severity: event.detail.response?.status >= 500 ? 'error' : 'warn',
+                            severity: responseBody.status >= 500 ? 'error' : 'warn',
                             summary: responseBody.error_summary,
                             detail: responseBody.error_detail,
                             life: 5000,
                         })
                     }
+                })
+
+                router.on('exception', (event) => {
+                    event.preventDefault()
+
+                    toast.add({
+                        severity: 'error',
+                        summary: 'Connection Error',
+                        detail: 'An unexpected error occurred while loading this page. Please try again.',
+                        life: 5000,
+                    })
                 })
 
                 return () => h('div', [
