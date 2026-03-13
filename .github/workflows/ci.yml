@@ -1,26 +1,46 @@
-name: Test and Lint
+name: CI
 
 on:
-  push:
-    branches: [ "master" ]
   pull_request:
+  push:
+    branches:
+      - main
+      - master
 
 jobs:
-  javascript:
+  frontend:
     runs-on: ubuntu-latest
+
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
       - name: Setup Node.js
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
           node-version: '22'
-          cache: 'npm'
-      - name: Install Dependencies
-        run: npm ci
-      - name: Run ESLint
-        run: npx eslint .
+          cache: npm
 
-  php:
+      - name: Install npm dependencies
+        run: npm ci
+
+      - name: Lint frontend
+        run: npm run lint
+
+      - name: Typecheck frontend
+        run: npm run typecheck
+
+      - name: Build frontend assets
+        run: npm run build
+
+      - name: Upload frontend build artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: vite-build
+          path: public/build
+          if-no-files-found: error
+
+  php-quality:
     runs-on: ubuntu-latest
     services:
       postgres:
@@ -32,44 +52,61 @@ jobs:
         ports:
           - 5432:5432
         options: --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 3
+
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
         with:
           php-version: '8.4'
+          coverage: none
           extensions: mbstring, xml, ctype, iconv, intl, pdo_pgsql, dom, filter, json, libxml, zip
       - name: Copy .env
         run: php -r "file_exists('.env') || copy('.env.example', '.env');"
-      - name: Install PHP Dependencies
-        run: composer install --prefer-dist --no-progress --no-interaction
+
+      - name: Install PHP/Composer dependencies
+        run: composer install --no-interaction --prefer-dist --no-progress 
+
       - name: Run Pint
         run: vendor/bin/pint --test
+
       - name: Run PHPStan
         run: vendor/bin/phpstan analyse --memory-limit=2G
-      - name: Setup Node.js
-        uses: actions/setup-node@v3
+
+  tests:
+    runs-on: ubuntu-latest
+    needs: frontend
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
         with:
-          node-version: '22'
-          cache: 'npm'
-      - name: Install Node Dependencies
-        run: npm ci
-      - name: Build Frontend Assets
-        run: npm run build
-      - name: Set Environment Variables
+          php-version: '8.4'
+          coverage: none
+          extensions: mbstring, xml, ctype, iconv, intl, pdo_pgsql, dom, filter, json, libxml, zip
+
+      - name: Install Composer dependencies
+        run: composer install --no-interaction --prefer-dist
+
+      - name: Download frontend build artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: vite-build
+          path: public/build
+
+      - name: Prepare environment
         run: |
-          echo "APP_ENV=testing" >> .env
-          echo "DB_CONNECTION=pgsql" >> .env
-          echo "DB_HOST=127.0.0.1" >> .env
-          echo "DB_PORT=5432" >> .env
-          echo "DB_DATABASE=laravel_test" >> .env
-          echo "DB_USERNAME=postgres" >> .env
-          echo "DB_PASSWORD=postgres" >> .env
-      - name: Generate Application Key
-        run: php artisan key:generate
-      - name: Clear Config
-        run: php artisan config:clear
-      - name: Migrate Database
+          cp .env.example .env
+          mkdir -p database
+          php artisan config:clear
+          php artisan key:generate
+
+      - name: Run migrations
         env:
           DB_CONNECTION: pgsql
           DB_HOST: 127.0.0.1
@@ -78,7 +115,8 @@ jobs:
           DB_USERNAME: postgres
           DB_PASSWORD: postgres
         run: php artisan migrate:fresh --force
-      - name: Run Tests
+
+      - name: Run tests
         env:
           DB_CONNECTION: pgsql
           DB_HOST: 127.0.0.1
@@ -86,4 +124,4 @@ jobs:
           DB_DATABASE: laravel_test
           DB_USERNAME: postgres
           DB_PASSWORD: postgres
-        run: php artisan test
+        run: php artisan test --compact

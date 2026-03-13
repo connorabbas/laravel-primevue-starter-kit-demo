@@ -59,6 +59,10 @@ COPY --from=node /usr/lib /usr/lib
 COPY --from=node /usr/local/lib /usr/local/lib
 COPY --from=node /usr/local/include /usr/local/include
 COPY --from=node /usr/local/bin /usr/local/bin
+USER www-data
+RUN curl -fsSL https://opencode.ai/install | bash
+ENV PATH="/home/www-data/.opencode/bin:$PATH"
+USER root
 COPY .devcontainer/.bashrc /home/www-data/.bashrc
 COPY .devcontainer/xdebug.ini /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
 RUN usermod -s /bin/bash www-data \
@@ -79,7 +83,7 @@ COPY --chown=www-data:www-data --from=build-assets /var/www/html/public/build ./
 COPY --chown=www-data:www-data . .
 USER www-data
 
-# SSR Production Image - Include Node.js and s6 overlay config to run the inertia SSR artisan command
+# SSR Production Image - Include Node.js and s6 overlay config to run the Inertia SSR artisan command
 FROM release AS ssr-release
 USER root
 COPY --from=node /usr/lib /usr/lib
