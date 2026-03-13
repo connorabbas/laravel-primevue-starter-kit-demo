@@ -5,7 +5,8 @@
         "dev": "vite",
         "build": "vite build",
         "build:ssr": "vite build && vite build --ssr",
-        "lint": "eslint . --fix"
+        "lint": "eslint . --fix",
+        "typecheck": "vue-tsc --noEmit"
     },
     "dependencies": {
         "@inertiajs/vue3": "^2.0.5",
