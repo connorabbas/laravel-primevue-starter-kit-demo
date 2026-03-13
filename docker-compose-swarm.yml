@@ -1,0 +1,82 @@
+services:
+  laravel:
+    image: '${IMAGE_REPOSITORY}:${IMAGE_TAG}'
+    env_file: '.env'
+    environment:
+      # https://serversideup.net/open-source/docker-php/docs/reference/environment-variable-specification
+      PHP_OPCACHE_ENABLE: '1'
+      SSL_MODE: 'mixed'
+      HEALTHCHECK_PATH: '/up'
+      AUTORUN_ENABLED: 'true'
+      #AUTORUN_DEBUG: 'true'
+      AUTORUN_LARAVEL_MIGRATION_ISOLATION: 'true' # apply after initial deployment, otherwise cache_locks table won't exist yet
+    healthcheck:
+      test: ['CMD-SHELL', 'curl -fsS http://127.0.0.1:8080/up && php artisan inertia:check-ssr || exit 1']
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 20s
+    networks:
+      - proxy
+      - web
+    deploy:
+      replicas: 1
+      update_config:
+        parallelism: 1
+        delay: 5s
+        order: start-first
+        failure_action: rollback
+      rollback_config:
+        parallelism: 1
+        order: stop-first
+      restart_policy:
+        condition: any
+        delay: 5s
+        max_attempts: 3
+      labels:
+        - 'traefik.enable=true'
+        - 'traefik.swarm.network=traefik_proxy'
+        - 'traefik.http.routers.laravel-primevue-demo.rule=Host(`${APP_DOMAIN}`)'
+        - 'traefik.http.routers.laravel-primevue-demo.entrypoints=websecure'
+        - 'traefik.http.routers.laravel-primevue-demo.tls=true'
+        - 'traefik.http.routers.laravel-primevue-demo.tls.certresolver=letsencrypt'
+        - 'traefik.http.services.laravel-primevue-demo.loadbalancer.server.port=8080'
+        - 'traefik.http.services.laravel-primevue-demo.loadbalancer.healthcheck.path=/up'
+        - 'traefik.http.services.laravel-primevue-demo.loadbalancer.healthcheck.interval=30s'
+        - 'traefik.http.services.laravel-primevue-demo.loadbalancer.healthcheck.timeout=5s'
+        - 'traefik.http.services.laravel-primevue-demo.loadbalancer.healthcheck.scheme=http'
+
+  pgsql:
+    image: postgres:17
+    environment:
+      POSTGRES_DB: '${DB_DATABASE}'
+      POSTGRES_USER: '${DB_USERNAME}'
+      POSTGRES_PASSWORD: '${DB_PASSWORD}'
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    networks:
+      - web
+    healthcheck:
+      test: ['CMD', 'pg_isready', '-q', '-d', '${DB_DATABASE}', '-U', '${DB_USERNAME}']
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    deploy:
+      replicas: 1
+      restart_policy:
+        condition: any
+        delay: 5s
+        max_attempts: 3
+
+volumes:
+  postgres-data:
+    external: true
+    name: laravel-primevue-starter-kit-demo_postgres-data
+
+networks:
+  web:
+    driver: overlay
+    attachable: true
+  proxy:
+    name: traefik_proxy
+    external: true
