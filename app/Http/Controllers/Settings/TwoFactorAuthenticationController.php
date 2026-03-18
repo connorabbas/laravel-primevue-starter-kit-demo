@@ -31,6 +31,11 @@ class TwoFactorAuthenticationController extends Controller implements HasMiddlew
         }
 
         $hasSecret = !is_null($user->two_factor_secret);
+        $setupKey = null;
+
+        if (is_string($user->two_factor_secret)) {
+            $setupKey = Fortify::currentEncrypter()->decrypt($user->two_factor_secret);
+        }
 
         return Inertia::render('settings/TwoFactor', [
             'status' => $request->session()->get('status'),
@@ -38,7 +43,7 @@ class TwoFactorAuthenticationController extends Controller implements HasMiddlew
             'twoFactorEnabled' => $user->hasEnabledTwoFactorAuthentication(),
             'isConfirming' => $hasSecret && is_null($user->two_factor_confirmed_at),
             'qrCode' => $hasSecret ? $user->twoFactorQrCodeSvg() : null,
-            'setupKey' => $hasSecret ? Fortify::currentEncrypter()->decrypt($user->two_factor_secret) : null,
+            'setupKey' => $setupKey,
             'recoveryCodes' => $hasSecret ? $user->recoveryCodes() : [],
         ]);
     }
