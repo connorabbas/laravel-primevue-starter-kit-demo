@@ -84,29 +84,41 @@ const featureCards = [
     >
         <div class="pointer-events-none absolute inset-0">
             <div
-                class="absolute inset-0 bg-linear-to-b from-surface-50 via-surface-0 to-surface-100 dark:from-surface-950 dark:via-surface-950 dark:to-surface-900" />
+                class="absolute inset-0 bg-linear-to-b from-surface-50 via-surface-0 to-surface-100 dark:from-surface-950 dark:via-surface-950 dark:to-surface-900"
+            />
             <div
-                class="absolute -top-20 left-1/2 h-[34rem] w-[90rem] -translate-x-1/2 rotate-[-10deg] bg-linear-to-r from-red-500/14 via-blue-500/16 to-emerald-500/14 blur-3xl dark:from-red-500/10 dark:via-blue-500/14 dark:to-emerald-500/10" />
+                class="absolute -top-20 left-1/2 h-[34rem] w-[90rem] -translate-x-1/2 rotate-[-10deg] bg-linear-to-r from-red-500/14 via-blue-500/16 to-emerald-500/14 blur-3xl dark:from-red-500/10 dark:via-blue-500/14 dark:to-emerald-500/10"
+            />
             <div
-                class="absolute top-20 left-1/2 h-[28rem] w-[72rem] -translate-x-1/2 rotate-[12deg] bg-linear-to-r from-transparent via-blue-400/14 to-transparent blur-3xl dark:via-blue-400/10" />
+                class="absolute top-20 left-1/2 h-[28rem] w-[72rem] -translate-x-1/2 rotate-[12deg] bg-linear-to-r from-transparent via-blue-400/14 to-transparent blur-3xl dark:via-blue-400/10"
+            />
             <div
-                class="absolute -top-10 -left-20 h-[30rem] w-[32rem] rounded-full bg-red-500/18 blur-3xl dark:bg-red-500/14" />
+                class="absolute -top-10 -left-20 h-[30rem] w-[32rem] rounded-full bg-red-500/18 blur-3xl dark:bg-red-500/14"
+            />
             <div
-                class="absolute top-8 left-[42%] h-[34rem] w-[34rem] -translate-x-1/2 rounded-full bg-blue-500/18 blur-3xl dark:bg-blue-500/16" />
+                class="absolute top-8 left-[42%] h-[34rem] w-[34rem] -translate-x-1/2 rounded-full bg-blue-500/18 blur-3xl dark:bg-blue-500/16"
+            />
             <div
-                class="absolute -top-6 right-[-4rem] h-[28rem] w-[30rem] rounded-full bg-emerald-500/16 blur-3xl dark:bg-emerald-500/14" />
+                class="absolute -top-6 right-[-4rem] h-[28rem] w-[30rem] rounded-full bg-emerald-500/16 blur-3xl dark:bg-emerald-500/14"
+            />
             <div
-                class="absolute top-28 left-[28%] h-[20rem] w-[28rem] rotate-[18deg] rounded-full bg-red-300/12 blur-3xl dark:bg-red-300/6" />
+                class="absolute top-28 left-[28%] h-[20rem] w-[28rem] rotate-[18deg] rounded-full bg-red-300/12 blur-3xl dark:bg-red-300/6"
+            />
             <div
-                class="absolute top-36 right-[22%] h-[20rem] w-[28rem] rotate-[-16deg] rounded-full bg-emerald-300/12 blur-3xl dark:bg-emerald-300/6" />
+                class="absolute top-36 right-[22%] h-[20rem] w-[28rem] rotate-[-16deg] rounded-full bg-emerald-300/12 blur-3xl dark:bg-emerald-300/6"
+            />
             <div
-                class="absolute bottom-28 left-[14%] h-[18rem] w-[24rem] rotate-[18deg] rounded-full bg-blue-400/12 blur-3xl dark:bg-blue-400/8" />
+                class="absolute bottom-28 left-[14%] h-[18rem] w-[24rem] rotate-[18deg] rounded-full bg-blue-400/12 blur-3xl dark:bg-blue-400/8"
+            />
             <div
-                class="absolute right-[10%] bottom-16 h-[18rem] w-[24rem] rotate-[-18deg] rounded-full bg-emerald-400/10 blur-3xl dark:bg-emerald-400/8" />
+                class="absolute right-[10%] bottom-16 h-[18rem] w-[24rem] rotate-[-18deg] rounded-full bg-emerald-400/10 blur-3xl dark:bg-emerald-400/8"
+            />
             <div
-                class="absolute inset-x-0 top-0 h-screen bg-linear-to-b from-white/34 via-white/4 to-transparent dark:from-white/4 dark:via-transparent dark:to-transparent" />
+                class="absolute inset-x-0 top-0 h-screen bg-linear-to-b from-white/34 via-white/4 to-transparent dark:from-white/4 dark:via-transparent dark:to-transparent"
+            />
             <div
-                class="absolute inset-x-0 bottom-0 h-64 bg-linear-to-t from-surface-100/90 via-surface-50/60 to-transparent dark:from-surface-950 dark:via-surface-950/90 dark:to-transparent" />
+                class="absolute inset-x-0 bottom-0 h-64 bg-linear-to-t from-surface-100/90 via-surface-50/60 to-transparent dark:from-surface-950 dark:via-surface-950/90 dark:to-transparent"
+            />
         </div>
 
         <Container fluid>
@@ -222,7 +234,8 @@ const featureCards = [
                         >
                             <template #content>
                                 <div
-                                    class="flex h-14 w-14 items-center justify-center border border-surface-200 bg-surface-100 text-surface-700 [border-radius:var(--p-card-border-radius)] dark:border-surface-700 dark:bg-surface-800/80 dark:text-surface-100">
+                                    class="flex h-14 w-14 items-center justify-center border border-surface-200 bg-surface-100 text-surface-700 [border-radius:var(--p-card-border-radius)] dark:border-surface-700 dark:bg-surface-800/80 dark:text-surface-100"
+                                >
                                     <component
                                         :is="feature.icon"
                                         class="size-6!"
@@ -249,11 +262,13 @@ const featureCards = [
                     >
                         <template #content>
                             <p
-                                class="m-0 text-sm font-medium uppercase tracking-widest text-surface-500 dark:text-surface-400">
+                                class="m-0 text-sm font-medium uppercase tracking-widest text-surface-500 dark:text-surface-400"
+                            >
                                 Ready to build your next Laravel + Vue app?
                             </p>
                             <h2
-                                class="mt-4 text-3xl font-semibold tracking-tight text-surface-950 dark:text-white sm:text-4xl">
+                                class="mt-4 text-3xl font-semibold tracking-tight text-surface-950 dark:text-white sm:text-4xl"
+                            >
                                 Discover the power of Laravel + PrimeVue
                             </h2>
                             <p class="mx-auto mt-4 max-w-3xl text-base leading-8 text-muted-color">
@@ -306,8 +321,8 @@ const featureCards = [
                             </div>
 
                             <div
-                                class="mt-10 flex flex-col items-center justify-between gap-4 border-t border-surface-200 pt-6 text-sm text-surface-500 dark:border-surface-800 dark:text-surface-400 sm:flex-row sm:gap-6">
-
+                                class="mt-10 flex flex-col items-center justify-between gap-4 border-t border-surface-200 pt-6 text-sm text-surface-500 dark:border-surface-800 dark:text-surface-400 sm:flex-row sm:gap-6"
+                            >
                                 <div class="">
                                     <span>Laravel {{ props.laravelVersion }} / PHP {{ props.phpVersion }}</span>
                                 </div>
