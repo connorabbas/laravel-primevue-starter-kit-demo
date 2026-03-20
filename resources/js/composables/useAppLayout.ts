@@ -108,11 +108,11 @@ export function useAppLayout() {
                     route: route('admin.users.index'),
                     active: currentRoute.value == 'admin.users.index',
                 },
-                {
+                /* {
                     label: 'Logs',
                     lucideIcon: Logs,
                     url: '/log-viewer',
-                },
+                }, */
             ],
         },
     ])

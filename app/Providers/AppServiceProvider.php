@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\URL;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Validation\Rules\Password;
-use Opcodes\LogViewer\Facades\LogViewer;
+//use Opcodes\LogViewer\Facades\LogViewer;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -26,13 +26,13 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
         // Easier way to view logs
-        LogViewer::auth(function ($request) {
+        /* LogViewer::auth(function ($request) {
             if (app()->isLocal()) {
                 return true;
             }
 
             return $request?->user()?->hasRole('Admin') ?? false;
-        });
+        }); */
 
         $this->configureDefaults();
     }
