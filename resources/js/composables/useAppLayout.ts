@@ -1,8 +1,7 @@
 import { ref, computed, onMounted, onUnmounted, watch } from 'vue'
 import { usePage, useForm } from '@inertiajs/vue3'
 import {
-    LayoutGrid, House, Info, Settings, LogOut, ExternalLink, FileSearch, FolderGit2, Lock, Users, Lightbulb, Table2, BookOpen,
-    Logs
+    LayoutGrid, House, Info, Settings, LogOut, ExternalLink, FileSearch, FolderGit2, Lock, Users, Lightbulb, Table2, BookOpen
 } from 'lucide-vue-next'
 import { MenuItem } from '@/types'
 
