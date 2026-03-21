@@ -3,6 +3,7 @@ import { Head as InertiaHead, Link as InertiaLink, usePage } from '@inertiajs/vu
 import {
     ArrowRight,
     ArrowUpRight,
+    ChartNoAxesCombined,
     DatabaseZap,
     LayoutGrid,
     Lock,
@@ -11,7 +12,6 @@ import {
     Rocket,
     Server,
     Settings,
-    ShieldCheck,
     Star,
     UserPlus,
     Waypoints,
@@ -65,7 +65,7 @@ const featureCards = [
     {
         title: 'Built for scale',
         description: 'Modern Vue 3 architecture with Composition API, proper error handling, and security best practices built-in.',
-        icon: ShieldCheck,
+        icon: ChartNoAxesCombined,
     },
     {
         title: 'Customizable to your needs',
