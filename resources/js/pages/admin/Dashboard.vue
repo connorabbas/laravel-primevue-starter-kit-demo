@@ -8,7 +8,11 @@ const breadcrumbs = [{ label: 'Admin Dashboard' }]
 <template>
     <InertiaHead title="Admin Dashboard" />
 
-    <AppLayout :breadcrumbs>
+    <AppLayout
+        title="Admin Dashboard"
+        description="Application dashboard for admins."
+        :breadcrumbs
+    >
         <Card>
             <template #content>
                 <p class="m-0">
