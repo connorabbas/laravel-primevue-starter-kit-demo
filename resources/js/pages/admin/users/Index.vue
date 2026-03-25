@@ -10,7 +10,7 @@ import AppLayout from '@/layouts/AppLayout.vue'
 import PageTitleSection from '@/components/PageTitleSection.vue'
 import ClientOnly from '@/components/ClientOnly.vue'
 import Menu from '@/components/router-link-menus/Menu.vue'
-import { LengthAwarePaginator } from '@/types/paginiation'
+import { LengthAwarePaginator } from '@/types/pagination'
 import { MenuItem, User } from '@/types'
 
 const props = defineProps<{
@@ -66,7 +66,10 @@ const {
 <template>
     <InertiaHead :title="pageTitle" />
 
-    <AppLayout :breadcrumbs="breadcrumbs">
+    <AppLayout
+        :title="pageTitle"
+        :breadcrumbs
+    >
         <PageTitleSection>
             <template #title>
                 {{ pageTitle }}
