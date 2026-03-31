@@ -2,7 +2,7 @@
 import { ref, computed } from 'vue'
 import { Head as InertiaHead } from '@inertiajs/vue3'
 import { FilterMatchMode } from '@primevue/core/api'
-import { AlertCircle, Funnel, RotateCcw, Search } from 'lucide-vue-next'
+import { AlertCircle, Funnel, RotateCcw, Search } from '@lucide/vue'
 import { formatInTimeZone } from 'date-fns-tz'
 import { parseISO } from 'date-fns'
 import { usePaginatedData } from '@/composables/usePaginatedData'
@@ -251,10 +251,9 @@ const appliedFiltersCount = computed(() => {
             </template>
         </Drawer>
         <div class="space-y-4">
-            <BlockUI
+            <div
                 v-if="contacts.data.length"
-                :blocked="processing"
-                class="grid grid-cols-1 sm:grid-cols-12 gap-4 z-[999]"
+                class="grid grid-cols-1 sm:grid-cols-12 gap-4"
             >
                 <div
                     v-for="contact in props.contacts.data"
@@ -303,7 +302,7 @@ const appliedFiltersCount = computed(() => {
                         </template>
                     </Card>
                 </div>
-            </BlockUI>
+            </div>
             <div
                 v-else
                 class="flex justify - center"

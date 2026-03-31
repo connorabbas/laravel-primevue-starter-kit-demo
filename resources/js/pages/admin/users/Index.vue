@@ -2,7 +2,7 @@
 import { ref, useTemplateRef } from 'vue'
 import { Head as InertiaHead } from '@inertiajs/vue3'
 import { FilterMatchMode } from '@primevue/core/api'
-import { AlertCircle, EllipsisVertical, FunnelX, Pencil } from 'lucide-vue-next'
+import { AlertCircle, EllipsisVertical, FunnelX, Pencil } from '@lucide/vue'
 import { formatInTimeZone } from 'date-fns-tz'
 import { parseISO } from 'date-fns'
 import { usePaginatedDataTable } from '@/composables/usePaginatedDataTable'

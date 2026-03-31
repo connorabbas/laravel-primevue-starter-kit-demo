@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { Head as InertiaHead } from '@inertiajs/vue3'
-import { AlertCircle } from 'lucide-vue-next'
+import { AlertCircle } from '@lucide/vue'
 import { usePaginatedData } from '@/composables/usePaginatedData'
 import AppLayout from '@/layouts/AppLayout.vue'
 import PageTitleSection from '@/components/PageTitleSection.vue'

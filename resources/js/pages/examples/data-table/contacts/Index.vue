@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { Head as InertiaHead } from '@inertiajs/vue3'
 import { FilterMatchMode } from '@primevue/core/api'
-import { AlertCircle, FunnelX } from 'lucide-vue-next'
+import { AlertCircle, FunnelX } from '@lucide/vue'
 import { formatInTimeZone } from 'date-fns-tz'
 import { parseISO } from 'date-fns'
 import { usePaginatedDataTable } from '@/composables/usePaginatedDataTable'
