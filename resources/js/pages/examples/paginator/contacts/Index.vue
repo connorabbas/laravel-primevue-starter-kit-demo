@@ -2,7 +2,7 @@
 import { ref, computed } from 'vue'
 import { Head as InertiaHead } from '@inertiajs/vue3'
 import { FilterMatchMode } from '@primevue/core/api'
-import { AlertCircle, Funnel, RotateCcw, Search } from 'lucide-vue-next'
+import { AlertCircle, Funnel, RotateCcw, Search } from '@lucide/vue'
 import { formatInTimeZone } from 'date-fns-tz'
 import { parseISO } from 'date-fns'
 import { usePaginatedData } from '@/composables/usePaginatedData'

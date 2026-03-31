@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { Head as InertiaHead } from '@inertiajs/vue3'
-import { AlertCircle } from 'lucide-vue-next'
+import { AlertCircle } from '@lucide/vue'
 import { format, parseISO } from 'date-fns'
 import { usePaginatedDataTable } from '@/composables/usePaginatedDataTable'
 import SidebarLayout from '@/layouts/app/SidebarLayout.vue'
