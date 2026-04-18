@@ -12,6 +12,8 @@ import ClientOnly from '@/components/ClientOnly.vue'
 import Menu from '@/components/router-link-menus/Menu.vue'
 import { LengthAwarePaginator } from '@/types/pagination'
 import { MenuItem, User } from '@/types'
+import { route } from '@/utils/route'
+
 
 const props = defineProps<{
     users: LengthAwarePaginator<User>

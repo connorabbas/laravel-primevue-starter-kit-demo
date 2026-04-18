@@ -7,6 +7,7 @@ import { useToast } from 'primevue/usetoast'
 import AppLayout from '@/layouts/AppLayout.vue'
 import SettingsLayout from '@/layouts/UserSettingsLayout.vue'
 import InputErrors from '@/components/InputErrors.vue'
+import { route } from '@/utils/route'
 
 const props = defineProps<{
     status?: string

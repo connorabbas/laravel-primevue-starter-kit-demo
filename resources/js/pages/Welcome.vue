@@ -19,6 +19,7 @@ import {
 import AppHead from '@/components/AppHead.vue'
 import Container from '@/components/Container.vue'
 import SelectColorModeButton from '@/components/SelectColorModeButton.vue'
+import { route } from '@/utils/route'
 
 const props = defineProps<{
     laravelVersion: string,
