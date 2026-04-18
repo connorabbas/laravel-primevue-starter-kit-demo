@@ -98,7 +98,7 @@ const updateProfileInformation = () => {
                                 />
                                 <InputErrors :errors="updateProfileForm.errors?.email" />
                             </div>
-                            <div v-if="mustVerifyEmail && user.email_verified_at === null">
+                            <div v-if="mustVerifyEmail && user?.emailVerifiedAt === null">
                                 <p class="text-sm mt-2">
                                     Your email address is unverified.
                                     <Button
