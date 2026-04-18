@@ -23,7 +23,7 @@ class TypeScriptTransformerServiceProvider extends BaseTypeScriptTransformerServ
             ->outputDirectory(resource_path('js/types'))
             ->writer(new GlobalNamespaceWriter('generated.d.ts'))
             ->formatter(EslintFormatter::class)
-            ->provider(new LaravelRouteTransformedProvider(path: '../utils/route.ts'))
+            ->provider(new LaravelRouteTransformedProvider(path: '../utils/route.ts', absoluteUrlsByDefault: false))
             ->replaceType(Carbon::class, 'string')
             ->replaceType(CarbonImmutable::class, 'string');
         ;

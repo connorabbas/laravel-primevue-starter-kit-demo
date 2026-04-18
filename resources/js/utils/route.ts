@@ -39,7 +39,7 @@ welcome: never,
 dashboard: never,
 appearance: never,
 };
-export function route<T extends keyof RouteParameters>(name: T, parameters?: [RouteParameters[T]] extends [never] ? Record<string, never> : RouteParameters[T], absolute: boolean = true): string {
+export function route<T extends keyof RouteParameters>(name: T, parameters?: [RouteParameters[T]] extends [never] ? Record<string, never> : RouteParameters[T], absolute: boolean = false): string {
     let url: string = '/' + routes[name]
 
     if (parameters) {

@@ -6,6 +6,7 @@ import AppLayout from '@/layouts/AppLayout.vue'
 import SettingsLayout from '@/layouts/UserSettingsLayout.vue'
 import DeleteUserModal from '@/components/DeleteUserModal.vue'
 import InputErrors from '@/components/InputErrors.vue'
+import { route } from '@/utils/route'
 
 defineProps<{
     mustVerifyEmail: boolean,
@@ -22,8 +23,8 @@ const deleteUserModalOpen = ref(false)
 const user = usePage().props.auth.user
 const toast = useToast()
 const updateProfileForm = useForm({
-    name: user.name,
-    email: user.email,
+    name: user?.name,
+    email: user?.email,
 })
 
 const sendVerificationForm = useForm({})
