@@ -54,10 +54,10 @@ const {
                         >
                             <div class="flex items-center gap-2">
                                 <Tag
-                                    v-if="page.props.auth.isAdmin"
+                                    v-if="page.props.auth?.user?.isAdmin"
                                     value="ADMIN"
                                 />
-                                {{ page.props.auth.user.name }}
+                                {{ page.props.auth?.user?.name }}
                             </div>
                             <div>
                                 <ChevronsUpDown />
@@ -75,7 +75,7 @@ const {
             <nav class="dynamic-bg shadow-sm">
                 <Container>
                     <Menubar
-                        :key="currentRoute"
+                        :key="currentRoute ?? page.url"
                         :model="menuItems"
                         pt:root:class="px-0 py-0 border-0 rounded-none bg-transparent h-[var(--header-height)]!"
                         pt:button:class="hidden"
@@ -98,10 +98,10 @@ const {
                                 >
                                     <div class="flex items-center gap-2">
                                         <Tag
-                                            v-if="page.props.auth.isAdmin"
+                                            v-if="page.props.auth?.user?.isAdmin"
                                             value="ADMIN"
                                         />
-                                        {{ page.props.auth.user.name }}
+                                        {{ page.props.auth?.user?.name }}
                                     </div>
                                     <div>
                                         <ChevronDown />

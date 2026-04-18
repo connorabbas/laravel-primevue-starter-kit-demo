@@ -3,6 +3,7 @@ import AppLayout from '@/layouts/AppLayout.vue'
 import SettingsLayout from '@/layouts/UserSettingsLayout.vue'
 import SelectColorModeButton from '@/components/SelectColorModeButton.vue'
 import ThemePresetSelector from '@/components/ThemePresetSelector.vue'
+import { route } from '@/utils/route'
 
 const breadcrumbs = [
     { label: 'Dashboard', route: route('dashboard') },
