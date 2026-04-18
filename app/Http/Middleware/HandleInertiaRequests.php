@@ -2,7 +2,9 @@
 
 namespace App\Http\Middleware;
 
+use App\Data\UserData;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
 use Inertia\Middleware;
 use Tighten\Ziggy\Ziggy;
@@ -52,7 +54,7 @@ class HandleInertiaRequests extends Middleware
                 'location' => $request->url(),
             ],
             'auth' => [
-                'user' => $request->user(),
+                'user' => Auth::check() ? UserData::from($request->user()) : null,
             ],
             'flash' => [
                 'success' => fn () => $request->session()->get('flash_success'),

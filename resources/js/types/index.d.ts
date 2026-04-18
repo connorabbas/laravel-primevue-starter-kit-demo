@@ -4,17 +4,8 @@ import type { MenuItem as PrimeVueMenuItem } from 'primevue/menuitem'
 import type { LucideIcon } from '@lucide/vue'
 import type { Config } from 'ziggy-js'
 
-export interface User {
-    id: number;
-    name: string;
-    email: string;
-    email_verified_at: string | null;
-    created_at: string;
-    updated_at: string;
-}
-
 export interface AuthProps {
-    user: User;
+    user: App.Data.UserData | null;
 }
 
 export interface FlashProps {
