@@ -1,5 +1,6 @@
 <?php
 
+use App\Data\ErrorToastResponseData;
 use App\Exceptions\ErrorToastException;
 use App\Http\Middleware\HandleInertiaRequests;
 use Illuminate\Foundation\Application;
@@ -63,7 +64,7 @@ return Application::configure(basePath: dirname(__DIR__))
 
             if ($statusCode >= 400) {
                 $errorMetadata = $resolveErrorMetadata($statusCode);
-                $errorTitle = Response::$statusTexts[$statusCode] ?? 'Error';
+                $statusText = Response::$statusTexts[$statusCode] ?? 'Error';
                 $errorDetail = $errorMetadata['detail'] ?? 'An unexpected error occurred.';
 
                 if (
@@ -75,25 +76,24 @@ return Application::configure(basePath: dirname(__DIR__))
                 }
 
                 if ($request->inertia() && !$request->isMethod('GET')) {
-                    $errorSummary = "{$errorTitle} - {$statusCode}";
-                    $toastTitle = $errorTitle;
+                    $errorSummary = "{$statusText} - {$statusCode}";
 
                     if ($exception instanceof ErrorToastException) {
-                        $toastTitle = 'Error';
                         $errorSummary = 'Error';
                         $errorDetail = $exception->getMessage();
                     }
 
-                    return response()->json([
-                        'status' => $statusCode,
-                        'error_title' => $toastTitle,
-                        'error_summary' => $errorSummary,
-                        'error_detail' => $errorDetail,
-                    ], $statusCode);
+                    $toastPayload = new ErrorToastResponseData(
+                        status: $statusCode,
+                        errorSummary: $errorSummary,
+                        errorDetail: $errorDetail,
+                    );
+
+                    return response()->json($toastPayload->toArray(), $statusCode);
                 }
 
                 return Inertia::render('Error', [
-                    'title' => $errorTitle,
+                    'title' => $statusText,
                     'detail' => $errorDetail,
                     'status' => $statusCode,
                     'homepageRoute' => route(name: 'welcome', absolute: false),
