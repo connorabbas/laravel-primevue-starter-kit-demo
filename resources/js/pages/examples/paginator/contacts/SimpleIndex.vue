@@ -4,11 +4,11 @@ import { AlertCircle } from '@lucide/vue'
 import { usePaginatedData } from '@/composables/usePaginatedData'
 import AppLayout from '@/layouts/AppLayout.vue'
 import PageTitleSection from '@/components/PageTitleSection.vue'
-import { LengthAwarePaginator } from '@/types/paginiation'
-import type { ContactWithRelations } from '@/types'
+import type { LengthAwarePaginator } from '@/types/pagination'
+import { route } from '@/utils/route'
 
 const props = defineProps<{
-    contacts: LengthAwarePaginator<ContactWithRelations>,
+    contacts: LengthAwarePaginator<App.Data.ContactData>,
 }>()
 
 const pageTitle = 'Contacts'
@@ -27,7 +27,10 @@ const {
 <template>
     <InertiaHead :title="pageTitle" />
 
-    <AppLayout :breadcrumbs="breadcrumbs">
+    <AppLayout
+        :title="pageTitle"
+        :breadcrumbs="breadcrumbs"
+    >
         <PageTitleSection>
             <template #title>
                 {{ pageTitle }}
@@ -81,7 +84,7 @@ const {
             </div>
             <div
                 v-else
-                class="flex justify - center"
+                class="flex justify-center"
             >
                 <Message
                     severity="warn"

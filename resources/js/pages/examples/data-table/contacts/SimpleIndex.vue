@@ -5,11 +5,11 @@ import { format, parseISO } from 'date-fns'
 import { usePaginatedDataTable } from '@/composables/usePaginatedDataTable'
 import SidebarLayout from '@/layouts/app/SidebarLayout.vue'
 import PageTitleSection from '@/components/PageTitleSection.vue'
-import type { LengthAwarePaginator } from '@/types/paginiation'
-import type { ContactWithRelations } from '@/types'
+import type { LengthAwarePaginator } from '@/types/pagination'
+import { route } from '@/utils/route'
 
 const props = defineProps<{
-    contacts: LengthAwarePaginator<ContactWithRelations>,
+    contacts: LengthAwarePaginator<App.Data.ContactData>,
 }>()
 
 const pageTitle = 'Contacts'
@@ -48,7 +48,7 @@ const {
                     :sortField="sorting.field"
                     :sortOrder="sorting.order"
                     :rows="props.contacts.per_page"
-                    :rowsPerPageOptions="[10, 20, 50, 100]"
+                    :rowsPerPageOptions="[20, 50, 100]"
                     :first="firstDatasetIndex"
                     paginatorTemplate="FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink CurrentPageReport RowsPerPageDropdown"
                     currentPageReportTemplate="Showing {first} to {last} of {totalRecords} records"
@@ -80,7 +80,7 @@ const {
                         field="organization"
                     >
                         <template #body="{ data }">
-                            {{ data.organization.name }}
+                            {{ data.organization?.name ?? '-' }}
                         </template>
                     </Column>
                     <Column
@@ -102,7 +102,7 @@ const {
                         field="created_at"
                     >
                         <template #body="{ data }">
-                            {{ format(parseISO(data.created_at), 'MM/dd/yyyy') }}
+                            {{ format(parseISO(data.createdAt), 'MM/dd/yyyy') }}
                         </template>
                     </Column>
                 </DataTable>

@@ -8,13 +8,13 @@ import { parseISO } from 'date-fns'
 import { usePaginatedData } from '@/composables/usePaginatedData'
 import AppLayout from '@/layouts/AppLayout.vue'
 import PageTitleSection from '@/components/PageTitleSection.vue'
-import type { LengthAwarePaginator } from '@/types/paginiation'
-import type { ContactWithRelations, Organization, Tag } from '@/types'
+import type { LengthAwarePaginator } from '@/types/pagination'
+import { route } from '@/utils/route'
 
 const props = defineProps<{
-    contacts: LengthAwarePaginator<ContactWithRelations>,
-    organizations: Organization[],
-    tags: Tag[],
+    contacts: LengthAwarePaginator<App.Data.ContactData>,
+    organizations: App.Data.OrganizationData[],
+    tags: App.Data.TagData[],
 }>()
 
 const pageTitle = 'Contacts'
@@ -41,17 +41,17 @@ const {
     created_at: { value: null, matchMode: FilterMatchMode.DATE_IS },
 }, props.contacts.per_page)
 
-sorting.value = { field: 'created_at', order: 0 }
+sorting.value = { field: 'created_at', order: -1 }
 
 const showFilters = ref(false)
 
 const sortOptions = ref([
     { label: 'Name - Asc', value: { field: 'name', order: 1 } },
-    { label: 'Name - Desc', value: { field: 'name', order: 0 } },
+    { label: 'Name - Desc', value: { field: 'name', order: -1 } },
     { label: 'Email - Asc', value: { field: 'email', order: 1 } },
-    { label: 'Email - Desc', value: { field: 'email', order: 0 } },
+    { label: 'Email - Desc', value: { field: 'email', order: -1 } },
     { label: 'Created - Oldest', value: { field: 'created_at', order: 1 } },
-    { label: 'Created - Latest', value: { field: 'created_at', order: 0 } },
+    { label: 'Created - Latest', value: { field: 'created_at', order: -1 } },
 ])
 
 const textInputMatchModes = [
@@ -79,7 +79,10 @@ const appliedFiltersCount = computed(() => {
 <template>
     <InertiaHead :title="pageTitle" />
 
-    <AppLayout :breadcrumbs="breadcrumbs">
+    <AppLayout
+        :title="pageTitle"
+        :breadcrumbs="breadcrumbs"
+    >
         <PageTitleSection>
             <template #title>
                 {{ pageTitle }}
@@ -288,7 +291,7 @@ const appliedFiltersCount = computed(() => {
                                     {{ contact.email }}
                                 </div>
                                 <div class="text-muted-color text-xs">
-                                    Created: {{ formatInTimeZone(parseISO(contact.created_at), 'UTC', 'MM/dd/yyyy') }}
+                                    Created: {{ formatInTimeZone(parseISO(contact.createdAt), 'UTC', 'MM/dd/yyyy') }}
                                 </div>
                                 <div class="flex flex-wrap gap-2">
                                     <Tag
@@ -305,7 +308,7 @@ const appliedFiltersCount = computed(() => {
             </div>
             <div
                 v-else
-                class="flex justify - center"
+                class="flex justify-center"
             >
                 <Message
                     severity="warn"

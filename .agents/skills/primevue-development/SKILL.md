@@ -171,36 +171,50 @@ function openContextMenu(event: Event, rowData: SomeType) {
 
 ### `TabMenu` note
 
-`TabMenu` uses an `items` prop (not `model`) and automatically derives the active tab from Ziggy's `route().current()`. Set `active: true` on items to control the active highlight explicitly when needed.
+`TabMenu` uses an `items` prop (not `model`) and determines the active tab from each item's `active` boolean.
+
+- Derive active state in the parent component (for example with `usePage().props.currentRouteName`).
+- Build item URLs with `route` from `@/utils/route`.
+- Set `active: true` on exactly one item for predictable highlighting.
 
 ```vue
 <script setup lang="ts">
+import { computed } from 'vue';
+import { usePage } from '@inertiajs/vue3';
 import type { MenuItem } from '@/types';
 import TabMenu from '@/components/router-link-menus/TabMenu.vue';
 import { KeyRound, Palette, ShieldCheck, UserRound } from '@lucide/vue';
+import { route } from '@/utils/route';
 
-const tabs: MenuItem[] = [
+const page = usePage();
+const currentRoute = computed(() => page.props.currentRouteName);
+
+const tabs = computed<MenuItem[]>(() => [
     {
         label: 'Profile',
         lucideIcon: UserRound,
         route: route('profile.edit'),
+        active: currentRoute.value === 'profile.edit',
     },
     {
         label: 'Password',
         lucideIcon: KeyRound,
         route: route('password.edit'),
+        active: currentRoute.value === 'password.edit',
     },
     {
         label: 'Two-Factor Auth',
         lucideIcon: ShieldCheck,
         route: route('two-factor.show'),
+        active: currentRoute.value === 'two-factor.show',
     },
     {
         label: 'Appearance',
         lucideIcon: Palette,
         route: route('appearance'),
+        active: currentRoute.value === 'appearance',
     },
-];
+]);
 </script>
 
 <template>
