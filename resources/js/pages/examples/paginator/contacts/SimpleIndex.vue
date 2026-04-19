@@ -1,14 +1,15 @@
 <script setup lang="ts">
+import { computed } from 'vue'
 import { Head as InertiaHead } from '@inertiajs/vue3'
 import { AlertCircle } from '@lucide/vue'
 import { usePaginatedData } from '@/composables/usePaginatedData'
 import AppLayout from '@/layouts/AppLayout.vue'
 import PageTitleSection from '@/components/PageTitleSection.vue'
-import { LengthAwarePaginator } from '@/types/paginiation'
-import type { ContactWithRelations } from '@/types'
+import type { LengthAwarePaginator } from '@/types/pagination'
+import { route } from '@/utils/route'
 
 const props = defineProps<{
-    contacts: LengthAwarePaginator<ContactWithRelations>,
+    contacts: LengthAwarePaginator<App.Data.ContactData>,
 }>()
 
 const pageTitle = 'Contacts'
@@ -19,15 +20,25 @@ const breadcrumbs = [
 ]
 
 const {
+    processing,
+    pagination,
     firstDatasetIndex,
     paginate,
 } = usePaginatedData('contacts', {}, props.contacts.per_page)
+
+const skeletonCards = computed<number[]>(() => Array.from(
+    { length: pagination.value.rows },
+    (_, index) => index,
+))
 </script>
 
 <template>
     <InertiaHead :title="pageTitle" />
 
-    <AppLayout :breadcrumbs="breadcrumbs">
+    <AppLayout
+        :title="pageTitle"
+        :breadcrumbs="breadcrumbs"
+    >
         <PageTitleSection>
             <template #title>
                 {{ pageTitle }}
@@ -36,7 +47,44 @@ const {
 
         <div class="space-y-4">
             <div
-                v-if="contacts.data.length"
+                v-if="processing"
+                class="grid grid-cols-1 sm:grid-cols-12 gap-4"
+                aria-busy="true"
+            >
+                <div
+                    v-for="skeletonIndex in skeletonCards"
+                    :key="`contact-skeleton-${skeletonIndex}`"
+                    class="sm:col-span-6 lg:col-span-3"
+                >
+                    <Card
+                        class="h-full"
+                        pt:content:class="flex flex-col gap-5"
+                    >
+                        <template #title>
+                            <Skeleton
+                                :pt="{ root: { class: 'w-2/3! h-5!' } }"
+                            />
+                        </template>
+                        <template #subtitle>
+                            <Skeleton
+                                :pt="{ root: { class: 'w-1/2! h-4!' } }"
+                            />
+                        </template>
+                        <template #content>
+                            <div class="flex flex-wrap gap-2">
+                                <Skeleton
+                                    :pt="{ root: { class: 'w-20! h-6! [border-radius:var(--p-card-border-radius)]!' } }"
+                                />
+                                <Skeleton
+                                    :pt="{ root: { class: 'w-16! h-6! [border-radius:var(--p-card-border-radius)]!' } }"
+                                />
+                            </div>
+                        </template>
+                    </Card>
+                </div>
+            </div>
+            <div
+                v-else-if="contacts.data.length"
                 class="grid grid-cols-1 sm:grid-cols-12 gap-4"
             >
                 <div
@@ -48,15 +96,6 @@ const {
                         class="h-full"
                         pt:content:class="flex flex-col gap-5"
                     >
-                        <template #header>
-                            <div class="p-4 pb-0 flex justify-center">
-                                <!-- Fake profile img -->
-                                <Skeleton
-                                    width="10rem"
-                                    height="7rem"
-                                />
-                            </div>
-                        </template>
                         <template #title>
                             {{ contact.name }}
                         </template>
@@ -81,7 +120,7 @@ const {
             </div>
             <div
                 v-else
-                class="flex justify - center"
+                class="flex justify-center"
             >
                 <Message
                     severity="warn"

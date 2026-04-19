@@ -11,10 +11,12 @@ import PageTitleSection from '@/components/PageTitleSection.vue'
 import ClientOnly from '@/components/ClientOnly.vue'
 import Menu from '@/components/router-link-menus/Menu.vue'
 import { LengthAwarePaginator } from '@/types/pagination'
-import { MenuItem, User } from '@/types'
+import { MenuItem } from '@/types'
+import { route } from '@/utils/route'
+
 
 const props = defineProps<{
-    users: LengthAwarePaginator<User>
+    users: LengthAwarePaginator<App.Data.UserData>
 }>()
 
 const pageTitle = 'Users'
@@ -27,7 +29,7 @@ const breadcrumbs = [
 // User context menu
 const userContextMenu = useTemplateRef<typeof Menu>('user-context-menu')
 const userContextMenuItems = ref<MenuItem[]>([])
-function toggleUserContextMenu(event: Event, userData: User) {
+function toggleUserContextMenu(event: Event, userData: App.Data.UserData) {
     // Populate menu items based on row data
     userContextMenuItems.value = [
         {
@@ -112,7 +114,7 @@ const {
                         :sortField="sorting.field"
                         :sortOrder="sorting.order"
                         :rows="props.users.per_page"
-                        :rowsPerPageOptions="[10, 20, 50, 100]"
+                        :rowsPerPageOptions="[20, 50, 100]"
                         :first="firstDatasetIndex"
                         columnResizeMode="fit"
                         filterDisplay="row"
@@ -188,7 +190,7 @@ const {
                                 />
                             </template>
                             <template #body="{ data }">
-                                {{ formatInTimeZone(parseISO(data.created_at), 'UTC', 'MM/dd/yyyy') }}
+                                {{ formatInTimeZone(parseISO(data.createdAt), 'UTC', 'MM/dd/yyyy') }}
                             </template>
                         </Column>
                         <Column header="Action">

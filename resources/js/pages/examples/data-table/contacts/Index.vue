@@ -7,13 +7,13 @@ import { parseISO } from 'date-fns'
 import { usePaginatedDataTable } from '@/composables/usePaginatedDataTable'
 import SidebarLayout from '@/layouts/app/SidebarLayout.vue'
 import PageTitleSection from '@/components/PageTitleSection.vue'
-import type { LengthAwarePaginator } from '@/types/paginiation'
-import type { ContactWithRelations, Organization, Tag } from '@/types'
+import type { LengthAwarePaginator } from '@/types/pagination'
+import { route } from '@/utils/route'
 
 const props = defineProps<{
-    contacts: LengthAwarePaginator<ContactWithRelations>,
-    organizations: Organization[],
-    tags: Tag[],
+    contacts: LengthAwarePaginator<App.Data.ContactData>,
+    organizations: App.Data.OrganizationData[],
+    tags: App.Data.TagData[],
 }>()
 
 const pageTitle = 'Contacts'
@@ -58,7 +58,7 @@ const {
                     type="button"
                     label="Clear Filters"
                     outlined
-                    @click="hardReset"
+                    @click="() => hardReset()"
                 >
                     <template #icon>
                         <FunnelX />
@@ -82,7 +82,7 @@ const {
                     :sortField="sorting.field"
                     :sortOrder="sorting.order"
                     :rows="props.contacts.per_page"
-                    :rowsPerPageOptions="[10, 20, 50, 100]"
+                    :rowsPerPageOptions="[20, 50, 100]"
                     :first="firstDatasetIndex"
                     columnResizeMode="fit"
                     filterDisplay="row"
@@ -156,7 +156,7 @@ const {
                             />
                         </template>
                         <template #body="{ data }">
-                            {{ data.organization.name }}
+                            {{ data.organization?.name ?? '-' }}
                         </template>
                     </Column>
                     <Column
@@ -205,7 +205,7 @@ const {
                             />
                         </template>
                         <template #body="{ data }">
-                            {{ formatInTimeZone(parseISO(data.created_at), 'UTC', 'MM/dd/yyyy') }}
+                            {{ formatInTimeZone(parseISO(data.createdAt), 'UTC', 'MM/dd/yyyy') }}
                         </template>
                     </Column>
                 </DataTable>

@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-use App\Models\Traits\Filterable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Attributes\Hidden;
@@ -20,8 +19,6 @@ class User extends Authenticatable implements MustVerifyEmail
     use HasFactory;
     use Notifiable;
     use HasRoles;
-    /** @use Filterable<User> */
-    use Filterable;
     use TwoFactorAuthenticatable;
 
     /**
@@ -34,16 +31,6 @@ class User extends Authenticatable implements MustVerifyEmail
         return [
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
-        ];
-    }
-
-    protected function getFilterableColumns(): array
-    {
-        return [
-            'id',
-            'name',
-            'email',
-            'created_at',
         ];
     }
 }

@@ -8,13 +8,13 @@ import { parseISO } from 'date-fns'
 import { usePaginatedData } from '@/composables/usePaginatedData'
 import AppLayout from '@/layouts/AppLayout.vue'
 import PageTitleSection from '@/components/PageTitleSection.vue'
-import type { LengthAwarePaginator } from '@/types/paginiation'
-import type { ContactWithRelations, Organization, Tag } from '@/types'
+import type { LengthAwarePaginator } from '@/types/pagination'
+import { route } from '@/utils/route'
 
 const props = defineProps<{
-    contacts: LengthAwarePaginator<ContactWithRelations>,
-    organizations: Organization[],
-    tags: Tag[],
+    contacts: LengthAwarePaginator<App.Data.ContactData>,
+    organizations: App.Data.OrganizationData[],
+    tags: App.Data.TagData[],
 }>()
 
 const pageTitle = 'Contacts'
@@ -28,6 +28,7 @@ const {
     processing,
     filters,
     sorting,
+    pagination,
     firstDatasetIndex,
     filteredOrSorted,
     paginate,
@@ -41,17 +42,17 @@ const {
     created_at: { value: null, matchMode: FilterMatchMode.DATE_IS },
 }, props.contacts.per_page)
 
-sorting.value = { field: 'created_at', order: 0 }
+sorting.value = { field: 'created_at', order: -1 }
 
 const showFilters = ref(false)
 
 const sortOptions = ref([
     { label: 'Name - Asc', value: { field: 'name', order: 1 } },
-    { label: 'Name - Desc', value: { field: 'name', order: 0 } },
+    { label: 'Name - Desc', value: { field: 'name', order: -1 } },
     { label: 'Email - Asc', value: { field: 'email', order: 1 } },
-    { label: 'Email - Desc', value: { field: 'email', order: 0 } },
+    { label: 'Email - Desc', value: { field: 'email', order: -1 } },
     { label: 'Created - Oldest', value: { field: 'created_at', order: 1 } },
-    { label: 'Created - Latest', value: { field: 'created_at', order: 0 } },
+    { label: 'Created - Latest', value: { field: 'created_at', order: -1 } },
 ])
 
 const textInputMatchModes = [
@@ -74,12 +75,20 @@ const appliedFiltersCount = computed(() => {
         .filter(f => f.value !== null && f.value !== '')
         .length
 })
+
+const skeletonCards = computed<number[]>(() => Array.from(
+    { length: pagination.value.rows },
+    (_, index) => index,
+))
 </script>
 
 <template>
     <InertiaHead :title="pageTitle" />
 
-    <AppLayout :breadcrumbs="breadcrumbs">
+    <AppLayout
+        :title="pageTitle"
+        :breadcrumbs="breadcrumbs"
+    >
         <PageTitleSection>
             <template #title>
                 {{ pageTitle }}
@@ -252,7 +261,52 @@ const appliedFiltersCount = computed(() => {
         </Drawer>
         <div class="space-y-4">
             <div
-                v-if="contacts.data.length"
+                v-if="processing"
+                class="grid grid-cols-1 sm:grid-cols-12 gap-4"
+                aria-busy="true"
+            >
+                <div
+                    v-for="skeletonIndex in skeletonCards"
+                    :key="`contact-skeleton-${skeletonIndex}`"
+                    class="sm:col-span-6 lg:col-span-3"
+                >
+                    <Card
+                        class="h-full"
+                        pt:content:class="flex flex-col gap-5"
+                    >
+                        <template #title>
+                            <Skeleton
+                                :pt="{ root: { class: 'w-2/3! h-5!' } }"
+                            />
+                        </template>
+                        <template #subtitle>
+                            <Skeleton
+                                :pt="{ root: { class: 'w-1/2! h-4!' } }"
+                            />
+                        </template>
+                        <template #content>
+                            <div class="flex flex-col gap-3">
+                                <Skeleton
+                                    :pt="{ root: { class: 'w-11/12! h-4!' } }"
+                                />
+                                <Skeleton
+                                    :pt="{ root: { class: 'w-3/5! h-3!' } }"
+                                />
+                                <div class="flex flex-wrap gap-2">
+                                    <Skeleton
+                                        :pt="{ root: { class: 'w-20! h-6! [border-radius:var(--p-card-border-radius)]!' } }"
+                                    />
+                                    <Skeleton
+                                        :pt="{ root: { class: 'w-16! h-6! [border-radius:var(--p-card-border-radius)]!' } }"
+                                    />
+                                </div>
+                            </div>
+                        </template>
+                    </Card>
+                </div>
+            </div>
+            <div
+                v-else-if="contacts.data.length"
                 class="grid grid-cols-1 sm:grid-cols-12 gap-4"
             >
                 <div
@@ -264,15 +318,6 @@ const appliedFiltersCount = computed(() => {
                         class="h-full"
                         pt:content:class="flex flex-col gap-5"
                     >
-                        <template #header>
-                            <div class="p-4 pb-0 flex justify-center">
-                                <!-- Fake profile img -->
-                                <Skeleton
-                                    width="10rem"
-                                    height="7rem"
-                                />
-                            </div>
-                        </template>
                         <template #title>
                             {{ contact.name }}
                         </template>
@@ -288,7 +333,7 @@ const appliedFiltersCount = computed(() => {
                                     {{ contact.email }}
                                 </div>
                                 <div class="text-muted-color text-xs">
-                                    Created: {{ formatInTimeZone(parseISO(contact.created_at), 'UTC', 'MM/dd/yyyy') }}
+                                    Created: {{ formatInTimeZone(parseISO(contact.createdAt), 'UTC', 'MM/dd/yyyy') }}
                                 </div>
                                 <div class="flex flex-wrap gap-2">
                                     <Tag
@@ -305,7 +350,7 @@ const appliedFiltersCount = computed(() => {
             </div>
             <div
                 v-else
-                class="flex justify - center"
+                class="flex justify-center"
             >
                 <Message
                     severity="warn"

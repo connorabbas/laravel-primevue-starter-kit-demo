@@ -62,10 +62,10 @@ const toggleSidebar = () => {
                         >
                             <div class="flex items-center gap-2">
                                 <Tag
-                                    v-if="page.props.auth.isAdmin"
+                                    v-if="page.props.auth?.user?.isAdmin"
                                     value="ADMIN"
                                 />
-                                {{ page.props.auth.user.name }}
+                                {{ page.props.auth?.user?.name }}
                             </div>
                             <div>
                                 <ChevronsUpDown />
@@ -131,10 +131,10 @@ const toggleSidebar = () => {
                         >
                             <div class="flex items-center gap-2">
                                 <Tag
-                                    v-if="page.props.auth.isAdmin"
+                                    v-if="page.props.auth?.user?.isAdmin"
                                     value="ADMIN"
                                 />
-                                {{ page.props.auth.user.name }}
+                                {{ page.props.auth?.user?.name }}
                             </div>
                             <div>
                                 <ChevronsUpDown />
