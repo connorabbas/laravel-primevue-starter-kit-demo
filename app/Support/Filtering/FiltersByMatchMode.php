@@ -64,29 +64,33 @@ class FiltersByMatchMode implements Filter
         mixed $normalizedValue,
         string $column,
     ): void {
+        $qualifiedColumn = str_contains($column, '.')
+            ? $column
+            : $query->qualifyColumn($column);
+
         $stringValue = is_array($normalizedValue) ? null : (string) $normalizedValue;
 
         match ($mode) {
-            FilterMatchMode::STARTS_WITH => $query->where($column, 'like', "{$stringValue}%"),
-            FilterMatchMode::CONTAINS => $query->where($column, 'like', "%{$stringValue}%"),
-            FilterMatchMode::NOT_CONTAINS => $query->where($column, 'not like', "%{$stringValue}%"),
-            FilterMatchMode::ENDS_WITH => $query->where($column, 'like', "%{$stringValue}"),
-            FilterMatchMode::EQUALS => $query->where($column, '=', $normalizedValue),
-            FilterMatchMode::NOT_EQUALS => $query->where($column, '!=', $normalizedValue),
+            FilterMatchMode::STARTS_WITH => $query->where($qualifiedColumn, 'like', "{$stringValue}%"),
+            FilterMatchMode::CONTAINS => $query->where($qualifiedColumn, 'like', "%{$stringValue}%"),
+            FilterMatchMode::NOT_CONTAINS => $query->where($qualifiedColumn, 'not like', "%{$stringValue}%"),
+            FilterMatchMode::ENDS_WITH => $query->where($qualifiedColumn, 'like', "%{$stringValue}"),
+            FilterMatchMode::EQUALS => $query->where($qualifiedColumn, '=', $normalizedValue),
+            FilterMatchMode::NOT_EQUALS => $query->where($qualifiedColumn, '!=', $normalizedValue),
             FilterMatchMode::IN => is_array($normalizedValue)
-                ? $query->whereIn($column, $normalizedValue)
+                ? $query->whereIn($qualifiedColumn, $normalizedValue)
                 : null,
-            FilterMatchMode::LESS_THAN => $query->where($column, '<', $normalizedValue),
-            FilterMatchMode::LESS_THAN_OR_EQUAL_TO => $query->where($column, '<=', $normalizedValue),
-            FilterMatchMode::GREATER_THAN => $query->where($column, '>', $normalizedValue),
-            FilterMatchMode::GREATER_THAN_OR_EQUAL_TO => $query->where($column, '>=', $normalizedValue),
+            FilterMatchMode::LESS_THAN => $query->where($qualifiedColumn, '<', $normalizedValue),
+            FilterMatchMode::LESS_THAN_OR_EQUAL_TO => $query->where($qualifiedColumn, '<=', $normalizedValue),
+            FilterMatchMode::GREATER_THAN => $query->where($qualifiedColumn, '>', $normalizedValue),
+            FilterMatchMode::GREATER_THAN_OR_EQUAL_TO => $query->where($qualifiedColumn, '>=', $normalizedValue),
             FilterMatchMode::BETWEEN => is_array($normalizedValue)
-                ? $this->applyBetween($query, $normalizedValue, $column)
+                ? $this->applyBetween($query, $normalizedValue, $qualifiedColumn)
                 : null,
-            FilterMatchMode::DATE_IS => $query->whereDate($column, '=', $stringValue),
-            FilterMatchMode::DATE_IS_NOT => $query->whereDate($column, '!=', $stringValue),
-            FilterMatchMode::DATE_BEFORE => $query->whereDate($column, '<', $stringValue),
-            FilterMatchMode::DATE_AFTER => $query->whereDate($column, '>', $stringValue),
+            FilterMatchMode::DATE_IS => $query->whereDate($qualifiedColumn, '=', $stringValue),
+            FilterMatchMode::DATE_IS_NOT => $query->whereDate($qualifiedColumn, '!=', $stringValue),
+            FilterMatchMode::DATE_BEFORE => $query->whereDate($qualifiedColumn, '<', $stringValue),
+            FilterMatchMode::DATE_AFTER => $query->whereDate($qualifiedColumn, '>', $stringValue),
         };
     }
 
@@ -96,8 +100,8 @@ class FiltersByMatchMode implements Filter
     private function parseRelationColumn(): array
     {
         $segments = explode('.', $this->column);
-        $column = (string) array_pop($segments);
-        $relation = implode('.', $segments);
+        $relation = (string) array_shift($segments);
+        $column = implode('.', $segments);
 
         return [$relation, $column];
     }
