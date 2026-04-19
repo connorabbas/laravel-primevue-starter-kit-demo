@@ -11,6 +11,11 @@ updatedAt: string | string,
 organization: App.Data.OrganizationData | null,
 tags: App.Data.TagData[],
 };
+export type ErrorToastResponseData = {
+status: number,
+errorSummary: string,
+errorDetail: string,
+};
 export type OrganizationData = {
 id: number,
 name: string,
