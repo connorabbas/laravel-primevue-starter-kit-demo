@@ -28,6 +28,10 @@ Key tools:
 - Check sibling pages in `resources/js/pages/` for existing usage patterns before writing new markup.
 - Prefer composition of existing PrimeVue components over any custom implementation.
 
+## Inertia Flash Notifications
+
+- For actions that require user-facing feedback after a server mutation, handle notifications server-side with `Inertia::flash(...)` (following project conventions in `AGENTS.md`) instead of manually wiring page-level `useToast()` success handlers or inline `Message` components. Manual Toasts should generally only be configured for client-side only actions (e.g., clipboard copy, etc.)
+
 ## Styled Mode & Theming
 
 This project uses PrimeVue's **styled mode** with a custom preset located in `resources/js/theme/`. The active preset is imported in `resources/js/app.ts`.
@@ -224,10 +228,10 @@ const tabs = computed<MenuItem[]>(() => [
 
 ## Paginated Data Types
 
-All paginated data returned from Laravel controllers must use Laravel's `LengthAwarePaginator` on the backend. On the frontend, type the corresponding Inertia page prop using `LengthAwarePaginator<T>` imported from `@/types/pagination`.
+All paginated data returned from Laravel controllers must use Laravel's `LengthAwarePaginator` on the backend. On the frontend, type the corresponding Inertia page prop using `LengthAwarePaginator<T>` imported from `@/types`.
 
 ```ts
-import type { LengthAwarePaginator } from '@/types/pagination';
+import type { LengthAwarePaginator } from '@/types';
 ```
 
 Always provide the specific item type as the generic — never use `any` or leave it untyped:
@@ -282,7 +286,7 @@ When displaying tabular data, always use `<DataTable>` paired with the `usePagin
 <script setup lang="ts">
 import { usePaginatedDataTable } from '@/composables/usePaginatedDataTable';
 import { FilterMatchMode } from '@primevue/core/api';
-import type { LengthAwarePaginator } from '@/types/pagination';
+import type { LengthAwarePaginator } from '@/types';
 import type { Contact } from '@/types';
 
 const props = defineProps<{
@@ -405,7 +409,7 @@ Key returned values:
 import { computed } from 'vue';
 import { usePaginatedData } from '@/composables/usePaginatedData';
 import { FilterMatchMode } from '@primevue/core/api';
-import type { LengthAwarePaginator } from '@/types/pagination';
+import type { LengthAwarePaginator } from '@/types';
 import type { Project } from '@/types';
 
 const props = defineProps<{
