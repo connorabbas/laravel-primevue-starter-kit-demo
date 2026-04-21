@@ -7,7 +7,7 @@ import { parseISO } from 'date-fns'
 import { usePaginatedDataTable } from '@/composables/usePaginatedDataTable'
 import SidebarLayout from '@/layouts/app/SidebarLayout.vue'
 import PageTitleSection from '@/components/PageTitleSection.vue'
-import type { LengthAwarePaginator } from '@/types/pagination'
+import type { LengthAwarePaginator } from '@/types'
 import { route } from '@/utils/route'
 
 const props = defineProps<{

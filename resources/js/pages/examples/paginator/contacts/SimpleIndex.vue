@@ -5,7 +5,7 @@ import { AlertCircle } from '@lucide/vue'
 import { usePaginatedData } from '@/composables/usePaginatedData'
 import AppLayout from '@/layouts/AppLayout.vue'
 import PageTitleSection from '@/components/PageTitleSection.vue'
-import type { LengthAwarePaginator } from '@/types/pagination'
+import type { LengthAwarePaginator } from '@/types'
 import { route } from '@/utils/route'
 
 const props = defineProps<{
