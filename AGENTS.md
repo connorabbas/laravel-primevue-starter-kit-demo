@@ -99,7 +99,7 @@ This project has domain-specific skills available. You MUST activate the relevan
 
 - Execute PHP in app context for debugging and testing code. Do not create models without user approval, prefer tests with factories instead. Prefer existing Artisan commands over custom tinker code.
 - Always use single quotes to prevent shell expansion: `php artisan tinker --execute 'Your::code();'`
-    - Double quotes for PHP strings inside: `php artisan tinker --execute 'User::where("active", true)->count();'`
+  - Double quotes for PHP strings inside: `php artisan tinker --execute 'User::where("active", true)->count();'`
 
 === php rules ===
 
@@ -202,7 +202,6 @@ This project has domain-specific skills available. You MUST activate the relevan
 # Inertia + Vue
 
 Vue components must have a single root element.
-
 - IMPORTANT: Activate `inertia-vue-development` when working with Inertia Vue client-side patterns.
 
 </laravel-boost-guidelines>
@@ -244,8 +243,18 @@ This application is starter kit based on Laravel + PrimeVue components (styled m
 - Shared props must use the generated Data types in frontend declarations. Example: `auth.user` is shared as `UserData` in `app/Http/Middleware/HandleInertiaRequests.php` and typed as `App.Data.UserData | null` in `resources/js/types/index.d.ts`.
 - For paginated page props, always transform model items into Data objects before returning to Inertia. Prefer chaining `->through(...)` on the paginator and returning the Data object from the callback.
 - Add explicit PHPDoc generics for paginated results and transformed collections so the contract is clear (for example `LengthAwarePaginator<int, UserData>` after transformation).
-- On the frontend, consume paginator props with `LengthAwarePaginator<T>` from `resources/js/types/pagination.d.ts`, where `T` is the generated Data type (for example `LengthAwarePaginator<App.Data.UserData>`).
+- On the frontend, consume paginator props with `LengthAwarePaginator<T>` imported from `@/types` (re-exported from `resources/js/types/pagination.d.ts`), where `T` is the generated Data type (for example `LengthAwarePaginator<App.Data.UserData>`).
 - In Vue pages/components, use explicit prop typing with shared/page prop composition (for example `defineProps<AppPageProps<{ users: LengthAwarePaginator<App.Data.UserData> }>>()`).
+
+## Inertia Flash Notifications
+
+- For server-driven notifications, use `Inertia::flash(...)` instead of Laravel session flash keys like `flash_success`, `flash_warn`, or page-local ad hoc props.
+- Use suffix-based flash key naming:
+  - `<severity>_toast` to trigger global toast notifications.
+  - `<severity>_message` to render inline `FlashMessages` content.
+- Use severity prefixes: `success`, `info`, `warn`, `error`. Unknown prefixes fall back to `secondary` in the frontend.
+- Toast rendering is centralized in `resources/js/composables/useInertiaRouterEvents.ts` via `router.on('flash', ...)`; do not duplicate mutation-success toasts in page-level `onSuccess` callbacks.
+- Inline message rendering is centralized in `resources/js/components/FlashMessages.vue`; use `*_message` flash keys when you want visible page-level messaging.
 
 ## Frontend Routing
 

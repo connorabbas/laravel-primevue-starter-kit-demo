@@ -10,7 +10,7 @@ import AppLayout from '@/layouts/AppLayout.vue'
 import PageTitleSection from '@/components/PageTitleSection.vue'
 import ClientOnly from '@/components/ClientOnly.vue'
 import Menu from '@/components/router-link-menus/Menu.vue'
-import { LengthAwarePaginator } from '@/types/pagination'
+import { LengthAwarePaginator } from '@/types'
 import { MenuItem } from '@/types'
 import { route } from '@/utils/route'
 
