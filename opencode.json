@@ -16,7 +16,11 @@
             "command": [
                 "npx",
                 "-y",
-                "@primevue/mcp"
+                "-p",
+                "@modelcontextprotocol/sdk@1.25.2",
+                "-p",
+                "@primevue/mcp@4.5.4",
+                "primevue-mcp"
             ]
         }
     }
