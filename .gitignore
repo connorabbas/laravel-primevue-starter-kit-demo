@@ -24,6 +24,7 @@ yarn-error.log
 /.fleet
 /.idea
 /.nova
+/.opencode
 /.vscode
 /.zed
 
