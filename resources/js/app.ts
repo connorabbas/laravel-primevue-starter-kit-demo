@@ -12,7 +12,7 @@ import ToastService from 'primevue/toastservice'
 
 import { useSiteColorMode } from '@/composables/useSiteColorMode'
 import globalPt from '@/theme/global-pt'
-import themePreset from '@/theme/bootstrap-preset'
+import themePreset from '@/theme/noir-preset'
 
 const appName = import.meta.env.VITE_APP_NAME || 'Laravel'
 
