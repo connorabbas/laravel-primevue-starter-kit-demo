@@ -5,6 +5,7 @@ use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
 
 return new class () extends Migration {
+    /** @var list<string> */
     protected array $defaultAdminPermissions = [
         'view users list',
         'view single user',
