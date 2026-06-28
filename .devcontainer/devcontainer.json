@@ -45,7 +45,7 @@
         }
     },
     "remoteUser": "www-data",
-    "postCreateCommand": "chown -R 1000:1000 /var/www/html 2>/dev/null || true"
+    "postCreateCommand": "bash .devcontainer/post-create.sh"
     // "forwardPorts": [],
     // "runServices": [],
     // "shutdownAction": "none",
