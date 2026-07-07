@@ -66,7 +66,7 @@ jobs:
           ssh_remote_known_hosts: ${{ secrets.SSH_REMOTE_KNOWN_HOSTS }}
           registry: ghcr.io
           registry-username: ${{ github.repository_owner }}
-          registry-token: ${{ secrets.GITHUB_TOKEN }}
+          registry-password: ${{ secrets.GITHUB_TOKEN }}
           env_file_base64: ${{ secrets.PRODUCTION_ENV_FILE_BASE64 }}
 
   prune-docker-host:
