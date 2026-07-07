@@ -55,7 +55,7 @@ jobs:
 
     steps:
       - name: Deploy stack to Docker Swarm
-        uses: serversideup/github-action-docker-swarm-deploy@v3
+        uses: serversideup/github-action-docker-swarm-deploy@v4
         with:
           stack_name: ${{ secrets.SWARM_STACK_NAME }}
           docker_compose_file_path: '-c docker-compose-swarm.yml'
